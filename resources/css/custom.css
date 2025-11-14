@@ -1,0 +1,216 @@
+.downscaled {
+    max-height: 460px;
+    object-fit: cover;
+}
+
+.featured-property-image {
+    height: 200px;
+    object-fit: cover;
+}
+
+.property-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;   /* Number of lines to show */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.text-orange{
+    color: #ff6600;
+}
+
+.button-orange{
+    background-color: #ffa600;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.button-orange:hover{
+    background-color: #ff7300;
+}
+
+.bg-orange{
+    background-color: #ff7300;
+}
+
+.gradient-nav {
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, .5)
+    );
+    backdrop-filter: blur(3px); /* optional: soft blur effect */
+}
+
+.nav-social-media-menu-text{
+    font-size: 12px;
+}
+
+.section-title {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto;
+    padding-bottom: 8px; /* space before the underline */
+}
+.section-title::after {
+    content: "";
+    position: absolute;
+    left: 50%; /* start from center */
+    transform: translateX(-50%); /* shift back half-width */
+    bottom: 0;
+    width: 80px; /* underline length */
+    height: 3px; /* underline thickness */
+    background-color: #ffc107; /* underline color (gold-like) */
+    border-radius: 2px; /* optional smooth edges */
+}
+
+.section-description {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.footer{
+    padding: 50px 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+
+.footer-link{
+    color: white;
+    transition: color 0.5s ease;
+}
+.footer-link:hover{
+    color: #ffc107;
+}
+
+.home-contact-form-container, .home-services-container{
+    width: 100%;        /* default for mobile */
+    margin: 0 auto;
+}
+
+/* Tablet & up */
+@media (min-width: 768px) {
+    .home-contact-form-container{
+        width: 60%;
+    }
+}
+
+.search-form{
+    background: rgba(0, 0, 0, .25);
+}
+
+.navbar-nav .nav-link.active {
+    color: #ffc107 !important;       /* highlight color (gold-like) */
+    font-weight: 600;                /* slightly bold */
+    position: relative;
+}
+
+.navbar-nav .nav-link.active::after{
+    content: "";
+    position: absolute;
+    bottom: -4px;                    /* distance under text */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;                     /* underline length */
+    height: 2px;                     /* underline thickness */
+    background-color: #ffc107;       /* same gold color */
+    border-radius: 3px;
+}
+
+.navbar-nav .nav-link {
+    transition: color 0.3s ease;  /* smooth transition */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffc107 !important;   /* yellow hover */
+}
+
+.single-page-banner {
+    background-image: url('https://images.pexels.com/photos/302769/pexels-photo-302769.jpeg?cs=srgb&dl=architecture-building-business-302769.jpg&fm=jpg');
+    background-size: cover;       /* like object-fit: cover */
+    background-position: center;  /* keeps image centered */
+    background-repeat: no-repeat; /* prevent tiling */
+    height: 250px;                /* set your preferred height */
+    border-radius: 10px;          /* optional: rounded corners */
+}
+
+.single-page-banner-title {
+    padding-top: 130px;
+    color: white;
+}
+
+.thumb {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.thumb:hover {
+    border-color: #ffc107;
+}
+
+.active-thumb {
+    border-color: #ffc107;
+}
+
+/* Main carousel images */
+.carousel-inner img {
+    width: 100%;
+    height: 500px;           /* fixed height for main image */
+    object-fit: cover;       /* ensures full coverage without distortion */
+    border-radius: 6px;      /* optional: rounded corners */
+}
+
+/* Thumbnail images */
+.thumb {
+    width: 100px;            /* thumbnail width */
+    height: 70px;            /* thumbnail height */
+    object-fit: cover;       /* keeps each thumbnail cropped properly */
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+    border-radius: 4px;      /* optional: rounded edges */
+}
+
+.thumb:hover {
+    border-color: #ffc107;
+}
+
+.active-thumb {
+    border-color: #ffc107;
+}
+
+.share-icon, .add-to-favorite-icon, .compare-icon{
+    transition: color 0.3s ease;
+}
+
+.share-icon:hover{
+    color: dodgerblue!important;
+}
+
+.add-to-favorite-icon:hover{
+    color: mediumvioletred!important;
+}
+
+.compare-icon:hover{
+    color: mediumseagreen!important;
+}
+
+.team-profile-image{
+    height: 180px;
+    object-fit: cover;
+}
+.author-img-thumbnail{
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+}
+
+@media (max-width: 1397px) {
+    .hide-1397 {
+        display: none !important;
+    }
+}
