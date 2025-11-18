@@ -13,6 +13,7 @@ export default defineConfig({
                 'resources/js/property-gallery.js',
                 'resources/js/dashboard/properties.js',
                 'resources/js/dashboard/add-property.js',
+                'resources/js/dashboard/dashboard.js'
             ],
             refresh: true,
         }),
