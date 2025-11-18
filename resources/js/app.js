@@ -5,8 +5,6 @@ import '../css/custom.css'
 import $ from 'jquery';
 window.$ = window.jQuery = $;
 
-import Datatables from 'datatables.net-bs5';
-
 // // 3) Bootstrap 5 JS (ESM import of component classes)
 // import { Modal } from 'bootstrap';
 //

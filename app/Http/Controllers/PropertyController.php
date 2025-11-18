@@ -6,6 +6,8 @@ use App\Models\Property;
 use App\Http\Requests\StorePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Services\PermissionService;
+use App\Services\PropertyService;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
 class PropertyController extends Controller
@@ -26,7 +28,9 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.pages.properties.create',[
+            'title' => 'Create Property'
+        ]);
     }
 
     /**
@@ -42,8 +46,24 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        //
+        // Convert JSON gallery to array
+        $property->gallery = $property->gallery ? json_decode($property->gallery, true) : [];
+
+        $property->full_location = $property->street . ', ' . $property->city;
+
+        // Auto-determine status color
+        $property->status_color = match($property->status) {
+            'Active'   => 'success',
+            'Reserved' => 'warning',
+            'Sold'     => 'danger',
+            default    => 'secondary'
+        };
+
+        $title = ucwords($property->title);
+
+        return view('dashboard.pages.properties.show', compact('property','title'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -72,6 +92,37 @@ class PropertyController extends Controller
     public function permission(PermissionService $permissionService)
     {
         return $permissionService->permissions();
+    }
+
+    public function properties(Request $request, PropertyService $propertyService)
+    {
+        $query = Property::query();
+
+        // Search
+        if ($request->search) {
+            $query->where(function($q) use ($request) {
+                $q->where('title', 'like', "%{$request->search}%")
+                    ->orWhere('address', 'like', "%{$request->search}%")
+                    ->orWhere('type', 'like', "%{$request->search}%");
+            });
+        }
+
+        // Listing Type (sale, rent, preselling)
+        if ($request->listingType) {
+            $query->where('type', $request->listingType);
+        }
+
+        // Category (house, condo, lot)
+        if ($request->category) {
+            $query->where('category', $request->category);
+        }
+
+        // Status (active, reserved, sold)
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
+
+        return $propertyService->getProperties($query);
     }
 
 }

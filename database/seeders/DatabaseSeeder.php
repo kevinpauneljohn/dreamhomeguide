@@ -19,22 +19,22 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        $superAdmin = Role::create(['name' => 'super admin']);
-
-        User::factory()->create([
-            'name' => 'John Kevin Paunel',
-            'email' => 'johnkevinpaunel@gmail.com',
-            'password' => bcrypt('123'),
-        ])->assignRole($superAdmin);
-
-        Permission::create(['name' => 'view listing']);
-        Permission::create(['name' => 'add listing']);
-        Permission::create(['name' => 'edit listing']);
-        Permission::create(['name' => 'delete listing']);
-
-        Permission::create(['name' => 'view agent']);
-        Permission::create(['name' => 'add agent']);
-        Permission::create(['name' => 'edit agent']);
-        Permission::create(['name' => 'delete agent']);
+//        $superAdmin = Role::create(['name' => 'super admin']);
+//
+//        User::factory()->create([
+//            'name' => 'John Kevin Paunel',
+//            'email' => 'johnkevinpaunel@gmail.com',
+//            'password' => bcrypt('123'),
+//        ])->assignRole($superAdmin);
+//
+//        Permission::create(['name' => 'view listing']);
+//        Permission::create(['name' => 'add listing']);
+//        Permission::create(['name' => 'edit listing']);
+//        Permission::create(['name' => 'delete listing']);
+//
+//        Permission::create(['name' => 'view agent']);
+//        Permission::create(['name' => 'add agent']);
+//        Permission::create(['name' => 'edit agent']);
+//        Permission::create(['name' => 'delete agent']);
     }
 }

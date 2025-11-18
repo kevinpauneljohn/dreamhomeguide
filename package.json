@@ -21,9 +21,11 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^7.1.0",
+        "chart.js": "^4.5.1",
         "datatables.net-bs5": "^2.3.5",
         "jquery": "^3.7.1",
         "jszip": "^3.10.1",
-        "pdfmake": "^0.2.20"
+        "pdfmake": "^0.2.20",
+        "summernote": "^0.9.1"
     }
 }

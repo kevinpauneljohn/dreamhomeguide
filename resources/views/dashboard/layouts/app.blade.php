@@ -9,6 +9,7 @@
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/sass/app.scss','resources/js/app.js'])
     @endif
+    @stack('css')
 </head>
 <body class="bg-light">
 
@@ -17,6 +18,7 @@
 <!-- CONTENT -->
 <div id="content" class="content-wrapper">
     <x-dashboard.navigation.top-nav/>
+
     <div class="container-fluid">
         @yield('content')
     </div>
