@@ -7,6 +7,9 @@ export default defineConfig({
             input: [
                 'resources/sass/app.scss',
                 'resources/js/app.js',
+                'resources/js/dashboard/app.js',
+                'resources/js/dashboard/permission-table.js',
+                'resources/js/property-gallery.js',
             ],
             refresh: true,
         }),
