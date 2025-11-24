@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePropertyImageRequest;
 use App\Models\Property;
 use App\Http\Requests\StorePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
-use App\Services\PermissionService;
+use App\Models\PropertyImage;
 use App\Services\PropertyService;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
@@ -36,9 +37,9 @@ class PropertyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePropertyRequest $request)
+    public function store(StorePropertyRequest $request, PropertyService $propertyService)
     {
-        //
+        return $propertyService->saveProperty($request->all());
     }
 
     /**
@@ -47,15 +48,13 @@ class PropertyController extends Controller
     public function show(Property $property)
     {
         // Convert JSON gallery to array
-        $property->gallery = $property->gallery ? json_decode($property->gallery, true) : [];
-
-        $property->full_location = $property->street . ', ' . $property->city;
+        $property->images = $property->images ? json_decode($property->images, true) : [];
 
         // Auto-determine status color
         $property->status_color = match($property->status) {
-            'Active'   => 'success',
-            'Reserved' => 'warning',
-            'Sold'     => 'danger',
+            'active'   => 'success',
+            'reserved' => 'warning',
+            'sold'     => 'danger',
             default    => 'secondary'
         };
 
@@ -70,7 +69,10 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
-        //
+        return view('dashboard.pages.properties.edit',[
+            'title' => 'Edit Property',
+            'property' => $property
+        ]);
     }
 
     /**
@@ -78,7 +80,13 @@ class PropertyController extends Controller
      */
     public function update(UpdatePropertyRequest $request, Property $property)
     {
-        //
+        if($property->fill($request->all())->isDirty())
+        {
+            $property->save();
+            return response()->json(['success' => true, 'message' => 'Property updated successfully.']);
+        }else{
+            return response()->json(['success' => false, 'message' => 'No changes were made.']);
+        }
     }
 
     /**
@@ -86,43 +94,47 @@ class PropertyController extends Controller
      */
     public function destroy(Property $property)
     {
-        //
+        return $property->delete() ?
+            response()->json(['success' => true, 'message' => 'Property deleted successfully.']) :
+            response()->json(['success' => false, 'message' => 'An error occurred while deleting the property.']);
     }
 
-    public function permission(PermissionService $permissionService)
+    public function properties(Request $request, PropertyService $propertyService): \Illuminate\Http\JsonResponse
     {
-        return $permissionService->permissions();
+        return $propertyService->getProperties($request->all());
     }
 
-    public function properties(Request $request, PropertyService $propertyService)
+    public function propertyImages(Property $property): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        $query = Property::query();
-
-        // Search
-        if ($request->search) {
-            $query->where(function($q) use ($request) {
-                $q->where('title', 'like', "%{$request->search}%")
-                    ->orWhere('address', 'like', "%{$request->search}%")
-                    ->orWhere('type', 'like', "%{$request->search}%");
-            });
-        }
-
-        // Listing Type (sale, rent, preselling)
-        if ($request->listingType) {
-            $query->where('type', $request->listingType);
-        }
-
-        // Category (house, condo, lot)
-        if ($request->category) {
-            $query->where('category', $request->category);
-        }
-
-        // Status (active, reserved, sold)
-        if ($request->status) {
-            $query->where('status', $request->status);
-        }
-
-        return $propertyService->getProperties($query);
+        return view('dashboard.pages.properties.gallery',[
+            'title' => 'Gallery',
+            'property' => $property
+        ]);
     }
 
+    public function uploadPropertyImages(StorePropertyImageRequest $request): \Illuminate\Http\JsonResponse
+    {
+        if($request->hasFile('file'))
+        {
+            $file = $request->file('file');
+
+            $newName = time(). '-' . uniqid() . '.' . $file->extension();
+            $file->move(public_path('storage/property_images'),$newName);
+
+            if(PropertyImage::create([
+                'property_id' => $request->property_id,
+                'file_name' => $newName,
+                'extension' => $file->getClientOriginalExtension(),
+            ]))
+            {
+                return response()->json(['success' => true, 'message' => 'File uploaded successfully.']);
+            }
+        }
+        return response()->json(['success' => false, 'message' => 'An error occurred while uploading the file.']);
+    }
+
+    public function images(PropertyService $propertyService, $property_id)
+    {
+        return $propertyService->getPropertyImages($property_id);
+    }
 }

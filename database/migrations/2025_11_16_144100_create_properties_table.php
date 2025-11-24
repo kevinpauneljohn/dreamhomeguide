@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('address');
-            $table->string('type');
-            $table->string('category');
+            $table->string('location')->comment('City, State, Country');
+            $table->string('property_type')->comment('Residential, Commercial, Land, Office, Other');
+            $table->string('property_category')->comment('Apartment, House, Villa, Office, Land, Other');
             $table->string('lot_area')->nullable();
             $table->string('floor_area')->nullable();
             $table->decimal('price', 10, 2);
@@ -24,7 +24,10 @@ return new class extends Migration
             $table->string('bathrooms');
             $table->string('garage');
             $table->text('description');
+            $table->string('youtube_video_id')->nullable();
+            $table->string('slug')->unique()->nullable();
             $table->string('status');
+            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

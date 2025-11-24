@@ -21,11 +21,11 @@
         </li>
         @endcan
 
-        @can('view agent')
+        @can('view user')
             <li>
-                <a href="#" class="nav-link text-white">
+                <a href="{{route('user.index')}}" class="nav-link text-white {{ Route::is('user.index') ? 'active' : '' }}">
                     <i class="bi bi-people"></i>
-                    <span>Agents</span>
+                    <span>Users</span>
                 </a>
             </li>
         @endcan

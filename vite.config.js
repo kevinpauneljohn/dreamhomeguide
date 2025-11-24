@@ -8,13 +8,25 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/css/properties.css',
                 'resources/css/dashboard.css',
+
                 'resources/js/app.js',
                 'resources/js/dashboard/app.js',
                 'resources/js/dashboard/permission-table.js',
                 'resources/js/property-gallery.js',
-                'resources/js/dashboard/properties.js',
-                'resources/js/dashboard/add-property.js',
-                'resources/js/dashboard/dashboard.js'
+                'resources/js/dashboard/properties/properties.js',
+                'resources/js/dashboard/properties/add-property.js',
+                'resources/js/dashboard/properties/edit-property.js',
+                'resources/js/dashboard/properties/property-gallery.js',
+                'resources/js/dashboard/properties/property-image-gallery-counter.js',
+                'resources/js/dashboard/properties/get-property-images.js',
+                'resources/js/dashboard/properties/EditImageModal.js',
+
+                'resources/js/dashboard/dashboard.js',
+
+                'resources/js/dashboard/Slugify.js',
+
+
+                'resources/js/dashboard/users/create.js'
             ],
             refresh: true,
         }),

@@ -104,11 +104,14 @@
                     <tbody>
                     @forelse($recentProperties ?? [] as $property)
                         <tr>
-{{--                            <td><img src="{{ $property->thumbnail_url }}" width="60" class="rounded" alt=""></td>--}}
-                            <td><img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="60" class="rounded" alt=""></td>
+                            <td>
+                                @if($property->images->where('is_thumbnail', true)->count() > 0)
+                                    <img src="/storage/property_images/{{$property->images->where('is_thumbnail', true)->first()->file_name}}" width="60" class="rounded" alt="{{$property->images->where('is_thumbnail', true)->first()->file_name}}">
+                                @endif
+                            </td>
                             <td>{{ $property->title }}</td>
-                            <td>{{ $property->address }}</td>
-                            <td>{{ ucfirst($property->type) }}</td>
+                            <td>{{ $property->location }}</td>
+                            <td>{{ ucfirst($property->property_type) }}</td>
                             <td>₱{{ number_format($property->price) }}</td>
                             <td>
                                     <span class="badge bg-{{ $property->status === 'active' ? 'success' : ($property->status === 'reserved' ? 'warning' : 'secondary') }}">

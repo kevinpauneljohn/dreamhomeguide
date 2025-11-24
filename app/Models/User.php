@@ -24,9 +24,13 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'phone_number',
         'email',
         'password',
+        'status',
+        'avatar',
     ];
 
     /**
@@ -69,5 +73,11 @@ class User extends Authenticatable
     public function uniqueIds(): array
     {
         return ['id'];
+    }
+
+    public function properties(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Property::class);
+
     }
 }

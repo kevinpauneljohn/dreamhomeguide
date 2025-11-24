@@ -47,9 +47,9 @@
                     <label class="form-label">Listing Type</label>
                     <select id="listingType" class="form-select">
                         <option value="">All</option>
-                        <option value="For Sale">For Sale</option>
-                        <option value="For Rent">For Rent</option>
-                        <option value="Pre-Selling">Pre-Selling</option>
+                        <option value="sale">For Sale</option>
+                        <option value="rent">For Rent</option>
+                        <option value="preselling">Pre-Selling</option>
                     </select>
                 </div>
 
@@ -57,10 +57,10 @@
                     <label class="form-label">Category</label>
                     <select id="category" class="form-select">
                         <option value="">All</option>
-                        <option value="House & Lot">House & Lot</option>
-                        <option value="Condominium">Condominium</option>
-                        <option value="Residential Lot">Residential Lot</option>
-                        <option value="Townhouse">Townhouse</option>
+                        <option value="house-and-lot">House & Lot</option>
+                        <option value="condominium">Condominium</option>
+                        <option value="lot">Lot Only</option>
+                        <option value="townhouse">Townhouse</option>
                     </select>
                 </div>
 
@@ -68,10 +68,10 @@
                     <label class="form-label">Status</label>
                     <select id="status" class="form-select">
                         <option value="">All</option>
-                        <option value="Active">Active</option>
-                        <option value="Sold">Sold</option>
-                        <option value="Reserved">Reserved</option>
-                        <option value="Inactive">Inactive</option>
+                        <option value="active">Active</option>
+                        <option value="status">Sold</option>
+                        <option value="reserved">Reserved</option>
+                        <option value="inactive">Inactive</option>
                     </select>
                 </div>
             </div>
@@ -80,13 +80,14 @@
 
     {{-- Table --}}
     <div class="card">
-        <div class="card-body table-responsive">
-            <table id="properties-table" class="table table-striped table-hover w-100">
+        <div class="card-body">
+            <table id="properties-table" class="table table-striped table-hover w-100 border">
                 <thead>
                 <tr>
                     <th>Thumbnail</th>
                     <th>Property Name</th>
                     <th>Location</th>
+                    <th>Images</th>
                     <th>Type</th>
                     <th>Price</th>
                     <th>Status</th>
@@ -100,5 +101,5 @@
 @endsection
 
 @push('scripts')
-    @vite(['resources/js/dashboard/properties.js'])
+    @vite(['resources/js/dashboard/properties/properties.js'])
 @endpush

@@ -10,4 +10,6 @@ include __DIR__.'/pages/blog.php';
 include __DIR__.'/pages/contact-us.php';
 
 include __DIR__.'/dashboard/property.php';;
+include __DIR__.'/dashboard/property_images.php';;
+include __DIR__.'/dashboard/user.php';;
 
