@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 use Illuminate\Validation\Rules\Password;
 
 class StoreUserRequest extends FormRequest
@@ -29,8 +30,10 @@ class StoreUserRequest extends FormRequest
             'role' => ['required','string'],
             'password' => [Password::min(8), 'string', 'confirmed','required'],
             'status' => ['required','string'],
-            'phone' => ['required','string'],
-            'avatar' => ['nullable','image'],
+            'phone' => ['nullable','string'],
+            'profile_photo' => ['nullable','image',  'max:160000', File::types([
+                'jpg','png',
+            ])],
         ];
     }
 }

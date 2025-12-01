@@ -39,9 +39,9 @@
 
             <div class="row g-4">
                 <div class="col-md-5">
-                    <img src="https://tse3.mm.bing.net/th/id/OIP._Aa03XhsKxpyEJiSLoTtqwHaFj?rs=1&pid=ImgDetMain&o=7&rm=3"
+                    <img src="{{$thumbnail}}"
                          class="img-fluid rounded border"
-                         style="object-fit: cover; width:100%; height:330px;">
+                         style="object-fit: cover; width:100%; height:330px;" alt="">
                 </div>
 
                 <div class="col-md-7">

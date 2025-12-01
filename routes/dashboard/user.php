@@ -5,4 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('user', UserController::class);
+    Route::get('/get-users',[UserController::class,'getUsers'])->name('get-users');
+    Route::post('/update-user-profile-photo/{user}',[UserController::class,'updateProfilePhoto'])->name('update-user-profile-photo');
 });

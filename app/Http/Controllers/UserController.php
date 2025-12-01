@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -19,8 +21,10 @@ class UserController implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('can:view user', only: ['index', 'show']),
-            new Middleware('can:add user', only: ['create', 'store'])
+            new Middleware('can:view user', only: ['index', 'show','getUsers']),
+            new Middleware('can:add user', only: ['create', 'store']),
+            new Middleware('can:edit user', only: ['edit', 'update']),
+            new Middleware('can:delete user', only: ['destroy'])
         ];
     }
 
@@ -49,40 +53,56 @@ class UserController implements HasMiddleware
      */
     public function store(StoreUserRequest $request)
     {
-        return $this->userService->saveUser($request->all());
+        return $this->userService->saveUser($request);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
         return view('dashboard.pages.users.show')->with([
-            'title' => 'View User'
+            'title' => 'View User',
+            'user' => $user
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('dashboard.pages.users.edit')->with([
+            'title' => 'Edit User',
+            'user' => $user,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, string $id)
     {
-        //
+        return $this->userService->updateUser($request, $id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user): \Illuminate\Http\JsonResponse
     {
-        //
+        return $user->delete() ?
+            response()->json(['success' => true, 'message' => 'User deleted.'], 200) :
+            response()->json(['success' => false, 'message' => 'Something went wrong.'], 500);
+    }
+
+    public function getUsers(Request $request): \Illuminate\Http\JsonResponse
+    {
+        return $this->userService->getUsers($request->all());
+    }
+
+    public function updateProfilePhoto(Request $request, User $user): \Illuminate\Http\JsonResponse
+    {
+        return $this->userService->updateProfilePhoto($user, $request);
     }
 }

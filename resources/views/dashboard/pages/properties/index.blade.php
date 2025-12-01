@@ -90,6 +90,7 @@
                     <th>Images</th>
                     <th>Type</th>
                     <th>Price</th>
+                    <th>Is Featured</th>
                     <th>Status</th>
                     <th width="80px">Action</th>
                 </tr>

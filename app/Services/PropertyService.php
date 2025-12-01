@@ -11,7 +11,10 @@ class PropertyService
 
     public function saveProperty(array $data): \Illuminate\Http\JsonResponse
     {
-        $property = Property::create(collect($data)->merge(['user_id' => auth()->id()])->toArray());
+        $property = Property::create(collect($data)->merge([
+            'user_id' => auth()->id(),
+        ])->toArray());
+
         return  $property ?
             response()->json(['success' => true, 'message' => 'Property created successfully!', 'property_id' => $property->id], 201) :
             response()->json(['success' => false, 'message' => 'Something went wrong!'], 500);
@@ -54,6 +57,7 @@ class PropertyService
             ->addColumn('thumbnail', function ($property) {
                 return [
                     'with_images' => $property->images->count() > 0,
+                    'with_thumbnail' => $property->images->where('is_thumbnail', true)->count() > 0,
                     'thumbnail' => $property->images->where('is_thumbnail', true)->first()
                 ];
             })

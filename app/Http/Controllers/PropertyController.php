@@ -57,10 +57,17 @@ class PropertyController extends Controller
             'sold'     => 'danger',
             default    => 'secondary'
         };
-
+//        if(collect($property->images)->count())
+//        {
+//
+//        }
+        $thumbnail = collect($property->images)->count() > 0 && $property->images()->where('is_thumbnail', true)->count() > 0 ?
+            '/storage/property_images/'.$property->images()->where('is_thumbnail', true)->first()->file_name :
+            'https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg';
         $title = ucwords($property->title);
 
-        return view('dashboard.pages.properties.show', compact('property','title'));
+//        return  $property->images()->where('is_thumbnail', true)->count();
+        return view('dashboard.pages.properties.show', compact('property','title','thumbnail'));
     }
 
 

@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Property extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['title', 'location', 'property_type', 'property_category', 'lot_area', 'floor_area', 'price', 'bedrooms','bathrooms','garage','description','status', 'slug', 'youtube_video_id','user_id'];
+    protected $fillable = ['title', 'location', 'property_type', 'property_category', 'lot_area', 'floor_area', 'price',
+        'bedrooms','bathrooms','garage','description','status', 'slug', 'youtube_video_id','is_featured','user_id'];
 
     public function images(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

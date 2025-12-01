@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.app')
-
+@section('title',$title)
 @section('content')
 
     <!-- Header -->
@@ -115,12 +115,12 @@
             <div class="card-body">
                 <h5 class="fw-bold mb-3">Profile Picture</h5>
 
-                <div class="d-flex align-items-center gap-3">
-                    <img id="previewImage" src="/images/default-avatar.png" width="70" height="70" class="rounded-circle border">
+                <div class="d-flex align-items-center gap-3 ">
+                    <img id="previewImage" src="https://static.vecteezy.com/system/resources/previews/026/434/417/original/default-avatar-profile-icon-of-social-media-user-photo-vector.jpg" width="70" height="70" class="rounded-circle border" alt="Profile Photo">
 
-                    <div>
-                        <label class="form-label">Upload Image</label>
-                        <input type="file" name="avatar" class="form-control" accept="image/*" onchange="previewPhoto(event)">
+                    <div class="profile_photo">
+                        <label class="form-label" for="profile_photo">Upload Image</label>
+                        <input type="file" name="profile_photo" id="profile_photo" class="form-control" accept="image/*" onchange="previewPhoto(event)">
                         <small class="text-muted d-block">JPEG, PNG only — Max 2MB</small>
                     </div>
                 </div>

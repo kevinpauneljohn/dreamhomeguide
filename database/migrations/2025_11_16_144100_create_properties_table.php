@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('youtube_video_id')->nullable();
             $table->string('slug')->unique()->nullable();
             $table->string('status');
+            $table->boolean('is_featured')->default(false);
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();

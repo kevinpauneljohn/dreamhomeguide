@@ -20,12 +20,6 @@ export const propertyImagesTable = $('#property-images-table').DataTable({
         { data: "title" },
         { data: "file_name" },
         {
-            data: "is_featured",
-            render: function (featured) {
-                return featured ? '<span class="badge bg-success">Yes</span>' : '<span class="badge bg-secondary">No</span>';
-            }
-        },
-        {
             data: "is_thumbnail",
             render: function (thumbnail) {
                 return thumbnail ? '<span class="badge bg-success">Yes</span>' : '<span class="badge bg-secondary">No</span>';

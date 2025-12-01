@@ -1,9 +1,9 @@
 @extends('dashboard.layouts.app')
-
+@section('title', $title)
 @section('content')
 
     <h3 class="fw-bold mb-2">Dashboard</h3>
-    <p class="text-muted">Welcome back, {{ auth()->user()->name }} 👋</p>
+    <p class="text-muted">Welcome back, {{ auth()->user()->full_name }} 👋</p>
 
     {{-- KPI CARDS --}}
     <div class="row g-3 mb-4">

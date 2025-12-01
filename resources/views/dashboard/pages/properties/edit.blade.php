@@ -52,10 +52,20 @@
                             <input type="text" name="title" id="title" class="form-control" value="{{$property->title}}" placeholder="Ex. The Hauslands Pampanga" >
                         </div>
 
-                        <div class="mb-3 slug">
-                            <label class="form-label fw-semibold">Slug</label><span class="text-danger">*</span>
-                            <input type="text" name="slug" id="slug" class="form-control" placeholder="Ex. the-hauslands-pampanga" value="{{$property->slug}}">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-8 slug">
+                                <label class="form-label fw-semibold">Slug</label><span class="text-danger">*</span>
+                                <input type="text" name="slug" id="slug" class="form-control" placeholder="Ex. the-hauslands-pampanga" value="{{$property->slug}}">
+                            </div>
+                            <div class="col-md-4 is_featured">
+                                <label class="form-label fw-semibold">Is Featured</label><span class="text-danger">*</span>
+                                <select name="is_featured" class="form-select" id="is_featured">
+                                    <option value="0" @if(!$property->is_featured) selected @endif></option>
+                                    <option value="1" @if($property->is_featured) selected @endif>Featured</option>
+                                </select>
+                            </div>
                         </div>
+
 
                         <div class="row g-3">
                             <div class="col-md-3 status">

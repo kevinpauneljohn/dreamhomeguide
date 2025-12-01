@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Ramsey\Uuid\Uuid;
@@ -13,7 +14,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasUuids, HasRoles;
+    use HasFactory, Notifiable, HasUuids, HasRoles, SoftDeletes;
 
     public $incrementing = false;
     protected $keyType = 'string';
@@ -30,7 +31,7 @@ class User extends Authenticatable
         'email',
         'password',
         'status',
-        'avatar',
+        'profile_photo',
     ];
 
     /**
@@ -56,6 +57,8 @@ class User extends Authenticatable
         ];
     }
 
+    protected $appends = ['full_name'];
+
 
     /**
      * Generate a new UUID for the model.
@@ -79,5 +82,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Property::class);
 
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function leads()
+    {
+        return $this->hasMany(Leads::class);
     }
 }

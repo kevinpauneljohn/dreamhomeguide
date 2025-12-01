@@ -88,7 +88,6 @@
                     <th width="100px">Thumbnail</th>
                     <th>Name</th>
                     <th class="w-25">Title</th>
-                    <th width="200px">Is Featured</th>
                     <th width="200px">Is Thumbnail</th>
                     <th width="80px">Action</th>
                 </tr>
@@ -117,13 +116,6 @@
                                 <div class="form-group title">
                                     <label for="title">Title</label>
                                     <input type="text" name="title" class="form-control" id="title">
-                                </div>
-                                <div class="form-group mt-2 is_featured">
-                                    <label for="is_featured">Is Featured</label>
-                                    <select name="is_featured" id="is_featured" class="form-control">
-                                        <option value="0">No</option>
-                                        <option value="1">Yes</option>
-                                    </select>
                                 </div>
                                 <div class="form-group mt-2 is_thumbnail">
                                     <label for="is_thumbnail">Is Thumbnail</label>

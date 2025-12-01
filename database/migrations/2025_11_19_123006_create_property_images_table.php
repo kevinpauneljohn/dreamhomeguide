@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('file_name', 255)->comment('Image file name');
             $table->string('title')->nullable();
             $table->string('extension');
-            $table->boolean('is_featured')->default(false);
             $table->boolean('is_thumbnail')->default(false);
             $table->timestamps();
         });

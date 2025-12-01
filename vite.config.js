@@ -25,8 +25,13 @@ export default defineConfig({
 
                 'resources/js/dashboard/Slugify.js',
 
+                //users
+                'resources/js/dashboard/users/create.js',
+                'resources/js/dashboard/users/edit.js',
 
-                'resources/js/dashboard/users/create.js'
+                //leads
+                'resources/js/dashboard/leads/create.js',
+                'resources/js/dashboard/leads/crmIndex.js'
             ],
             refresh: true,
         }),

@@ -20,7 +20,7 @@ $(function () {
                 data: "thumbnail",
                 orderable: false,
                 render: function (data) {
-                    return `${data.with_images ? `<img src="/storage/property_images/${data.thumbnail.file_name}" class="rounded" width="55" alt="">` : ``}`;
+                    return `${data.with_images && data.with_thumbnail ? `<img src="/storage/property_images/${data.thumbnail.file_name}" class="rounded" width="55" alt="">` : ``}`;
                 }
             },
             { data: "title" },
@@ -50,6 +50,13 @@ $(function () {
             {
                 data: "price",
                 render: data => `₱ ${parseFloat(data).toLocaleString()}`
+            },
+            {
+                data: "is_featured",
+                render: function (is_featured) {
+                    const colors = is_featured ? 'text-bg-success' : 'text-bg-secondary';
+                    return `<span class="badge ${colors}">${is_featured ? 'Yes' : 'No'}</span>`;
+                }
             },
             {
                 data: "status",

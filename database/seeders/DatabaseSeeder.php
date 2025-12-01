@@ -47,5 +47,10 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'add user']);
         Permission::create(['name' => 'edit user']);
         Permission::create(['name' => 'delete user']);
+
+        Permission::create(['name' => 'view lead']);
+        Permission::create(['name' => 'add lead']);
+        Permission::create(['name' => 'edit lead']);
+        Permission::create(['name' => 'delete lead']);
     }
 }
