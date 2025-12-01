@@ -24,7 +24,7 @@
                     <i class="bi bi-person-plus"></i>
                 </div>
                 <h6 class="text-muted mt-3">New Leads</h6>
-                <h2 class="fw-bold">128</h2>
+                <h2 class="fw-bold">{{$newLeads}}</h2>
             </div>
         </div>
 

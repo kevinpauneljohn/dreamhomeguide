@@ -1,14 +1,14 @@
 import "datatables.net-bs5";
+
 import moment from "moment";
 import '../../../css/properties.css';
+
 import select2 from 'select2';
 import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css'
 import Swal from "sweetalert2";
 select2()
 
-
 $(function () {
-
     $('#status').select2({
         theme: 'bootstrap-5',
         width: '20%',

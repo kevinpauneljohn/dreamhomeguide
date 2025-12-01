@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Leads;
 use App\Services\LeadService;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,7 @@ class CrmController extends Controller
     {
         return view('dashboard.crm.index')->with([
             'title' => 'CRM',
+            'newLeads' => Leads::where('status','new')->count(),
             'statuses' => $this->leadsService->leadStatus(),
             'sources' => $this->leadsService->leadSources(),
         ]);

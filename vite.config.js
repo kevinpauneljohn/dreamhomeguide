@@ -31,7 +31,8 @@ export default defineConfig({
 
                 //leads
                 'resources/js/dashboard/leads/create.js',
-                'resources/js/dashboard/leads/crmIndex.js'
+                'resources/js/dashboard/leads/crmIndex.js',
+                'resources/js/dashboard/leads/appointment.js'
             ],
             refresh: true,
         }),
