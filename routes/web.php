@@ -14,4 +14,5 @@ include __DIR__.'/dashboard/property_images.php';;
 include __DIR__.'/dashboard/user.php';;
 include __DIR__.'/dashboard/crm.php';;
 include __DIR__.'/dashboard/leads.php';;
+include __DIR__.'/dashboard/notes.php';;
 

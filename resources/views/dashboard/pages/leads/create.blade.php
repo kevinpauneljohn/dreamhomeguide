@@ -147,14 +147,6 @@
             </div>
         </div>
 
-        <!-- Notes -->
-{{--        <div class="card shadow-sm mb-4">--}}
-{{--            <div class="card-body notes">--}}
-{{--                <h5 class="fw-bold mb-3">Notes</h5>--}}
-{{--                <textarea name="notes" id="notes" class="form-control" rows="4"></textarea>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
         <!-- Tags -->
         <div class="card shadow-sm mb-4">
             <div class="card-body tags">

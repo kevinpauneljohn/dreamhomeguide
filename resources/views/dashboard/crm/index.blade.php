@@ -116,7 +116,7 @@
                     <th>Status</th>
                     <th>Date Added</th>
                     <th>Assigned To</th>
-                    <th class="text-center" width="120px">Action</th>
+                    <th class="text-center" width="40"></th>
                 </tr>
                 </thead>
             </table>

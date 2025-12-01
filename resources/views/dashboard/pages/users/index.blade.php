@@ -80,7 +80,7 @@
                     <th class="text-center">Listings</th>
                     <th>Joined</th>
                     <th>Status</th>
-                    <th width="100px">Action</th>
+                    <th class="text-center" width="40"></th>
                 </tr>
                 </thead>
 

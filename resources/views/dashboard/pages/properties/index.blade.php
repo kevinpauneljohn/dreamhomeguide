@@ -92,7 +92,7 @@
                     <th>Price</th>
                     <th>Is Featured</th>
                     <th>Status</th>
-                    <th width="80px">Action</th>
+                    <th class="text-center" width="40"></th>
                 </tr>
                 </thead>
             </table>

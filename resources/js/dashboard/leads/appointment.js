@@ -4,7 +4,6 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 
-
 let calendar;
 
 $(function () {
@@ -24,7 +23,7 @@ $(function () {
         themeSystem: 'bootstrap5',
         customButtons: {
             bookAppointment: {
-                text: "Create",
+                text: "Create Appointment",
                 click: function () {
                     console.log("Create appointment clicked");
                     const modal = new bootstrap.Modal('#addAppointmentModal');

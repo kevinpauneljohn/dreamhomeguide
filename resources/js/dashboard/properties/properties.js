@@ -76,8 +76,8 @@ $(function () {
                 render: function (action) {
                     return `
                         <div class="dropdown">
-                            <button class="btn btn-sm btn-light border dropdown-toggle" data-bs-toggle="dropdown">
-                                Actions
+                            <button class="btn btn-sm btn-light border-0" data-bs-toggle="dropdown">
+                                <i class="bi bi-three-dots-vertical"></i>
                             </button>
                             <ul class="dropdown-menu">
                                 ${action.view ? `<li><a href="/property/${action.id}" class="dropdown-item">View</a></li>` : ''}

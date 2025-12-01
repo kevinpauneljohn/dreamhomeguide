@@ -93,4 +93,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Leads::class);
     }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
 }

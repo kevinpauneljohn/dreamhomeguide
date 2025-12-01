@@ -90,7 +90,16 @@
                                     <label class="text-muted small">Email</label>
                                     <div class="editable-field" data-field="email">
                                         <span class="value">{{ $lead->email }}</span>
-                                        <i class="bi bi-pencil edit-icon"></i>
+                                        <i class="bi bi-pencil edit-icon edit-btn"></i>
+
+                                        <!-- Hidden input for editing -->
+                                        <div class="edit-input mt-1 d-none">
+                                            <input type="text" class="form-control input-box" value="{{ $lead->email }}">
+                                            <div class="mt-1">
+                                                <button class="btn btn-sm btn-success save-btn">Save</button>
+                                                <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -99,7 +108,16 @@
                                     <label class="text-muted small">Phone</label>
                                     <div class="editable-field" data-field="phone">
                                         <span class="value">{{ $lead->phone }}</span>
-                                        <i class="bi bi-pencil edit-icon"></i>
+                                        <i class="bi bi-pencil edit-icon edit-btn"></i>
+
+                                        <!-- Hidden input for editing -->
+                                        <div class="edit-input mt-1 d-none">
+                                            <input type="text" class="form-control input-box" value="{{ $lead->phone }}">
+                                            <div class="mt-1">
+                                                <button class="btn btn-sm btn-success save-btn">Save</button>
+                                                <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -108,7 +126,16 @@
                                     <label class="text-muted small">Address</label>
                                     <div class="editable-field" data-field="address">
                                         <span class="value">{{ $lead->address }}</span>
-                                        <i class="bi bi-pencil edit-icon"></i>
+                                        <i class="bi bi-pencil edit-icon edit-btn"></i>
+
+                                        <!-- Hidden input for editing -->
+                                        <div class="edit-input mt-1 d-none">
+                                            <input type="text" class="form-control input-box" value="{{ $lead->address }}">
+                                            <div class="mt-1">
+                                                <button class="btn btn-sm btn-success save-btn">Save</button>
+                                                <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -118,37 +145,132 @@
                                     <div class="editable-field" data-field="birthday">
                                         <span class="value">{{ $lead->birthday->format('M d, Y') }}</span>
                                         <i class="bi bi-pencil edit-icon"></i>
+
+                                        <!-- Hidden input for editing -->
+                                        <div class="edit-input mt-1 d-none">
+                                            <input type="hidden" class="form-control" id="birthday" value="{{ $lead->birthday }}">
+                                            <input type="date" class="form-control input-box" id="birthday-input">
+                                            <div class="mt-1">
+                                                <button class="btn btn-sm btn-success save-btn">Save</button>
+                                                <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <!-- Gender -->
                                 <div class="col-md-6 mb-3">
                                     <label class="text-muted small">Gender</label>
-                                    <p class="fw-semibold">{{ $lead->gender }}</p>
+                                    <div class="editable-field" data-field="gender">
+                                        <span class="value">{{ $lead->gender }}</span>
+                                        <i class="bi bi-pencil edit-icon edit-btn"></i>
+
+                                        <!-- Hidden input for editing -->
+                                        <div class="edit-input mt-1 d-none">
+                                            <select name="gender" id="gender" class="form-select input-box">
+                                                <option value=""> -- Select an option -- </option>
+                                                <option value="Male" @if($lead->gender === "Male") selected @endif>Male</option>
+                                                <option value="Female" @if($lead->gender === "Female") selected @endif>Female</option>
+                                            </select>
+                                            <div class="mt-1">
+                                                <button class="btn btn-sm btn-success save-btn">Save</button>
+                                                <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- Civil Status -->
                                 <div class="col-md-6 mb-3">
                                     <label class="text-muted small">Civil Status</label>
-                                    <p class="fw-semibold">{{ $lead->civil_status }}</p>
+                                    <div class="editable-field" data-field="civil_status">
+                                        <span class="value">{{ $lead->civil_status }}</span>
+                                        <i class="bi bi-pencil edit-icon edit-btn"></i>
+
+                                        <!-- Hidden input for editing -->
+                                        <div class="edit-input mt-1 d-none">
+                                            <select name="civil_status" id="civil_status" class="form-select input-box">
+                                                <option value=""> -- Select an option -- </option>
+                                                <option value="single" @if($lead->civil_status === "single") selected @endif>Single</option>
+                                                <option value="married" @if($lead->civil_status === "married") selected @endif>Married</option>
+                                                <option value="widower" @if($lead->civil_status === "widower") selected @endif>Widower</option>
+                                            </select>
+                                            <div class="mt-1">
+                                                <button class="btn btn-sm btn-success save-btn">Save</button>
+                                                <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- Income -->
                                 <div class="col-md-6 mb-3">
                                     <label class="text-muted small">Income Range</label>
-                                    <p class="fw-semibold">{{ $lead->income_range }}</p>
+                                    <div class="editable-field" data-field="income_range">
+                                        <span class="value fw-semibold">{{ $lead->income_range }}</span>
+                                        <i class="bi bi-pencil edit-icon edit-btn"></i>
+
+                                        <!-- Hidden input for editing -->
+                                        <div class="edit-input mt-1 d-none">
+                                            <select name="income_range" id="income_range" class="form-select input-box">
+                                                <option value=""></option>
+                                                @foreach($incomeRange as $range)
+                                                    <option value="{{ $range }}" @if($range === $lead->income_range) selected @endif>{{ $range }}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="mt-1">
+                                                <button class="btn btn-sm btn-success save-btn">Save</button>
+                                                <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- Lead Source -->
                                 <div class="col-md-6 mb-3">
                                     <label class="text-muted small">Source</label>
-                                    <p class="fw-semibold">{{ $lead->source }}</p>
+                                    <div class="editable-field" data-field="source">
+                                        <span class="value fw-semibold">{{ $lead->source }}</span>
+                                        <i class="bi bi-pencil edit-icon edit-btn"></i>
+
+                                        <!-- Hidden input for editing -->
+                                        <div class="edit-input mt-1 d-none">
+                                            <select name="source" id="source" class="form-select input-box">
+                                                <option value="">Select Source</option>
+                                                @foreach($sources as $source)
+                                                    <option value="{{$source}}" @if($source === $lead->source) selected @endif>{{$source}}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="mt-1">
+                                                <button class="btn btn-sm btn-success save-btn">Save</button>
+                                                <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <!-- Assigned Agent -->
                                 <div class="col-md-12 mb-3">
                                     <label class="text-muted small">Assigned Agent</label>
-                                    <p class="fw-semibold">{{ $lead->user->full_name ?? 'Unassigned' }}</p>
+                                    <div class="editable-field" data-field="user_id">
+                                        <span class="value fw-semibold">{{ $lead->user->full_name ?? 'Unassigned' }}</span>
+                                        <i class="bi bi-pencil edit-icon edit-btn"></i>
+
+                                        <!-- Hidden input for editing -->
+                                        <div class="edit-input mt-1 d-none">
+                                            <select name="user_id" id="user_id" class="form-select input-box">
+                                                <option value="">Select Agent</option>
+                                                @foreach($agents as $agent)
+                                                    <option value="{{ $agent->id }}" @if($agent->id === $lead->user_id) selected @endif>{{ $agent->full_name }} - {{$agent->email}}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="mt-1">
+                                                <button class="btn btn-sm btn-success save-btn">Save</button>
+                                                <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -158,10 +280,11 @@
 
                     <!-- NOTES -->
                     <div class="card shadow-sm border-0 mb-4">
+                        <input type="hidden" name="lead_id" value="{{ $lead->id }}">
                         <div class="card-header d-flex justify-content-between bg-white border-bottom-0">
                             <h5 class="fw-bold mb-0">Notes</h5>
 
-                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addNoteModal">
+                            <button class="btn btn-primary btn-sm add-note-btn" data-bs-toggle="modal" data-bs-target="#addNoteModal">
                                 <i class="bi bi-plus-circle me-1"></i> Add Note
                             </button>
                         </div>
@@ -171,7 +294,7 @@
                         {{--                </div>--}}
 
                         <div class="card-body">
-                            <table class="table table-hover align-middle notes-table">
+                            <table id="notes-table" class="table table-hover align-middle notes-table">
                                 <thead class="table-light">
                                 <tr>
                                     <th width="60">Type</th>
@@ -346,7 +469,7 @@
                             </button>
                         </div>
 
-                        <div class="card-body">
+                        <div class="card-body p-1">
 
                             <!-- Appointment Table -->
                             <table class="table table-hover align-middle appointments-table">
@@ -596,14 +719,14 @@
             <form class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Add Tag</h5>
-                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <input type="text" class="form-control" placeholder="Enter tag…">
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-light border" data-bs-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
                 </div>
             </form>
         </div>
@@ -612,17 +735,36 @@
     <!-- NOTE MODAL -->
     <div class="modal fade" id="addNoteModal" tabindex="-1">
         <div class="modal-dialog">
-            <form class="modal-content">
+            <form class="modal-content" id="addNoteForm">
+                @csrf
+                <input type="hidden" name="lead_id" value="{{$lead->id}}">
+                <input type="hidden" name="user_id" value="{{$lead->user_id}}">
                 <div class="modal-header">
                     <h5 class="modal-title">Add Note</h5>
-                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <textarea class="form-control" rows="4" placeholder="Enter note…" required></textarea>
+                    <div class="form-group mb-3 type">
+                        <label for="type">Note Type</label><span class="text-danger">*</span>
+                        <select name="type" class="form-select" id="type">
+                            <option value=""></option>
+                            @foreach($noteTypes as $key => $value)
+                                <optgroup label="{{$key}}">
+                                    @foreach($value as $type)
+                                        <option value="{{$type['note_type']}}">{{$type['note_type']}}</option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
+                        </select>
+                    </div>
+                    <small class="text-muted">
+                        <span id="char_count">0</span>/2000 characters
+                    </small>
+                    <textarea name="description" id="description" class="form-control" rows="4" maxlength="2000" placeholder="Enter optional note…"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-light border" data-bs-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary">Save Note</button>
+                    <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary add-note-form-submit">Save Note</button>
                 </div>
             </form>
         </div>
@@ -700,4 +842,5 @@
 
 @push('scripts')
     @vite('resources/js/dashboard/leads/appointment.js')
+    @vite(['resources/js/dashboard/notes/create.js','resources/js/dashboard/notes/editNote.js'])
 @endpush

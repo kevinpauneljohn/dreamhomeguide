@@ -7,6 +7,7 @@ use App\Http\Requests\StoreLeadsRequest;
 use App\Http\Requests\UpdateLeadsRequest;
 use App\Models\User;
 use App\Services\LeadService;
+use App\Services\NoteService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -63,13 +64,18 @@ class LeadsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, NoteService $noteService)
     {
         $lead = Leads::findOrFail($id);
         return view('dashboard.pages.leads.show')->with([
             'title' => 'View Lead',
             'lead' => $lead,
             'genderPhoto' => $this->leadsService->genderPhoto($lead->gender),
+            'noteTypes' => $noteService->noteTypes(),
+            'agents' => User::all(),
+            'leadStatus' => $this->leadsService->leadStatus(),
+            'incomeRange' => $this->leadsService->incomeRange(),
+            'sources' => $this->leadsService->leadSources(),
         ]);
     }
 
