@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Leads;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 
 class LeadService
@@ -17,25 +19,130 @@ class LeadService
     public function leadStatus(): array
     {
         return [
-            'new' => 'New',
-            'hot' => 'Hot',
-            'cold' => 'Cold',
-            'warm' => 'Warm',
-            're-engaging' => 'Re-Engaging',
-            'contacted' => 'Contacted',
-            'follow-up' => 'Follow Up',
-            'qualified' => 'Qualified',
-            'for-tripping' => 'Scheduled For Tripping / Viewing',
-            'tripping-done' => 'Tripping Done',
-            'reserved' => 'Reserved',
-            'for-documentation' => 'For Documentation',
-            'for-loan-processing' => 'For Loan Processing',
-            'loan-approved' => 'Loan Approved',
-            'not-qualified' => 'Not Qualified',
-            'not-interested' => 'Not Interested',
-            'closed' => 'Closed / Sold',
-            'lost' => 'Lost',
+
+            'new' => [
+                'label' => 'New',
+                'color' => '#6c757d',
+                'class' => 'bg-primary'
+            ],
+
+            'hot' => [
+                'label' => 'Hot',
+                'color' => '#dc3545',
+                'class' => 'bg-danger'
+            ],
+
+            'cold' => [
+                'label' => 'Cold',
+                'color' => '#0d6efd',
+                'class' => 'bg-info'
+            ],
+
+            'warm' => [
+                'label' => 'Warm',
+                'color' => '#fd7e14',
+                'class' => 'bg-warning'
+            ],
+
+            're-engaging' => [
+                'label' => 'Re-Engaging',
+                'color' => '#20c997',
+                'class' => 'bg-teal'
+            ],
+
+            'contacted' => [
+                'label' => 'Contacted',
+                'color' => '#0dcaf0',
+                'class' => 'bg-info'
+            ],
+
+            'follow-up' => [
+                'label' => 'Follow-Up',
+                'color' => '#ffc107',
+                'class' => 'bg-warning'
+            ],
+
+            'qualified' => [
+                'label' => 'Qualified',
+                'color' => '#198754',
+                'class' => 'bg-success'
+            ],
+
+            'for-tripping' => [
+                'label' => 'Scheduled For Tripping / Viewing',
+                'color' => '#6610f2',
+                'class' => 'bg-purple'
+            ],
+
+            'tripping-done' => [
+                'label' => 'Tripping Done',
+                'color' => '#6f42c1',
+                'class' => 'bg-purple'
+            ],
+
+            'reserved' => [
+                'label' => 'Reserved',
+                'color' => '#0d6efd',
+                'class' => 'bg-primary'
+            ],
+
+            'for-documentation' => [
+                'label' => 'For Documentation',
+                'color' => '#0dcaf0',
+                'class' => 'bg-info'
+            ],
+
+            'for-loan-processing' => [
+                'label' => 'For Loan Processing',
+                'color' => '#ffc107',
+                'class' => 'bg-warning'
+            ],
+
+            'loan-approved' => [
+                'label' => 'Loan Approved',
+                'color' => '#198754',
+                'class' => 'bg-success'
+            ],
+
+            'not-qualified' => [
+                'label' => 'Not Qualified',
+                'color' => '#6c757d',
+                'class' => 'bg-secondary'
+            ],
+
+            'not-interested' => [
+                'label' => 'Not Interested',
+                'color' => '#adb5bd',
+                'class' => 'bg-light text-dark'
+            ],
+
+            'closed' => [
+                'label' => 'Closed / Sold',
+                'color' => '#198754',
+                'class' => 'bg-success'
+            ],
+
+            'lost' => [
+                'label' => 'Lost',
+                'color' => '#343a40',
+                'class' => 'bg-dark'
+            ],
         ];
+    }
+
+    public function findStatus(string $leadStatus): ?array
+    {
+        foreach ($this->leadStatus() as $key => $item) {
+            if (strcasecmp($item['label'], $leadStatus) === 0) {
+                return [
+                    'label' => $key,
+                    'color' => $item['color'],
+                    'class' => $item['class'],
+                ];
+            }
+        }
+
+        return null;
     }
 
     public function incomeRange(): array
@@ -107,6 +214,9 @@ class LeadService
                     'id' => $lead->id,
                 ];
             })
+            ->editColumn('status', content: function ($lead) {
+                return $this->findStatus($lead->status);
+            })
             ->editColumn('created_at', content: function ($lead) {
                 return $lead->created_at->format('m-d-Y h:i a');
             })
@@ -122,5 +232,25 @@ class LeadService
                 ];
             })
             ->make(true);
+    }
+
+    public function validationRules(string $lead_id): array
+    {
+        return [
+            'email' => ['required', 'email', Rule::unique('leads', 'email')->ignore($lead_id)],
+            'phone' => ['nullable', 'string'],
+            'address' => ['nullable', 'string'],
+            'gender' => ['nullable', 'string'],
+            'income_range' => ['nullable', 'string'],
+            'user_id' => ['required', 'exists:users,id'],
+            'birthday' => [
+                'nullable',
+                'date',
+                'after_or_equal:1900-01-01',
+                'before_or_equal:2100-12-31'
+            ],
+            'civil_status' => ['nullable', 'string'],
+            'source' => ['required', 'string'],
+        ];
     }
 }

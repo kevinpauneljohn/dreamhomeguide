@@ -108,51 +108,5 @@ const addNote = (formData) => {
     });
 }
 
-$(document).ready(function () {
 
-    // Click ✏️ to open edit mode
-    $(".edit-icon").on("click", function () {
-        let container = $(this).closest(".editable-field");
-
-        container.find(".value-text").addClass("d-none");
-        container.find(".edit-btn").addClass("d-none");
-        container.find(".edit-input").removeClass("d-none");
-    });
-
-    // Cancel edit
-    $(".cancel-btn").on("click", function () {
-        let container = $(this).closest(".editable-field");
-
-        container.find(".value-text").removeClass("d-none");
-        container.find(".edit-btn").removeClass("d-none");
-        container.find(".edit-input").addClass("d-none");
-    });
-
-    // Save edit (AJAX)
-    $(".save-btn").on("click", function () {
-        let container = $(this).closest(".editable-field");
-
-        let newValue = container.find(".input-box").val();
-        let field = container.data("field");
-
-        console.log(field, newValue);
-        // $.ajax({
-        //     url: "/lead/{{ $lead->id }}/update-field",
-        //     method: "POST",
-        //     data: {
-        //         field: field,
-        //         value: newValue,
-        //         _token: "{{ csrf_token() }}"
-        //     },
-        //     success: function (response) {
-        //         container.find(".value-text").text(newValue);
-        //
-        //         container.find(".value-text").removeClass("d-none");
-        //         container.find(".edit-btn").removeClass("d-none");
-        //         container.find(".edit-input").addClass("d-none");
-        //     }
-        // });
-    });
-
-});
 

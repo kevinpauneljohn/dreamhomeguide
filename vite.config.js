@@ -9,10 +9,15 @@ export default defineConfig({
                 'resources/css/properties.css',
                 'resources/css/dashboard.css',
 
+                //pages
                 'resources/js/app.js',
                 'resources/js/dashboard/app.js',
                 'resources/js/dashboard/permission-table.js',
                 'resources/js/property-gallery.js',
+
+                'resources/js/pages/search-property-full-form.js',
+
+                ///dashboard properties
                 'resources/js/dashboard/properties/properties.js',
                 'resources/js/dashboard/properties/add-property.js',
                 'resources/js/dashboard/properties/edit-property.js',
@@ -28,12 +33,14 @@ export default defineConfig({
                 //users
                 'resources/js/dashboard/users/create.js',
                 'resources/js/dashboard/users/edit.js',
+                'resources/js/dashboard/users/user-table.js',
 
                 //leads
                 'resources/js/dashboard/leads/create.js',
                 'resources/js/dashboard/leads/crmIndex.js',
                 'resources/js/dashboard/leads/appointment.js',
 
+                //notes
                 'resources/js/dashboard/notes/create.js',
                 'resources/js/dashboard/notes/notesTable.js',
             ],

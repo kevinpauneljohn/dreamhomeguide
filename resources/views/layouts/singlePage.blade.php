@@ -9,6 +9,7 @@
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/sass/app.scss','resources/js/app.js'])
     @endif
+    @stack('css')
 </head>
 <body>
 
@@ -18,8 +19,6 @@
     </div>
         @yield('content')
     <x-navigation.footer/>
-@section('scripts')
-
-@show
+    @stack('scripts')
 </body>
 </html>

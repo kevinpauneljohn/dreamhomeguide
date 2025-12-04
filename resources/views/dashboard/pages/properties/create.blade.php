@@ -80,9 +80,10 @@
                             <div class="col-md-3 property_type">
                                 <label class="form-label fw-semibold">Property Type</label><span class="text-danger">*</span>
                                 <select name="property_type" class="form-select" id="property_type">
-                                    <option value="sale">For Sale</option>
-                                    <option value="rent">For Rent</option>
-                                    <option value="preselling">Pre-Selling</option>
+                                    <option value=""></option>
+                                    @foreach($propertyTypes as $key => $value)
+                                        <option value="{{$key}}">{{$value}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -90,10 +91,9 @@
                                 <label class="form-label fw-semibold">Property Category</label><span class="text-danger">*</span>
                                 <select name="property_category" class="form-select" id="property_category">
                                     <option value=""></option>
-                                    <option value="house-and-lot">House & Lot</option>
-                                    <option value="condominium">Condominium</option>
-                                    <option value="lot">Residential Lot</option>
-                                    <option value="townhouse">Townhouse</option>
+                                    @foreach($propertyCategories as $key => $value)
+                                        <option value="{{$key}}">{{$value}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 

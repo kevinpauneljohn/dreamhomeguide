@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('status')->default('active');
             $table->string('profile_photo')->nullable();
+            $table->string('position')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

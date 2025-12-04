@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Property;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,6 +14,7 @@ class HomeController extends Controller
     {
         return view('pages.home')->with([
             'title' => 'Home',
+            'featuredProperties' => Property::all(),
         ]);
     }
 

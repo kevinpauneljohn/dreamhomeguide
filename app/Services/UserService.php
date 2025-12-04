@@ -20,7 +20,7 @@ class UserService
 
     public function updateUser($userData, $id): \Illuminate\Http\JsonResponse
     {
-        $user = User::findOrFail($id)->fill($userData->only('first_name', 'last_name', 'email', 'phone', 'status'));
+        $user = User::findOrFail($id)->fill($userData->only('first_name', 'last_name', 'email', 'phone', 'status','position'));
         if($user->isDirty() || !$user->hasRole($userData->role))
         {
             $user->save();

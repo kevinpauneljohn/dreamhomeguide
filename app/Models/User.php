@@ -27,11 +27,12 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name',
         'last_name',
-        'phone_number',
+        'phone',
         'email',
         'password',
         'status',
         'profile_photo',
+        'position',
     ];
 
     /**
@@ -89,12 +90,12 @@ class User extends Authenticatable
         return "{$this->first_name} {$this->last_name}";
     }
 
-    public function leads()
+    public function leads(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Leads::class);
     }
 
-    public function notes()
+    public function notes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Note::class);
     }

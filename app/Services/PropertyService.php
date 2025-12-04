@@ -20,9 +20,14 @@ class PropertyService
             response()->json(['success' => false, 'message' => 'Something went wrong!'], 500);
     }
 
+    private function propertyQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return Property::query();
+    }
+
     public function getQuery(array $request): \Illuminate\Database\Eloquent\Builder
     {
-        $query = Property::query();
+        $query = $this->propertyQuery();
 
         // Search
         if ($request['search']) {
@@ -89,5 +94,119 @@ class PropertyService
                 ];
             })
             ->make(true);
+    }
+
+    public function propertyTypes(): array
+    {
+        return [
+            'sale' => 'For Sale',
+            'rent' => 'For Rent',
+            'preselling' => 'Pre-Selling',
+        ];
+    }
+
+    public function propertyCategories(): array
+    {
+        return [
+            'house-and-lot' => 'House and Lot',
+            'condominium' => 'Condominium',
+            'apartment' => 'Apartment',
+            'land' => 'Land',
+            'office' => 'Office',
+            'commercial' => 'Commercial',
+            'industrial' => 'Industrial',
+            'warehouse' => 'Warehouse',
+        ];
+    }
+
+    public function propertyStatus(): array
+    {
+        return [
+            'active' => 'Active',
+            'reserved' => 'Reserved',
+            'sold' => 'Sold',
+        ];
+    }
+
+    public function propertyFeatures(): array
+    {
+        return [
+            'elevator' => 'Elevator',
+            'parking' => 'Parking',
+            'gym' => 'Gym',
+            'swimming_pool' => 'Swimming Pool',
+            'laundry' => 'Laundry',
+            'furnished' => 'Furnished',
+            'furnished_unfurnished' => 'Furnished/Unfurnished',
+            'furnished_partially_furnished' => 'Furnished/Partially Furnished',
+        ];
+    }
+
+    public function location(): array
+    {
+        return [
+            'pampanga' => 'Pampanga',
+            'tarlac' => 'Tarlac',
+            'bulacan' => 'Bulacan',
+            'bataan' => 'Bataan',
+        ];
+    }
+
+    public function searchPropertyQuery($request): \Illuminate\Database\Eloquent\Builder
+    {
+        $query = $this->propertyQuery();
+
+        if(array_key_exists('category', $request) && !empty($request['category']) )
+        {
+            $query->where('property_category', $request['category']);
+        }
+
+        if(array_key_exists('purpose', $request) && !empty($request['purpose']) )
+        {
+            $query->where('property_type', $request['purpose']);
+        }
+
+        if(array_key_exists('location', $request) && !empty($request['location']) )
+        {
+            $query->where('location', 'like', "%{$request['location']}%");
+        }
+
+        if(array_key_exists('room', $request) && !empty($request['room']) )
+        {
+            $query->where('bedrooms', $request['room']);
+        }
+
+        if(array_key_exists('garage', $request) && !empty($request['garage']) )
+        {
+            $query->where('garage', $request['garage']);
+        }
+
+        if(array_key_exists('minPrice', $request) && !empty($request['minPrice']) )
+        {
+            $query->where('price','>=', (int)$request['minPrice'].'000000');
+        }
+
+        if(array_key_exists('maxPrice', $request) && !empty($request['maxPrice']) )
+        {
+            $query->where('price','<=', (int)$request['maxPrice'].'000000');
+        }
+
+        if(array_key_exists('minArea', $request) && !empty($request['minArea']) )
+        {
+            $query->where('lot_area','>=', (int)$request['minArea']);
+        }
+
+        if(array_key_exists('maxArea', $request) && !empty($request['maxArea']) )
+        {
+            $query->where('lot_area','<=', (int)$request['maxArea']);
+        }
+
+        return $query;
+    }
+
+    public function searchProperties($request): \Illuminate\Pagination\LengthAwarePaginator
+    {
+        $query = $this->searchPropertyQuery($request);
+        return $query->paginate(12);
     }
 }

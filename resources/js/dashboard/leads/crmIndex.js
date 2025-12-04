@@ -57,7 +57,10 @@ $(function () {
                 data: 'source'
             },
             {
-                data: 'status'
+                data: 'status',
+                render: function (status) {
+                    return `<span class="badge ${status.class}">${status.label}</span>`;
+                }
             },
             {
                 data: 'created_at'

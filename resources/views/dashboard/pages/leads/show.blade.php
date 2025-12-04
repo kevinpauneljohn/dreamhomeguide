@@ -94,7 +94,7 @@
 
                                         <!-- Hidden input for editing -->
                                         <div class="edit-input mt-1 d-none">
-                                            <input type="text" class="form-control input-box" value="{{ $lead->email }}">
+                                            <input type="text" id="email" class="form-control input-box" value="{{ $lead->email }}">
                                             <div class="mt-1">
                                                 <button class="btn btn-sm btn-success save-btn">Save</button>
                                                 <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
@@ -112,7 +112,7 @@
 
                                         <!-- Hidden input for editing -->
                                         <div class="edit-input mt-1 d-none">
-                                            <input type="text" class="form-control input-box" value="{{ $lead->phone }}">
+                                            <input type="text" id="phone" class="form-control input-box" value="{{ $lead->phone }}">
                                             <div class="mt-1">
                                                 <button class="btn btn-sm btn-success save-btn">Save</button>
                                                 <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
@@ -130,7 +130,7 @@
 
                                         <!-- Hidden input for editing -->
                                         <div class="edit-input mt-1 d-none">
-                                            <input type="text" class="form-control input-box" value="{{ $lead->address }}">
+                                            <input type="text" id="address" class="form-control input-box" value="{{ $lead->address }}">
                                             <div class="mt-1">
                                                 <button class="btn btn-sm btn-success save-btn">Save</button>
                                                 <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
@@ -150,11 +150,13 @@
                                         <div class="edit-input mt-1 d-none">
                                             <input type="hidden" class="form-control" id="birthday" value="{{ $lead->birthday }}">
                                             <input type="date" class="form-control input-box" id="birthday-input">
+                                            <span id="birthday-error" class="text-danger small"></span>
                                             <div class="mt-1">
                                                 <button class="btn btn-sm btn-success save-btn">Save</button>
                                                 <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
 
@@ -842,5 +844,5 @@
 
 @push('scripts')
     @vite('resources/js/dashboard/leads/appointment.js')
-    @vite(['resources/js/dashboard/notes/create.js','resources/js/dashboard/notes/editNote.js'])
+    @vite(['resources/js/dashboard/notes/create.js','resources/js/dashboard/notes/editNote.js','resources/js/dashboard/leads/edit.js'])
 @endpush

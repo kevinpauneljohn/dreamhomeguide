@@ -1,18 +1,14 @@
-<form>
+<form id="full-search-property-form">
     @csrf
     <div class="row g-3 align-items-end mb-3">
         <!-- Property Type -->
         <div class="col-md-3">
-            <label for="property_type" class="form-label">Property Type</label>
-            <select name="property_type" id="property_type" class="form-select">
+            <label for="category" class="form-label">Property Type</label>
+            <select name="category" id="category" class="form-select">
                 <option value=""></option>
-                <option value="buy">Lot Only</option>
-                <option value="rent">Bungalow</option>
-                <option value="rent">Townhouse</option>
-                <option value="rent">Single-attached</option>
-                <option value="rent">Single-Detached</option>
-                <option value="rent">Condominium</option>
-                <option value="rent">Commercial Space</option>
+                @foreach ($propertyCategories as $key => $value)
+                    <option value="{{$key}}" @if(request('category') == $key) selected @endif>{{$value}}</option>
+                @endforeach
             </select>
         </div>
 
@@ -21,8 +17,9 @@
             <label for="purpose" class="form-label">Purpose</label>
             <select name="purpose" id="purpose" class="form-select">
                 <option value=""></option>
-                <option value="buy">Buy</option>
-                <option value="rent">Rent</option>
+                @foreach ($propertyTypes as $key => $value)
+                    <option value="{{$key}}" @if(request('purpose') == $key) selected @endif>{{$value}}</option>
+                @endforeach
             </select>
         </div>
 
@@ -34,7 +31,7 @@
                     <select name="minPrice" id="minPrice" class="form-select">
                         <option value=""></option>
                         @for($minPrice = 1; $minPrice <= 20; $minPrice++)
-                            <option value="{{$minPrice}}">{{$minPrice}} Million</option>
+                            <option value="{{$minPrice}}" @if(request('minPrice') == $minPrice) selected @endif>{{$minPrice}} Million</option>
                         @endfor
                     </select>
                 </div>
@@ -43,7 +40,7 @@
                     <select name="maxPrice" id="maxPrice" class="form-select">
                         <option value=""></option>
                         @for($maxPrice = 1; $maxPrice <= 20; $maxPrice++)
-                            <option value="{{$maxPrice}}">{{$maxPrice}} Million</option>
+                            <option value="{{$maxPrice}}" @if(request('maxPrice') == $maxPrice) selected @endif>{{$maxPrice}} Million</option>
                         @endfor
                     </select>
                 </div>
@@ -54,20 +51,20 @@
         <div class="col-md-3">
             <div class="row g-2">
                 <div class="col">
-                    <label for="minPrice" class="form-label">Min Area</label>
-                    <select name="lot_area" id="lot_area" class="form-select">
+                    <label for="minArea" class="form-label">Min Area</label>
+                    <select name="minArea" id="minArea" class="form-select">
                         <option value=""></option>
-                        @for($lotArea = 50; $lotArea <= 500; $lotArea = $lotArea + 50)
-                            <option value="{{$lotArea}}">{{$lotArea}} sqm</option>
+                        @for($minArea = 50; $minArea <= 500; $minArea = $minArea + 50)
+                            <option value="{{$minArea}}" @if(request('minArea') == $minArea) selected @endif>{{$minArea}} sqm</option>
                         @endfor
                     </select>
                 </div>
                 <div class="col">
-                    <label for="maxPrice" class="form-label">Max Area</label>
-                    <select name="maxPrice" id="maxPrice" class="form-select">
+                    <label for="maxArea" class="form-label">Max Area</label>
+                    <select name="maxArea" id="maxArea" class="form-select">
                         <option value=""></option>
-                        @for($lotArea = 50; $lotArea <= 500; $lotArea = $lotArea + 50)
-                            <option value="{{$lotArea}}">{{$lotArea}} sqm</option>
+                        @for($max_area = 50; $max_area <= 500; $max_area = $max_area + 50)
+                            <option value="{{$max_area}}" @if(request('maxArea') == $max_area) selected @endif>{{$max_area}} sqm</option>
                         @endfor
                     </select>
                 </div>
@@ -78,10 +75,10 @@
                 <!-- Rooms -->
         <div class="col-md-3">
             <label for="room" class="form-label">Room</label>
-            <select name="garage" id="garage" class="form-select">
+            <select name="room" id="room" class="form-select">
                 <option value=""></option>
                 @for($room = 1; $room <= 10; $room++)
-                    <option value="{{$room}}">{{$room}}</option>
+                    <option value="{{$room}}" @if(request('room') == $room) selected @endif>{{$room}}</option>
                 @endfor
             </select>
         </div>
@@ -92,7 +89,7 @@
             <select name="garage" id="garage" class="form-select">
                 <option value=""></option>
                 @for($garage = 1; $garage <= 10; $garage++)
-                    <option value="{{$garage}}">{{$garage}}</option>
+                    <option value="{{$garage}}" @if(request('garage') == $garage) selected @endif>{{$garage}}</option>
                 @endfor
             </select>
         </div>
@@ -102,10 +99,9 @@
             <label for="location" class="form-label">Location</label>
             <select name="location" id="location" class="form-select">
                 <option value=""></option>
-                <option value="Pampanga">Pampanga</option>
-                <option value="Tarlac">Tarlac</option>
-                <option value="Bulacan">Bulacan</option>
-                <option value="Bataan">Bataan</option>
+                @foreach ($location as $key => $value)
+                    <option value="{{$key}}" @if(request('location') == $key) selected @endif>{{$value}}</option>
+                @endforeach
             </select>
         </div>
 
@@ -115,3 +111,7 @@
         </div>
     </div>
 </form>
+
+@push('scripts')
+
+@endpush

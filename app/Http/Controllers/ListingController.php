@@ -2,18 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Property;
+use App\Services\PropertyService;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller
 {
+    public function __construct(
+        protected PropertyService $propertyService
+    )
+    {
+
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('pages.listings.listing')->with(
             [
                 'title' => 'Listings',
+                'properties' => $this->propertyService->searchProperties($request->all()),
+                'searchQueryCount' => $this->propertyService->searchPropertyQuery($request->all())->count(),
             ]
         );
     }
@@ -37,11 +47,18 @@ class ListingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Property $property)
     {
-        return view('pages.listings.profile')->with(
-            'title', 'Listing'
-        );
+        //
+    }
+
+    public function showBySlug(string $slug): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    {
+        $property = Property::where('slug',$slug)->firstOrFail();
+        return view('pages.listings.profile')->with([
+            'title' => $property->title,
+            'property' => $property,
+        ]);
     }
 
     /**

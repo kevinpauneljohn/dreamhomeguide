@@ -102,9 +102,9 @@
                         </select>
                     </div>
 
-                    <div class="col-md-4">
-                        <label class="form-label">Assign Listings (Optional)</label>
-                        <input type="number" class="form-control" name="listing_count" placeholder="Auto-calculated" disabled>
+                    <div class="col-md-4 position">
+                        <label class="form-label">Position (Optional)</label>
+                        <input type="text" class="form-control" name="position" id="position" placeholder="Ex. CEO & Founder">
                     </div>
                 </div>
             </div>

@@ -13,6 +13,12 @@ use Spatie\Permission\Models\Permission;
 
 class PropertyController extends Controller
 {
+    public function __construct(
+        protected PropertyService $propertyService
+    )
+    {
+
+    }
     /**
      * Display a listing of the resource.
      */
@@ -30,7 +36,9 @@ class PropertyController extends Controller
     public function create()
     {
         return view('dashboard.pages.properties.create',[
-            'title' => 'Create Property'
+            'title' => 'Create Property',
+            'propertyCategories' => $this->propertyService->propertyCategories(),
+            'propertyTypes' => $this->propertyService->propertyTypes(),
         ]);
     }
 

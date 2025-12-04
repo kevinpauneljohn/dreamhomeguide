@@ -76,8 +76,8 @@
                 <span class="input-group-text bg-white"><i class="bi bi-funnel"></i></span>
                 <select class="form-select" id="status">
                     <option value="">Status</option>
-                    @foreach($statuses as $status)
-                        <option value="{{ $status }}">{{ $status }}</option>
+                    @foreach($statuses as $key => $value)
+                        <option value="{{ $key }}">{{ $key }}</option>
                     @endforeach
                 </select>
             </div>

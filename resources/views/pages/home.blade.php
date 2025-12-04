@@ -18,7 +18,7 @@
     <div class="container-fluid p-5">
         <div class="container mt-4">
             <h2 class="text-center mb-5 section-title w-100">Featured Properties</h2>
-            <x-featured-properties />
+            <x-featured-properties :properties="$featuredProperties"/>
         </div>
     </div>
     <div class="container-fluid p-5">
