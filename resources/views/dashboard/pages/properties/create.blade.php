@@ -177,7 +177,7 @@
 
         {{-- Submit --}}
         <div class="text-end mb-5">
-            <button class="btn btn-primary px-4" type="submit">
+            <button class="btn btn-primary px-4 save-property-btn" type="submit">
                 Save Property
             </button>
         </div>

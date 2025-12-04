@@ -8,9 +8,15 @@
             <small class="text-muted">Property: {{ $property->title }}</small>
         </div>
 
-        <button class="btn btn-light border px-4" onclick="window.history.back()">
-            Back
-        </button>
+        <div class="d-flex justify-content-end gap-1 mb-3">
+            <button class="btn btn-light border px-4" onclick="window.history.back()">
+                Back
+            </button>
+            <a href="{{route('property.create')}}" class="btn btn-primary border px-4">
+                <i class="bi bi-plus me-1"></i> Add New Property
+            </a>
+        </div>
+
 
     </div>
 

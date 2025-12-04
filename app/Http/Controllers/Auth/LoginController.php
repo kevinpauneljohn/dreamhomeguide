@@ -10,8 +10,12 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
 
-    public function login(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function login(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|RedirectResponse
     {
+        if(auth()->check())
+        {
+            return redirect()->route('dashboard');
+        }
         return view('dashboard.auth.login');
     }
 
@@ -41,6 +45,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect(route('login'));
     }
 }

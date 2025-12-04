@@ -1,7 +1,7 @@
 <!-- SIDEBAR -->
 <div id="sidebar" class="sidebar bg-dark text-white position-fixed p-3">
     <h5 class="pb-3 border-bottom text-center">
-        <span class="sidebar-title">DHG</span>
+        <a href="{{route('home')}}" class="text-white text-decoration-none"><span class="sidebar-title">DHG</span></a>
     </h5>
 
     <ul class="nav nav-pills flex-column mt-3">
@@ -90,36 +90,24 @@
 
     <ul class="nav nav-pills flex-column mt-3">
 
-        <!-- Dashboard -->
-        <li class="nav-item">
-            <a href="{{route('crm.index')}}" class="nav-link text-white {{ Route::is('crm.index') ? 'active' : '' }}">
-                <i class="bi bi-speedometer2"></i>
-                <span>CRM</span>
-            </a>
-        </li>
+        @can('view lead')
+            <li class="nav-item">
+                <a href="{{route('crm.index')}}" class="nav-link text-white {{ Route::is('crm.index') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>CRM</span>
+                </a>
+            </li>
+        @endcan
+
 
         <!-- Properties -->
         @can('view lead')
-            <li class="nav-item">
-                <a class="nav-link text-white d-flex justify-content-between align-items-center {{ Route::is('leads.index') || Route::is('leads.create') ? 'active' : '' }}"
-                   data-bs-toggle="collapse"
-                   href="#leadsMenu"
-                   role="button"
-                   aria-expanded="false"
-                   aria-controls="leadsMenu">
-
-                <span>
-                    <i class="bi bi-bar-chart"></i> Leads
-                </span>
-
-                    <i class="bi bi-caret-down-fill small"></i>
-                </a>
-
-                <ul class="collapse {{ Route::is('leads.index') || Route::is('leads.create') ? 'show' : '' }} ps-4" id="leadsMenu">
-                    <li><a href="{{route('leads.index')}}" class="nav-link text-white-50 {{ Route::is('leads.index') ? 'active' : '' }}">View Leads</a></li>
-                    <li><a href="{{route('leads.create')}}" class="nav-link text-white-50 {{ Route::is('leads.create') ? 'active' : '' }}">Add Lead</a></li>
-                </ul>
-            </li>
+                <li class="nav-item">
+                    <a href="{{route('leads.create')}}" class="nav-link text-white {{ Route::is('leads.create') ? 'active' : '' }}">
+                        <i class="bi bi-bar-chart"></i>
+                        <span>Add New Lead</span>
+                    </a>
+                </li>
         @endcan
 
     </ul>
