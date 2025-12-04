@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm gradient-nav fixed-top">
     <div class="container">
-        <a class="navbar-brand text-white" href="{{ route('home') }}">Dream Home Guide</a>
+        <a class="navbar-brand text-white" href="{{ route('home') }}">John Kevin Paunel</a>
 
         <!-- Toggler for Offcanvas -->
         <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainOffcanvas">
