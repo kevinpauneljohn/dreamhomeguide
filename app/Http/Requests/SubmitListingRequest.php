@@ -34,7 +34,7 @@ class SubmitListingRequest extends FormRequest
             'location' => 'required|string|max:255',
             'property_category' => 'required|string',
             'details' => 'nullable|string|max:2000',
-//            'g-recaptcha-response' => 'required|captcha'
+            'g-recaptcha-response' => 'required|captcha'
         ];
     }
 
