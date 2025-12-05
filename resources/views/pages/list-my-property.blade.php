@@ -93,7 +93,7 @@
                         {!! NoCaptcha::display() !!}
                     </div>
 
-
+                    {!! NoCaptcha::renderJs() !!}
 
                     <button type="submit" class="btn btn-primary mt-4 w-100 py-2">Submit Property Details</button>
                 </form>
@@ -104,6 +104,5 @@
 @endsection
 
 @push('scripts')
-    {!! NoCaptcha::renderJs() !!}
     @vite('resources/js/pages/list-my-property.js')
 @endpush
