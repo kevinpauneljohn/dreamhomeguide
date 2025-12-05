@@ -46,6 +46,7 @@ class SubmitListingRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'g-recaptcha-response.required' => 'Captcha is required.',
             'phone.required_without' => 'Mobile Number is required when email is not provided.',
             'phone.regex' => 'Please enter a valid Philippine mobile number (0917xxxxxxx or +63917xxxxxxx).',
         ];
