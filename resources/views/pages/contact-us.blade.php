@@ -19,9 +19,7 @@
                 <h2 class="mb-3 fw-light">Tell Us Your Inquiry</h2>
 
                 <p class="section-description mb-4 text-muted lh-lg">
-                    At <strong>Presello</strong>, we are committed to delivering exceptional brokering service.
-                    Whether you want to sell your property or purchase your next investment,
-                    our team is ready to assist you every step of the way.
+                    Whatever your real estate needs may be—selling, buying, or investing—our team is here to support you with reliable assistance and personalized service every step of the way.
                 </p>
 
                 <h4 class="fw-light mb-3">You May Also Contact Us</h4>

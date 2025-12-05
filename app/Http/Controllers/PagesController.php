@@ -8,11 +8,9 @@ use App\Services\PropertyService;
 
 class PagesController extends Controller
 {
-    public function listMyProperty(PropertyService $propertyService): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function listMyProperty(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        return view('pages.list-my-property')->with([
-            'propertyCategories' => $propertyService->propertyCategories(),
-        ]);
+        return view('pages.list-my-property');
     }
 
     public function submitListing(SubmitListingRequest $request, LeadService $leadService): \Illuminate\Http\JsonResponse

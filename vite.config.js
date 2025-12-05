@@ -40,10 +40,12 @@ export default defineConfig({
                 'resources/js/dashboard/leads/create.js',
                 'resources/js/dashboard/leads/crmIndex.js',
                 'resources/js/dashboard/leads/appointment.js',
+                'resources/js/dashboard/leads/edit.js',
 
                 //notes
                 'resources/js/dashboard/notes/create.js',
                 'resources/js/dashboard/notes/notesTable.js',
+                'resources/js/dashboard/notes/editNote.js'
             ],
             refresh: true,
         }),

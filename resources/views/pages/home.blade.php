@@ -42,7 +42,7 @@
                     <h2 class="mb-3 fw-semibold">Tell Us Your Inquiry</h2>
 
                     <p class="section-description mb-4 text-muted lh-lg">
-                        Whatever your real estate needs may be—selling, buying, or investing—our team is here to support you with reliable assistance and personalized service every step of the way
+                        Whatever your real estate needs may be—selling, buying, or investing—our team is here to support you with reliable assistance and personalized service every step of the way.
                     </p>
 
                     <h4 class="fw-semibold mb-3">You May Also Contact Us</h4>
