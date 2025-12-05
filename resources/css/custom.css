@@ -258,5 +258,16 @@
 .carousel-inner img {
     border-radius: 0 !important;
 }
-
 /*End of Carousel*/
+
+/*Service offered about us*/
+.card.h-100 .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card.h-100 .btn {
+    margin-top: auto;
+}
+/*End Service offered about us*/
