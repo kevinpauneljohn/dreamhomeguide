@@ -260,6 +260,13 @@
 }
 /*End of Carousel*/
 
+
+/*About Us*/
+.about-us-text{
+    text-align: justify;
+}
+/*About Us*/
+
 /*Service offered about us*/
 .card.h-100 .card-body {
     display: flex;

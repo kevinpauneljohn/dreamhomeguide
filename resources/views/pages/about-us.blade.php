@@ -11,14 +11,14 @@
         <div class="row">
             <div class="col-md-6">
                 <h2 class="fw-lighter">Your Vision, Our Mission</h2>
-                <p class="text-muted">
+                <p class="text-muted about-us-text">
                     Welcome to the official website of <strong>John Kevin Paunel</strong>—a real estate professional, entrepreneur,
                     and storyteller committed to helping Filipinos make smarter, more confident decisions in buying, selling, and investing in real estate.
                 </p>
 
             </div>
             <div class="col-md-6">
-                <p class="text-muted">
+                <p class="text-muted about-us-text">
                     My mission is simple:<br/>
                     <strong>To guide people toward better homes, better opportunities, and a better quality of life through honest service, clear advice, and modern real estate solutions.</strong>
 

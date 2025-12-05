@@ -15,7 +15,7 @@ class FeaturedProperties extends Component
      */
     public function __construct(public $properties)
     {
-        $this->properties = Property::all();
+        $this->properties = Property::where('is_featured',true)->get();
     }
 
     /**
