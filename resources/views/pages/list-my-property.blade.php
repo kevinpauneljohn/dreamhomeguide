@@ -90,7 +90,9 @@
                             <label class="form-label">Additional Details</label>
                             <textarea name="additional_details" id="additional_details" class="form-control" rows="4"></textarea>
                         </div>
-                        {!! NoCaptcha::display() !!}
+                        <div class="col-12 g-recaptcha-response">
+                            {!! NoCaptcha::display() !!}
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary mt-4 w-100 py-2">Submit Property Details</button>
