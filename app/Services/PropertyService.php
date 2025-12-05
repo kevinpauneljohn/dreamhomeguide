@@ -111,11 +111,12 @@ class PropertyService
             'house-and-lot' => 'House and Lot',
             'condominium' => 'Condominium',
             'apartment' => 'Apartment',
-            'land' => 'Land',
             'office' => 'Office',
             'commercial' => 'Commercial',
             'industrial' => 'Industrial',
             'warehouse' => 'Warehouse',
+            'land' => 'Land',
+            'lot' => 'Lot',
         ];
     }
 

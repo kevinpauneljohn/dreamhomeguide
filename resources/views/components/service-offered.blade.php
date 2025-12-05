@@ -8,7 +8,7 @@
                 <h4 class="card-title text-center">SELL MY PROPERTY</h4>
                 <p class="card-text text-center">Showcase your property to serious buyers across Central Luzon’s fastest-growing communities.</p>
 
-                <a href="#" class="btn btn-outline-dark mx-auto d-block w-50">LIST MY PROPERTY</a>
+                <a href="{{route('list-my-property')}}" class="btn btn-outline-dark mx-auto d-block w-50">LIST MY PROPERTY</a>
             </div>
         </div>
     </div>

@@ -16,6 +16,7 @@ export default defineConfig({
                 'resources/js/property-gallery.js',
 
                 'resources/js/pages/search-property-full-form.js',
+                'resources/js/pages/list-my-property.js',
 
                 ///dashboard properties
                 'resources/js/dashboard/properties/properties.js',

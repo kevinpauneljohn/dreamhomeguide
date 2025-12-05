@@ -6,7 +6,7 @@
                     <i class="fa fa-map-marker-alt fa-xl"></i>
                     {{ucwords(strtolower($property->location))}}
                 </span>
-        <a href="{{route('show-property-by-slug',['slug' => $property->slug])}}">
+        <a href="{{route('show-property-by-slug',['slug' => $property->slug])}}" class="stretched-link">
             @php
                 $thumbnail = $property->images()->where('is_thumbnail',true);
                 $propertyPhoto = $thumbnail->count() > 0 ? $thumbnail->first()->file_name : 'No Photo';
