@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('civil_status')->nullable();
             $table->string('income_range')->nullable();
             $table->string('gender')->nullable();
+            $table->enum('lead_type', ['buyer', 'seller','buyer-and-seller'])->default('buyer');
             $table->timestamps();
             $table->softDeletes();
         });
