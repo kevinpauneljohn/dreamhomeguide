@@ -143,7 +143,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="text-muted small">Birthday</label>
                                     <div class="editable-field" data-field="birthday">
-                                        <span class="value">{{ $lead->birthday->format('M d, Y') }}</span>
+                                        <span class="value">{{ !is_null($lead->birthday) ? $lead->birthday->format('M d, Y'):'' }}</span>
                                         <i class="bi bi-pencil edit-icon"></i>
 
                                         <!-- Hidden input for editing -->

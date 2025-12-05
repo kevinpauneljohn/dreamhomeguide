@@ -24,11 +24,12 @@ class SubmitListingRequest extends FormRequest
         return [
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
-            'email' => 'nullable|email|required_without:phone',
+            'email' => 'nullable|email|required_without:phone|unique:leads,email',
             'phone' => [
                 'nullable',
                 'required_without:email',
-                'regex:/^(09\d{9}|\+639\d{9})$/'
+                'regex:/^(09\d{9}|\+639\d{9})$/',
+                'unique:leads,phone'
             ],
             'location' => 'required|string|max:255',
             'property_category' => 'required|string',

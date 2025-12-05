@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Leads;
+use App\Models\ListPropertyInformation;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
@@ -167,13 +168,19 @@ class LeadService
         };
     }
 
-    public function saveLead(array $data): \Illuminate\Http\JsonResponse
+//    Buyer type
+    public function saveLead(array $data)
     {
-        $lead = Leads::create($data);
-        return $lead ? response()->json(['success' => true, 'message' => 'Lead created successfully.', 'lead_id' => $lead->id]) :
-            response()->json(['success' => false, 'message' => 'Error creating lead.']);
+        return Leads::create($data);
     }
 
+    public function sellerLeadPropertyInformation($lead_type, array $propertyInformation): void
+    {
+        if($lead_type == 'seller')
+        {
+           ListPropertyInformation::create($propertyInformation);
+        }
+    }
     protected function leadQuery($request): \Illuminate\Database\Eloquent\Builder
     {
         $query = Leads::query();

@@ -51,9 +51,6 @@ class LeadsController extends Controller
             'incomeRange' => $this->leadsService->incomeRange(),
             'sources' => $this->leadsService->leadSources(),
         ]);
-//        foreach ($this->leadsService->leadStatus() as $key => $value) {
-//            echo $value['label'].'<br/>';
-//        }
 
     }
 
@@ -62,8 +59,10 @@ class LeadsController extends Controller
      */
     public function store(StoreLeadsRequest $request)
     {
-        return $this->leadsService->saveLead($request->only('first_name', 'last_name', 'email', 'phone','address','source',
-            'source_url','status','user_id','birthday','civil_status','income_range','gender'));
+        $lead = $this->leadsService->saveLead($request->only('first_name', 'last_name', 'email', 'phone','address','source',
+            'source_url','status','user_id','birthday','civil_status','income_range','gender','lead_type'));
+
+        return response()->json(['success' => true, 'message' => 'Lead created successfully.', 'lead_id' => $lead->id]);
     }
 
     /**

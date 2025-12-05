@@ -86,11 +86,11 @@
                             </select>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-12 additional_details">
                             <label class="form-label">Additional Details</label>
-                            <textarea class="form-control" rows="4"></textarea>
+                            <textarea name="additional_details" id="additional_details" class="form-control" rows="4"></textarea>
                         </div>
-{{--                        {!! NoCaptcha::display() !!}--}}
+                        {!! NoCaptcha::display() !!}
                     </div>
 
                     <button type="submit" class="btn btn-primary mt-4 w-100 py-2">Submit Property Details</button>
@@ -102,6 +102,6 @@
 @endsection
 
 @push('scripts')
-{{--    {!! NoCaptcha::renderJs() !!}--}}
+    {!! NoCaptcha::renderJs() !!}
     @vite('resources/js/pages/list-my-property.js')
 @endpush

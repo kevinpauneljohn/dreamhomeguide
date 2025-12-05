@@ -12,7 +12,7 @@ class Leads extends Model
     use SoftDeletes, HasUuids;
 
     protected $fillable = ['first_name', 'last_name', 'email', 'phone','address','source',
-        'source_url','status','user_id','birthday','civil_status','income_range','gender'];
+        'source_url','status','user_id','birthday','civil_status','income_range','gender','lead_type'];
 
     protected function casts()
     {
@@ -44,13 +44,18 @@ class Leads extends Model
         return ucwords(strtolower($this->first_name.' '.$this->last_name));
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function notes()
+    public function notes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Note::class);
+    }
+
+    public function propertyInformation(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(ListPropertyInformation::class);
     }
 }

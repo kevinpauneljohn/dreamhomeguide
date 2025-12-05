@@ -106,8 +106,9 @@ const saveLead = (formData) => {
 
         }
     }).fail(function (xhr) {
+        console.log(xhr);
         $.each(xhr.responseJSON.errors, function (key, value) {
-            console.log(key, value);
+
             createLeadForm.find('#' + key).addClass('is-invalid');
             createLeadForm.find('.' + key).append(`<p class="text-danger error">${value}</p>`);
         });

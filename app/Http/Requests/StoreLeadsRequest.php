@@ -33,6 +33,13 @@ class StoreLeadsRequest extends FormRequest
         ];
     }
 
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'birthday' => $this->birthday ?: null
+        ]);
+    }
+
     /**
      * Get the error messages for the defined validation rules.
      *
