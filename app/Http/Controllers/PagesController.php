@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SubmitListingRequest;
 use App\Services\LeadService;
 use App\Services\PropertyService;
+use Spatie\Sitemap\SitemapGenerator;
 
 class PagesController extends Controller
 {
@@ -48,5 +49,17 @@ class PagesController extends Controller
         return view('pages.terms-and-conditions')->with([
             'title' => 'Terms and Conditions',
         ]);
+    }
+
+    public function sitemap()
+    {
+        return view('pages.sitemap')->with([
+            'title' => 'Sitemap',
+        ]);
+    }
+
+    public function sitemapXml()
+    {
+        return SitemapGenerator::create('https://dreamhomeguide.test')->writeToFile(public_path('sitemap.xml'));
     }
 }

@@ -27,16 +27,16 @@
                     <h5 class="mb-4">Key Locations</h5>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#" class="text-decoration-none footer-link">Pampanga</a>
+                            <a href="{{ route('listing.index') }}?location=pampanga" class="text-decoration-none footer-link">Pampanga</a>
                         </li>
                         <li>
-                            <a href="#" class="text-decoration-none footer-link">Tarlac</a>
+                            <a href="{{ route('listing.index') }}?location=tarlac" class="text-decoration-none footer-link">Tarlac</a>
                         </li>
                         <li>
-                            <a href="#" class="text-decoration-none footer-link">Bulacan</a>
+                            <a href="{{ route('listing.index') }}?location=bulacan" class="text-decoration-none footer-link">Bulacan</a>
                         </li>
                         <li>
-                            <a href="#" class="text-decoration-none footer-link">Bataan</a>
+                            <a href="{{ route('listing.index') }}?location=bataan" class="text-decoration-none footer-link">Bataan</a>
                         </li>
                     </ul>
                 </div>
@@ -52,7 +52,7 @@
                             <a href="{{route('terms-and-conditions')}}" class="text-decoration-none footer-link">Terms & Conditions</a>
                         </li>
                         <li>
-                            <a href="#" class="text-decoration-none footer-link">Sitemap</a>
+                            <a href="{{route('sitemap')}}" class="text-decoration-none footer-link">Sitemap</a>
                         </li>
                     </ul>
                 </div>
