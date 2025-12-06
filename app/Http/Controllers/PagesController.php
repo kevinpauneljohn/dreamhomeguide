@@ -60,6 +60,6 @@ class PagesController extends Controller
 
     public function sitemapXml()
     {
-        return SitemapGenerator::create('https://dreamhomeguide.test')->writeToFile(public_path('sitemap.xml'));
+        return SitemapGenerator::create('https://johnkevinpaunel.com')->writeToFile(public_path('sitemap.xml'));
     }
 }
