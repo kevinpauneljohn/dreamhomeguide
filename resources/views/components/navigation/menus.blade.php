@@ -98,15 +98,10 @@
                     <i class="bi-facebook"></i> Like us on Facebook
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="bi-instagram"></i> Follow us on Instagram
-                </a>
-            </li>
         </ul>
 
         <div class="mt-3">
-            <button class="btn btn-warning w-100">BOOK A VIEWING</button>
+            <a href="{{route('list-my-property')}}" class="btn btn-warning w-100">List Your Property</a>
         </div>
 
     </div>
