@@ -6,14 +6,13 @@
     <div class="blog-banner">
         <div class="container">
             <h1 class="single-page-banner-title fw-bold">{{ $title }}</h1>
-            <p class="lead">Insights, guides, and real estate knowledge for every homeowner and investor</p>
         </div>
     </div>
 @endsection
 
 @section('content')
     <div class="container py-5">
-
+        <h4 class="mb-4">Insights, guides, and real estate knowledge for every homeowner and investor</h4>
         <div class="row g-4">
 
             @foreach(range(1,9) as $i)

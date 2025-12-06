@@ -116,7 +116,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card mb-4">
-                    <img src="https://na.rdcpix.com/2004563991/ab56a5a91431644dc57e031e9b665a54w-c199274xd-w685_h860_q80.jpg" class="card-img-top" alt="...">
+                    <img src="{{asset('/carousel/businessman-8825632_1280.jpg')}}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <p class="card-text">Looking to learn more about this unit? Contact us today for full pricing details, payment options, and a personalized consultation.</p>
                     </div>

@@ -134,9 +134,13 @@
             </div>
             <div class="col-md-4">
                 <div class="card mb-4">
-                    <img src="https://na.rdcpix.com/2004563991/ab56a5a91431644dc57e031e9b665a54w-c199274xd-w685_h860_q80.jpg" class="card-img-top" alt="...">
+                    <img src="{{asset('/carousel/businessman-8825632_1280.jpg')}}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">
+                            Looking for Your Dream Home?<br>
+                            Let me help you find the perfect property that matches your lifestyle, budget,
+                            and long-term goals. Send your inquiry below and I’ll personally assist you.
+                        </p>
                     </div>
                 </div>
                 <div class="card">

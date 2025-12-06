@@ -126,7 +126,7 @@
 }
 
 .single-page-banner {
-    background-image: url('https://images.pexels.com/photos/302769/pexels-photo-302769.jpeg?cs=srgb&dl=architecture-building-business-302769.jpg&fm=jpg');
+    background-image: url('https://johnkevinpaunel.com/carousel/sunset-8170058_1280.jpg');
     background-size: cover;       /* like object-fit: cover */
     background-position: center;  /* keeps image centered */
     background-repeat: no-repeat; /* prevent tiling */
