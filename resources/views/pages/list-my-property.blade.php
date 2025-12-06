@@ -1,5 +1,5 @@
 @extends('layouts.singlePage')
-
+@section('title', $title)
 @section('content')
 
     <!-- HERO -->

@@ -10,7 +10,9 @@ class PagesController extends Controller
 {
     public function listMyProperty(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        return view('pages.list-my-property');
+        return view('pages.list-my-property')->with([
+            'title' => 'List My Property',
+        ]);
     }
 
     public function submitListing(SubmitListingRequest $request, LeadService $leadService): \Illuminate\Http\JsonResponse
