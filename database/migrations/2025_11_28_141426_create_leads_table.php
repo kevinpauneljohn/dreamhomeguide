@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->enum('lead_type', ['buyer', 'seller','buyer-and-seller'])->default('buyer');
             $table->foreignId('property_id')->nullable()->constrained('properties')->cascadeOnDelete();
+            $table->text('message')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -12,7 +12,7 @@ class Leads extends Model
     use SoftDeletes, HasUuids;
 
     protected $fillable = ['first_name', 'last_name', 'email', 'phone','address','source',
-        'source_url','status','user_id','birthday','civil_status','income_range','gender','lead_type'];
+        'source_url','status','user_id','birthday','civil_status','income_range','gender','lead_type','message','property_id'];
 
     protected function casts()
     {

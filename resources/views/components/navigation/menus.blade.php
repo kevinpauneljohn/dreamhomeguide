@@ -41,12 +41,12 @@
                             <span class="nav-social-media-menu-text">Like us on Facebook</span>
                         </a>
                     </li>
-                    <li class="nav-item px-2">
-                        <a class="nav-link text-white" href="#">
-                            <i class="bi-instagram"></i>
-                            <span class="nav-social-media-menu-text">Follow us on Instagram</span>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item px-2">--}}
+{{--                        <a class="nav-link text-white" href="#">--}}
+{{--                            <i class="bi-instagram"></i>--}}
+{{--                            <span class="nav-social-media-menu-text">Follow us on Instagram</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 </ul>
 
                 <button class="btn btn-fla btn-warning">BOOK A VIEWING</button>

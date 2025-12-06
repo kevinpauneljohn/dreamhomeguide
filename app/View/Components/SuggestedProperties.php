@@ -15,7 +15,7 @@ class SuggestedProperties extends Component
      */
     public function __construct()
     {
-        $this->suggestedProperties = Property::all()->random(3);
+        $this->suggestedProperties = Property::count() > 2 ? Property::all()->random(3) : Property::all();
     }
 
     /**

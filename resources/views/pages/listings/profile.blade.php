@@ -123,7 +123,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body p-3">
-                        <x-contact-form/>
+                        <x-contact-form propertyId="{{$property->id}}"/>
                     </div>
                 </div>
             </div>
@@ -132,7 +132,7 @@
     <div class="container-fluid py-5">
         <h2 class="text-center mb-3 section-title w-100">Suggested Properties</h2>
         <div class="container py-3">
-            <x-suggested-properties />
+            <x-suggested-properties/>
         </div>
     </div>
 @endsection

@@ -1,4 +1,3 @@
-import Swal from "sweetalert2";
 import {Toast} from '../toast.js';
 const listMyPropertyForm = $('#list-my-property-form');
 $(document).on('submit', '#list-my-property-form', function(e) {

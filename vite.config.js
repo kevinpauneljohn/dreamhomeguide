@@ -45,7 +45,10 @@ export default defineConfig({
                 //notes
                 'resources/js/dashboard/notes/create.js',
                 'resources/js/dashboard/notes/notesTable.js',
-                'resources/js/dashboard/notes/editNote.js'
+                'resources/js/dashboard/notes/editNote.js',
+
+                //contact forms
+                'resources/js/contactForms/contact-form.js',
             ],
             refresh: true,
         }),
