@@ -32,4 +32,21 @@ class PagesController extends Controller
         }
         return response()->json(['success' => false, 'Notice' => 'Your listing has not been submitted. <br/> You may email us at <strong>johnkevinpaunel@gmail.com</strong> instead.']);
     }
+
+    /*
+     *Privacy Policy Page
+     */
+    public function privacyPolicy(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    {
+        return view('pages.privacy-policy')->with([
+            'title' => 'Privacy Policy',
+        ]);
+    }
+
+    public function termsAndConditions(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    {
+        return view('pages.terms-and-conditions')->with([
+            'title' => 'Terms and Conditions',
+        ]);
+    }
 }

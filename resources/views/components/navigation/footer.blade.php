@@ -6,19 +6,19 @@
                     <h5 class="mb-4">Navigation</h5>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#" class="text-decoration-none footer-link">Home</a>
+                            <a href="{{route('home')}}" class="text-decoration-none footer-link">Home</a>
                         </li>
                         <li>
-                            <a href="#" class="text-decoration-none footer-link">Listings</a>
+                            <a href="{{route('listing.index')}}" class="text-decoration-none footer-link">Listings</a>
                         </li>
                         <li>
-                            <a href="#" class="text-decoration-none footer-link">Services</a>
+                            <a href="{{route('about-us')}}" class="text-decoration-none footer-link">About Us</a>
                         </li>
                         <li>
-                            <a href="#" class="text-decoration-none footer-link">Blogs</a>
+                            <a href="{{route('blog.index')}}" class="text-decoration-none footer-link">Blogs</a>
                         </li>
                         <li>
-                            <a href="#" class="text-decoration-none footer-link">Contact Us</a>
+                            <a href="{{route('contact-us')}}" class="text-decoration-none footer-link">Contact Us</a>
                         </li>
                     </ul>
                 </div>
@@ -44,17 +44,12 @@
                 <div class="col-lg-3 col-md-6">
                     <h5 class="mb-4">Information</h5>
                     <ul class="list-unstyled">
+
                         <li>
-                            <a href="#" class="text-decoration-none footer-link">About</a>
+                            <a href="{{route('privacy-policy')}}" class="text-decoration-none footer-link">Privacy Policy</a>
                         </li>
                         <li>
-                            <a href="#" class="text-decoration-none footer-link">Blog</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-decoration-none footer-link">Privacy Policy</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-decoration-none footer-link">Terms & Conditions</a>
+                            <a href="{{route('terms-and-conditions')}}" class="text-decoration-none footer-link">Terms & Conditions</a>
                         </li>
                         <li>
                             <a href="#" class="text-decoration-none footer-link">Sitemap</a>

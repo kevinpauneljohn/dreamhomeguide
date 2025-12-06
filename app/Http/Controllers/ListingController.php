@@ -56,7 +56,7 @@ class ListingController extends Controller
     {
         $property = Property::where('slug',$slug)->firstOrFail();
         return view('pages.listings.profile')->with([
-            'title' => $property->title,
+            'title' => ucwords(strtolower($property->title)),
             'property' => $property,
         ]);
     }
