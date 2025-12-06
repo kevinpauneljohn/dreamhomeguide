@@ -208,6 +208,6 @@ class PropertyService
     public function searchProperties($request): \Illuminate\Pagination\LengthAwarePaginator
     {
         $query = $this->searchPropertyQuery($request);
-        return $query->paginate(12);
+        return $query->paginate(2);
     }
 }
