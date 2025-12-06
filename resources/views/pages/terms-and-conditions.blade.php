@@ -10,78 +10,7 @@
 
 @section('content')
 
-    <style>
-        .terms-container {
-            display: flex;
-            gap: 40px;
-        }
 
-        .terms-sidebar {
-            width: 260px;
-            position: sticky;
-            top: 100px;
-            height: fit-content;
-            background: rgba(255,255,255,0.25);
-            backdrop-filter: blur(12px);
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid rgba(255,255,255,0.3);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .terms-sidebar h5 {
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .terms-sidebar a {
-            display: block;
-            padding: 6px 0;
-            font-size: 14px;
-            color: #0d6efd;
-            text-decoration: none;
-        }
-
-        .terms-sidebar a:hover {
-            text-decoration: underline;
-        }
-
-        .terms-content {
-            flex: 1;
-        }
-
-        .terms-card {
-            background: rgba(255,255,255,0.45);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.25);
-            box-shadow: 0px 12px 30px rgba(0,0,0,0.1);
-        }
-
-        .terms-card h2, .terms-card h4 {
-            font-weight: 700;
-        }
-
-        .terms-card p, .terms-card li {
-            font-size: 15px;
-            line-height: 1.7;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        @media(max-width: 992px) {
-            .terms-container {
-                flex-direction: column;
-            }
-            .terms-sidebar {
-                width: 100%;
-                position: relative;
-            }
-        }
-    </style>
 
     <div class="container py-5">
 
@@ -202,3 +131,78 @@
     </div>
 
 @endsection
+
+@push('css')
+    <style>
+        .terms-container {
+            display: flex;
+            gap: 40px;
+        }
+
+        .terms-sidebar {
+            width: 260px;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .terms-sidebar h5 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .terms-sidebar a {
+            display: block;
+            padding: 6px 0;
+            font-size: 14px;
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        .terms-sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        .terms-content {
+            flex: 1;
+        }
+
+        .terms-card {
+            background: rgba(255,255,255,0.45);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0px 12px 30px rgba(0,0,0,0.1);
+        }
+
+        .terms-card h2, .terms-card h4 {
+            font-weight: 700;
+        }
+
+        .terms-card p, .terms-card li {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media(max-width: 992px) {
+            .terms-container {
+                flex-direction: column;
+            }
+            .terms-sidebar {
+                width: 100%;
+                position: relative;
+            }
+        }
+    </style>
+@endpush

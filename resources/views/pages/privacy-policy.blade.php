@@ -10,83 +10,6 @@
 
 @section('content')
 
-    <style>
-        .policy-container {
-            display: flex;
-            gap: 40px;
-        }
-
-        /* LEFT SIDEBAR */
-        .policy-sidebar {
-            width: 260px;
-            position: sticky;
-            top: 100px;
-            height: fit-content;
-            background: rgba(255,255,255,0.25);
-            backdrop-filter: blur(12px);
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid rgba(255,255,255,0.3);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .policy-sidebar h5 {
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .policy-sidebar a {
-            display: block;
-            padding: 6px 0;
-            text-decoration: none;
-            font-size: 14px;
-            color: #0d6efd;
-        }
-
-        .policy-sidebar a:hover {
-            text-decoration: underline;
-        }
-
-        /* MAIN CONTENT CARD */
-        .policy-content {
-            flex: 1;
-        }
-
-        .policy-card {
-            background: rgba(255,255,255,0.45);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.25);
-            box-shadow: 0px 12px 30px rgba(0,0,0,0.1);
-        }
-
-        .policy-card h2, .policy-card h4 {
-            font-weight: 700;
-        }
-
-        .policy-card p, .policy-card li {
-            font-size: 15px;
-            line-height: 1.7;
-        }
-
-        /* SMOOTH SCROLL */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* MOBILE FIX */
-        @media(max-width: 992px) {
-            .policy-container {
-                flex-direction: column;
-            }
-            .policy-sidebar {
-                width: 100%;
-                position: relative;
-            }
-        }
-    </style>
-
     <div class="container py-5">
 
         <div class="policy-container">
@@ -174,3 +97,82 @@
     </div>
 
 @endsection
+
+@push('css')
+    <style>
+        .policy-container {
+            display: flex;
+            gap: 40px;
+        }
+
+        /* LEFT SIDEBAR */
+        .policy-sidebar {
+            width: 260px;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .policy-sidebar h5 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .policy-sidebar a {
+            display: block;
+            padding: 6px 0;
+            text-decoration: none;
+            font-size: 14px;
+            color: #0d6efd;
+        }
+
+        .policy-sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        /* MAIN CONTENT CARD */
+        .policy-content {
+            flex: 1;
+        }
+
+        .policy-card {
+            background: rgba(255,255,255,0.45);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0px 12px 30px rgba(0,0,0,0.1);
+        }
+
+        .policy-card h2, .policy-card h4 {
+            font-weight: 700;
+        }
+
+        .policy-card p, .policy-card li {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* SMOOTH SCROLL */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width: 992px) {
+            .policy-container {
+                flex-direction: column;
+            }
+            .policy-sidebar {
+                width: 100%;
+                position: relative;
+            }
+        }
+    </style>
+@endpush
