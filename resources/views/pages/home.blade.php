@@ -4,7 +4,7 @@
 @section('content')
     <x-carousel />
 
-    <div class="container-fluid p-5 bg-primary text-white">
+    <div class="container-fluid px-0 py-5 bg-primary text-white">
         <div class="container">
             <h2 class="text-center">Start Your Property Search</h2>
             <p class="text-center mb-4">
@@ -32,8 +32,8 @@
         </div>
     </div>
 
-    <div class="container-fluid py-5 bg-secondary-subtle">
-        <div class="container py-4 home-contact-form-container" style="max-width: 1300px;">
+    <div class="container-fluid py-5 bg-light">
+        <div class="container home-contact-form-container">
             <div class="row align-items-start g-5">
 
                 <!-- LEFT SIDE -->
