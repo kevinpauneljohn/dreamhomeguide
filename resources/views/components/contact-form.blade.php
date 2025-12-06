@@ -3,11 +3,11 @@
     <div class="row">
         <div class="col-md-6 first_name mt-3">
             <label for="first_name">First Name</label> <span class="text-danger">*</span>
-            <input type="text" name="first_name" class="form-control" id="first_name">
+            <input type="text" name="first_name" class="form-control" id="first_name" required>
         </div>
         <div class="col-md-6 last_name mt-3">
             <label for="last_name">Last Name</label> <span class="text-danger">*</span>
-            <input type="text" name="last_name" class="form-control" id="last_name">
+            <input type="text" name="last_name" class="form-control" id="last_name" required>
         </div>
     </div>
     <div class="row">

@@ -10,7 +10,7 @@
                 Get matched with serious buyers through professional marketing,
                 smart pricing strategies, and a streamlined selling process.
             </p>
-            <a href="#list-form" class="btn btn-dark px-5 py-2 mt-3">List My Property</a>
+            <a href="#list-form" class="btn btn-dark px-5 py-2 mt-3">List Your Property</a>
         </div>
     </section>
 

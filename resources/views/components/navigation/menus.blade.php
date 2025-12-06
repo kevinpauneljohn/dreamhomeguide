@@ -49,7 +49,7 @@
 {{--                    </li>--}}
                 </ul>
 
-                <button class="btn btn-fla btn-warning">BOOK A VIEWING</button>
+                <a href="{{route('list-my-property')}}" class="btn btn-fla btn-warning">List Your Property</a>
             </div>
         </div>
     </div>
