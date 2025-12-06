@@ -6,9 +6,9 @@
 
     <div class="container-fluid p-5 bg-primary text-white">
         <div class="container">
-            <h2 class="text-center">Move Online</h2>
+            <h2 class="text-center">Start Your Property Search</h2>
             <p class="text-center mb-4">
-                Search for your next property to buy or rent in the Philippines
+                Find the perfect home, investment, or rental in the Philippines.
             </p>
             <div class="search-form pt-3 px-3">
                 <x-search-property />

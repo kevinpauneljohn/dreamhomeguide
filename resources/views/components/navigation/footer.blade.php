@@ -85,7 +85,7 @@
     </footer>
     <footer class="container-fluid text-center text-white p-2 bg-dark">
         <div class="container">
-            <p>Copyright © 2018-2023 Dream Home Guide.</p>
+            <p>Copyright © 2018-2023 johnkevinpaunel.com</p>
         </div>
     </footer>
 </div>

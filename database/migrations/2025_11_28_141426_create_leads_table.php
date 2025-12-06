@@ -21,12 +21,13 @@ return new class extends Migration
             $table->string('source');
             $table->string('source_url')->nullable();
             $table->string('status');
-            $table->foreignUuid('user_id')->constrained('users');
+            $table->foreignUuid('user_id')->nullable()->constrained('users');
             $table->date('birthday')->nullable();
             $table->string('civil_status')->nullable();
             $table->string('income_range')->nullable();
             $table->string('gender')->nullable();
             $table->enum('lead_type', ['buyer', 'seller','buyer-and-seller'])->default('buyer');
+            $table->foreignId('property_id')->nullable()->constrained('properties')->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });
