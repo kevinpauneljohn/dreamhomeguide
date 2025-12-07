@@ -52,6 +52,12 @@ export default defineConfig({
 
                 //blogs
                 'resources/js/dashboard/blogs/create.js',
+
+                //blog post
+                'resources/js/pages/blog-post.js',
+
+                //mortgage calculator
+                'resources/js/pages/mortgage-calculator.js'
             ],
             refresh: true,
         }),
