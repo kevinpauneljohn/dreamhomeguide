@@ -3,7 +3,7 @@
     <div class="card h-100">
 
                 <span class="position-absolute mt-3 ms-3 d-flex align-items-start text-wrap bg-dark bg-opacity-50 text-white rounded px-3 py-2"
-                      style="max-width: 90%; white-space: normal; line-height: 1.25;">
+                      style="max-width: 90%; white-space: normal; line-height: 1.25; font-size: 12px;">
 
                     <i class="fa fa-map-marker-alt me-2 mt-1"></i>
 
