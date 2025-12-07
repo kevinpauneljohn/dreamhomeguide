@@ -15,7 +15,7 @@
         <h4 class="mb-4">Insights, guides, and real estate knowledge for every homeowner and investor</h4>
         <div class="row g-4">
 
-            @if($blog->count() > 0)
+            @if($blogs->count() > 0)
                 @foreach($blogs as $blog)
                     <x-blog.blog-card :blog="$blog" />
                 @endforeach
