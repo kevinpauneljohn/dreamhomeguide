@@ -30,11 +30,59 @@
     <div class="container my-3">
         <div class="property-header">
 
-            <div class="d-flex justify-content-between align-items-start">
-
-                <div>
+            <div class="row d-flex justify-content-between align-items-start">
+                <div class="col-lg-8">
                     <h1 class="property-title">{{ ucwords(strtolower($property->title)) }}</h1>
+                </div>
+                <div class="col-lg-4 d-flex justify-content-end">
+                    {{-- Floating Action Icons --}}
+                    <div class="property-actions d-flex gap-2">
 
+                        {{-- Facebook --}}
+                        <a class="action-btn action-fb"
+                           href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}"
+                           target="_blank">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+
+                        {{-- Messenger --}}
+                        <a class="action-btn action-msg"
+                           href="https://www.facebook.com/dialog/send?link={{ urlencode(url()->current()) }}&app_id=YOUR_APP_ID&redirect_uri={{ urlencode(url()->current()) }}"
+                           target="_blank">
+                            <i class="bi bi-messenger"></i>
+                        </a>
+
+                        {{-- Twitter --}}
+                        <a class="action-btn action-twt"
+                           href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($property->title) }}"
+                           target="_blank">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+
+                        {{-- LinkedIn --}}
+                        <a class="action-btn action-li"
+                           href="https://www.linkedin.com/shareArticle?url={{ urlencode(url()->current()) }}"
+                           target="_blank">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+
+                        {{-- Copy Link --}}
+                        <span class="action-btn action-copy" onclick="copyPropertyLink()">
+                            <i class="bi bi-link-45deg"></i>
+                        </span>
+
+                                            {{-- Favorite --}}
+                                            <span class="action-btn action-fav" title="Add to Favorites">
+                            <i class="bi bi-heart"></i>
+                        </span>
+
+                                            {{-- Compare --}}
+                                            <span class="action-btn action-compare" title="Compare Property">
+                            <i class="bi bi-arrow-left-right"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-12">
                     <div class="d-flex flex-wrap gap-3 mt-3">
                         <div class="d-flex align-items-center gap-2">
                             <i class="fa-solid fa-peso-sign text-primary"></i>
@@ -46,7 +94,8 @@
                             <span>{{ $property->location }}</span>
                         </div>
                     </div>
-
+                </div>
+                <div class="col-lg-12">
                     {{-- Badges --}}
                     <div class="mt-3">
                         @if($property->is_featured)
@@ -55,56 +104,6 @@
                         <span class="badge rounded-pill text-bg-danger badge-pill">{{ $property->property_type }}</span>
                     </div>
                 </div>
-
-                {{-- Floating Action Icons --}}
-                <div class="property-actions d-flex gap-2">
-
-                    {{-- Facebook --}}
-                    <a class="action-btn action-fb"
-                       href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}"
-                       target="_blank">
-                        <i class="bi bi-facebook"></i>
-                    </a>
-
-                    {{-- Messenger --}}
-                    <a class="action-btn action-msg"
-                       href="https://www.facebook.com/dialog/send?link={{ urlencode(url()->current()) }}&app_id=YOUR_APP_ID&redirect_uri={{ urlencode(url()->current()) }}"
-                       target="_blank">
-                        <i class="bi bi-messenger"></i>
-                    </a>
-
-                    {{-- Twitter --}}
-                    <a class="action-btn action-twt"
-                       href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($property->title) }}"
-                       target="_blank">
-                        <i class="bi bi-twitter"></i>
-                    </a>
-
-                    {{-- LinkedIn --}}
-                    <a class="action-btn action-li"
-                       href="https://www.linkedin.com/shareArticle?url={{ urlencode(url()->current()) }}"
-                       target="_blank">
-                        <i class="bi bi-linkedin"></i>
-                    </a>
-
-                    {{-- Copy Link --}}
-                    <span class="action-btn action-copy" onclick="copyPropertyLink()">
-        <i class="bi bi-link-45deg"></i>
-    </span>
-
-                    {{-- Favorite --}}
-                    <span class="action-btn action-fav" title="Add to Favorites">
-        <i class="bi bi-heart"></i>
-    </span>
-
-                    {{-- Compare --}}
-                    <span class="action-btn action-compare" title="Compare Property">
-        <i class="bi bi-arrow-left-right"></i>
-    </span>
-                </div>
-
-
-
             </div>
 
         </div>

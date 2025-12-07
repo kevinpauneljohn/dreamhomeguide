@@ -614,6 +614,46 @@
 .action-fav { background: #dc3545; }
 .action-compare { background: #ff9800; }
 
+/* Make the circle buttons smaller */
+.action-btn {
+    width: 30px!important;       /* previously 40px */
+    height: 30px!important;;      /* previously 40px */
+    font-size: 0.9rem; /* smaller icons */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/* Even smaller icons on mobile (optional) */
+@media (max-width: 576px) {
+    .action-btn {
+        width: 28px!important;
+        height: 28px!important;
+        font-size: 0.8rem;
+    }
+}
+
+/* Default (desktop): icons stay on the right */
+.property-actions {
+    justify-content: flex-end;
+}
+
+/* MOBILE BEHAVIOR */
+@media (max-width: 768px) {
+
+    /* Make title + icons align to left on mobile */
+    .property-header .d-flex,
+    .property-actions {
+        justify-content: flex-start !important;
+    }
+
+    /* Add spacing so icons drop below the title neatly */
+    .property-actions {
+        margin-top: 10px;
+    }
+}
+
 /*End of Property Listing Profile Page*/
 
 /*Mortgage Calculator*/
