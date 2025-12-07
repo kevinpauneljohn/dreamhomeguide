@@ -5,7 +5,7 @@
                 <span class="position-absolute mt-3 ms-3 d-flex align-items-start text-wrap bg-dark bg-opacity-50 text-white rounded px-3 py-2"
                       style="max-width: 90%; white-space: normal; line-height: 1.25; font-size: 13px;">
 
-                    <i class="fa fa-map-marker-alt me-2 mt-0"></i>
+                    <i class="fa fa-map-marker-alt me-2 mt-1"></i>
 
                     <span class="lh-sm">
                         {{ ucwords(strtolower($property->location)) }}
