@@ -2,12 +2,17 @@
 
     <div class="card h-100">
 
-                <span class="px-3 py-1 bg-dark bg-opacity-50 text-white rounded-pill position-absolute mt-3 ms-3 text-wrap d-inline-block"
-                      style="max-width: 85%; white-space: normal; font-size: .85rem;">
+                <span class="badge rounded-pill text-bg-dark bg-opacity-50 position-absolute mt-3 ms-3 d-flex align-items-start text-wrap"
+                      style="max-width: 85%; white-space: normal; line-height: 1.2; padding: 6px 10px;">
 
-                    <i class="fa fa-map-marker-alt fa-xl"></i>
-                    {{ucwords(strtolower($property->location))}}
+                    <i class="fa fa-map-marker-alt fa-lg me-2 mt-1"></i>
+
+                    <span class="lh-sm">
+                        {{ ucwords(strtolower($property->location)) }}
+                    </span>
+
                 </span>
+
         <a href="{{route('show-property-by-slug',['slug' => $property->slug])}}" class="stretched-link">
             @php
                 $thumbnail = $property->images()->where('is_thumbnail',true);
