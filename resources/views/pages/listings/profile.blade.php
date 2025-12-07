@@ -40,14 +40,22 @@
                         <h3 class="property-title">
                             {{ucwords(strtolower($property->title))}}
                         </h3>
-                        <div class="d-flex justify-content-between align-items-baseline">
-                            <span class="property-price mt-4 text-primary fs-4 fw-bold">
-                                &#8369 {{number_format($property->price,2)}}
-                            </span>
-                            <div class="text-muted">
-                                <i class="fa fa-map-marker-alt"></i>
-                                <span>{{$property->location}}</span>
+                        <div class="d-flex flex-column flex-md-row align-items-md-center gap-2">
+
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fa-solid fa-peso-sign text-primary"></i>
+                                <span class="fs-4 fw-bold text-primary">
+                                    {{ number_format($property->price, 2) }}
+                                </span>
                             </div>
+
+                            <div class="d-flex align-items-center gap-2 text-muted">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span class="property-address">
+                                    {{ $property->location }}
+                                </span>
+                            </div>
+
                         </div>
 
 
