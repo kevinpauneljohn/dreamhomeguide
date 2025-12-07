@@ -11,7 +11,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('home')}}" class="text-decoration-none">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{route('blog.index')}}" class="text-decoration-none">Blogs</a></li>
+                <li class="breadcrumb-item"><a href="{{route('blogs')}}" class="text-decoration-none">Blogs</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ucwords(strtolower($blog->title))}}</li>
             </ol>
         </nav>

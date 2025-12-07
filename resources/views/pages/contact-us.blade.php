@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <div class="container py-5 w-75">
+    <div class="container py-5 px-4">
 
         <div class="row g-5">
 

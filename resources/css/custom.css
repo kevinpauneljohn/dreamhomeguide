@@ -278,3 +278,15 @@
     margin-top: auto;
 }
 /*End Service offered about us*/
+
+.g-recaptcha {
+    transform: scale(0.85);
+    transform-origin: 0 0;
+}
+
+@media(max-width: 480px) {
+    .g-recaptcha {
+        transform: scale(0.75);
+    }
+}
+
