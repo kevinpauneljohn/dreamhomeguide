@@ -12,7 +12,11 @@
 
 @section('content')
     <div class="container py-5">
-        <h4 class="mb-4">Insights, guides, and real estate knowledge for every homeowner and investor</h4>
+        <h4 class="mb-4 text-center fw-semibold text-uppercase mb-4" style="font-size: 0.95rem; letter-spacing: 2px; color:#555;">
+            Insights • Guides • Real Estate Knowledge
+        </h4>
+
+
         <div class="row g-4">
 
             @if($blogs->count() > 0)
