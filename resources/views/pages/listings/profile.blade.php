@@ -55,7 +55,7 @@
 
                         <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4">
                             <div class="col">
-                                <h5>{{$property->property_category}}</h5>
+                                <h5>{{ucwords(strtolower(str_replace('-',' ',$property->property_category)))}}</h5>
                                 <span class="text-muted">Property Type</span>
                             </div>
                             @if(!is_null($property->bedrooms))
