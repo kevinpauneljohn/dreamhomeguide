@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBlogRequest;
+use App\Models\Blog;
+use App\Services\BlogService;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+    public function __construct(
+        protected BlogService $blogService
+    )
+    {
+
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('pages.blog.index')->with([
+        return view('dashboard.pages.blogs.index')->with([
             'title' => 'Blogs',
         ]);
     }
@@ -21,7 +30,11 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.pages.blogs.create')->with([
+            'title' => 'Create Blog Post',
+            'blogCategories' => $this->blogService->blogCategories(),
+            'blogStatus' => $this->blogService->blogStatus(),
+        ]);
     }
 
     /**
@@ -29,7 +42,25 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        ///saving thumbnail
+        if($request->hasFile('thumbnail'))
+        {
+            $photo = $request->file('thumbnail');
+            $newName = time(). '-' . uniqid() . '.' . $photo->extension();
+            $photo->move(public_path('storage/blogs'),$newName);
+//
+            $request->thumbnail = $newName;
+        }
+
+        ///
+        $request->merge(['user_id' => auth()->user()->id]);
+        $blogData = $request->only('title','slug','category','status','thumbnail','user_id','blog_content',
+            'meta_title','meta_description','meta_keywords');
+        $blog = Blog::create($blogData);
+
+        return $blog->exists() ?
+            response()->json(['success' => true, 'message' => 'Blog post created successfully.', 'slug' => $blog->slug]) :
+            response()->json(['success' => false, 'message' => 'An error occurred while creating the blog post.']);
     }
 
     /**
@@ -37,9 +68,11 @@ class BlogController extends Controller
      */
     public function show(string $id)
     {
-        return view('pages.blog.post')->with([
-            'title' => 'Blog Post',
-        ]);
+//        $blog = Blog::where('slug', $slug)->firstOrFail();
+//        return view('pages.blog.post')->with([
+//            'title' => ucwords(strtolower($blog->title)),
+//            'blog' => $blog,
+//        ]);
     }
 
     /**

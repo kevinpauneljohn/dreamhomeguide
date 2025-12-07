@@ -9,3 +9,6 @@ Route::get('/privacy-policy',[PagesController::class,'privacyPolicy'])->name('pr
 Route::get('/terms-and-conditions',[PagesController::class,'termsAndConditions'])->name('terms-and-conditions');
 Route::get('/sitemap',[PagesController::class,'sitemap'])->name('sitemap');
 Route::get('/sitemap.xml',[PagesController::class,'sitemapXml'])->name('sitemap.xml');
+
+Route::get('/blogs',[PagesController::class,'blogs'])->name('blogs');
+Route::get('/blog/post/{slug}',[PagesController::class,'blogPost'])->name('blog-post');

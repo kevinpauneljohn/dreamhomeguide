@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SubmitListingRequest;
+use App\Models\Blog;
 use App\Services\LeadService;
 use App\Services\PropertyService;
 use Spatie\Sitemap\SitemapGenerator;
@@ -32,6 +33,24 @@ class PagesController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
         return response()->json(['success' => false, 'Notice' => 'Your listing has not been submitted. <br/> You may email us at <strong>johnkevinpaunel@gmail.com</strong> instead.']);
+    }
+
+    public function blogs(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    {
+        return view('pages.blog.index')->with([
+            'title' => 'Blog',
+            'blogs' => Blog::where('status','published')->paginate(12)
+        ]);
+    }
+
+    public function blogPost($slug): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    {
+        $blog = Blog::where('slug',$slug)->firstOrFail();
+        return view('pages.blog.post')->with([
+            'title' => ucwords(strtolower($blog->title)),
+            'blog' => $blog,
+            'relatedBlogs' => Blog::where('status','published')->take(3)->get()
+        ]);
     }
 
     /*

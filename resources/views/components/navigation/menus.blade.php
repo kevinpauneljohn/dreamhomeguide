@@ -20,7 +20,7 @@
                     <a class="nav-link {{ Route::is('about-us') ? 'active' : '' }} text-white" href="{{ route('about-us') }}">About Us</a>
                 </li>
                 <li class="nav-item px-2">
-                    <a class="nav-link {{ Route::is('blog.index') ? 'active' : '' }} text-white" href="{{ route('blog.index') }}">Blogs</a>
+                    <a class="nav-link {{ Route::is('blogs') ? 'active' : '' }} text-white" href="{{ route('blogs') }}">Blogs</a>
                 </li>
                 <li class="nav-item px-2">
                     <a class="nav-link {{ Route::is('contact-us') ? 'active' : '' }} text-white" href="{{ route('contact-us') }}">Contact Us</a>
@@ -77,7 +77,7 @@
                 <a class="nav-link {{ Route::is('about-us') ? 'active' : '' }}" href="{{ route('about-us') }}">About Us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::is('blog.index') ? 'active' : '' }}" href="{{ route('blog.index') }}">Blogs</a>
+                <a class="nav-link {{ Route::is('blogs') ? 'active' : '' }}" href="{{ route('blogs') }}">Blogs</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ Route::is('contact-us') ? 'active' : '' }}" href="{{ route('contact-us') }}">Contact Us</a>

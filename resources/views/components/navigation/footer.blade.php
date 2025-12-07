@@ -15,7 +15,7 @@
                             <a href="{{route('about-us')}}" class="text-decoration-none footer-link">About Us</a>
                         </li>
                         <li>
-                            <a href="{{route('blog.index')}}" class="text-decoration-none footer-link">Blogs</a>
+                            <a href="{{route('blogs')}}" class="text-decoration-none footer-link">Blogs</a>
                         </li>
                         <li>
                             <a href="{{route('contact-us')}}" class="text-decoration-none footer-link">Contact Us</a>

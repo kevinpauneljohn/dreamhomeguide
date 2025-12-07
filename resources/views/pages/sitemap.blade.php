@@ -116,7 +116,7 @@
                     <li><a href="{{ route('home') }}">Home</a></li>
                     <li><a href="{{ route('listing.index') }}">Listings</a></li>
                     <li><a href="{{ route('about-us') }}">About Us</a></li>
-                    <li><a href="{{ route('blog.index') }}">Blogs</a></li>
+                    <li><a href="{{ route('blogs') }}">Blogs</a></li>
                     <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                 </ul>
 

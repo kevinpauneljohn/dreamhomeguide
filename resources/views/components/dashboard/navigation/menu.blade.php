@@ -62,6 +62,30 @@
             </li>
         @endcan
 
+        <!-- Blogs -->
+        @can('view blog')
+            <li class="nav-item">
+                <a class="nav-link text-white d-flex justify-content-between align-items-center {{ Route::is('user.index') || Route::is('user.create') ? 'active' : '' }}"
+                   data-bs-toggle="collapse"
+                   href="#blogsMenu"
+                   role="button"
+                   aria-expanded="false"
+                   aria-controls="blogsMenu">
+
+                <span>
+                    <i class="bi bi-journal-text"></i> Blogs
+                </span>
+
+                    <i class="bi bi-caret-down-fill small"></i>
+                </a>
+
+                <ul class="collapse {{ Route::is('user.index') || Route::is('user.create') ? 'show' : '' }} ps-4" id="blogsMenu">
+                    <li><a href="{{route('blog.index')}}" class="nav-link text-white-50 {{ Route::is('blog.index') ? 'active' : '' }}">View Blogs</a></li>
+                    <li><a href="{{route('blog.create')}}" class="nav-link text-white-50 {{ Route::is('blog.create') ? 'active' : '' }}">Add Blog</a></li>
+                </ul>
+            </li>
+        @endcan
+
         <!-- Reports with Submenu -->
         <li class="nav-item">
             <a class="nav-link text-white d-flex justify-content-between align-items-center"
@@ -104,7 +128,7 @@
         @can('view lead')
                 <li class="nav-item">
                     <a href="{{route('leads.create')}}" class="nav-link text-white {{ Route::is('leads.create') ? 'active' : '' }}">
-                        <i class="bi bi-bar-chart"></i>
+                        <i class="bi bi-person-add"></i>
                         <span>Add New Lead</span>
                     </a>
                 </li>
