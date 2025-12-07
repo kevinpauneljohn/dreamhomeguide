@@ -15,9 +15,27 @@
         <h4 class="mb-4">Insights, guides, and real estate knowledge for every homeowner and investor</h4>
         <div class="row g-4">
 
-            @foreach($blogs as $blog)
-                <x-blog.blog-card :blog="$blog" />
-            @endforeach
+            @if($blog->count() > 0)
+                @foreach($blogs as $blog)
+                    <x-blog.blog-card :blog="$blog" />
+                @endforeach
+
+            @else
+                <div class="col-12">
+                    <div class="text-center py-5 my-5">
+
+                        <i class="bi bi-journal-text text-secondary" style="font-size: 4rem;"></i>
+
+                        <h2 class="fw-bold mt-3">Blog Articles Coming Soon</h2>
+
+                        <p class="text-muted mx-auto" style="max-width: 600px;">
+                            We're working on helpful guides, market insights, and real estate tips to empower homebuyers and investors.
+                            Check back again soon!
+                        </p>
+
+                    </div>
+                </div>
+            @endif
 
         </div>
 
