@@ -2,16 +2,17 @@
 
     <div class="card h-100">
 
-                <span class="badge rounded-pill text-bg-dark bg-opacity-50 position-absolute mt-3 ms-3 d-flex align-items-start text-wrap"
-                      style="max-width: 85%; white-space: normal; line-height: 1.2; padding: 6px 10px;">
+                <span class="position-absolute mt-3 ms-3 d-flex align-items-start text-wrap bg-dark bg-opacity-50 text-white rounded px-3 py-2"
+                      style="max-width: 70%; white-space: normal; line-height: 1.25;">
 
-                    <i class="fa fa-map-marker-alt fa-lg me-2 mt-1"></i>
+                    <i class="fa fa-map-marker-alt me-2 mt-1"></i>
 
                     <span class="lh-sm">
                         {{ ucwords(strtolower($property->location)) }}
                     </span>
 
                 </span>
+
 
         <a href="{{route('show-property-by-slug',['slug' => $property->slug])}}" class="stretched-link">
             @php
