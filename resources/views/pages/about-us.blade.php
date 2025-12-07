@@ -34,9 +34,10 @@
             <div class="container p-2">
                 <h2 class="text-center">Meet Our Team</h2>
                 <p class="mb-5 text-center">Dedicated to Serving You With Excellence</p>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5 justify-content-center">
                     @foreach($teams->get() as $team)
-                        <div class="col">
+                        <div class="col d-flex justify-content-center">
                             <x-card-profile
                                 imageUrl="storage/profile_pictures/{{$team->profile_photo}}"
                                 name="{{ucwords(strtolower($team->full_name))}}"
@@ -45,9 +46,11 @@
                         </div>
                     @endforeach
                 </div>
+
             </div>
         </div>
     @endif
+
 
     <div class="container p-5">
         <h2 class="text-center mb-3 section-title w-100">How Can We Help You?</h2>

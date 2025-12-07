@@ -49,6 +49,9 @@ export default defineConfig({
 
                 //contact forms
                 'resources/js/contactForms/contact-form.js',
+
+                //blogs
+                'resources/js/dashboard/blogs/create.js',
             ],
             refresh: true,
         }),
