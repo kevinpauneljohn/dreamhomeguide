@@ -99,7 +99,7 @@
             </p>
 
             <a href="{{ url('/') }}" class="btn btn-custom">
-                ⬅ Return to Dashboard
+                ⬅ Return to Home Page
             </a>
         </div>
 
