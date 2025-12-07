@@ -2,7 +2,9 @@
 
     <div class="card h-100">
 
-                <span class="badge rounded-pill text-bg-dark bg-opacity-50 position-absolute mt-3 ms-3">
+                <span class="px-3 py-1 bg-dark bg-opacity-50 text-white rounded-pill position-absolute mt-3 ms-3 text-wrap d-inline-block"
+                      style="max-width: 85%; white-space: normal; font-size: .85rem;">
+
                     <i class="fa fa-map-marker-alt fa-xl"></i>
                     {{ucwords(strtolower($property->location))}}
                 </span>
