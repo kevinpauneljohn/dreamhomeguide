@@ -2,7 +2,7 @@
     <div class="col-md-6 mb-4">
         <div class="card h-100">
             <a href="#">
-                <img src="https://tse2.mm.bing.net/th/id/OIP.iy3fYdKxhl7F3JkUrTLIPQHaEJ?rs=1&pid=ImgDetMain&o=7&rm=3" class="card-img-top featured-property-image" alt="...">
+                <img src="{{asset('/carousel/home-8166287_1280.jpg')}}" class="card-img-top featured-property-image" alt="...">
             </a>
             <div class="card-body">
                 <h4 class="card-title text-center">SELL MY PROPERTY</h4>
@@ -15,7 +15,7 @@
     <div class="col-md-6 mb-4">
         <div class="card h-100">
             <a href="#">
-                <img src="https://lessandra.com.ph/assets/BlogImages/house-lot-philippines/steps-in-how-to-invest-in-affordable-house-and-lot-for-sale-in-lessandra.jpg" class="card-img-top featured-property-image" alt="...">
+                <img src="{{asset('/carousel/ai-generated-9616741_1280.jpg')}}" class="card-img-top featured-property-image" alt="...">
             </a>
             <div class="card-body">
                 <h4 class="card-title text-center">BUY A PROPERTY</h4>
