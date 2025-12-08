@@ -50,8 +50,10 @@ export default defineConfig({
                 //contact forms
                 'resources/js/contactForms/contact-form.js',
 
-                //blogs
+                //blogs dashboard
                 'resources/js/dashboard/blogs/create.js',
+                'resources/js/dashboard/blogs/index.js',
+                'resources/js/dashboard/blogs/edit.js',
 
                 //blog post
                 'resources/js/pages/blog-post.js',

@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('title', $title)
+@push('seo')
+    <x-seo title="{{$title}} — {{url('/')}}" />
+@endpush
 @section('content')
     <x-carousel />
 

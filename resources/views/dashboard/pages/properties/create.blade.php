@@ -175,6 +175,31 @@
             </div>
         </div>
 
+        {{-- SEO Section --}}
+        <div class="card mb-4">
+            <div class="card-header bg-light fw-bold">SEO Settings (Optional)</div>
+            <div class="card-body">
+                <div class="row g-4">
+
+                    <div class="col-md-6">
+                        <label class="form-label">Meta Title</label>
+                        <input type="text" name="meta_title" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Meta Keywords</label>
+                        <input type="text" name="meta_keywords" class="form-control" placeholder="e.g. real estate, pampanga, bahay for sale">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label">Meta Description</label>
+                        <textarea name="meta_description" class="form-control" rows="3"></textarea>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
         {{-- Submit --}}
         <div class="text-end mb-5">
             <button class="btn btn-primary px-4 save-property-btn" type="submit">

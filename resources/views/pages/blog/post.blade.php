@@ -1,6 +1,16 @@
 @extends('layouts.singlePage')
 
 @section('title', $title)
+@push('seo')
+    <x-seo
+        :title="$blog->meta_title"
+        :description="$blog->meta_description"
+        :keywords="$blog->meta_keywords"
+        :image="url('/storage/blogs/'.$blog->thumbnail)"
+        schemaType="Article"
+    />
+
+@endpush
 @section('bannerTitle')
     <div class="container">
         <h1 class="single-page-banner-title">{{$title}}</h1>

@@ -1,6 +1,9 @@
 @extends('layouts.singlePage')
 
 @section('title', 'Privacy Policy')
+@push('seo')
+    <x-seo title="{{$title}} — {{url('/')}}" />
+@endpush
 
 @section('bannerTitle')
     <div class="container">

@@ -65,7 +65,7 @@
         <!-- Blogs -->
         @can('view blog')
             <li class="nav-item">
-                <a class="nav-link text-white d-flex justify-content-between align-items-center {{ Route::is('user.index') || Route::is('user.create') ? 'active' : '' }}"
+                <a class="nav-link text-white d-flex justify-content-between align-items-center {{ Route::is('blog.index') || Route::is('blog.create') ? 'active' : '' }}"
                    data-bs-toggle="collapse"
                    href="#blogsMenu"
                    role="button"
@@ -79,7 +79,7 @@
                     <i class="bi bi-caret-down-fill small"></i>
                 </a>
 
-                <ul class="collapse {{ Route::is('user.index') || Route::is('user.create') ? 'show' : '' }} ps-4" id="blogsMenu">
+                <ul class="collapse {{ Route::is('blog.index') || Route::is('blog.create') ? 'show' : '' }} ps-4" id="blogsMenu">
                     <li><a href="{{route('blog.index')}}" class="nav-link text-white-50 {{ Route::is('blog.index') ? 'active' : '' }}">View Blogs</a></li>
                     <li><a href="{{route('blog.create')}}" class="nav-link text-white-50 {{ Route::is('blog.create') ? 'active' : '' }}">Add Blog</a></li>
                 </ul>

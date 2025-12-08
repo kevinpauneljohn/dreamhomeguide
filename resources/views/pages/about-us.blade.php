@@ -1,6 +1,9 @@
 @extends('layouts.singlePage')
 
 @section('title', $title)
+@push('seo')
+    <x-seo title="{{$title}} — {{url('/')}}" />
+@endpush
 
 {{-- ============================= --}}
 {{-- HERO HEADER --}}

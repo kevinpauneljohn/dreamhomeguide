@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
 class UpdateBlogRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class UpdateBlogRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->user()->can('edit blog');
     }
 
     /**
@@ -22,7 +24,14 @@ class UpdateBlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', 'max:255'],
+            'thumbnail' => ['nullable','image', 'max:160000', File::types([
+                'jpg','png',
+            ])],
+            'slug' => ['required', 'string', Rule::unique('blogs','slug')->ignore($this->blog)],
+            'category' => ['required', 'string', 'max:255'],
+            'status' => ['required', 'string', 'max:255'],
+            'blog_content' => ['required', 'string', 'max:10000']
         ];
     }
 }

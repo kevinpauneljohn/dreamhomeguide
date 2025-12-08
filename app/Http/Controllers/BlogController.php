@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogRequest;
+use App\Http\Requests\UpdateBlogRequest;
 use App\Models\Blog;
 use App\Services\BlogService;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 
 class BlogController extends Controller
 {
@@ -15,6 +17,16 @@ class BlogController extends Controller
     {
 
     }
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('can:view blog', only: ['index', 'show','getBlogs']),
+            new Middleware('can:add blog', only: ['create', 'store']),
+            new Middleware('can:edit blog', only: ['edit', 'update']),
+            new Middleware('can:delete blog', only: ['destroy'])
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -22,6 +34,8 @@ class BlogController extends Controller
     {
         return view('dashboard.pages.blogs.index')->with([
             'title' => 'Blogs',
+            'blogCategories' => $this->blogService->blogCategories(),
+            'blogStatus' => $this->blogService->blogStatus(),
         ]);
     }
 
@@ -40,7 +54,7 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBlogRequest $request)
     {
         ///saving thumbnail
         if($request->hasFile('thumbnail'))
@@ -68,27 +82,52 @@ class BlogController extends Controller
      */
     public function show(string $id)
     {
-//        $blog = Blog::where('slug', $slug)->firstOrFail();
-//        return view('pages.blog.post')->with([
-//            'title' => ucwords(strtolower($blog->title)),
-//            'blog' => $blog,
-//        ]);
+        return 'test';
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Blog $blog)
     {
-        //
+        return view('dashboard.pages.blogs.edit')->with([
+            'title' => 'Edit Blog Post',
+            'blog' => $blog,
+            'blogCategories' => $this->blogService->blogCategories(),
+            'blogStatus' => $this->blogService->blogStatus(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateBlogRequest $request, Blog $blog): \Illuminate\Http\JsonResponse
     {
-        //
+        $blog->fill($request->only('title','slug','category','status','blog_content','meta_title','meta_keywords','meta_description'));
+        $isDirty = $blog->isDirty();
+
+        if($isDirty)
+        {
+            $blog->save();
+        }
+
+        if($request->hasFile('thumbnail'))
+        {
+            $this->blogService->removeThumbnail($request, $blog->thumbnail);
+            $photo = $request->file('thumbnail');
+            $newName = time(). '-' . uniqid() . '.' . $photo->extension();
+            $photo->move(public_path('storage/blogs'),$newName);
+            $blog->update(['thumbnail' => $newName]);
+
+            $isDirty = true;
+        }
+
+        if($isDirty)
+        {
+            return response()->json(['success' => true, 'message' => 'Blog post updated successfully.', ]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'No changes were made.']);
     }
 
     /**
@@ -98,4 +137,11 @@ class BlogController extends Controller
     {
         //
     }
+
+    public function getBlogs(Request $request): \Illuminate\Http\JsonResponse
+    {
+        return $this->blogService->getBlogs($request->all());
+    }
+
+
 }

@@ -1,13 +1,22 @@
 @extends('layouts.singlePage')
 
 @section('title', $title)
+@push('seo')
+    <x-seo
+        :title="$property->title"
+        :description="$property->meta_description"
+        :keywords="$property->meta_keywords"
+        :image="url('/storage/property_images/'.$property->images->first()->file_name)"
+        schemaType="Residence"
+    />
+
+@endpush
 @section('bannerTitle')
     <div class="container">
         <h1 class="single-page-banner-title">{{$title}}</h1>
     </div>
 @endsection
 @section('content')
-
     {{-- Breadcrumb --}}
     <div class="container mt-3">
         <nav aria-label="breadcrumb">

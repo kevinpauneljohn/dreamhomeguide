@@ -48,22 +48,21 @@
 
                 <div class="col-md-4">
                     <label class="form-label">Category</label>
-                    <select id="categoryFilter" class="form-select">
+                    <select id="category" class="form-select">
                         <option value="">All</option>
-                        <option value="real-estate">Real Estate</option>
-                        <option value="investment">Investment</option>
-                        <option value="tips">Tips & Guides</option>
-                        <option value="announcement">Announcements</option>
+                        @foreach($blogCategories as $key => $value)
+                            <option value="{{$key}}">{{$value}}</option>
+                        @endforeach
                     </select>
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label">Status</label>
-                    <select id="statusFilter" class="form-select">
+                    <select id="status" class="form-select">
                         <option value="">All</option>
-                        <option value="published">Published</option>
-                        <option value="draft">Draft</option>
-                        <option value="archived">Archived</option>
+                        @foreach($blogStatus as $key => $value)
+                            <option value="{{$key}}">{{$value['label']}}</option>
+                        @endforeach
                     </select>
                 </div>
 
