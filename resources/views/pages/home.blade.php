@@ -76,7 +76,7 @@
                             <span>Email:
                                 <a href="mailto:johnkevinpaunel@gmail.com"
                                    class="fw-semibold text-decoration-none text-dark">
-                                    johnkevinpaunel@gmail.com
+                                    inquiry@johnkevinpaunel.com
                                 </a>
                             </span>
                         </li>

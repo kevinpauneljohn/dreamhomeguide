@@ -56,8 +56,8 @@
                         <div class="contact-icon"><i class="bi bi-envelope-at text-danger"></i></div>
                         <div>
                             <div class="fw-semibold">Email</div>
-                            <a href="mailto:johnkevinpaunel@gmail.com" class="fw-semibold text-dark-emphasis text-decoration-none fs-5">
-                                johnkevinpaunel@gmail.com
+                            <a href="mailto:inquiry@johnkevinpaunel.com" class="fw-semibold text-dark-emphasis text-decoration-none fs-5">
+                                inquiry@johnkevinpaunel.com
                             </a>
                         </div>
                     </li>

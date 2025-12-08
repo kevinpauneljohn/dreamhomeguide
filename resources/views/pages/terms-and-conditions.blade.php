@@ -119,7 +119,7 @@
                     <h4 id="contact" class="mt-4">10. Contact Information</h4>
                     <p>
                         For questions regarding these Terms & Conditions, you may contact us through:
-                        <br><strong>Email:</strong> johnkevinpaunel@gmail.com
+                        <br><strong>Email:</strong> inquiry@johnkevinpaunel.com
                         <br><strong>Phone:</strong> 091710277662 / 09297096801
                         <br><strong>Real Estate Brokerage:</strong> Dream Home Guide Realty
                     </p>

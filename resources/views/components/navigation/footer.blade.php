@@ -61,7 +61,7 @@
                     <h5 class="mb-4">Get In Touch</h5>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#" class="text-decoration-none footer-link"><i class="bi-envelope" aria-hidden="true"></i> johnkevinpaunel@gmail.com</a>
+                            <a href="mailto:inquiry@johnkevinpaunel.com" class="text-decoration-none footer-link"><i class="bi-envelope" aria-hidden="true"></i> inquiry@johnkevinpaunel.com</a>
                         </li>
                         <li>
                             <a href="#" class="text-decoration-none footer-link"><i class="bi-phone" aria-hidden="true"></i> 091710277662 / 09297096801</a>

@@ -159,7 +159,7 @@
                 {{-- CONTACT --}}
                 <h3 id="contact">Contact Information</h3>
                 <ul>
-                    <li>Email: <a href="mailto:johnkevinpaunel@gmail.com">johnkevinpaunel@gmail.com</a></li>
+                    <li>Email: <a href="mailto:inquiry@johnkevinpaunel.com">inquiry@johnkevinpaunel.com</a></li>
                     <li>Mobile: 091710277662 / 09297096801</li>
                     <li>Facebook: <a href="https://facebook.com/johnkevinpaunelvlog" target="_blank">John Kevin Paunel</a></li>
                 </ul>

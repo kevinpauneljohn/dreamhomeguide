@@ -77,7 +77,7 @@
                         <li>Request a copy of your stored information</li>
                     </ul>
 
-                    <p>Send requests to: <strong>johnkevinpaunel@gmail.com</strong></p>
+                    <p>Send requests to: <strong>inquiry@johnkevinpaunel.com</strong></p>
 
                     <h4 id="updates" class="mt-4">7. Policy Updates</h4>
                     <p>
@@ -88,7 +88,7 @@
                     <h4 id="contact" class="mt-4">8. Contact Us</h4>
                     <p>
                         For questions or concerns, contact us at:
-                        <br><strong>Email:</strong> johnkevinpaunel@gmail.com
+                        <br><strong>Email:</strong> inquiry@johnkevinpaunel.com
                         <br><strong>Phone:</strong> 091710277662 / 09297096801
                     </p>
 
