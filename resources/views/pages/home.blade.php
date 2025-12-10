@@ -93,6 +93,18 @@
                             </span>
                         </li>
 
+                        <li class="d-flex align-items-center gap-2 mb-3">
+                            <i class="bi bi-tiktok text-dark"></i></i>
+                            <span>Tiktok:
+                                <a href="https://www.tiktok.com/@johnkevinpaunel"
+                                   target="_blank"
+                                   class="fw-semibold text-dark-emphasis text-decoration-none fs-5">
+                                    @johnkevinpaunel
+                                </a>
+                            </span>
+                        </li>
+
+
                     </ul>
 
                 </div>
