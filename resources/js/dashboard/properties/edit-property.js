@@ -32,6 +32,11 @@ $(document).on('submit', '.edit-property-form', function(form){
             // console.log("Uploading...");
             editPropertyForm.find('.is-invalid').removeClass('is-invalid');
             editPropertyForm.find('.invalid-feedback').remove();
+
+            editPropertyForm.find('input, select, textarea').attr('disabled', true);
+            editPropertyForm.find('button[type=submit]').attr('disabled', true)
+                .html(`<span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                    <span role="status">Saving...</span>`);
         },
     }).done(function (response) {
         console.log(response);
@@ -56,7 +61,9 @@ $(document).on('submit', '.edit-property-form', function(form){
             editPropertyForm.find('#' + key).addClass('is-invalid');
         });
     }).always(function () {
-
+        editPropertyForm.find('input, select, textarea').attr('disabled', false);
+        editPropertyForm.find('button[type=submit]').attr('disabled', false)
+            .html(`Save Property`);
     });
 })
 
