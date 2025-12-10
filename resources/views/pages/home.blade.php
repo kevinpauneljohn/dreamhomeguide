@@ -18,12 +18,12 @@
             </div>
         </div>
     </div>
-{{--    <div class="container-fluid p-0 mb-5">--}}
-{{--        <div class="container mt-4">--}}
-{{--            <h2 class="text-center mb-5 section-title w-100">Featured Properties</h2>--}}
-{{--            <x-featured-properties :properties="$featuredProperties"/>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    <div class="container-fluid p-0 mb-5">
+        <div class="container mt-4">
+            <h2 class="text-center mb-5 section-title w-100">Featured Properties</h2>
+            <x-featured-properties :properties="$featuredProperties"/>
+        </div>
+    </div>
     <div class="container-fluid p-0 mb-5">
         <div class="container mt-4 home-services-container">
             <h2 class="text-center mb-3 section-title w-100">How Can We Help You?</h2>
