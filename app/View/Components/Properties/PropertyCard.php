@@ -13,7 +13,7 @@ class PropertyCard extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public object $property
+        public Property $property
     )
     {
         //

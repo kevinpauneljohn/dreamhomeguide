@@ -10,12 +10,13 @@ use Illuminate\View\Component;
 class FeaturedProperties extends Component
 {
 
+    public $featuredProperties;
     /**
      * Create a new component instance.
      */
-    public function __construct(public $properties)
+    public function __construct()
     {
-        $this->properties = Property::where('is_featured',true)->get();
+        $this->featuredProperties = Property::where('is_featured',true)->get();
     }
 
     /**
