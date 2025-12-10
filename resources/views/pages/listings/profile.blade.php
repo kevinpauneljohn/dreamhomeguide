@@ -176,6 +176,15 @@
                             </div>
                         </div>
                     @endif
+                    @if($property->floor_area)
+                        <div class="col-6 col-md-3">
+                            <div class="stat-box">
+                                <i class="fa-solid fa-ruler-combined"></i>
+                                <div class="fw-bold">{{ $property->floor_area }} sqm</div>
+                                <div class="stat-label">Floor Area</div>
+                            </div>
+                        </div>
+                    @endif
 
                 </div>
 

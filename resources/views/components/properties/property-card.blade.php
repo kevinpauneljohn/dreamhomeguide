@@ -36,16 +36,11 @@
                     @endif
                     @if(!empty($property->lot_area))
                         <div>
-                            <i class="fa-solid fa-vector-square fa-xl text-orange"></i>
+                            <i class="fa-solid fa-arrows-alt fa-xl text-orange"></i>
                             <span class="">{{number_format($property->lot_area,2)}} {{\Illuminate\Support\Str::plural('sqm', $property->lot_area)}}</span>
                         </div>
                     @endif
-                        @if(!empty($property->floor_area))
-                            <div>
-                                <i class="fa-solid fa-ruler-combined fa-xl text-orange"></i>
-                                <span class="">{{number_format($property->floor_area,2)}} {{\Illuminate\Support\Str::plural('sqm', $property->floor_area)}}</span>
-                            </div>
-                        @endif
+
                 </div>
                 <div>
                     @if(!empty($property->bathrooms))
