@@ -30,7 +30,7 @@ class StoreBlogRequest extends FormRequest
             'slug' => ['required', 'string', 'unique:blogs,slug'],
             'category' => ['required', 'string', 'max:255'],
             'status' => ['required', 'string', 'max:255'],
-            'blog_content' => ['required', 'string', 'max:10000']
+            'blog_content' => ['required', 'string', 'max:500000']
         ];
     }
 }
