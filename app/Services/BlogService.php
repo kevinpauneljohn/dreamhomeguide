@@ -102,7 +102,8 @@ class BlogService
                     'view' => (bool)auth()->user()->can('view blog'),
                     'edit' => (bool)auth()->user()->can('edit blog'),
                     'delete' => (bool)auth()->user()->can('delete blog'),
-                    'id' => $blog->id
+                    'id' => $blog->id,
+                    'slug' => $blog->slug,
                 ];
             })
             ->make(true);

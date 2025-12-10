@@ -53,7 +53,7 @@ $(function () {
                                 <i class="bi bi-three-dots-vertical"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                ${action.view ? `<li><a href="/blog/${action.id}" class="dropdown-item">View</a></li>` : ''}
+                                ${action.view ? `<li><a href="/blog/post/${action.slug}" class="dropdown-item" target="_blank">View</a></li>` : ''}
                                 ${action.edit ? `<li><a href="/blog/${action.id}/edit" class="dropdown-item">Edit</a></li>` : ''}
                                 ${action.delete ? `<li><a href="#" onclick="removeUser(this)" class="dropdown-item text-danger">Delete</a></li>` : ''}
                             </ul>
