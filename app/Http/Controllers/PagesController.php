@@ -74,6 +74,7 @@ class PagesController extends Controller
     {
         return view('pages.sitemap')->with([
             'title' => 'Sitemap',
+            'latestBlogs' => Blog::all()->sortByDesc('created_at')->take(5),
         ]);
     }
 

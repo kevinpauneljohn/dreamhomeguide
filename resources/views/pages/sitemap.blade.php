@@ -134,9 +134,9 @@
                 <h3 id="blogs">Blogs & Articles</h3>
                 <ul>
                     <li><a href="{{ route('blog.index') }}">All Blog Articles</a></li>
-{{--                    @foreach($latestBlogs ?? [] as $blog)--}}
-{{--                        <li><a href="{{ route('blog.show', $blog->id) }}">{{ $blog->title }}</a></li>--}}
-{{--                    @endforeach--}}
+                    @foreach($latestBlogs ?? [] as $blog)
+                        <li><a href="{{ route('blog.show', $blog->id) }}">{{ $blog->title }}</a></li>
+                    @endforeach
                 </ul>
 
                 {{-- LOCATIONS --}}
