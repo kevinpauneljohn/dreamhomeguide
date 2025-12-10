@@ -15,7 +15,7 @@ class HomeController extends Controller
         return view('pages.home')->with([
             'title' => 'Home',
             'featuredProperties' => Property::where('is_featured', true)
-                ->where('status','!=','inactive')->get(),
+                ->where('status','!=','active')->get(),
         ]);
     }
 
