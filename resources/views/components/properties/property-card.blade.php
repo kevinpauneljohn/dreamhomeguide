@@ -43,7 +43,7 @@
                         <span class="">{{$property->bathrooms}} {{\Illuminate\Support\Str::plural('Bathrooms', $property->bathrooms)}} </span>
                     </div>
                     @if(!is_null($property->garage))
-                        {{!is_null($property->garage)}}
+                        {{$property->garage}}
 {{--                        <div>--}}
 {{--                            <i class="fa-solid fa-car-alt fa-xl text-orange"></i>--}}
 {{--                            <span class="">{{$property->garage}} {{\Illuminate\Support\Str::plural('Carport', $property->garage)}}</span>--}}
