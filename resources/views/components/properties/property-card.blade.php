@@ -43,7 +43,7 @@
                         @if(!empty($property->floor_area))
                             <div>
                                 <i class="fa-solid fa-ruler-combined fa-xl text-orange"></i>
-                                <span class="">{{number_format($property->floor_area,2)}} {{\Illuminate\Support\Str::plural('sqm', $property->lot_area)}}</span>
+                                <span class="">{{number_format($property->floor_area,2)}} {{\Illuminate\Support\Str::plural('sqm', $property->floor_area)}}</span>
                             </div>
                         @endif
                 </div>
