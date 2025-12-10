@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         return view('pages.home')->with([
             'title' => 'Home',
-            'featuredProperties' => Property::all(),
+            'featuredProperties' => Property::where('is_featured', true)->get(),
         ]);
     }
 
