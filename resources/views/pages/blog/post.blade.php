@@ -157,7 +157,7 @@
         {{-- RELATED POSTS --}}
         {{-- =========================== --}}
         <div class="container pt-5">
-            <h3 class="related-title mb-4">Related Posts</h3>
+            <h3 class="related-title mb-4">Recent Blog Posts</h3>
 
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 @foreach($relatedBlogs as $blog)
