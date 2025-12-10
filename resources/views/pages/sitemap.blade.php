@@ -135,7 +135,7 @@
                 <ul>
                     <li><a href="{{ route('blog.index') }}">All Blog Articles</a></li>
                     @foreach($latestBlogs ?? [] as $blog)
-                        <li><a href="{{ route('blog.show', $blog->id) }}">{{ $blog->title }}</a></li>
+                        <li><a href="{{ route('blog-post', ['slug' => $blog->slug]) }}">{{ $blog->title }}</a></li>
                     @endforeach
                 </ul>
 
