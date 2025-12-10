@@ -31,7 +31,7 @@ class UpdateBlogRequest extends FormRequest
             'slug' => ['required', 'string', Rule::unique('blogs','slug')->ignore($this->blog)],
             'category' => ['required', 'string', 'max:255'],
             'status' => ['required', 'string', 'max:255'],
-            'blog_content' => ['required', 'string', 'max:10000']
+            'blog_content' => ['required', 'string', 'max:50000']
         ];
     }
 }
