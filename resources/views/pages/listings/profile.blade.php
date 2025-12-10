@@ -276,6 +276,15 @@
     @vite(['resources/js/pages/mortgage-calculator.js'])
 @endpush
 
+@push('meta')
+    <script>
+        fbq('track', 'ViewContent', {
+            content_name: {{$property->title}},
+            content_category: 'Listing'
+        });
+    </script>
+@endpush
+
 
 
 

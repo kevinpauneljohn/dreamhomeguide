@@ -64,4 +64,13 @@
 
 @endsection
 
+@push('meta')
+    <script>
+        fbq('track', 'ViewContent', {
+            content_name: 'List my property Page',
+            content_category: 'List my property Page'
+        });
+    </script>
+@endpush
+
 

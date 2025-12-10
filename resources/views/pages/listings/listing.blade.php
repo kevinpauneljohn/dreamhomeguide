@@ -35,3 +35,12 @@
 @push('scripts')
     @vite(['resources/js/pages/search-property-full-form.js'])
 @endpush
+
+@push('meta')
+    <script>
+        fbq('track', 'ViewContent', {
+            content_name: 'Listing Page',
+            content_category: 'Listing'
+        });
+    </script>
+@endpush

@@ -1,8 +1,14 @@
 import {Toast} from '../toast.js';
 const listMyPropertyForm = $('#list-my-property-form');
+
+window.fireLeadEvent = function () {
+    fbq('track', 'Lead');
+};
+
 $(document).on('submit', '#list-my-property-form', function(e) {
     e.preventDefault();
     let data = $(this).serializeArray();
+    fireLeadEvent();
 
     $.ajax({
         url: '/submit-listing',

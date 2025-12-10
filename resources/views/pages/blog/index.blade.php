@@ -53,3 +53,12 @@
 
     </div>
 @endsection
+
+@push('meta')
+    <script>
+        fbq('track', 'ViewContent', {
+            content_name: 'Blog Page',
+            content_category: 'Blog'
+        });
+    </script>
+@endpush

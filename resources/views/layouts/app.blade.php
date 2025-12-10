@@ -10,10 +10,6 @@
 {{--    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))--}}
 {{--        @vite(['resources/sass/app.scss','resources/js/app.js'])--}}
 {{--    @endif--}}
-    @vite(['resources/sass/app.scss','resources/js/app.js'])
-    <!-- End Meta Pixel Code -->
-    @stack('css')
-    <!-- Meta Pixel Code -->
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -23,14 +19,19 @@
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1724337451858365');
+
+        fbq('init', '{{ env('FACEBOOK_PIXEL_ID') }}' );
         fbq('track', 'PageView');
     </script>
     <noscript>
         <img height="1" width="1" style="display:none"
-             src="https://www.facebook.com/tr?id=1724337451858365&ev=PageView&noscript=1"
+             src="https://www.facebook.com/tr?id={{ env('FACEBOOK_PIXEL_ID') }}&ev=PageView&noscript=1"
         />
     </noscript>
+    @vite(['resources/sass/app.scss','resources/js/app.js'])
+    @stack('css')
+    <!-- Meta Pixel Code -->
+    @stack('meta')
 </head>
 <body>
 

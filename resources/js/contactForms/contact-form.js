@@ -1,9 +1,16 @@
 import {Toast} from '../toast.js';
 const contactForm = $('#client-inquiry-form');
 
+window.fireLeadEvent = function () {
+    fbq('track', 'Lead');
+};
+
+
 $(document).on('submit', '#client-inquiry-form', function(form) {
     form.preventDefault();
     let data = $(this).serializeArray();
+
+    fireLeadEvent()
 
     $.ajax({
         url: '/submit-inquiry',

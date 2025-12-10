@@ -109,3 +109,12 @@
     </div>
 
 @endsection
+
+@push('meta')
+    <script>
+        fbq('track', 'ViewContent', {
+            content_name: 'Home Page',
+            content_category: 'Home'
+        });
+    </script>
+@endpush

@@ -171,3 +171,12 @@
     </div>
 
 @endsection
+
+@push('meta')
+    <script>
+        fbq('track', 'ViewContent', {
+            content_name: 'Site map Page',
+            content_category: 'Site map'
+        });
+    </script>
+@endpush

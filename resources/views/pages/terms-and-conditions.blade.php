@@ -208,3 +208,12 @@
         }
     </style>
 @endpush
+
+@push('meta')
+    <script>
+        fbq('track', 'ViewContent', {
+            content_name: 'Terms & condition Page',
+            content_category: 'Terms & condition'
+        });
+    </script>
+@endpush

@@ -208,3 +208,12 @@
 @push('scripts')
     @vite(['resources/js/pages/blog-post.js'])
 @endpush
+
+@push('meta')
+    <script>
+        fbq('track', 'ViewContent', {
+            content_name: {{$blog->title}},
+            content_category: 'Blog Post'
+        });
+    </script>
+@endpush

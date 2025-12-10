@@ -41,3 +41,7 @@
     {!! NoCaptcha::renderJs() !!}
     @vite('resources/js/contactForms/contact-form.js')
 @endpush
+
+@push('meta')
+
+@endpush

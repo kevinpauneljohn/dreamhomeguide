@@ -143,3 +143,11 @@
     </div>
 
 @endsection
+@push('meta')
+    <script>
+        fbq('track', 'ViewContent', {
+            content_name: 'About us Page',
+            content_category: 'About'
+        });
+    </script>
+@endpush

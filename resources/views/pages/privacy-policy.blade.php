@@ -179,3 +179,12 @@
         }
     </style>
 @endpush
+
+@push('meta')
+    <script>
+        fbq('track', 'ViewContent', {
+            content_name: 'Privacy Policy Page',
+            content_category: 'Privacy Policy'
+        });
+    </script>
+@endpush

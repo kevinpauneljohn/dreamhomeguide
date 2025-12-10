@@ -6,11 +6,6 @@
 
     <title>@yield('title')</title>
     @stack('seo')
-    <!-- Styles / Scripts -->
-    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/sass/app.scss','resources/js/app.js'])
-    @endif
-    @stack('css')
     <!-- Meta Pixel Code -->
     <script>
         !function(f,b,e,v,n,t,s)
@@ -29,6 +24,13 @@
              src="https://www.facebook.com/tr?id=1724337451858365&ev=PageView&noscript=1"
         />
     </noscript>
+    <!-- Styles / Scripts -->
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/sass/app.scss','resources/js/app.js'])
+    @endif
+    @stack('css')
+
+    @stack('meta')
 </head>
 <body>
 

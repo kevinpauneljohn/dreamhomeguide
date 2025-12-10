@@ -103,3 +103,12 @@
 
 @endsection
 
+@push('meta')
+    <script>
+        fbq('track', 'ViewContent', {
+            content_name: 'Contact Us Page',
+            content_category: 'Contact Us'
+        });
+    </script>
+@endpush
+
