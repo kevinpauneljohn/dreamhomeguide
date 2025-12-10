@@ -28,20 +28,26 @@
             <p class="card-text">{{ucwords(strtolower($property->title))}}</p>
             <div class="d-flex justify-content-between mb-3">
                 <div>
-                    <div class="mb-2">
-                        <i class="fa-solid fa-bed fa-xl text-orange"></i>
-                        <span class="">{{$property->bedrooms}} {{\Illuminate\Support\Str::plural('Bedroom', $property->bedrooms)}}</span>
-                    </div>
-                    <div>
-                        <i class="fa-solid fa-arrows-alt fa-xl text-orange"></i>
-                        <span class="">{{number_format($property->lot_area,2)}} {{\Illuminate\Support\Str::plural('sqm', $property->lot_area)}}</span>
-                    </div>
+                    @if(!empty($property->bedrooms))
+                        <div class="mb-2">
+                            <i class="fa-solid fa-bed fa-xl text-orange"></i>
+                            <span class="">{{$property->bedrooms}} {{\Illuminate\Support\Str::plural('Bedroom', $property->bedrooms)}}</span>
+                        </div>
+                    @endif
+                    @if(!empty($property->lot_area))
+                        <div>
+                            <i class="fa-solid fa-arrows-alt fa-xl text-orange"></i>
+                            <span class="">{{number_format($property->lot_area,2)}} {{\Illuminate\Support\Str::plural('sqm', $property->lot_area)}}</span>
+                        </div>
+                    @endif
                 </div>
                 <div>
-                    <div class="mb-2">
-                        <i class="fa-solid fa-shower fa-xl text-orange"></i>
-                        <span class="">{{$property->bathrooms}} {{\Illuminate\Support\Str::plural('Bathrooms', $property->bathrooms)}} </span>
-                    </div>
+                    @if(!empty($property->bathrooms))
+                        <div class="mb-2">
+                            <i class="fa-solid fa-shower fa-xl text-orange"></i>
+                            <span class="">{{$property->bathrooms}} {{\Illuminate\Support\Str::plural('Bathrooms', $property->bathrooms)}} </span>
+                        </div>
+                    @endif
                     @if(!empty($property->garage))
                         <div>
                             <i class="fa-solid fa-car-alt fa-xl text-orange"></i>
