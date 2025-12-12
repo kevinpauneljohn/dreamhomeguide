@@ -10,10 +10,11 @@ include __DIR__.'/pages/blog.php';
 include __DIR__.'/pages/contact-us.php';
 include __DIR__.'/pages/pages.php';
 
-include __DIR__.'/dashboard/property.php';;
-include __DIR__.'/dashboard/property_images.php';;
-include __DIR__.'/dashboard/user.php';;
-include __DIR__.'/dashboard/crm.php';;
-include __DIR__.'/dashboard/leads.php';;
-include __DIR__.'/dashboard/notes.php';;
+include __DIR__.'/dashboard/property.php';
+include __DIR__.'/dashboard/property_images.php';
+include __DIR__.'/dashboard/user.php';
+include __DIR__.'/dashboard/crm.php';
+include __DIR__.'/dashboard/leads.php';
+include __DIR__.'/dashboard/notes.php';
+include __DIR__.'/dashboard/appointment.php';
 

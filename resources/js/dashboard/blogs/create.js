@@ -68,7 +68,7 @@ const saveBlog = (formData) => {
                 showConfirmButton: false,
                 timer: 1300
             }).then((result) => {
-                window.location.replace('/blog/'+response.slug);
+                window.location.reload();
             });
 
         }

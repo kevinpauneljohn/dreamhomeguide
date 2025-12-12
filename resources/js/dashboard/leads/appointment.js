@@ -3,6 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
+import moment from "moment";
 
 let calendar;
 
@@ -20,7 +21,6 @@ $(function () {
         },
         titleFormat: { year: 'numeric', month: 'short', day: 'numeric' },
         height: 650,
-        themeSystem: 'bootstrap5',
         customButtons: {
             bookAppointment: {
                 text: "Create Appointment",
@@ -30,6 +30,30 @@ $(function () {
                     modal.show();
                 }
             }
+        },
+        themeSystem: 'bootstrap5',
+        editable: true,
+        selectable: true,
+        selectConstraint:{
+            start: '00:00',
+            end: '24:00'
+        },
+        select: function(info){
+            let selectedDate = info.startStr;
+            console.log(info);
+
+            if(moment(selectedDate).isBefore(moment('{{now()}}')))
+            {
+            }
+        },
+        // events: '/get-appointments',
+        eventClick: function(info) {
+            alert('Event: ' + info.event.title);
+            alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+            alert('View: ' + info.view.type);
+
+            // change the border color just for fun
+            info.el.style.borderColor = 'red';
         }
     });
 
