@@ -52,7 +52,7 @@
                     @if(!empty($property->garage))
                         <div>
                             <i class="fa-solid fa-car-alt fa-xl text-orange"></i>
-                            <span class="">{{$property->garage}} {{\Illuminate\Support\Str::plural('Carport', $property->garage)}}</span>
+                            <span class="">{{$property->garage}} {{\Illuminate\Support\Str::plural('Parking', $property->garage)}}</span>
                         </div>
                     @endif
 

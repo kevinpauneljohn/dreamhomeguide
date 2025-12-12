@@ -162,7 +162,7 @@
                             <div class="stat-box">
                                 <i class="fa-solid fa-car"></i>
                                 <div class="fw-bold">{{ $property->garage }}</div>
-                                <div class="stat-label">Carport</div>
+                                <div class="stat-label">Parking</div>
                             </div>
                         </div>
                     @endif
