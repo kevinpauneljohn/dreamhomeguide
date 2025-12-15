@@ -168,7 +168,15 @@ class LeadService
         };
     }
 
-//    Buyer type
+    public function leadTypes(): array
+    {
+        return [
+            'buyer' => 'Buyer',
+            'seller' => 'Seller',
+            'buyer-and-seller' => 'Buyer & Seller'
+        ];
+    }
+
     public function saveLead(array $data)
     {
         return Leads::create($data);
@@ -258,6 +266,7 @@ class LeadService
             ],
             'civil_status' => ['nullable', 'string'],
             'source' => ['required', 'string'],
+            'lead_type' => ['required', 'string'],
         ];
     }
 }

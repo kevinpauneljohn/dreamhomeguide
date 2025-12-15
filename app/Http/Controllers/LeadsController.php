@@ -80,6 +80,7 @@ class LeadsController extends Controller
             'leadStatus' => $this->leadsService->leadStatus(),
             'incomeRange' => $this->leadsService->incomeRange(),
             'sources' => $this->leadsService->leadSources(),
+            'leadTypes' => $this->leadsService->leadTypes(),
         ]);
     }
 

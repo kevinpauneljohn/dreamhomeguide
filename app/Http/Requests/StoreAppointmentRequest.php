@@ -11,7 +11,7 @@ class StoreAppointmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->user()->can('add appointment');
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', 'max:255'],
+            'appointment_date' => ['required', 'date'],
+            'location' => ['nullable', 'string', 'max:255'],
+            'notes' => ['nullable', 'string', 'max:2000'],
         ];
     }
 }

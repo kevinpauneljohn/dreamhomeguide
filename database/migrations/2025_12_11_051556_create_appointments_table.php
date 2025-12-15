@@ -16,8 +16,6 @@ return new class extends Migration
             $table->foreignUuid('lead_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->date('appointment_date');
-            $table->time('appointment_time');
-            $table->string('type');
             $table->string('location')->nullable();
             $table->text('notes')->nullable();
             $table->string('status')->default('pending');

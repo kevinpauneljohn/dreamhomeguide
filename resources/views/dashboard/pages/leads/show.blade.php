@@ -253,7 +253,7 @@
                                 </div>
 
                                 <!-- Assigned Agent -->
-                                <div class="col-md-12 mb-3">
+                                <div class="col-md-6 mb-3">
                                     <label class="text-muted small">Assigned Agent</label>
                                     <div class="editable-field" data-field="user_id">
                                         <span class="value fw-semibold">{{ $lead->user->full_name ?? 'Unassigned' }}</span>
@@ -275,8 +275,39 @@
                                     </div>
                                 </div>
 
+                                <!-- Lead type -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="text-muted small">Lead Type</label>
+                                    <div class="editable-field" data-field="lead_type">
+                                        <span class="value fw-semibold">{{ $lead->lead_type }}</span>
+                                        <i class="bi bi-pencil edit-icon edit-btn"></i>
+
+                                        <!-- Hidden input for editing -->
+                                        <div class="edit-input mt-1 d-none">
+                                            <select name="lead_type" id="lead_type" class="form-select input-box">
+                                                <option value="">Select lead Type</option>
+                                                @foreach($leadTypes as $key => $value)
+                                                    <option value="{{ $key }}" @if($key === $lead->lead_type) selected @endif>{{ $value }}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="mt-1">
+                                                <button class="btn btn-sm btn-success save-btn">Save</button>
+                                                <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
+                        </div>
+                    </div>
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center bg-white border-bottom-0">
+                            <h5 class="fw-bold mb-0">lead Initial Message</h5>
+                        </div>
+                        <div class="card-body">
+                            {!! $lead->message !!}
                         </div>
                     </div>
 
@@ -466,7 +497,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center bg-white border-bottom-0">
                             <h5 class="fw-bold mb-0">Appointments</h5>
 
-                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addAppointmentModal">
+                            <button type="button" class="btn btn-primary btn-sm set-appointment-btn" data-bs-toggle="modal" data-bs-target="#addAppointmentModal">
                                 <i class="bi bi-calendar-plus me-1"></i> Set Appointment
                             </button>
                         </div>
@@ -804,8 +835,9 @@
     <!-- ADD APPOINTMENT MODAL -->
     <div class="modal fade" id="addAppointmentModal" tabindex="-1">
         <div class="modal-dialog">
-            <form class="modal-content">
-
+            <form class="modal-content" id="appointment-form">
+                @csrf
+                <input type="hidden" name="lead_id" value="{{$lead->id}}">
                 <div class="modal-header">
                     <h5 class="modal-title">Set Appointment</h5>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
@@ -813,26 +845,32 @@
 
                 <div class="modal-body">
 
-                    <label class="fw-semibold">Appointment Title</label>
-                    <input type="text" class="form-control mb-3" placeholder="Ex. Tripping at Mansfield" required>
+                    <div class="form-group mb-3">
+                        <label class="fw-semibold">Appointment Title</label>
+                        <input type="text" name="title" class="form-control" placeholder="Ex. Tripping at Mansfield" >
+                    </div>
 
-                    <label class="fw-semibold">Date</label>
-                    <input type="date" class="form-control mb-3" required>
+                    <div class="form-group mb-3">
+                        <label class="fw-semibold">Date</label>
+                        <input type="datetime-local" name="appointment_date" class="form-control" >
+                    </div>
 
-                    <label class="fw-semibold">Time</label>
-                    <input type="time" class="form-control mb-3" required>
 
-                    <label class="fw-semibold">Location (Optional)</label>
-                    <input type="text" class="form-control mb-3" placeholder="Ex. Mansfield Tarlac Gate">
+                    <div class="form-group mb-3">
+                        <label class="fw-semibold">Location (Optional)</label>
+                        <input type="text" name="location" class="form-control" placeholder="Ex. Mansfield Tarlac Gate">
+                    </div>
 
-                    <label class="fw-semibold">Notes (Optional)</label>
-                    <textarea class="form-control" rows="3" placeholder="Additional instructions…"></textarea>
+                    <div class="form-group mb-3">
+                        <label class="fw-semibold">Notes (Optional)</label>
+                        <textarea class="form-control" name="notes" rows="3" placeholder="Additional instructions…"></textarea>
+                    </div>
 
                 </div>
 
                 <div class="modal-footer">
-                    <button class="btn btn-light border" data-bs-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary">Save Appointment</button>
+                    <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Appointment</button>
                 </div>
 
             </form>

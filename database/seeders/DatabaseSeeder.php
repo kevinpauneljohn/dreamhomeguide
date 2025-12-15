@@ -59,9 +59,14 @@ class DatabaseSeeder extends Seeder
 //        Permission::create(['name' => 'edit note']);
 //        Permission::create(['name' => 'delete note']);
 
-        Permission::create(['name' => 'view blog']);
-        Permission::create(['name' => 'add blog']);
-        Permission::create(['name' => 'edit blog']);
-        Permission::create(['name' => 'delete blog']);
+//        Permission::create(['name' => 'view blog']);
+//        Permission::create(['name' => 'add blog']);
+//        Permission::create(['name' => 'edit blog']);
+//        Permission::create(['name' => 'delete blog']);
+
+        Permission::create(['name' => 'view appointment']);
+        Permission::create(['name' => 'add appointment']);
+        Permission::create(['name' => 'edit appointment']);
+        Permission::create(['name' => 'delete appointment']);
     }
 }
