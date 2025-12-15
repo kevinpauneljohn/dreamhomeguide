@@ -52,7 +52,7 @@
                     </button>
                 </div>
 
-                <small class="text-muted">Created on {{ $lead->created_at->format('M d, Y') }}</small>
+                <small class="text-muted">Created on {{ $lead->created_at->format('M d, Y g:i a') }}</small>
             </div>
         </div>
     </div>
