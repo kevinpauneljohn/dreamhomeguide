@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignUuid('lead_id')->constrained()->cascadeOnDelete();
             $table->string('title');
-            $table->date('appointment_date');
+            $table->dateTime('appointment_date');
             $table->string('location')->nullable();
             $table->text('notes')->nullable();
             $table->string('status')->default('pending');
+            $table->string('appointment_type');
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

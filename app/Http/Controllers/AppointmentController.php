@@ -6,6 +6,7 @@ use App\Models\Appointment;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
 use App\Services\AppointmentService;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 
 class AppointmentController extends Controller
@@ -19,7 +20,7 @@ class AppointmentController extends Controller
     public static function middleware(): array
     {
         return [
-            new Middleware('can:view appointment', only: ['index', 'show']),
+            new Middleware('can:view appointment', only: ['index', 'show','getAppointments']),
             new Middleware('can:add appointment', only: ['create', 'store']),
             new Middleware('can:edit appointment', only: ['edit', 'update']),
             new Middleware('can:delete appointment', only: ['destroy'])
@@ -46,8 +47,7 @@ class AppointmentController extends Controller
      */
     public function store(StoreAppointmentRequest $request)
     {
-        $request->merge(['user_id' => auth()->user()->id]);
-        return $this->appointmentService->saveAppointment($request->only('title','appointment_date','location','notes','lead_id','user_id'));
+        return $this->appointmentService->saveAppointment($request->only('title','appointment_date','location','notes','lead_id','user_id','appointment_type_id','status','appointment_type'));
     }
 
     /**
@@ -71,7 +71,8 @@ class AppointmentController extends Controller
      */
     public function update(UpdateAppointmentRequest $request, Appointment $appointment)
     {
-        //
+        return $this->appointmentService->updateAppointment($appointment,
+            $request->only('title','appointment_date','location','notes','lead_id','user_id','appointment_type_id','status','appointment_type'));
     }
 
     /**
@@ -79,6 +80,13 @@ class AppointmentController extends Controller
      */
     public function destroy(Appointment $appointment)
     {
-        //
+        return $appointment->delete() ?
+            response()->json(['success' => true, 'message' => 'Appointment deleted successfully.']) :
+            response()->json(['success' => false, 'message' => 'An error occurred while deleting the appointment.']);
+    }
+
+    public function getAppointments(): \Illuminate\Support\Collection
+    {
+        return $this->appointmentService->appointments_in_calendar_format();
     }
 }

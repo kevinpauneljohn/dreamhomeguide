@@ -6,5 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
-    protected $fillable = ['title','appointment_date','location','notes','user_id','status','lead_id'];
+    protected $fillable = ['title','appointment_date','location','notes','user_id','status','lead_id','appointment_type'];
+
+    public function lead(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Leads::class);
+    }
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
+
+    }
 }

@@ -11,7 +11,7 @@ class UpdateAppointmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->user()->can('edit appointment');
     }
 
     /**
@@ -22,7 +22,12 @@ class UpdateAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => ['required'],
+            'appointment_type' => ['required'],
+            'title' => ['required', 'string', 'max:255'],
+            'appointment_date' => ['required', 'date'],
+            'location' => ['nullable', 'string', 'max:255'],
+            'notes' => ['nullable', 'string', 'max:2000'],
         ];
     }
 }

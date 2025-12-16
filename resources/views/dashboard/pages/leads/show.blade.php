@@ -488,107 +488,14 @@
                     <!-- Calendar -->
                     <div class="card shadow-sm border-0 mb-4">
                         <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="badge bg-primary rounded-pill m-1">Tripping</span>
+                                <span class="badge bg-warning rounded-pill m-1">Follow Up</span>
+                                <span class="badge bg-success rounded-pill m-1">Assistance</span>
+                                <span class="badge bg-danger rounded-pill m-1">Reservations</span>
+                                <span class="badge rounded-pill m-1" style="background-color: #6f42c1">Send Update</span>
+                            </div>
                             <div id='calendar'></div>
-                        </div>
-                    </div>
-
-                    <!-- APPOINTMENTS -->
-                    <div class="card shadow-sm border-0 mb-4">
-                        <div class="card-header d-flex justify-content-between align-items-center bg-white border-bottom-0">
-                            <h5 class="fw-bold mb-0">Appointments</h5>
-
-                            <button type="button" class="btn btn-primary btn-sm set-appointment-btn" data-bs-toggle="modal" data-bs-target="#addAppointmentModal">
-                                <i class="bi bi-calendar-plus me-1"></i> Set Appointment
-                            </button>
-                        </div>
-
-                        <div class="card-body p-1">
-
-                            <!-- Appointment Table -->
-                            <table class="table table-hover align-middle appointments-table">
-                                <thead class="table-light">
-                                <tr>
-                                    <th width="60">Type</th>
-                                    <th>Appointment</th>
-                                    <th width="200">Date</th>
-                                    <th width="150">Status</th>
-                                    <th class="text-center" width="40"></th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-
-                                <!-- SAMPLE UPCOMING APPOINTMENT -->
-                                <tr>
-                                    <td>
-                                        <div class="appt-type-icon meeting">
-                                            <i class="bi bi-people-fill"></i>
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <h6 class="fw-bold mb-1">Site Viewing — Mansfield Tarlac</h6>
-                                        <p class="mb-0 appt-text">Client wants to check 3BR model units.</p>
-                                    </td>
-
-                                    <td>
-                                        <small class="text-muted">Feb 02, 2025 • 10:00 AM</small>
-                                    </td>
-
-                                    <td>
-                                        <span class="badge bg-warning text-dark">Upcoming</span>
-                                    </td>
-
-                                    <td class="text-center">
-                                        <div class="dropdown">
-                                            <button class="btn btn-sm btn-light border-0" data-bs-toggle="dropdown">
-                                                <i class="bi bi-three-dots-vertical"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><a class="dropdown-item">Edit</a></li>
-                                                <li><a class="dropdown-item text-danger">Cancel</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- SAMPLE PAST -->
-                                <tr>
-                                    <td>
-                                        <div class="appt-type-icon call">
-                                            <i class="bi bi-telephone-fill"></i>
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <h6 class="fw-bold mb-1">Follow-up Call</h6>
-                                        <p class="mb-0 appt-text">Discussed Pag-IBIG financing details.</p>
-                                    </td>
-
-                                    <td>
-                                        <small class="text-muted">Jan 25, 2025 • 3:00 PM</small>
-                                    </td>
-
-                                    <td>
-                                        <span class="badge bg-success">Completed</span>
-                                    </td>
-
-                                    <td class="text-center">
-                                        <div class="dropdown">
-                                            <button class="btn btn-sm btn-light border-0" data-bs-toggle="dropdown">
-                                                <i class="bi bi-three-dots-vertical"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><a class="dropdown-item">View</a></li>
-                                                <li><a class="dropdown-item text-danger">Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                </tbody>
-                            </table>
-
                         </div>
                     </div>
                 </div>
@@ -846,6 +753,16 @@
                 <div class="modal-body">
 
                     <div class="form-group mb-3">
+                        <label class="fw-semibold">Appointment Type</label>
+                        <select name="appointment_type" class="form-select">
+                            <option value="">-- select type --</option>
+                            @foreach($appointmentTypes as $key => $value)
+                                <option value="{{$key}}">{{$value['label']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
                         <label class="fw-semibold">Appointment Title</label>
                         <input type="text" name="title" class="form-control" placeholder="Ex. Tripping at Mansfield" >
                     </div>
@@ -853,6 +770,17 @@
                     <div class="form-group mb-3">
                         <label class="fw-semibold">Date</label>
                         <input type="datetime-local" name="appointment_date" class="form-control" >
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="fw-semibold">Assign Agent</label>
+                        <select name="user_id" id="user_id" class="form-select input-box">
+                            <option value="">Select Agent</option>
+                            @foreach($agents as $agent)
+                                <option value="{{ $agent->id }}" @if($agent->id === $lead->user_id) selected @endif>{{ $agent->full_name }} - {{$agent->email}}</option>
+                            @endforeach
+                        </select>
+
                     </div>
 
 

@@ -21,6 +21,8 @@ class Leads extends Model
         ];
     }
 
+    protected $appends = ['full_name'];
+
     /**
      * Generate a new UUID for the model.
      */
@@ -58,4 +60,11 @@ class Leads extends Model
     {
         return $this->hasOne(ListPropertyInformation::class);
     }
+
+    public function appointments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
+
 }
