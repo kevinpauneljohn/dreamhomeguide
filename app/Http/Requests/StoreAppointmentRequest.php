@@ -30,4 +30,16 @@ class StoreAppointmentRequest extends FormRequest
             'notes' => ['nullable', 'string', 'max:2000'],
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'user_id.required' => 'Agent field is required',
+        ];
+    }
 }
