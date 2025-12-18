@@ -31,8 +31,8 @@ class Seo extends Component
         $this->keywords = $keywords ?? 'pampanga real estate, house and lot for sale, angeles city, clark, dream home guide realty';
         $this->image = $image ?? asset('images/logo.png');
         $this->schemaType = $schemaType;
-//        $this->canonical = $canonical ?? url()->current();
-        $this->canonical = 'https://johnkevinpaunel.com';
+        $this->canonical = $canonical ?? url()->current();
+//        $this->canonical = 'https://johnkevinpaunel.com';
     }
 
     /**
