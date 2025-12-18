@@ -80,9 +80,12 @@ class AppointmentService
                     'color' => $this->findAppointmentType($item->appointment_type)['color'],
                     'appointment_type' => $item->appointment_type,
                     'assigned_agent' => $item->user_id ? User::find($item->user_id)->full_name : 'Unassigned',
+                    'agent_id' => $item->user_id,
                     'client' => Leads::find($item->lead_id)->full_name,
                     'location' => $item->location,
                     'notes' => $item->notes,
+                    'lead_id' => $item->lead_id,
+//                    'url' => route('leads.show', ['lead' => $item->lead_id]),
                 ]
             ];
         });

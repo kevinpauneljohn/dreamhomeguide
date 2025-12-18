@@ -12,6 +12,7 @@ import {Toast} from "@/toast.js";
 let calendar;
 let mode;
 let appointment_id;
+const lead_id = document.querySelector('input[name=lead_id]').value;
 
 $(function () {
     const calendarEl = document.getElementById('calendar');
@@ -53,61 +54,68 @@ $(function () {
         },
         events: '/get-appointments',
         eventClick: function(info) {
-            appointmentForm.dataset.mode = 'edit';
-            appointment_id = info.event.id;
+            console.log(info.event);
+            if (lead_id !== info.event.extendedProps.lead_id) {
+                info.jsEvent.preventDefault();
+            }else{
+                appointmentForm.dataset.mode = 'edit';
+                appointment_id = info.event.id;
 
-            info.jsEvent.preventDefault();
+                info.jsEvent.preventDefault();
 
-            Swal.fire({
-                title: info.event.title,
-                text: 'What would you like to do?',
-                icon: 'question',
-                showCancelButton: true,
+                Swal.fire({
+                    title: info.event.title,
+                    text: 'What would you like to do?',
+                    icon: 'question',
+                    showCancelButton: true,
 
-                showDenyButton: true,
-                confirmButtonText: 'Edit',
-                denyButtonText: 'View',
-                cancelButtonText: 'Delete',
+                    showDenyButton: true,
+                    confirmButtonText: 'Edit',
+                    denyButtonText: 'View',
+                    cancelButtonText: 'Delete',
 
-                confirmButtonColor: '#0d6efd',
-                denyButtonColor: '#198754',
-                cancelButtonColor: '#dc3545'
-            }).then(result => {
+                    confirmButtonColor: '#0d6efd',
+                    denyButtonColor: '#198754',
+                    cancelButtonColor: '#dc3545'
+                }).then(result => {
 
-                // 👉 EDIT
-                if (result.isConfirmed) {
-                    openEditModal(info.event);
-                }
+                    // 👉 EDIT
+                    if (result.isConfirmed) {
+                        openEditModal(info.event);
+                    }
 
-                // 👉 VIEW
-                if (result.isDenied) {
-                    openViewModal(info.event);
-                }
+                    // 👉 VIEW
+                    if (result.isDenied) {
+                        openViewModal(info.event);
+                    }
 
-                // 👉 DELETE
-                if (result.dismiss === Swal.DismissReason.cancel) {
-                    confirmDelete(info.event);
-                }
-            });
+                    // 👉 DELETE
+                    if (result.dismiss === Swal.DismissReason.cancel) {
+                        confirmDelete(info.event);
+                    }
+                });
+            }
+
+
         },
         eventDidMount: function(info) {
             info.el.setAttribute('title', 'Type: '+info.event.extendedProps.appointment_type +
                 '\nClient: '+ info.event.extendedProps.client+
                 '\nAssigned To: '+ info.event.extendedProps.assigned_agent+
                 '\n' + moment(info.event.start).format('dddd, MMMM Do YYYY, h:mm a'));
+
         },
         eventDrop: function(info) {
-            // console.log(info.event);
-        },
-        eventResize(info) {
-            // console.log('Resized:', info.event.id);
 
-            // axios.put(`/appointments/${info.event.id}`, {
-            //     end: info.event.end.toISOString()
-            // }).catch(() => {
-            //     info.revert();
-            // });
-        }
+            let formData = new FormData(appointmentForm);
+            appointment_id = info.event.id;
+            formData.append('_method', 'PUT');
+            formData.append('title', info.event.title);
+            formData.append('appointment_type', info.event.extendedProps.appointment_type);
+            formData.append('user_id', info.event.extendedProps.agent_id);
+            formData.append('appointment_date', moment(info.event.start).format('YYYY-MM-DDTHH:mm'));
+            editAppointment(formData)
+        },
     });
 
 
@@ -187,7 +195,6 @@ const editAppointment = (formData) => {
 
     axios.post(`/appointment/${appointment_id}`, formData)
         .then(response => {
-            console.log(response);
             if(response.data.success)
             {
                 Toast.fire({
@@ -297,7 +304,6 @@ const openEditModal = (event) => {
     removeErrorMessages();
     mode = 'edit';
 
-    // appointmentForm.setAttribute('id',`edit-appointment-form`);
     appointmentForm.querySelector('.modal-title').textContent = 'Edit Appointment';
 
     appointmentForm.querySelector('select[name=appointment_type]').value = event.extendedProps.appointment_type;
