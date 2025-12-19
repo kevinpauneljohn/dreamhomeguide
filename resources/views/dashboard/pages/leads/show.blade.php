@@ -495,7 +495,8 @@
                                 <span class="badge bg-danger rounded-pill m-1">Reservations</span>
                                 <span class="badge rounded-pill m-1" style="background-color: #6f42c1">Send Update</span>
                             </div>
-                            <div id='calendar'></div>
+                            <!-- calendar here -->
+                            <x-appointment.calendar />
                         </div>
                     </div>
                 </div>
@@ -808,7 +809,6 @@
 
 @endsection
 
-@push('scripts')
-    @vite('resources/js/dashboard/leads/appointment.js')
+@pushonce('scripts')
     @vite(['resources/js/dashboard/notes/create.js','resources/js/dashboard/notes/editNote.js','resources/js/dashboard/leads/edit.js'])
-@endpush
+@endpushonce

@@ -61,6 +61,9 @@ export default defineConfig({
                 //mortgage calculator
                 'resources/js/pages/mortgage-calculator.js',
 
+                //component
+                'resources/js/component/appointment/calendar.js',
+
             ],
             refresh: true,
         }),
