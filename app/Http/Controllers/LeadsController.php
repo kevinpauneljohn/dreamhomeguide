@@ -126,13 +126,12 @@ class LeadsController extends Controller
 
         $lead->fill($validated);
 //
-//        if ($lead->isDirty()) {
-//            $lead->save();
-//            return response()->json(['success' => true, 'message' => ucfirst($field == 'user_id' ? 'Agent' : $field) . ' updated successfully.',
-//                'field' => $field,'agent' => $lead->user->full_name]);
-//        }
+        if ($lead->isDirty()) {
+            $lead->save();
+            return response()->json(['success' => true, 'message' => ucfirst($field == 'user_id' ? 'Agent' : $field) . ' updated successfully.',
+                'field' => $field,'agent' => $lead->user->full_name]);
+        }
 //
-//        return response()->json(['success' => false, 'message' => 'No changes were made.']);
-        return $lead;
+        return response()->json(['success' => false, 'message' => 'No changes were made.']);
     }
 }
