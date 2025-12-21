@@ -10,6 +10,8 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class SendAppointmentNotification extends Mailable implements ShouldQueue
 {
@@ -57,5 +59,13 @@ class SendAppointmentNotification extends Mailable implements ShouldQueue
     public function attachments(): array
     {
         return [];
+    }
+
+    public function failed(\Throwable $e)
+    {
+        Log::error('Appointment email failed', [
+            'error' => $e->getMessage(),
+            'appointment_id' => $this->appointment->id
+        ]);
     }
 }
