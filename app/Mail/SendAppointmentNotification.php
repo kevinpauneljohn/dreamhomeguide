@@ -13,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class SendAppointmentNotification extends Mailable
+class SendAppointmentNotification extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
