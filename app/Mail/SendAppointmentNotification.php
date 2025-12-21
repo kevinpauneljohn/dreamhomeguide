@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SendAppointmentNotification extends Mailable implements ShouldQueue
+class SendAppointmentNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -24,7 +24,7 @@ class SendAppointmentNotification extends Mailable implements ShouldQueue
         public Appointment $appointment
     )
     {
-        $this->afterCommit();
+//        $this->afterCommit();
     }
 
     /**
