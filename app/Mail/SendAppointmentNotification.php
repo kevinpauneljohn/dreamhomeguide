@@ -26,7 +26,7 @@ class SendAppointmentNotification extends Mailable implements ShouldQueue
         public Appointment $appointment
     )
     {
-//        $this->afterCommit();
+        $this->afterCommit();
     }
 
     /**
@@ -61,7 +61,7 @@ class SendAppointmentNotification extends Mailable implements ShouldQueue
         return [];
     }
 
-    public function failed(\Throwable $e)
+    public function failed(Throwable $e)
     {
         Log::error('Appointment email failed', [
             'error' => $e->getMessage(),
