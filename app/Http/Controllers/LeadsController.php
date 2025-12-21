@@ -128,6 +128,8 @@ class LeadsController extends Controller
 //
         if ($lead->isDirty()) {
             $lead->save();
+            return response()->json(['success' => true, 'message' => ucfirst($field == 'user_id' ? 'Agent' : $field) . ' updated successfully.',
+                'field' => $field]);
 //            return response()->json(['success' => true, 'message' => ucfirst($field == 'user_id' ? 'Agent' : $field) . ' updated successfully.',
 //                'field' => $field,'agent' => $lead->user->full_name]);
         }
