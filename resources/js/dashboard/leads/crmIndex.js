@@ -79,8 +79,7 @@ $(function () {
                             </button>
                             <ul class="dropdown-menu">
                                 ${action.view ? `<li><a href="/leads/${action.id}" class="dropdown-item">View</a></li>` : ''}
-                                ${action.edit ? `<li><a href="/leads/${action.id}/edit" class="dropdown-item">Edit</a></li>` : ''}
-                                ${action.delete ? `<li><a href="#" onclick="removeUser(this)" class="dropdown-item text-danger">Delete</a></li>` : ''}
+                                ${action.delete ? `<li><a href="#" onclick="removeLead(this)" class="dropdown-item text-danger">Delete</a></li>` : ''}
                             </ul>
                         </div>
                     `;
@@ -94,12 +93,12 @@ $(function () {
         crmTable.ajax.reload();
     });
 
-    window.removeUser = function (model) {
+    window.removeLead = function (model) {
         const rowData = crmTable.row($(model).closest('tr')).data();
 
         Swal.fire({
             title: "Are you sure?",
-            html: `Remove <span class="fw-bolder text-primary">${rowData.full_name.full_name}</span>?`,
+            html: `Remove <span class="fw-bolder text-primary">${rowData.full_name.name}</span>?`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -112,9 +111,9 @@ $(function () {
         });
     }
 
-    const deleteUser = (user_id) => {
+    const deleteUser = (lead_id) => {
         $.ajax({
-            url: `/user/${user_id}`,
+            url: `/leads/${lead_id}`,
             type: 'DELETE',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             cache: false,

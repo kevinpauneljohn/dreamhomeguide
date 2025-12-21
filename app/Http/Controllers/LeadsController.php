@@ -106,9 +106,11 @@ class LeadsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Leads $leads)
+    public function destroy(string $id): \Illuminate\Http\JsonResponse
     {
-        //
+        return Leads::destroy($id) ?
+            response()->json(['success' => true, 'message' => 'Lead deleted successfully.']) :
+            response()->json(['success' => false, 'message' => 'An error occurred while deleting the lead.']);
     }
 
     public function getLeads(Request $request): \Illuminate\Http\JsonResponse
