@@ -82,7 +82,7 @@
                         <div class="row g-3">
                             <div class="col-md-6 lead_type">
                                 <label class="form-label" for="status">Lead Type</label>
-                                <i class="bi bi-question-circle" id="lead_type"></i>
+
                                 <select name="lead_type" id="lead_type" class="form-select">
                                     @foreach($leadTypes as $key => $value)
                                         <option value="{{$key}}">{{$value}}</option>
