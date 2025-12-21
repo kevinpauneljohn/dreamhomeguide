@@ -118,12 +118,13 @@ class LeadsController extends Controller
 
     public function updateField(Request $request, Leads $lead)
     {
-//        $field = array_key_first($request->all());
-//
-//        $validated = $request->validate([
-//            $field => $this->leadsService->validationRules($lead->id)[$field]
-//        ],['user_id.required' => 'Please select an agent.']);
-//        $lead->fill($validated);
+        $field = array_key_first($request->all());
+
+        $validated = $request->validate([
+            $field => $this->leadsService->validationRules($lead->id)[$field]
+        ],['user_id.required' => 'Please select an agent.']);
+
+        $lead->fill($validated);
 //
 //        if ($lead->isDirty()) {
 //            $lead->save();
