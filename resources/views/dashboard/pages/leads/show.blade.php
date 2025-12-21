@@ -302,7 +302,7 @@
                                             <select name="assigned_agent" id="assigned_agent" class="form-select input-box">
                                                 <option value="">Select Agent</option>
                                                 @foreach($agents as $agent)
-                                                    <option value="{{ $agent->id }}" @if($agent->id === $lead->assigned_agent) selected @endif>{{ $agent->full_name }} - {{$agent->email}}</option>
+                                                    <option value="{{ $agent->id }}" @if($agent->id === $lead->user_id) selected @endif>{{ $agent->full_name }} - {{$agent->email}}</option>
                                                 @endforeach
                                             </select>
                                             <div class="mt-1">
