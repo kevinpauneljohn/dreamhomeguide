@@ -77,14 +77,13 @@ $(document).ready(function () {
             { name: field, value: newValue },
         ];
 
-
         $.ajax({
             url: `/lead/${lead_id}/update-field`,
             method: "patch",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: data,
             success: function (response) {
-                console.log(response);
+
                 container.find(".value-text").text(newValue);
 
                 container.find(".value-text").removeClass("d-none");
