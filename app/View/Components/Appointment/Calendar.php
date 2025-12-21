@@ -8,14 +8,20 @@ use Illuminate\View\Component;
 
 class Calendar extends Component
 {
+    public string $getAllUrl;
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public bool $editable = true
+        public bool $editable = true,
+        public bool $displayAll = false
     )
     {
-        //
+        if($displayAll) {
+            $this->getAllUrl = route('get-appointments');
+        }else{
+            $this->getAllUrl = route('get-user-appointment',['userId' => auth()->id()]);
+        }
     }
 
     /**

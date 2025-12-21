@@ -9,28 +9,24 @@ import axios from 'axios';
 import {Toast} from "@/toast.js";
 
 
-export let calendar;
-export const calendarEl = document.getElementById('calendar');
+let calendar;
+const calendarEl = document.getElementById('calendar');
 const editable = calendarEl.dataset.editable;
-
-console.log(editable);
-// export let mode;
+const eventUrl = calendarEl.dataset.url;
 
 let appointment_id;
 const lead_id = document.querySelector('input[name=lead_id]').value;
-export const appointmentForm = document.getElementById('appointment-form');
+const appointmentForm = document.getElementById('appointment-form');
 
-export let mode = 'create';
+let mode = 'create';
 
-export const setMode = (value) => {
+const setMode = (value) => {
     mode = value;
 }
 
-export const getMode = () => mode;
-
+const getMode = () => mode;
 
 $(function () {
-
 
     // Initialize calendar but DO NOT render yet
     calendar = new Calendar(calendarEl, {
@@ -67,14 +63,13 @@ $(function () {
             // console.log(info);
 
         },
-        events: '/get-appointments',
+        events: eventUrl,
         eventClick: function(info) {
             console.log(info.event);
-            // if (lead_id !== info.event.extendedProps.lead_id) {
-            //     info.jsEvent.preventDefault();
             if (!editable) {
                 info.jsEvent.preventDefault();
-            }else{
+            }
+            else{
                 appointmentForm.dataset.mode = 'edit';
                 appointment_id = info.event.id;
 
@@ -84,9 +79,9 @@ $(function () {
                     title: info.event.title,
                     text: 'What would you like to do?',
                     icon: 'question',
-                    showCancelButton: true,
-
-                    showDenyButton: true,
+                    showCancelButton: info.event.extendedProps.showCloseButton,
+                    showConfirmButton: info.event.extendedProps.showEditButton,
+                    showDenyButton: info.event.extendedProps.showViewButton,
                     confirmButtonText: 'Edit',
                     denyButtonText: 'View',
                     cancelButtonText: 'Delete',
@@ -103,7 +98,7 @@ $(function () {
 
                     // 👉 VIEW
                     if (result.isDenied) {
-                        openViewModal(info.event);
+                        window.location.href = `/appointment/${info.event.id}`;
                     }
 
                     // 👉 DELETE
@@ -116,10 +111,14 @@ $(function () {
 
         },
         eventDidMount: function(info) {
+            console.log(info.event);
             info.el.setAttribute('title', 'Type: '+info.event.extendedProps.appointment_type +
                 '\nClient: '+ info.event.extendedProps.client+
                 '\nAssigned To: '+ info.event.extendedProps.assigned_agent+
                 '\n' + moment(info.event.start).format('dddd, MMMM Do YYYY, h:mm a'));
+
+            info.el.style.backgroundColor = info.event.extendedProps.bgColor;
+            // info.el.style.color = '#fff';
 
         },
         eventDrop: function(info) {
@@ -129,7 +128,7 @@ $(function () {
             formData.append('_method', 'PUT');
             formData.append('title', info.event.title);
             formData.append('appointment_type', info.event.extendedProps.appointment_type);
-            formData.append('user_id', info.event.extendedProps.agent_id);
+            formData.append('assigned_agent', info.event.extendedProps.agent_id);
             formData.append('appointment_date', moment(info.event.start).format('YYYY-MM-DDTHH:mm'));
             editAppointment(formData)
         },
@@ -311,6 +310,7 @@ const openEditModal = (event) => {
     appointmentForm.querySelector('input[name=title]').value = event.title;
     appointmentForm.querySelector('input[name=appointment_date]').value = moment(event.start).format('YYYY-MM-DDTHH:mm');
     appointmentForm.querySelector('input[name=location]').value = event.extendedProps.location;
+    appointmentForm.querySelector('select[name=assigned_agent]').value = event.extendedProps.agent_id;
     appointmentForm.querySelector('textarea[name=notes]').value = event.extendedProps.notes;
 
 
@@ -320,6 +320,8 @@ const openEditModal = (event) => {
 
 
 // End of Edit Modal
+
+export {getMode, setMode, mode, appointmentForm, calendarEl, calendar};
 
 
 

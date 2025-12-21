@@ -261,10 +261,10 @@
 
                                         <!-- Hidden input for editing -->
                                         <div class="edit-input mt-1 d-none">
-                                            <select name="user_id" id="user_id" class="form-select input-box">
+                                            <select name="assigned_agent" id="assigned_agent" class="form-select input-box">
                                                 <option value="">Select Agent</option>
                                                 @foreach($agents as $agent)
-                                                    <option value="{{ $agent->id }}" @if($agent->id === $lead->user_id) selected @endif>{{ $agent->full_name }} - {{$agent->email}}</option>
+                                                    <option value="{{ $agent->id }}" @if($agent->id === $lead->assigned_agent) selected @endif>{{ $agent->full_name }} - {{$agent->email}}</option>
                                                 @endforeach
                                             </select>
                                             <div class="mt-1">
@@ -748,7 +748,7 @@
                 <input type="hidden" name="lead_id" value="{{$lead->id}}">
                 <div class="modal-header">
                     <h5 class="modal-title">Set Appointment</h5>
-                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
                 <div class="modal-body">
@@ -775,10 +775,10 @@
 
                     <div class="form-group mb-3">
                         <label class="fw-semibold">Assign Agent</label>
-                        <select name="user_id" id="user_id" class="form-select input-box">
+                        <select name="assigned_agent" id="assigned_agent" class="form-select input-box">
                             <option value="">Select Agent</option>
                             @foreach($agents as $agent)
-                                <option value="{{ $agent->id }}" @if($agent->id === $lead->user_id) selected @endif>{{ $agent->full_name }} - {{$agent->email}}</option>
+                                <option value="{{ $agent->id }}" @if($agent->id === $lead->assigned_agent) selected @endif>{{ $agent->full_name }} - {{$agent->email}}</option>
                             @endforeach
                         </select>
 
@@ -798,7 +798,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Appointment</button>
                 </div>
 

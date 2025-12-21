@@ -21,7 +21,10 @@ return new class extends Migration
             $table->string('status')->default('pending');
             $table->string('appointment_type');
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
+            $table->uuid('assigned_agent')->nullable();
             $table->timestamps();
+
+            $table->foreign('assigned_agent')->references('id')->on('users');
         });
     }
 

@@ -20,7 +20,7 @@ class AppointmentController extends Controller
     public static function middleware(): array
     {
         return [
-            new Middleware('can:view appointment', only: ['index', 'show','getAppointments']),
+            new Middleware('can:view appointment', only: ['index', 'show','getAppointments','getUserAppointments']),
             new Middleware('can:add appointment', only: ['create', 'store']),
             new Middleware('can:edit appointment', only: ['edit', 'update']),
             new Middleware('can:delete appointment', only: ['destroy'])
@@ -47,7 +47,8 @@ class AppointmentController extends Controller
      */
     public function store(StoreAppointmentRequest $request)
     {
-        return $this->appointmentService->saveAppointment($request->only('title','appointment_date','location','notes','lead_id','user_id','appointment_type_id','status','appointment_type'));
+        $request->merge(['user_id' => auth()->id()]);
+        return $this->appointmentService->saveAppointment($request->only('title','appointment_date','location','notes','lead_id','user_id','appointment_type_id','status','appointment_type','assigned_agent'));
     }
 
     /**
@@ -55,7 +56,9 @@ class AppointmentController extends Controller
      */
     public function show(Appointment $appointment)
     {
-        //
+        return view('dashboard.pages.appointments.show')->with([
+            'appointment' => $appointment,
+        ]);
     }
 
     /**
@@ -72,7 +75,7 @@ class AppointmentController extends Controller
     public function update(UpdateAppointmentRequest $request, Appointment $appointment)
     {
         return $this->appointmentService->updateAppointment($appointment,
-            $request->only('title','appointment_date','location','notes','lead_id','user_id','appointment_type_id','status','appointment_type'));
+            $request->only('title','appointment_date','location','notes','lead_id','user_id','appointment_type_id','status','appointment_type','assigned_agent'));
     }
 
     /**
@@ -87,6 +90,11 @@ class AppointmentController extends Controller
 
     public function getAppointments(): \Illuminate\Support\Collection
     {
-        return $this->appointmentService->appointments_in_calendar_format();
+        return $this->appointmentService->appointments_in_calendar_format(true);
+    }
+
+    public function getUserAppointments(string $userId): \Illuminate\Support\Collection
+    {
+        return $this->appointmentService->appointments_in_calendar_format($userId);
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use App\Mail\SendAppointmentNotification;
 use App\Models\Appointment;
 use App\Models\Leads;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class AppointmentService
 {
@@ -52,25 +54,55 @@ class AppointmentService
 
     public function saveAppointment(array $appointmentData): \Illuminate\Http\JsonResponse
     {
-        return Appointment::create($appointmentData) ?
-            response()->json(['success' => true, 'message' => 'Appointment saved successfully.']) :
-            response()->json(['success' => false, 'message' => 'An error occurred while saving your appointment.']);
+        if($appointment = Appointment::create($appointmentData))
+        {
+            Mail::to($appointment->agent->email)
+                ->send(
+                    new SendAppointmentNotification(
+                        'New Appointment Created',
+                        'You have a new appointment scheduled',
+                        $appointment
+                    )
+                );
+            return response()->json(['success' => true, 'message' => 'Appointment saved successfully.']);
+        }
+        return response()->json(['success' => false, 'message' => 'An error occurred while saving your appointment.']);
     }
 
     public function updateAppointment(Appointment $appointment, array $appointmentData): \Illuminate\Http\JsonResponse
     {
         if($appointment->fill($appointmentData)->isDirty())
         {
-            return $appointment->save() ? response()->json(['success' => true, 'message' => 'Appointment updated successfully.']) :
-                response()->json(['success' => false, 'message' => 'An error occurred while updating your appointment.']);
+            if($appointment->save())
+            {
+                Mail::to($appointment->agent->email)
+                    ->send(
+                        new SendAppointmentNotification(
+                            'Appointment updated',
+                            'The appointment assigned to you has been updated.',
+                            $appointment
+                        )
+                    );
+                return response()->json(['success' => true, 'message' => 'Appointment updated successfully.']);
+            }
+             return response()->json(['success' => false, 'message' => 'An error occurred while updating your appointment.']);
+
         }
         return response()->json(['success' => false, 'message' => 'No changes were made.']);
 
     }
 
-    public function appointments_in_calendar_format(): \Illuminate\Support\Collection
+    public function appointments_in_calendar_format(bool|string $display_all_appointments_or_get_user_id): \Illuminate\Support\Collection
     {
-        return collect(Appointment::all())->mapWithKeys(function ($item, $key){
+        if($display_all_appointments_or_get_user_id === true)
+        {
+            $appointments = Appointment::all();
+        }else{
+            $appointments = Appointment::where('user_id',auth()->id())
+                ->orWhere('assigned_agent',auth()->id())->get();
+        }
+
+        return collect($appointments)->mapWithKeys(function ($item, $key){
             return [
                 $key => [
                     'id' => $item->id,
@@ -79,12 +111,16 @@ class AppointmentService
                     'allDay' => false,
                     'color' => $this->findAppointmentType($item->appointment_type)['color'],
                     'appointment_type' => $item->appointment_type,
-                    'assigned_agent' => $item->user_id ? User::find($item->user_id)->full_name : 'Unassigned',
-                    'agent_id' => $item->user_id,
+                    'assigned_agent' => $item->user_id ? User::find($item->assigned_agent)->full_name : 'Unassigned',
+                    'agent_id' => $item->assigned_agent,
                     'client' => Leads::find($item->lead_id)->full_name,
                     'location' => $item->location,
                     'notes' => $item->notes,
                     'lead_id' => $item->lead_id,
+                    'bgColor' => $item->assigned_agent == auth()->id() ? '#d4d2d2' : '',
+                    'showEditButton' => $item->user_id == auth()->id(),
+                    'showCloseButton' => $item->user_id == auth()->id(),
+                    'showViewButton' => true,
 //                    'url' => route('leads.show', ['lead' => $item->lead_id]),
                 ]
             ];

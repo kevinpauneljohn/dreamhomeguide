@@ -22,7 +22,7 @@ class UpdateAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required'],
+            'assigned_agent' => ['required'],
             'appointment_type' => ['required'],
             'title' => ['required', 'string', 'max:255'],
             'appointment_date' => ['required', 'date'],
@@ -39,7 +39,7 @@ class UpdateAppointmentRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'user_id.required' => 'Agent field is required',
+            'assigned_agent.required' => 'Agent field is required',
         ];
     }
 }
