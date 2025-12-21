@@ -24,7 +24,7 @@ class SendAppointmentNotification extends Mailable implements ShouldQueue
         public Appointment $appointment
     )
     {
-        $this->afterCommit();
+//        $this->afterCommit();
     }
 
     /**
