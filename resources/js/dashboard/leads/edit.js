@@ -35,6 +35,13 @@ $(document).ready(function () {
         // dropdownParent: $('#addNoteModal')
     });
 
+    $('#assigned_agent').select2({
+        theme: 'bootstrap-5',
+        placeholder: 'Assign an agent',
+        allowClear: true,
+        // dropdownParent: $('#addNoteModal')
+    });
+
     $('#source').select2({
         theme: 'bootstrap-5',
         placeholder: 'Select lead Source',
