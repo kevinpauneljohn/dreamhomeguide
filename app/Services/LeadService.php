@@ -271,4 +271,5 @@ class LeadService
             'lead_type' => ['required', 'string'],
         ];
     }
+
 }
