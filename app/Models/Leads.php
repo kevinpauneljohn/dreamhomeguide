@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Ramsey\Uuid\Uuid;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class Leads extends Model
 {
-    use SoftDeletes, HasUuids;
+    use SoftDeletes, HasUuids, LogsActivity;
 
     protected $fillable = ['first_name', 'last_name', 'email', 'phone','address','source',
         'source_url','status','user_id','birthday','civil_status','income_range','gender','lead_type','message','property_id'];
@@ -39,6 +41,15 @@ class Leads extends Model
     public function uniqueIds(): array
     {
         return ['id'];
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly($this->fillable)
+            ->logOnlyDirty()
+            ->useLogName('leads');
+        // Chain fluent methods for configuration options
     }
 
     public function getFullNameAttribute(): string

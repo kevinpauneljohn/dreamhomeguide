@@ -3,10 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class Appointment extends Model
 {
+    use LogsActivity;
     protected $fillable = ['title','appointment_date','location','notes','user_id','status','lead_id','appointment_type','assigned_agent'];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly($this->fillable)
+            ->logOnlyDirty()
+            ->useLogName('appointments');
+        // Chain fluent methods for configuration options
+    }
 
     public function lead(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
