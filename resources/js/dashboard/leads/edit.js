@@ -77,7 +77,6 @@ $(document).ready(function () {
             { name: field, value: newValue },
         ];
 
-        console.log(data - 'kevin test');
 
         $.ajax({
             url: `/lead/${lead_id}/update-field`,
@@ -85,7 +84,7 @@ $(document).ready(function () {
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: data,
             success: function (response) {
-                // console.log(response);
+                console.log(response);
                 container.find(".value-text").text(newValue);
 
                 container.find(".value-text").removeClass("d-none");

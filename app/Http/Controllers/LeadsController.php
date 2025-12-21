@@ -116,21 +116,22 @@ class LeadsController extends Controller
         return $this->leadsService->getLeads($request->all());
     }
 
-    public function updateField(Request $request, Leads $lead): \Illuminate\Http\JsonResponse
+    public function updateField(Request $request, Leads $lead)
     {
-        $field = array_key_first($request->all());
-
-        $validated = $request->validate([
-            $field => $this->leadsService->validationRules($lead->id)[$field]
-        ],['user_id.required' => 'Please select an agent.']);
-        $lead->fill($validated);
-
-        if ($lead->isDirty()) {
-            $lead->save();
-            return response()->json(['success' => true, 'message' => ucfirst($field == 'user_id' ? 'Agent' : $field) . ' updated successfully.',
-                'field' => $field,'agent' => $lead->user->full_name]);
-        }
-
-        return response()->json(['success' => false, 'message' => 'No changes were made.']);
+//        $field = array_key_first($request->all());
+//
+//        $validated = $request->validate([
+//            $field => $this->leadsService->validationRules($lead->id)[$field]
+//        ],['user_id.required' => 'Please select an agent.']);
+//        $lead->fill($validated);
+//
+//        if ($lead->isDirty()) {
+//            $lead->save();
+//            return response()->json(['success' => true, 'message' => ucfirst($field == 'user_id' ? 'Agent' : $field) . ' updated successfully.',
+//                'field' => $field,'agent' => $lead->user->full_name]);
+//        }
+//
+//        return response()->json(['success' => false, 'message' => 'No changes were made.']);
+        return $lead;
     }
 }
