@@ -43,7 +43,7 @@ $(function () {
             bookAppointment: {
                 text: "Create Appointment",
                 click: function () {
-
+                    removeErrorMessages();
                     const modal = new bootstrap.Modal('#addAppointmentModal');
                     modal.show();
                 }
