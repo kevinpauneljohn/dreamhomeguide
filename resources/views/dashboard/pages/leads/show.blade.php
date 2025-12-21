@@ -90,7 +90,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="text-muted small">First Name</label>
                                     <div class="editable-field" data-field="first_name">
-                                        <span class="value">{{ $lead->first_name }}</span>
+                                        <span class="value fw-semibold">{{ $lead->first_name }}</span>
                                         <i class="bi bi-pencil edit-icon edit-btn"></i>
 
                                         <!-- Hidden input for editing -->
@@ -109,7 +109,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="text-muted small">Last Name</label>
                                     <div class="editable-field" data-field="last_name">
-                                        <span class="value">{{ $lead->last_name }}</span>
+                                        <span class="value fw-semibold">{{ $lead->last_name }}</span>
                                         <i class="bi bi-pencil edit-icon edit-btn"></i>
 
                                         <!-- Hidden input for editing -->
@@ -127,7 +127,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="text-muted small">Email</label>
                                     <div class="editable-field" data-field="email">
-                                        <span class="value">{{ $lead->email }}</span>
+                                        <span class="value fw-semibold">{{ $lead->email }}</span>
                                         <i class="bi bi-pencil edit-icon edit-btn"></i>
 
                                         <!-- Hidden input for editing -->
@@ -145,7 +145,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="text-muted small">Phone</label>
                                     <div class="editable-field" data-field="phone">
-                                        <span class="value">{{ $lead->phone }}</span>
+                                        <span class="value fw-semibold">{{ $lead->phone }}</span>
                                         <i class="bi bi-pencil edit-icon edit-btn"></i>
 
                                         <!-- Hidden input for editing -->
@@ -163,7 +163,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="text-muted small">Address</label>
                                     <div class="editable-field" data-field="address">
-                                        <span class="value">{{ $lead->address }}</span>
+                                        <span class="value fw-semibold">{{ $lead->address }}</span>
                                         <i class="bi bi-pencil edit-icon edit-btn"></i>
 
                                         <!-- Hidden input for editing -->
@@ -181,7 +181,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="text-muted small">Birthday</label>
                                     <div class="editable-field" data-field="birthday">
-                                        <span class="value">{{ !is_null($lead->birthday) ? $lead->birthday->format('M d, Y'):'' }}</span>
+                                        <span class="value fw-semibold">{{ !is_null($lead->birthday) ? $lead->birthday->format('M d, Y'):'' }}</span>
                                         <i class="bi bi-pencil edit-icon"></i>
 
                                         <!-- Hidden input for editing -->
@@ -202,7 +202,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="text-muted small">Gender</label>
                                     <div class="editable-field" data-field="gender">
-                                        <span class="value">{{ $lead->gender }}</span>
+                                        <span class="value fw-semibold">{{ $lead->gender }}</span>
                                         <i class="bi bi-pencil edit-icon edit-btn"></i>
 
                                         <!-- Hidden input for editing -->
@@ -224,7 +224,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="text-muted small">Civil Status</label>
                                     <div class="editable-field" data-field="civil_status">
-                                        <span class="value">{{ $lead->civil_status }}</span>
+                                        <span class="value fw-semibold">{{ $lead->civil_status }}</span>
                                         <i class="bi bi-pencil edit-icon edit-btn"></i>
 
                                         <!-- Hidden input for editing -->

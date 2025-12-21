@@ -35,7 +35,7 @@ class SendAppointmentNotification extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('noreply@johnkevinpaunel.com', 'John Kevin'),
+            from: new Address('noreply@johnkevinpaunel.com', 'John Kevin Paunel'),
             subject: $this->subject,
         );
     }
