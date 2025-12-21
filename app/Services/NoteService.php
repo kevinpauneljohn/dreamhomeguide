@@ -144,6 +144,13 @@ class NoteService
                 ['note_type' => 'Lead Unreachable', 'icon' => 'fa-solid fa-person-circle-question', 'icon_color' => '#0a58ca'],
             ],
 
+            /* ------------------------------
+            |  Connection / Network – Orange
+            ------------------------------ */
+            'Connection / Network' => [
+                ['note_type' => 'Referral', 'icon' => 'bi bi-gift-fill', 'icon_color' => '#fd7e14'],
+            ],
+
         ];
     }
 
