@@ -234,7 +234,13 @@ const confirmDelete = (event) => {
         confirmButtonText: 'Yes, remove it!'
     }).then((result) => {
         if (result.isConfirmed) {
-            axios.delete(`/appointment/${event.id}`)
+            axios.delete(`/appointment/${event.id}`, {
+                headers: {
+                    'X-CSRF-TOKEN': document
+                        .querySelector('meta[name="csrf-token"]')
+                        .getAttribute('content')
+                }
+            })
                 .then(response => {
                     if(response.data.success)
                     {
