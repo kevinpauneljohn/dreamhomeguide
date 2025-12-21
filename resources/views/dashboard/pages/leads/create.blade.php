@@ -80,7 +80,17 @@
                     </div>
                     <div class="col-md-6">
                         <div class="row g-3">
-                            <div class="col-md-12 status">
+                            <div class="col-md-6 lead_type">
+                                <label class="form-label" for="status">Lead Type</label>
+                                <i class="bi bi-question-circle" id="lead_type"></i>
+                                <select name="lead_type" id="lead_type" class="form-select">
+                                    @foreach($leadTypes as $key => $value)
+                                        <option value="{{$key}}">{{$value}}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                            <div class="col-md-6 status">
                                 <div id="lead-status-content" class="d-none">
                                     <ol class="mb-0">
                                         <li><strong>New</strong> – Fresh leads that entered the system and are not yet contacted.</li>
@@ -148,20 +158,20 @@
         </div>
 
         <!-- Tags -->
-        <div class="card shadow-sm mb-4">
-            <div class="card-body tags">
-                <h5 class="fw-bold mb-3">Tags (Optional)</h5>
+{{--        <div class="card shadow-sm mb-4">--}}
+{{--            <div class="card-body tags">--}}
+{{--                <h5 class="fw-bold mb-3">Tags (Optional)</h5>--}}
 {{--                <input type="text" name="tags" id="tags" class="form-control" placeholder="Ex: hot, investor, follow-up">--}}
-                <select name="tags[]" id="tags" class="form-select" multiple>
-                    <option value="Investor">Investor</option>
-                    <option value="Hot Lead">Hot Lead</option>
-                    <option value="Follow Up">Follow Up</option>
-                    <option value="Site Visit">Site Visit</option>
-                    <option value="Messenger Inquiry">Messenger Inquiry</option>
-                </select>
-                <small class="text-muted">Separate tags with commas</small>
-            </div>
-        </div>
+{{--                <select name="tags[]" id="tags" class="form-select" multiple>--}}
+{{--                    <option value="Investor">Investor</option>--}}
+{{--                    <option value="Hot Lead">Hot Lead</option>--}}
+{{--                    <option value="Follow Up">Follow Up</option>--}}
+{{--                    <option value="Site Visit">Site Visit</option>--}}
+{{--                    <option value="Messenger Inquiry">Messenger Inquiry</option>--}}
+{{--                </select>--}}
+{{--                <small class="text-muted">Separate tags with commas</small>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
         <div class="d-flex justify-content-end gap-3 mb-3">
             <a href="{{ route('crm.index') }}" class="btn btn-light border px-4">Cancel</a>

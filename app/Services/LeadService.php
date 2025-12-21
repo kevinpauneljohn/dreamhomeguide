@@ -252,6 +252,8 @@ class LeadService
     public function validationRules(string $lead_id): array
     {
         return [
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', Rule::unique('leads', 'email')->ignore($lead_id)],
             'phone' => ['nullable', 'string'],
             'address' => ['nullable', 'string'],

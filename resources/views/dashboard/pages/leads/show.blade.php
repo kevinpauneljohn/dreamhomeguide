@@ -28,7 +28,8 @@
 
             <div class="flex-grow-1">
                 <h3 class="fw-bold mb-1 d-flex align-items-center gap-2">
-                    {{ $lead->full_name }}
+{{--                    <span class="lead-name">{{ $lead->full_name }}</span>--}}
+                    <span class="lead-name"></span>
                     <span class="badge bg-warning text-dark lead-score">
                     ⭐ {{ $lead->score ?? 72 }}
                 </span>
@@ -84,6 +85,43 @@
 
                             <!-- Editable Grid -->
                             <div class="row">
+
+                                <!-- First Name -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="text-muted small">First Name</label>
+                                    <div class="editable-field" data-field="first_name">
+                                        <span class="value">{{ $lead->first_name }}</span>
+                                        <i class="bi bi-pencil edit-icon edit-btn"></i>
+
+                                        <!-- Hidden input for editing -->
+                                        <div class="edit-input mt-1 d-none">
+                                            <input type="text" id="first_name" class="form-control input-box" value="{{ $lead->first_name }}">
+                                            <div class="mt-1">
+                                                <button class="btn btn-sm btn-success save-btn">Save</button>
+                                                <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- First Name -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="text-muted small">Last Name</label>
+                                    <div class="editable-field" data-field="last_name">
+                                        <span class="value">{{ $lead->last_name }}</span>
+                                        <i class="bi bi-pencil edit-icon edit-btn"></i>
+
+                                        <!-- Hidden input for editing -->
+                                        <div class="edit-input mt-1 d-none">
+                                            <input type="text" id="last_name" class="form-control input-box" value="{{ $lead->last_name }}">
+                                            <div class="mt-1">
+                                                <button class="btn btn-sm btn-success save-btn">Save</button>
+                                                <button class="btn btn-sm btn-light cancel-btn">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <!-- Email -->
                                 <div class="col-md-6 mb-3">

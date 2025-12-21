@@ -5,7 +5,29 @@ select2()
 import moment from "moment";
 
 const lead_id = $('input[name=lead_id]').val();
+const leadName = document.querySelector('.lead-name');
+let firstName = document.getElementById("first_name").value;
+let lastName = document.getElementById("last_name").value;
+let fullName;
+
+const setFullName = (first_name, last_name) => {
+    const ucWords = str =>
+        str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+
+    first_name = ucWords(first_name);
+    last_name = ucWords(last_name);
+
+    fullName = `${first_name} ${last_name}`;
+}
+
+const getFullName = () => {
+    return fullName;
+}
 $(document).ready(function () {
+
+    setFullName(firstName, lastName);
+    leadName.innerText = getFullName();
+
     $('#income_range').select2({
         theme: 'bootstrap-5',
         placeholder: 'Select Income Range',
@@ -79,6 +101,20 @@ $(document).ready(function () {
                     newValue = response.field === 'birthday'? moment(newValue).format("MMM DD, YYYY") : newValue;
 
                     container.find(".value").text(newValue);
+
+                    if(response.field === 'first_name')
+                    {
+                        firstName = newValue;
+                    }
+
+                    if(response.field === 'last_name')
+                    {
+                        lastName = newValue;
+                    }
+
+                    setFullName(firstName, lastName);
+                    leadName.innerText = getFullName();
+
                 }
                 else
                 {
