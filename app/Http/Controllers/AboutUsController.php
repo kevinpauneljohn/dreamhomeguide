@@ -11,7 +11,7 @@ class AboutUsController extends Controller
     {
         return view('pages.about-us')->with([
             'title' => 'About Us',
-            'teams' => User::where('position','!=',null)
+            'teams' => User::where('position','!=',null)->orWhere('position','!=',''),
         ]);
     }
 }
