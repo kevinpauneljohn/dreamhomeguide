@@ -63,6 +63,8 @@ export default defineConfig({
 
                 //component
                 'resources/js/component/appointment/calendar.js',
+                //activity logs
+                'resources/js/component/activities/logs.js',
 
             ],
             refresh: true,

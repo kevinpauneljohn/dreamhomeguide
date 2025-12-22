@@ -12,9 +12,11 @@
             <button class="btn btn-light border px-4" onclick="window.history.back()">
                 Back
             </button>
-            <a href="{{route('property.create')}}" class="btn btn-primary border px-4">
-                <i class="bi bi-plus me-1"></i> Add New Property
-            </a>
+            @can('add listing')
+                <a href="{{route('property.create')}}" class="btn btn-primary border px-4">
+                    <i class="bi bi-plus me-1"></i> Add New Property
+                </a>
+            @endcan
         </div>
 
 

@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Contracts\Activity;
 
 class Note extends Model
 {
     use LogsActivity;
-    protected $fillable = ['title','description','user_id','lead_id','type'];
+    protected $fillable = ['description','user_id','lead_id','type'];
 
     public function getActivitylogOptions(): LogOptions
     {
@@ -18,6 +19,13 @@ class Note extends Model
             ->logOnlyDirty()
             ->useLogName('notes');
         // Chain fluent methods for configuration options
+    }
+
+    public function tapActivity(Activity $activity, string $eventName): void
+    {
+        $activity->properties = $activity->properties->merge([
+            'lead_id' => $this->lead_id
+        ]);
     }
 
     public function lead()

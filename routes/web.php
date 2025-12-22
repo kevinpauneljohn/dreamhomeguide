@@ -17,4 +17,7 @@ include __DIR__.'/dashboard/crm.php';
 include __DIR__.'/dashboard/leads.php';
 include __DIR__.'/dashboard/notes.php';
 include __DIR__.'/dashboard/appointment.php';
+include __DIR__.'/dashboard/activities.php';
+
+
 

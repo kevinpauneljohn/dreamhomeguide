@@ -22,8 +22,8 @@ class UserController implements HasMiddleware
     {
         return [
             new Middleware('can:view user', only: ['index', 'show','getUsers']),
-            new Middleware('can:add user', only: ['create', 'store']),
-            new Middleware('can:edit user', only: ['edit', 'update']),
+            new Middleware('can:add user', only: ['create', 'store','updateProfilePhoto']),
+            new Middleware('can:edit user', only: ['edit', 'update','updateProfilePhoto']),
             new Middleware('can:delete user', only: ['destroy'])
         ];
     }

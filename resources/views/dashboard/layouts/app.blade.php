@@ -25,6 +25,8 @@
     </div>
 </div>
 
+@stack('modal')
+
 @vite(['resources/js/dashboard/app.js'])
 @stack('scripts')
 

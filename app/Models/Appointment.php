@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
@@ -18,6 +19,13 @@ class Appointment extends Model
             ->logOnlyDirty()
             ->useLogName('appointments');
         // Chain fluent methods for configuration options
+    }
+
+    public function tapActivity(Activity $activity, string $eventName): void
+    {
+        $activity->properties = $activity->properties->merge([
+            'lead_id' => $this->lead_id
+        ]);
     }
 
     public function lead(): \Illuminate\Database\Eloquent\Relations\BelongsTo

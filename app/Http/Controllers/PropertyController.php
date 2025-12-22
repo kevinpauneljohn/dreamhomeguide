@@ -9,6 +9,7 @@ use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\PropertyImage;
 use App\Services\PropertyService;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\Permission\Models\Permission;
 
 class PropertyController extends Controller
@@ -19,6 +20,18 @@ class PropertyController extends Controller
     {
 
     }
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('can:view listing', only: ['index', 'show','properties','propertyImages']),
+            new Middleware('can:add listing', only: ['create', 'store']),
+            new Middleware('can:edit listing', only: ['edit', 'update']),
+            new Middleware('can:delete listing', only: ['destroy']),
+            new Middleware('can:upload listing images', only: ['uploadPropertyImages'])
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -65,16 +78,12 @@ class PropertyController extends Controller
             'sold'     => 'danger',
             default    => 'secondary'
         };
-//        if(collect($property->images)->count())
-//        {
-//
-//        }
+
         $thumbnail = collect($property->images)->count() > 0 && $property->images()->where('is_thumbnail', true)->count() > 0 ?
             '/storage/property_images/'.$property->images()->where('is_thumbnail', true)->first()->file_name :
             'https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg';
         $title = ucwords($property->title);
 
-//        return  $property->images()->where('is_thumbnail', true)->count();
         return view('dashboard.pages.properties.show', compact('property','title','thumbnail'));
     }
 

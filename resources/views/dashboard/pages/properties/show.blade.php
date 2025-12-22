@@ -9,13 +9,17 @@
         </div>
 
         <div class="d-flex gap-2">
-            <a href="{{ route('property.edit', $property->id) }}" class="btn btn-primary px-4">
-                Edit Property
-            </a>
+            @can('edit listing')
+                <a href="{{ route('property.edit', $property->id) }}" class="btn btn-primary px-4">
+                    Edit Property
+                </a>
+            @endcan
 
-            <a href="{{ route('property.index') }}" class="btn btn-light border px-4">
-                Back
-            </a>
+            @can('view listing')
+                <a href="{{ route('property.index') }}" class="btn btn-light border px-4">
+                    Back
+                </a>
+            @endcan
         </div>
     </div>
 

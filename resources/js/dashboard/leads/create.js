@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 import select2 from 'select2';
 import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css'
+import {reloadActivityLogs} from "@/component/activities/logs.js";
 
 select2()
 
@@ -92,9 +93,9 @@ const saveLead = (formData) => {
                     <span role="status">Creating...</span>`);
         }
     }).done(function (response) {
-        console.log(response);
         if(response.success === true)
         {
+            reloadActivityLogs();
             Swal.fire({
                 icon: "success",
                 title: response.message,

@@ -7,6 +7,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import moment from "moment";
 import axios from 'axios';
 import {Toast} from "@/toast.js";
+import {reloadActivityLogs} from "@/component/activities/logs.js";
 
 
 let calendar;
@@ -169,6 +170,7 @@ const createAppointment = (formData) => {
                 })
                 appointmentForm.reset();
                 calendar.refetchEvents();
+                reloadActivityLogs();
             }
             else if(response.data.success === false)
             {
@@ -202,6 +204,7 @@ const editAppointment = (formData) => {
                     title: response.data.message
                 })
                 calendar.refetchEvents();
+                reloadActivityLogs();
             }
             else if(response.data.success === false)
             {
@@ -249,6 +252,7 @@ const confirmDelete = (event) => {
                             title: response.data.message
                         })
                         calendar.refetchEvents();
+                        reloadActivityLogs();
                     }
                     else if(response.data.success === false)
                     {

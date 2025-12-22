@@ -8,9 +8,11 @@
             <small class="text-muted">Manage all users under Dream Home Guide Realty</small>
         </div>
 
-        <a href="{{ route('user.create') }}" class="btn btn-primary px-4">
-            + Add New User
-        </a>
+        @can('add user')
+            <a href="{{ route('user.create') }}" class="btn btn-primary px-4">
+                + Add New User
+            </a>
+        @endcan
     </div>
 
     <div class="card mb-3">

@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import {reloadActivityLogs} from "@/component/activities/logs.js";
 
 export const lead_id = $('input[name=lead_id]').val();
 export const notesTable = $('#notes-table').DataTable({
@@ -93,6 +94,7 @@ const deleteNote = (note_id) => {
         if(response.success === true)
         {
             notesTable.ajax.reload(null, false);
+            reloadActivityLogs()
             Swal.fire({
                 title: "Deleted!",
                 text: response.message,

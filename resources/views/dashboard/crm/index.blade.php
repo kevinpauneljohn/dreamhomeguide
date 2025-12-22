@@ -9,9 +9,11 @@
             <p class="text-muted mb-0">Track, manage and nurture your leads efficiently</p>
         </div>
 
-        <a href="{{ route('leads.create') }}" class="btn btn-primary px-4 py-2">
-            <i class="bi bi-plus-circle me-1"></i> Add New Lead
-        </a>
+        @can('add lead')
+            <a href="{{ route('leads.create') }}" class="btn btn-primary px-4 py-2">
+                <i class="bi bi-plus-circle me-1"></i> Add New Lead
+            </a>
+        @endcan
     </div>
 
     <!-- STAT CARDS -->

@@ -1,6 +1,7 @@
 import {Toast} from '@/toast.js'
 import {notesTable} from "../notes/notesTable.js";
 import moment from "moment";
+import {reloadActivityLogs} from "@/component/activities/logs.js";
 
 let noteId = '';
 const addNoteModal = $('#addNoteModal');
@@ -68,6 +69,7 @@ const updateNote = (formData) => {
         if(response.success === true)
         {
             notesTable.ajax.reload(null, false);
+            reloadActivityLogs();
             Toast.fire({
                 icon: "success",
                 title: response.message

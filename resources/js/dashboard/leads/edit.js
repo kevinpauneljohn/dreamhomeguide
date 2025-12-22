@@ -3,6 +3,7 @@ import select2 from 'select2';
 select2()
 
 import moment from "moment";
+import {reloadActivityLogs} from "@/component/activities/logs.js";
 
 const lead_id = $('input[name=lead_id]').val();
 const leadName = document.querySelector('.lead-name');
@@ -121,6 +122,8 @@ $(document).ready(function () {
 
                     setFullName(firstName, lastName);
                     leadName.innerText = getFullName();
+
+                    reloadActivityLogs();
 
                 }
                 else

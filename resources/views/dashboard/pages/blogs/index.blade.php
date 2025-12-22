@@ -15,9 +15,11 @@
             <small class="text-muted">Manage articles, announcements & content</small>
         </div>
 
-        <a href="{{ route('blog.create') }}" class="btn btn-primary px-4">
-            <i class="bi bi-pencil-square me-1"></i> Add New Blog
-        </a>
+        @can('add blog')
+            <a href="{{ route('blog.create') }}" class="btn btn-primary px-4">
+                <i class="bi bi-pencil-square me-1"></i> Add New Blog
+            </a>
+        @endcan
     </div>
 
     {{-- Breadcrumb --}}
