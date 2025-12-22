@@ -22,6 +22,8 @@ $(document).on('click', '.edit-note-btn', function(){
     addNoteModal.find('form').attr('id','editNoteForm')
     addNoteModal.find('.is-invalid').removeClass('is-invalid');
     addNoteModal.find('.error').remove();
+    let myModal = new bootstrap.Modal(document.getElementById('addNoteModal'));
+    myModal.show();
     getNoteDetails();
 })
 
@@ -35,9 +37,6 @@ const getNoteDetails = () => {
 
         }
     }).done(function (response) {
-        let myModal = new bootstrap.Modal(document.getElementById('addNoteModal'));
-        myModal.show();
-
         $.each(response, function (key, value) {
             $('#'+key).val(value).change();
         })
