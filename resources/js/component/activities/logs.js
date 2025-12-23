@@ -289,13 +289,13 @@ console.log(activity);
         <table class="table table-sm table-bordered align-middle mb-0">
             <thead class="table-light">
                 <tr>
-                    <th style="width: 10%">Field</th>
+                    <th style="width: 15%">Field</th>
                     <th style="width: 30%">
                         ${isDeleted ? 'Deleted Value' : 'Old Value'}
                     </th>
-                    ${activity.log_name ? 'login' || 'logout' ? '' : `<th style="width: 30%">
+                    ${activity.log_name === 'login' || activity.log_name === 'logout' ? '' : `<th style="width: 30%">
                         ${isDeleted ? '' : 'New Value'}
-                    </th>` : ''}
+                    </th>`}
 
                 </tr>
             </thead>
@@ -307,7 +307,7 @@ console.log(activity);
                         </td>
                     </tr>
                 `}
-                ${activity.log_name === 'leads' || activity.log_name ? 'login' || 'logout' : `
+                ${activity.log_name === 'leads' || activity.log_name === 'login' || activity.log_name === 'logout' ? '' : `
                     <tr>
                         <td colspan="2" class="fw-semibold text-capitalize">Lead Name</td>
                         <td class="text-right text-success">
