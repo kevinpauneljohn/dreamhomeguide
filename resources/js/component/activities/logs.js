@@ -209,7 +209,7 @@ console.log(activity);
                         `${activity.properties['location']['region']}
                         ${activity.properties['location']['city']}
                         ${activity.properties['location']['isp']}
-                        ${activity.properties['location']['lang']}
+                        ${activity.properties['location']['lng']}
                         ${activity.properties['location']['lat']}
                         ${activity.properties['location']['timezone']}`
                         : activity.properties[key]}
