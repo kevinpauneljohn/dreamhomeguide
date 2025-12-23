@@ -104,7 +104,7 @@
                             <div class="col-md-4">
                                 <div class="border rounded p-3 text-center">
                                     <div class="fw-bold fs-4">{{ $property->floor_area }} sqm</div>
-                                    <div class="text-muted small">Lot Area</div>
+                                    <div class="text-muted small">Floor Area</div>
                                 </div>
                             </div>
                         @endif

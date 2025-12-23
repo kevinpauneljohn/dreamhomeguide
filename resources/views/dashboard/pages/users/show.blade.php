@@ -211,22 +211,6 @@
                         <!-- ACTIVITY TAB -->
                         <div class="tab-pane fade" id="activity">
                             <h5 class="fw-bold mb-3">Recent Activity</h5>
-
-{{--                            @php $logs = ""; @endphp--}}
-
-{{--                            @if(empty($logs))--}}
-{{--                                <div class="alert alert-info">No recent activity found.</div>--}}
-{{--                            @else--}}
-{{--                                <ul class="list-group">--}}
-{{--                                    @foreach($logs as $log)--}}
-{{--                                        <li class="list-group-item">--}}
-{{--                                            <strong>{{ $log->action }}</strong><br>--}}
-{{--                                            <small class="text-muted">{{ $log->created_at->diffForHumans() }}</small>--}}
-{{--                                        </li>--}}
-{{--                                    @endforeach--}}
-{{--                                </ul>--}}
-{{--                            @endif--}}
-
                             <x-activities.logs userId="{{ $user->id }}"/>
                         </div>
 
