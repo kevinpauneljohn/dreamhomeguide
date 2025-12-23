@@ -289,13 +289,14 @@ console.log(activity);
         <table class="table table-sm table-bordered align-middle mb-0">
             <thead class="table-light">
                 <tr>
-                    <th style="width: 40%">Field</th>
+                    <th style="width: 10%">Field</th>
                     <th style="width: 30%">
                         ${isDeleted ? 'Deleted Value' : 'Old Value'}
                     </th>
-                    <th style="width: 30%">
+                    ${activity.log_name ? 'login' || 'logout' ? '' : `<th style="width: 30%">
                         ${isDeleted ? '' : 'New Value'}
-                    </th>
+                    </th>` : ''}
+
                 </tr>
             </thead>
             <tbody>
@@ -320,8 +321,6 @@ console.log(activity);
     </div>
 `;
 
-
-
     // =========================
     // SHOW MODAL
     // =========================
@@ -332,9 +331,10 @@ console.log(activity);
     modal.show();
 };
 
-
-
-
 export function reloadActivityLogs() {
     activityLogsDataTable?.ajax.reload(null, false);
 }
+
+navigator.geolocation.getCurrentPosition(function (position) {
+    console.log(position);
+})

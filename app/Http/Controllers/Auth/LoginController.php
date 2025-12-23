@@ -66,6 +66,7 @@ class LoginController extends Controller
                     'url'       => $request->fullUrl(),
                     'method'    => $request->method(),
                     'session_id'=> session()->getId(),
+
                 ])
                 ->event('login')
                 ->log('Logged in');
