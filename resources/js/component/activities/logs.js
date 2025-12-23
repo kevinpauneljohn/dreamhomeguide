@@ -206,11 +206,13 @@ console.log(activity);
 
                     <td colspan="2" class="text-success">
                         ${key === 'location' ?
-                        `${activity.properties['location']['region']}
+                        `
                         ${activity.properties['location']['city']}
+                        ${activity.properties['location']['region']}
+                        ${activity.properties['location']['country']} |
                         ${activity.properties['location']['isp']}
-                        ${activity.properties['location']['lng']}
-                        ${activity.properties['location']['lat']}
+                        Long: ${activity.properties['location']['lng']}
+                        Lat: ${activity.properties['location']['lat']}
                         ${activity.properties['location']['timezone']}`
                         : activity.properties[key]}
 
