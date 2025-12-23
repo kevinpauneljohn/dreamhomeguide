@@ -24,7 +24,8 @@ class Appointment extends Model
     public function tapActivity(Activity $activity, string $eventName): void
     {
         $activity->properties = $activity->properties->merge([
-            'lead_id' => $this->lead_id
+            'lead_id' => $this->lead_id,
+            'lead_name' => $this->lead()->first()->full_name
         ]);
     }
 

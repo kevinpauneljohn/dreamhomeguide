@@ -43,6 +43,16 @@ $(function () {
                             icon: 'bi-trash-fill',
                             color: 'danger',
                             label: 'Deleted'
+                        },
+                        login: {
+                            icon: 'bi-shield-check',
+                            color: 'success',
+                            label: 'Logged In'
+                        },
+                        logout: {
+                            icon: 'bi-shield-lock',
+                            color: 'danger',
+                            label: 'Logged Out'
                         }
                     };
 
@@ -111,8 +121,7 @@ $(function () {
 });
 
 window.showActivityModal = (activity) => {
-    console.log(activity);
-
+console.log(activity);
     const modalEl = document.getElementById('viewActivityModal');
 
     // =========================
@@ -141,6 +150,7 @@ window.showActivityModal = (activity) => {
     // =========================
     const { old = {}, attributes = {} } = activity.properties ?? {};
     const isDeleted = activity.event === 'deleted';
+    const isLoggedIn = activity.event === 'login' || activity.event === 'logout';
 
     // =========================
     // HELPER: RESOLVE DISPLAY VALUE
@@ -183,7 +193,33 @@ window.showActivityModal = (activity) => {
                 </tr>
             `;
         });
-    } else {
+    }
+    else if (isLoggedIn) {
+        Object.keys(activity.properties).forEach(key => {
+            console.log(activity.log_name);
+
+            rows += `
+                <tr>
+                    <td class="fw-semibold text-capitalize">
+                        ${key.replaceAll('_', ' ')}
+                    </td>
+
+                    <td colspan="2" class="text-success">
+                        ${key === 'location' ?
+                        `${activity.properties['location']['region']}
+                        ${activity.properties['location']['city']}
+                        ${activity.properties['location']['isp']}
+                        ${activity.properties['location']['lang']}
+                        ${activity.properties['location']['lat']}
+                        ${activity.properties['location']['timezone']}`
+                        : activity.properties[key]}
+
+                    </td>
+                </tr>
+            `;
+        });
+    }
+    else {
         // Created / Updated → show diff
         Object.keys(attributes).forEach(key => {
             const oldValue = resolveValue(key, old[key], old);
@@ -268,6 +304,15 @@ window.showActivityModal = (activity) => {
                         </td>
                     </tr>
                 `}
+                ${activity.log_name === 'leads' || activity.log_name ? 'login' || 'logout' : `
+                    <tr>
+                        <td colspan="2" class="fw-semibold text-capitalize">Lead Name</td>
+                        <td class="text-right text-success">
+                            ${activity.properties.lead_name}
+                        </td>
+                    </tr>
+                `}
+
             </tbody>
         </table>
     </div>

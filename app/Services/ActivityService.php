@@ -50,15 +50,14 @@ class ActivityService
                 */
                 if (isset($props['properties']['old'])) {
 
-                    // Lead
-                    if (isset($props['properties']['old']['lead_id'])) {
-                        $props['properties']['old']['lead_id_name'] =
-                            $resolveLeadName($props['properties']['old']['lead_id']);
-                    }
+//                    // Lead
+//                    if (isset($props['properties']['old']['lead_id'])) {
+//                        $props['properties']['old']['lead_id'] = $props['properties']['lead_name'];
+//                    }
 
                     // User
                     if (isset($props['properties']['old']['user_id'])) {
-                        $props['properties']['old']['user_id_name'] =
+                        $props['properties']['old']['user_id'] =
                             $resolveUserName($props['properties']['old']['user_id'], 'System');
                     }
 
@@ -76,21 +75,20 @@ class ActivityService
                 */
                 if (isset($props['properties']['attributes'])) {
 
-                    // Lead
-                    if (isset($props['attributes']['lead_id'])) {
-                        $props['properties']['attributes']['lead_id_name'] =
-                            $resolveLeadName($props['attributes']['lead_id']);
-                    }
+//                    // Lead
+//                    if (isset($props['properties']['attributes']['lead_id'])) {
+//                        $props['properties']['attributes']['lead_id'] = $props['properties']['lead_name'];
+//                    }
 
                     // User
                     if (isset($props['properties']['attributes']['user_id'])) {
-                        $props['properties']['attributes']['user_id_name'] =
+                        $props['properties']['attributes']['user_id'] =
                             $resolveUserName($props['properties']['attributes']['user_id'], 'System');
                     }
 
                     // Assigned Agent
                     if (isset($props['properties']['attributes']['assigned_agent'])) {
-                        $props['properties']['attributes']['assigned_agent_name'] =
+                        $props['properties']['attributes']['assigned_agent'] =
                             $resolveUserName($props['properties']['attributes']['assigned_agent'], 'Unassigned');
                     }
                 }
@@ -105,6 +103,8 @@ class ActivityService
                     'created' => 'created',
                     'updated' => 'updated',
                     'deleted' => 'deleted',
+                    'login' => 'login',
+                    'logout' => 'logout',
                     default   => 'performed an action on',
                 };
 
@@ -116,7 +116,8 @@ class ActivityService
                 // Article handling
                 $article = in_array($subject[0], ['a','e','i','o','u']) ? 'an' : 'a';
 
-                return "{$causer} {$verb} {$article} {$subject}";
+                return $activity->event === 'login' || $activity->event === 'logout' ? "{$causer} {$activity->description}" : "{$causer} {$verb} {$article} {$subject}";
+//                return "{$causer} {$verb} {$article} {$subject}";
             })
             ->make(true);
     }
