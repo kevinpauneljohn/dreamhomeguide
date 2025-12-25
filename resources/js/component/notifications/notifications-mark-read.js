@@ -1,4 +1,5 @@
 import axios from "axios";
+import {getNotifications} from "@/component/notifications/get-notifications.js";
 
 const notificationElement = document.getElementById('notification-getter');
 const notificationId = notificationElement.dataset.notificationId;
@@ -6,9 +7,7 @@ const notificationCount = document.getElementById('notification-count');
 const url = new URL(window.location.href);
 
 document.addEventListener('DOMContentLoaded', () => {
-
-
-    notifications(notificationId).then(r => {
+    notificationsMarkRead(notificationId).then(r => {
 
         url.searchParams.delete('notification');
         url.searchParams.delete('id');
@@ -18,21 +17,24 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-const notifications = async (notificationId) => {
+const notificationsMarkRead = async (notificationId) => {
     try {
-        const { data } = await axios.post('/notifications', {
+        const { data } = await axios.post('/notifications/mark-read', {
             id: notificationId,
         });
 
         if (data.success) {
-            console.log(data);
-            if(data.unread_count > 0)
-            {
-                notificationCount.innerText = data.unread_count;
-            }else{
-                notificationCount.remove()
-            }
-            document.getElementById(`notification-item-${notificationId}`).remove();
+            getNotifications()
+                .then(r => {
+                    notificationCount.innerText = data.unread_count;
+                })
+                .then(r => {
+                    if(data.unread_count === 0)
+                    {
+                        notificationCount.remove()
+                    }
+                })
+
         }
     } catch (error) {
         console.error(error);

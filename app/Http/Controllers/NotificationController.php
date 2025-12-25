@@ -9,7 +9,7 @@ class NotificationController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function notificationMarkAsRead(Request $request)
     {
         try {
             $notification = auth()->user()->notifications()->where('id', $request->id)->firstOrFail();
@@ -25,5 +25,10 @@ class NotificationController extends Controller
                 'message' => $exception->getMessage(),
             ]);
         }
+    }
+
+    public function notifications()
+    {
+        return auth()->user()->unreadNotifications()->limit(10)->get();
     }
 }

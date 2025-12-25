@@ -24,34 +24,34 @@
                 </span>
             </a>
 
-            <ul class="dropdown-menu dropdown-menu-end shadow" style="width: 320px">
-                <li class="dropdown-header fw-semibold">Notifications</li>
-                @forelse(auth()->user()->unreadNotifications->take(5) as $notification)
-                    <li id="notification-item-{{$notification->id}}">
-                        <a class="dropdown-item small" href="{{ $notification->data['url'].'?notification=read&id='.$notification->id ?? '#' }}">
-                            <div class="fw-semibold">
-                                {{ ucfirst(str_replace('_',' ', $notification->data['type'] ?? 'Notification')) }}
-                            </div>
-                            <div class="text-muted small">
-                                {{ $notification->data['name'] ?? 'New update' }}
-                            </div>
-                        </a>
-                    </li>
-                @empty
-                    <li>
-                        <span class="dropdown-item text-muted small">
-                            No new notifications
-                        </span>
-                    </li>
-                @endforelse
+            <ul class="dropdown-menu dropdown-menu-end shadow" style="width: 320px" id="notification-dropdown-menu">
+{{--                <li class="dropdown-header fw-semibold">Notifications</li>--}}
+{{--                @forelse(auth()->user()->unreadNotifications->take(5) as $notification)--}}
+{{--                    <li id="notification-item-{{$notification->id}}">--}}
+{{--                        <a class="dropdown-item small" href="{{ $notification->data['url'].'?notification=read&id='.$notification->id ?? '#' }}">--}}
+{{--                            <div class="fw-semibold">--}}
+{{--                                {{ ucfirst(str_replace('_',' ', $notification->data['type'] ?? 'Notification')) }}--}}
+{{--                            </div>--}}
+{{--                            <div class="text-muted small">--}}
+{{--                                {{ $notification->data['name'] ?? 'New update' }}--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                @empty--}}
+{{--                    <li>--}}
+{{--                        <span class="dropdown-item text-muted small">--}}
+{{--                            No new notificationsMarkRead--}}
+{{--                        </span>--}}
+{{--                    </li>--}}
+{{--                @endforelse--}}
 
-                <li><hr class="dropdown-divider"></li>
-                <li>
-                    <a class="dropdown-item text-center small" href="#">
-{{--                    <a class="dropdown-item text-center small" href="{{ route('notifications.index') }}">--}}
-                        View all notifications
-                    </a>
-                </li>
+{{--                <li><hr class="dropdown-divider"></li>--}}
+{{--                <li>--}}
+{{--                    <a class="dropdown-item text-center small" href="#">--}}
+{{--                    <a class="dropdown-item text-center small" href="{{ route('notificationsMarkRead.index') }}">--}}
+{{--                        View all notificationsMarkRead--}}
+{{--                    </a>--}}
+{{--                </li>--}}
             </ul>
         </li>
 

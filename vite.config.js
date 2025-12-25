@@ -63,7 +63,8 @@ export default defineConfig({
 
                 //component
                 'resources/js/component/appointment/calendar.js',
-                'resources/js/component/notifications.js',
+                'resources/js/component/notifications/notifications-mark-read.js',
+                'resources/js/component/notifications/get-notifications.js',
 
                 //activity logs
                 'resources/js/component/activities/logs.js',
