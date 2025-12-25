@@ -31,7 +31,7 @@ class SubmitInquiryRequest extends FormRequest
                 'regex:/^(09\d{9}|\+639\d{9})$/',
             ],
             'message' => 'nullable|string|max:1000',
-//            'g-recaptcha-response' => 'required|captcha'
+            'g-recaptcha-response' => 'required|captcha'
         ];
     }
 
