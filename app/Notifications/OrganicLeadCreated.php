@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\Leads;
+use App\Models\Property;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -38,22 +39,25 @@ class OrganicLeadCreated extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $message = trim(preg_replace("/\r\n|\r|\n/", "\n", $this->lead->message));
+        $lead = $this->lead->fresh('property');
+        $message = trim(preg_replace("/\r\n|\r|\n/", "\n", $lead->message));
+        $property = $lead->property;
+
+        $propertyHtml = $property
+            ? '<a href="' . route('property.show', $property->id) . '">' . e(ucwords($property->title)) . '</a>'
+            : '<em>No property specified</em>';
+
         return (new MailMessage)
             ->subject('New Lead Received')
             ->greeting('Good day!')
             ->line('A new lead has been created in the system.')
-            ->line('Name: ' . $this->lead->full_name)
-            ->line('Email: ' . $this->lead->email)
-            ->line('Contact: ' . $this->lead->phone)
-            ->line('Source: ' . $this->lead->source)
-            ->line(new HtmlString(
-                '<strong>Message:</strong><br>' . nl2br(e($message))
-            ))
-            ->action(
-                'View Lead',
-                url('/leads/' . $this->lead->id)
-            )
+            ->line('Name: ' . $lead->full_name)
+            ->line('Email: ' . $lead->email)
+            ->line('Contact: ' . $lead->phone)
+            ->line('Source: ' . $lead->source)
+            ->line(new HtmlString('<strong>Property Interested:</strong><br>' . $propertyHtml))
+            ->line(new HtmlString('<strong>Message:</strong><br>' . nl2br(e($message))))
+            ->action('View Lead', url('/leads/' . $lead->id))
             ->line('Please follow up as soon as possible.');
     }
 
@@ -73,6 +77,7 @@ class OrganicLeadCreated extends Notification implements ShouldQueue
             'source'    => $this->lead->source,
             'message'   => $this->lead->message,
             'url'       => url('/leads/' . $this->lead->id),
+            'property'       => url('/property/' . $this->lead->property_id),
         ];
     }
 }

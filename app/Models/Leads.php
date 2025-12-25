@@ -85,5 +85,9 @@ class Leads extends Model
         return $this->hasMany(Appointment::class);
     }
 
+    public function property(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Property::class);
+    }
 
 }

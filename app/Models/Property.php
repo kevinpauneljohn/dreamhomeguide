@@ -22,4 +22,9 @@ class Property extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function clients(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Leads::class);
+    }
 }
