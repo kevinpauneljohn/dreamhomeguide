@@ -14,6 +14,7 @@
 </head>
 <body class="bg-light">
 
+
 <x-dashboard.navigation.menu/>
 
 <!-- CONTENT -->
@@ -21,9 +22,11 @@
     <x-dashboard.navigation.top-nav/>
 
     <div class="container-fluid">
+        <x-notifications />
         @yield('content')
     </div>
 </div>
+
 
 @stack('modal')
 
