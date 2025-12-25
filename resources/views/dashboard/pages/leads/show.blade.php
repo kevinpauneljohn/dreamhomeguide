@@ -371,6 +371,11 @@
                             <h5 class="fw-bold mb-0">lead Initial Message</h5>
                         </div>
                         <div class="card-body">
+                            @if(!is_null($lead->property_id))
+                                <div>
+                                    <strong>Property Interested to: <a href="{{route('property.show',['property' => $lead->property_id])}}" target="_blank">{{ucwords($lead->property->title)}}</a> </strong>
+                                </div>
+                            @endif
                             {!! $lead->message !!}
                         </div>
                     </div>
