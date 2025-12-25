@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\Leads;
 use App\Models\ListPropertyInformation;
+use App\Models\User;
+use App\Notifications\OrganicLeadCreated;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
@@ -270,6 +272,14 @@ class LeadService
             'source' => ['required', 'string'],
             'lead_type' => ['required', 'string'],
         ];
+    }
+
+    public function notify_users_when_lead_created(array $roles, Leads $lead): void
+    {
+        User::role($roles)
+            ->each(function ($user) use ($lead) {
+                $user->notify(new OrganicLeadCreated($lead));
+            });
     }
 
 }

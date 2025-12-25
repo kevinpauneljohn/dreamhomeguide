@@ -20,7 +20,6 @@
         <div class="col-lg-4">
             <div class="card shadow-sm mb-4">
                 <div class="card-body text-center p-4">
-
                     <!-- Avatar -->
                     <img src="{{ !is_null($user->profile_photo) ?  '/storage/profile_pictures/'.$user->profile_photo : 'https://static.vecteezy.com/system/resources/previews/026/434/417/original/default-avatar-profile-icon-of-social-media-user-photo-vector.jpg' }}"
                          class="rounded-circle border mb-3 shadow-sm"
@@ -56,7 +55,7 @@
 
                     <!-- Contact -->
                     <div class="text-start">
-                        <p class="mb-2"><i class="bi bi-phone me-2 text-primary"></i><strong>Phone:</strong> {{ $user->phone }}</p>
+                        <p class="mb-2 "><i class="bi bi-phone me-2 text-primary"></i><strong>Phone:</strong> {{ $user->phone }}</p>
                         <p class="mb-2"><i class="bi bi-envelope me-2 text-primary"></i><strong>Email:</strong> {{ $user->email }}</p>
                         <p><i class="bi bi-calendar me-2 text-primary"></i><strong>Joined:</strong> {{ $user->created_at->format('F d, Y') }}</p>
                     </div>

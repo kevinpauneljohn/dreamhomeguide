@@ -50,11 +50,6 @@ class ActivityService
                 */
                 if (isset($props['properties']['old'])) {
 
-//                    // Lead
-//                    if (isset($props['properties']['old']['lead_id'])) {
-//                        $props['properties']['old']['lead_id'] = $props['properties']['lead_name'];
-//                    }
-
                     // User
                     if (isset($props['properties']['old']['user_id'])) {
                         $props['properties']['old']['user_id'] =
@@ -74,12 +69,6 @@ class ActivityService
                 |--------------------------------------------------------------------------
                 */
                 if (isset($props['properties']['attributes'])) {
-
-//                    // Lead
-//                    if (isset($props['properties']['attributes']['lead_id'])) {
-//                        $props['properties']['attributes']['lead_id'] = $props['properties']['lead_name'];
-//                    }
-
                     // User
                     if (isset($props['properties']['attributes']['user_id'])) {
                         $props['properties']['attributes']['user_id'] =

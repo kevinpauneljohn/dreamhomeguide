@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Leads;
+use App\Observers\LeadObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -21,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Leads::observe(LeadObserver::class);
+
         Paginator::useBootstrapFive();
         // Implicitly grant "Super Admin" role all permissions
         // This works in the app by using gate-related functions like auth()->user->can() and @can()

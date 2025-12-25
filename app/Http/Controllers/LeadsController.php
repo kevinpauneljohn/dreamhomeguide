@@ -11,7 +11,6 @@ use App\Services\LeadService;
 use App\Services\NoteService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Validation\Rule;
 
 class LeadsController extends Controller
 {
