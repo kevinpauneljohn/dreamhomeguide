@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!window.Laravel || !window.Laravel.userId) return;
 
+    console.log('test', window.Laravel.userId);
+
     Echo.private(`App.Models.User.${window.Laravel.userId}`)
         .notification((notification) => {
             console.log('New notification:', notification);
