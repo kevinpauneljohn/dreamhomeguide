@@ -2,6 +2,8 @@ import axios from "axios";
 
 const notificationDropdownElement = document.getElementById("notification-dropdown-menu");
 const notificationCountElement = document.getElementById("notification-count");
+const userIdElement = document.getElementById("app-user-id");
+const userIdObserver = userIdElement.dataset.userId;
 let notificationSound = null;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,9 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    if (!window.Laravel || !window.Laravel.userId) return;
+    if (!userIdObserver) return;
 
-    Echo.private(`App.Models.User.${window.Laravel.userId}`)
+    Echo.private(`App.Models.User.${userIdObserver}`)
         .notification((notification) => {
             console.log('New notification:', notification);
             playNotificationSound()

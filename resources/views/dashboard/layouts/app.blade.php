@@ -13,7 +13,7 @@
     @stack('css')
 </head>
 <body class="bg-light">
-
+<div id="app-user-id" data-user-id="{{ auth()->id() }}">
 
 <x-dashboard.navigation.menu/>
 
@@ -30,17 +30,7 @@
 
 @stack('modal')
 
-
-
-
 @vite(['resources/js/dashboard/app.js'])
 @stack('scripts')
-<script>
-    window.Laravel = {
-        userId: `{{ auth()->id() }}`
-    };
-
-</script>
-
 </body>
 </html>

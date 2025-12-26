@@ -17,11 +17,9 @@ class Calendar extends Component
         public bool $displayAll = false
     )
     {
-        if($displayAll) {
-            $this->getAllUrl = route('get-appointments');
-        }else{
-            $this->getAllUrl = route('get-user-appointment',['userId' => auth()->id()]);
-        }
+        $this->getAllUrl = $this->displayAll
+            ? route('get-appointments')
+            : route('get-user-appointment',['userId' => auth()->id()]);
     }
 
     /**

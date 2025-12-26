@@ -433,6 +433,10 @@
                                     <span class="badge bg-success rounded-pill m-1">Assistance</span>
                                     <span class="badge bg-danger rounded-pill m-1">Reservations</span>
                                     <span class="badge rounded-pill m-1" style="background-color: #6f42c1">Send Update</span>
+                                    <select class="form-select form-select-sm ms-auto w-25" aria-label="Default select example" id="view-appointments-filter">
+                                        <option value="all">All</option>
+                                        <option value="self" selected>My Appointments</option>
+                                    </select>
                                 </div>
                                 <!-- calendar here -->
                                 <x-appointment.calendar />

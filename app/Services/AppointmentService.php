@@ -82,8 +82,8 @@ class AppointmentService
         {
             $appointments = Appointment::all();
         }else{
-            $appointments = Appointment::where('user_id',auth()->id())
-                ->orWhere('assigned_agent',auth()->id())->get();
+            $appointments = Appointment::where('assigned_agent',auth()->id())->get();
+//                ->orWhere('assigned_agent',auth()->id())->get();
         }
 
         return collect($appointments)->mapWithKeys(function ($item, $key){
@@ -101,7 +101,7 @@ class AppointmentService
                     'location' => $item->location,
                     'notes' => $item->notes,
                     'lead_id' => $item->lead_id,
-                    'bgColor' => $item->assigned_agent == auth()->id() ? '#d4d2d2' : '',
+                    'bgColor' => $item->assigned_agent == auth()->id() ? '#f6e388' : '',
                     'showEditButton' => $item->user_id == auth()->id(),
                     'showCloseButton' => $item->user_id == auth()->id(),
                     'showViewButton' => true,

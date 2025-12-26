@@ -13,12 +13,12 @@ import {reloadActivityLogs} from "@/component/activities/logs.js";
 let calendar;
 const calendarEl = document.getElementById('calendar');
 const editable = calendarEl.dataset.editable;
-const eventUrl = calendarEl.dataset.url;
-
+let eventUrl = calendarEl.dataset.url;
+let viewAppointmentFilter = document.getElementById('view-appointments-filter');
 let appointment_id;
 const lead_id = document.querySelector('input[name=lead_id]').value;
 const appointmentForm = document.getElementById('appointment-form');
-
+const appointmentUserId = document.getElementById('app-user-id').dataset.userId;
 let mode = 'create';
 
 const setMode = (value) => {
@@ -26,7 +26,7 @@ const setMode = (value) => {
 }
 
 const getMode = () => mode;
-
+let currentEventUrl = eventUrl;
 $(function () {
 
     // Initialize calendar but DO NOT render yet
@@ -64,7 +64,11 @@ $(function () {
             // console.log(info);
 
         },
-        events: eventUrl,
+        events: (info, successCallback, failureCallback) => {
+            axios.get(currentEventUrl)
+                .then(res => successCallback(res.data))
+                .catch(err => failureCallback(err));
+        },
         eventClick: function(info) {
             // console.log(info.event);
             if (!editable) {
@@ -134,6 +138,15 @@ $(function () {
             editAppointment(formData)
         },
     });
+
+});
+
+viewAppointmentFilter.addEventListener('change', function () {
+    currentEventUrl = this.value === 'all'
+        ? `/get-appointments`
+        : `/get-appointment/user/${appointmentUserId}`;
+
+    calendar.refetchEvents();
 });
 
 
