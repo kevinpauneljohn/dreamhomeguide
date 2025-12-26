@@ -34,7 +34,6 @@ window.Echo = new Echo({
     forceTLS: true
 });
 
-console.log('Echo loaded');
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
