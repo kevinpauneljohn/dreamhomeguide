@@ -59,7 +59,6 @@ $(function () {
             {
                 data: 'status',
                 render: function (status) {
-                    console.log(status);
                     return `<span class="badge ${status.class}">${status.label}</span>`;
                 }
             },
