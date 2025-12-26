@@ -54,16 +54,8 @@ class AppointmentService
 
     public function saveAppointment(array $appointmentData): \Illuminate\Http\JsonResponse
     {
-        if($appointment = Appointment::create($appointmentData))
+        if(Appointment::create($appointmentData))
         {
-//            Mail::to($appointment->agent->email)
-//                ->send(
-//                    new SendAppointmentNotification(
-//                        'New Appointment Created',
-//                        'You have a new appointment scheduled',
-//                        $appointment
-//                    )
-//                );
             return response()->json(['success' => true, 'message' => 'Appointment saved successfully.']);
         }
         return response()->json(['success' => false, 'message' => 'An error occurred while saving your appointment.']);
@@ -75,14 +67,6 @@ class AppointmentService
         {
             if($appointment->save())
             {
-//                Mail::to($appointment->agent->email)
-//                    ->send(
-//                        new SendAppointmentNotification(
-//                            'Appointment updated',
-//                            'The appointment assigned to you has been updated.',
-//                            $appointment
-//                        )
-//                    );
                 return response()->json(['success' => true, 'message' => 'Appointment updated successfully.']);
             }
              return response()->json(['success' => false, 'message' => 'An error occurred while updating your appointment.']);
