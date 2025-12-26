@@ -17,11 +17,13 @@ readonly class LeadObserver
     public function created(Leads $leads): void
     {
         //only notify users when a lead was created organically or submitted by the client itself
-        if(is_null($leads->user_id))
-        {
-            $roles = ['super admin','manager'];
-            $this->leadService->notify_users_when_lead_created($roles, $leads);
-        }
+//        if(is_null($leads->user_id))
+//        {
+//            $roles = ['super admin','manager'];
+//            $this->leadService->notify_users_when_lead_created($roles, $leads);
+//        }
+        $roles = ['super admin','manager'];
+        $this->leadService->notify_users_when_lead_created($roles, $leads);
 
     }
 

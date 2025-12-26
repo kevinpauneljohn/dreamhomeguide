@@ -4,12 +4,13 @@ namespace App\Notifications;
 
 use App\Models\Leads;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\HtmlString;
 
-class OrganicLeadCreated extends Notification implements ShouldQueue
+class OrganicLeadCreated extends Notification implements ShouldQueue, ShouldBroadcast
 {
     use Queueable;
 
@@ -30,8 +31,24 @@ class OrganicLeadCreated extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        return ['mail','database'];
+        return ['mail','database','broadcast'];
     }
+
+    public function toBroadcast(object $notifiable): array
+    {
+        return [
+            'id' => $this->id, // notification UUID
+            'type' => 'organic_lead_created',
+            'title' => 'New Organic Lead',
+            'message' => $this->lead->full_name,
+            'url' => url(
+                '/leads/' . $this->lead->id .
+                '?notification=read&id=' . $this->id
+            ),
+            'created_at' => now()->toDateTimeString(),
+        ];
+    }
+
 
     /**
      * Get the mail representation of the notification.
