@@ -29,6 +29,9 @@ class NotificationController extends Controller
 
     public function notifications()
     {
-        return auth()->user()->unreadNotifications()->limit(4)->get();
+        return [
+            'unread_count' => auth()->user()->unreadNotifications()->count(),
+            'unread_messages' => auth()->user()->unreadNotifications()->limit(4)->get(),
+        ];
     }
 }

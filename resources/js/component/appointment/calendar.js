@@ -66,7 +66,7 @@ $(function () {
         },
         events: eventUrl,
         eventClick: function(info) {
-            console.log(info.event);
+            // console.log(info.event);
             if (!editable) {
                 info.jsEvent.preventDefault();
             }
@@ -112,7 +112,7 @@ $(function () {
 
         },
         eventDidMount: function(info) {
-            console.log(info.event);
+            // console.log(info.event);
             info.el.setAttribute('title', 'Type: '+info.event.extendedProps.appointment_type +
                 '\nClient: '+ info.event.extendedProps.client+
                 '\nAssigned To: '+ info.event.extendedProps.assigned_agent+
@@ -161,7 +161,7 @@ const createAppointment = (formData) => {
 
     axios.post('/appointment', formData)
         .then(response => {
-            console.log(response);
+            // console.log(response);
             if(response.data.success)
             {
                 Toast.fire({
@@ -303,7 +303,7 @@ if (setAppointmentButton) {
     setAppointmentButton.addEventListener('click', function () {
         removeErrorMessages();
         appointmentForm.reset();
-        console.log('clicked');
+        // console.log('clicked');
     });
 }
 

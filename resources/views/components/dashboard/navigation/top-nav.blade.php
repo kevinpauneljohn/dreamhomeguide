@@ -11,39 +11,11 @@
             <a class="nav-link position-relative" data-bs-toggle="dropdown" href="#">
                 <span class="position-relative d-inline-block">
                 <i class="bi bi-bell fs-5"></i>
-
-                @php
-                    $unreadCount = auth()->user()->unreadNotifications->count();
-                @endphp
-
-                @if($unreadCount > 0)
-                    <span class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger" id="notification-count">
-                        {{ $unreadCount }}
-                    </span>
-                @endif
+                    <span class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger" id="notification-count"></span>
                 </span>
             </a>
 
             <ul class="dropdown-menu dropdown-menu-end shadow" style="width: 320px" id="notification-dropdown-menu">
-{{--                <li class="dropdown-header fw-semibold">Notifications</li>--}}
-{{--                @forelse(auth()->user()->unreadNotifications->take(5) as $notification)--}}
-{{--                    <li id="notification-item-{{$notification->id}}">--}}
-{{--                        <a class="dropdown-item small" href="{{ $notification->data['url'].'?notification=read&id='.$notification->id ?? '#' }}">--}}
-{{--                            <div class="fw-semibold">--}}
-{{--                                {{ ucfirst(str_replace('_',' ', $notification->data['type'] ?? 'Notification')) }}--}}
-{{--                            </div>--}}
-{{--                            <div class="text-muted small">--}}
-{{--                                {{ $notification->data['name'] ?? 'New update' }}--}}
-{{--                            </div>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                @empty--}}
-{{--                    <li>--}}
-{{--                        <span class="dropdown-item text-muted small">--}}
-{{--                            No new notificationsMarkRead--}}
-{{--                        </span>--}}
-{{--                    </li>--}}
-{{--                @endforelse--}}
 
 {{--                <li><hr class="dropdown-divider"></li>--}}
 {{--                <li>--}}

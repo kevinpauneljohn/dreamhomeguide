@@ -31,7 +31,7 @@ const notificationsMarkRead = async (notificationId) => {
                 .then(r => {
                     if(data.unread_count === 0)
                     {
-                        notificationCount.remove()
+                        notificationCount.innerText = '';
                     }
                 })
 

@@ -30,9 +30,17 @@
 
 @stack('modal')
 
+
+
+
 @vite(['resources/js/dashboard/app.js'])
 @stack('scripts')
+<script>
+    window.Laravel = {
+        userId: `{{ auth()->id() }}`
+    };
 
+</script>
 
 </body>
 </html>

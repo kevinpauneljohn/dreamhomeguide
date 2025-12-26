@@ -1,11 +1,24 @@
 import axios from "axios";
 
 const notificationDropdownElement = document.getElementById("notification-dropdown-menu");
+const notificationCountElement = document.getElementById("notification-count");
 
 document.addEventListener("DOMContentLoaded", () => {
     getNotifications().then(r => {
 
     });
+
+
+    if (!window.Laravel || !window.Laravel.userId) return;
+
+    Echo.private(`App.Models.User.${window.Laravel.userId}`)
+        .notification((notification) => {
+            console.log('New notification:', notification);
+
+            getNotifications().then(r => {
+
+            });
+        });
 })
 
 const formatNotificationType = (type) => {
@@ -21,9 +34,9 @@ const getNotifications = async () => {
         // Clear dropdown properly
         notificationDropdownElement.innerHTML = '';
 
-        if (notifications.length > 0) {
-            notifications.forEach(notification => {
-                console.log(notification)
+        if (notifications.unread_messages.length > 0) {
+            notificationCountElement.innerText = notifications.unread_count;
+            notifications.unread_messages.forEach(notification => {
                 const item = document.createElement('li');
                 item.id = `notification-item-${notification.id}`;
                 item.classList.add('notification-item');

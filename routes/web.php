@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Broadcast;
+
 include __DIR__.'/auth/auth.php';
 
 include __DIR__. '/dashboard/dashboard.php';
@@ -20,5 +22,7 @@ include __DIR__.'/dashboard/appointment.php';
 include __DIR__.'/dashboard/activities.php';
 include __DIR__.'/dashboard/notifications.php';
 
-
+Broadcast::routes([
+    'middleware' => ['web']
+]);
 

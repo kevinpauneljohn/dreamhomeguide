@@ -5,11 +5,12 @@ namespace App\Notifications;
 use App\Models\Appointment;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class AppointmentAssignedNotification extends Notification implements ShouldQueue
+class AppointmentAssignedNotification extends Notification implements ShouldQueue, ShouldBroadcast
 {
     use Queueable;
 
@@ -31,7 +32,19 @@ class AppointmentAssignedNotification extends Notification implements ShouldQueu
      */
     public function via(object $notifiable): array
     {
-        return ['mail','database'];
+        return ['mail','database','broadcast'];
+    }
+
+    public function toBroadcast(object $notifiable): array
+    {
+        return [
+            'id' => $this->id,
+            'type' => 'appointment_assigned',
+            'title' => 'New Appointment Assigned',
+            'message' => $this->appointment->lead->full_name,
+            'url' => url('/appointments/' . $this->appointment->id),
+            'created_at' => now()->toDateTimeString(),
+        ];
     }
 
     /**
