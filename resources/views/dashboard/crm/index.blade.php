@@ -37,7 +37,7 @@
                     <i class="bi bi-clock-history"></i>
                 </div>
                 <h6 class="text-muted mt-3">Follow Ups</h6>
-                <h2 class="fw-bold">42</h2>
+                <h2 class="fw-bold">{{$forFollowUp}}</h2>
             </div>
         </div>
 
@@ -48,7 +48,7 @@
                     <i class="bi bi-fire"></i>
                 </div>
                 <h6 class="text-muted mt-3">Hot Leads</h6>
-                <h2 class="fw-bold">18</h2>
+                <h2 class="fw-bold">{{$hotLeads}}</h2>
             </div>
         </div>
 
@@ -59,7 +59,7 @@
                     <i class="bi bi-check-circle"></i>
                 </div>
                 <h6 class="text-muted mt-3">Closed Deals</h6>
-                <h2 class="fw-bold">7</h2>
+                <h2 class="fw-bold">{{$closedLeads}}</h2>
             </div>
         </div>
 

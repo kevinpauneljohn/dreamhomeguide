@@ -7,6 +7,7 @@ const notificationCount = document.getElementById('notification-count');
 const url = new URL(window.location.href);
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log(notificationId);
     notificationsMarkRead(notificationId).then(r => {
 
         url.searchParams.delete('notification');

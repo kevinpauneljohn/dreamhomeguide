@@ -19,6 +19,7 @@ let appointment_id;
 const lead_id = document.querySelector('input[name=lead_id]').value;
 const appointmentForm = document.getElementById('appointment-form');
 const appointmentUserId = document.getElementById('app-user-id').dataset.userId;
+const leadStatus = document.querySelector('.lead-status');
 let mode = 'create';
 
 const setMode = (value) => {
@@ -174,7 +175,7 @@ const createAppointment = (formData) => {
 
     axios.post('/appointment', formData)
         .then(response => {
-            // console.log(response);
+            console.log(response);
             if(response.data.success)
             {
                 Toast.fire({
@@ -183,6 +184,7 @@ const createAppointment = (formData) => {
                 })
                 appointmentForm.reset();
                 calendar.refetchEvents();
+                updateLeadStatus(response.data.type);
                 reloadActivityLogs();
             }
             else if(response.data.success === false)
@@ -210,6 +212,7 @@ const editAppointment = (formData) => {
 
     axios.post(`/appointment/${appointment_id}`, formData)
         .then(response => {
+            console.log(response);
             if(response.data.success)
             {
                 Toast.fire({
@@ -217,6 +220,7 @@ const editAppointment = (formData) => {
                     title: response.data.message
                 })
                 calendar.refetchEvents();
+                updateLeadStatus(response.data.type);
                 reloadActivityLogs();
             }
             else if(response.data.success === false)
@@ -238,6 +242,16 @@ const editAppointment = (formData) => {
         afterSaveAppointment();
     })
 }
+
+const updateLeadStatus = (status) => {
+    const statusMap = {
+        'follow-up': 'Follow-up',
+        'tripping': 'For-tripping',
+        'reservations': 'For-reservation',
+    };
+
+    leadStatus.textContent = statusMap[status] ?? 'Unknown';
+};
 
 const confirmDelete = (event) => {
     Swal.fire({

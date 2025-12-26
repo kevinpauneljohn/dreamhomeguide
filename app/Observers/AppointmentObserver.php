@@ -4,9 +4,14 @@ namespace App\Observers;
 
 use App\Models\Appointment;
 use App\Notifications\AppointmentAssignedNotification;
+use App\Services\LeadService;
 
 class AppointmentObserver
 {
+    public function __construct(private LeadService $leadService)
+    {
+
+    }
     /**
      * Handle the Appointment "created" event.
      */
@@ -18,6 +23,17 @@ class AppointmentObserver
                 new AppointmentAssignedNotification($appointment, 'created')
             );
         }
+
+
+        $this->leadService->updateLeadStatus(
+            $appointment->lead,
+            match ($appointment->appointment_type) {
+                'follow-up' => 'follow-up',
+                'tripping'  => 'for-tripping',
+                'reservations'  => 'for-reservation',
+                default     => null,
+            }
+        );
     }
 
     /**
@@ -35,6 +51,19 @@ class AppointmentObserver
                     new AppointmentAssignedNotification($appointment, 'assigned')
                 );
             }
+        }
+
+        if($appointment->wasChanged('appointment_type'))
+        {
+            $this->leadService->updateLeadStatus(
+                $appointment->lead,
+                match ($appointment->appointment_type) {
+                    'follow-up' => 'follow-up',
+                    'tripping'  => 'for-tripping',
+                    'reservations'  => 'for-reservation',
+                    default     => null,
+                }
+            );
         }
     }
 

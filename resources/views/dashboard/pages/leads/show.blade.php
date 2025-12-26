@@ -30,27 +30,26 @@
                 <h3 class="fw-bold mb-1 d-flex align-items-center gap-2">
 {{--                    <span class="lead-name">{{ $lead->full_name }}</span>--}}
                     <span class="lead-name"></span>
-                    <span class="badge bg-warning text-dark lead-score">
-                    ⭐ {{ $lead->score ?? 72 }}
-                </span>
+{{--                    <span class="badge bg-warning text-dark lead-score">--}}
+{{--                        ⭐ {{ $lead->score ?? 72 }}--}}
+{{--                    </span>--}}
                 </h3>
 
                 <div class="d-flex flex-wrap gap-2 mb-2">
-                    <span class="badge px-3 py-2 bg-primary">{{ ucfirst($lead->status) }}</span>
+                    <span class="badge px-3 py-2 bg-orange lead-status">{{ ucfirst($lead->status) }}</span>
+{{--                    <!-- TAGS -->--}}
+{{--                    @if(!empty($lead->tags))--}}
+{{--                        @foreach(explode(',', $lead->tags) as $tag)--}}
+{{--                            <span class="badge bg-light text-dark border">{{ trim($tag) }}</span>--}}
+{{--                        @endforeach--}}
+{{--                    @else--}}
+{{--                        <span class="text-muted small">No tags yet</span>--}}
+{{--                    @endif--}}
 
-                    <!-- TAGS -->
-                    @if(!empty($lead->tags))
-                        @foreach(explode(',', $lead->tags) as $tag)
-                            <span class="badge bg-light text-dark border">{{ trim($tag) }}</span>
-                        @endforeach
-                    @else
-                        <span class="text-muted small">No tags yet</span>
-                    @endif
-
-                    <!-- Add Tag Button -->
-                    <button class="btn btn-sm btn-outline-primary rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#addTagModal">
-                        + Tag
-                    </button>
+{{--                    <!-- Add Tag Button -->--}}
+{{--                    <button class="btn btn-sm btn-outline-primary rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#addTagModal">--}}
+{{--                        + Tag--}}
+{{--                    </button>--}}
                 </div>
 
                 <small class="text-muted">Created on {{ $lead->created_at->format('M d, Y g:i a') }}</small>
@@ -576,7 +575,7 @@
         <!-- RIGHT COLUMN (Sticky Sidebar) -->
         <div class="col-lg-3">
 
-            <div class="card shadow-sm border-0 sticky-top" style="top: 90px">
+            <div class="card shadow-sm border-0">
 
                 <div class="card-header bg-white border-bottom-0">
                     <h5 class="fw-bold mb-0">Activity Timeline</h5>

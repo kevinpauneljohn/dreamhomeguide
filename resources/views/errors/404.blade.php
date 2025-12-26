@@ -104,4 +104,9 @@
         </div>
 
     </div>
+    @if(auth()->check())
+        <div id="app-user-id" data-user-id="{{ auth()->id() }}">
+        <x-notifications />
+    @endif
+
 @endsection

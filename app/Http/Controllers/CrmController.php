@@ -22,6 +22,9 @@ class CrmController extends Controller
         return view('dashboard.crm.index')->with([
             'title' => 'CRM',
             'newLeads' => Leads::where('status','new')->count(),
+            'forFollowUp' => Leads::where('status','follow-up')->count(),
+            'hotLeads' => Leads::where('status','hot')->count(),
+            'closedLeads' => Leads::where('status','closed')->count(),
             'statuses' => $this->leadsService->leadStatus(),
             'sources' => $this->leadsService->leadSources(),
         ]);

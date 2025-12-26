@@ -121,7 +121,6 @@ $(function () {
 });
 
 window.showActivityModal = (activity) => {
-console.log(activity);
     const modalEl = document.getElementById('viewActivityModal');
 
     // =========================

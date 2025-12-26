@@ -82,7 +82,11 @@ class LeadService
                 'color' => '#6f42c1',
                 'class' => 'bg-purple'
             ],
-
+            'for-reservation' => [
+                'label' => 'For Reservation',
+                'color' => '#0d6efd',
+                'class' => 'bg-primary'
+            ],
             'reserved' => [
                 'label' => 'Reserved',
                 'color' => '#0d6efd',
@@ -280,6 +284,12 @@ class LeadService
             ->each(function ($user) use ($lead) {
                 $user->notify(new OrganicLeadCreated($lead));
             });
+    }
+
+    public function updateLeadStatus(Leads $lead, string|null $status): void
+    {
+        if(!is_null($status))
+        $lead->update(['status' => $status]);
     }
 
 }
