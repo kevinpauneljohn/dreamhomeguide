@@ -9,7 +9,7 @@ window.fireLeadEvent = function () {
 $(document).on('submit', '#client-inquiry-form', function(form) {
     form.preventDefault();
     let data = $(this).serializeArray();
-
+console.log(data);
     fireLeadEvent()
 
     $.ajax({

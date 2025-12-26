@@ -117,7 +117,7 @@
                                 <i class="bi bi-question-circle" id="leadStatusPopover" data-bs-title="Lead Status Definition"></i>
                                 <select name="status" id="status" class="form-select">
                                     @foreach($leadStatus as $key => $value)
-                                        <option value="{{$value['label']}}">{{$value['label']}}</option>
+                                        <option value="{{$key}}">{{$value['label']}}</option>
                                     @endforeach
 
                                 </select>

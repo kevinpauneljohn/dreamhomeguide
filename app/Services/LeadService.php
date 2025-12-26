@@ -137,19 +137,11 @@ class LeadService
         ];
     }
 
-    public function findStatus(string $leadStatus): ?array
+    public function findStatus(?string $status): ?array
     {
-        foreach ($this->leadStatus() as $key => $item) {
-            if (strcasecmp($item['label'], $leadStatus) === 0) {
-                return [
-                    'label' => $key,
-                    'color' => $item['color'],
-                    'class' => $item['class'],
-                ];
-            }
-        }
-
-        return null;
+        return $status && isset($this->leadStatus()[$status])
+            ? $this->leadStatus()[$status]
+            : null;
     }
 
     public function incomeRange(): array
