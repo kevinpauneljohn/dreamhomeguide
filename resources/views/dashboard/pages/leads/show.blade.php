@@ -376,7 +376,7 @@
                                     <strong>Property Interested to: <a href="{{route('property.show',['property' => $lead->property_id])}}" target="_blank">{{ucwords($lead->property->title)}}</a> </strong>
                                 </div>
                             @endif
-                            {!! $lead->message !!}
+                            {!! nl2br($lead->message) !!}
                         </div>
                     </div>
 

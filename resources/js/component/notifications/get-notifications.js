@@ -23,6 +23,7 @@ const getNotifications = async () => {
 
         if (notifications.length > 0) {
             notifications.forEach(notification => {
+                console.log(notification)
                 const item = document.createElement('li');
                 item.id = `notification-item-${notification.id}`;
                 item.classList.add('notification-item');
@@ -31,7 +32,7 @@ const getNotifications = async () => {
                     <a class="dropdown-item small"
                        href="${notification.data.url}?notification=read&id=${notification.id}">
                         <div class="fw-semibold">${formatNotificationType(notification.data.type)}</div>
-                        <small class="text-muted">${notification.data.name}</small>
+                        <small class="text-muted">${notification.data.description}</small>
                     </a>
                 `;
 

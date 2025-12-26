@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Appointment;
 use App\Models\Leads;
+use App\Observers\AppointmentObserver;
 use App\Observers\LeadObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
@@ -24,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Leads::observe(LeadObserver::class);
+        Appointment::observe(AppointmentObserver::class);
 
         Paginator::useBootstrapFive();
         // Implicitly grant "Super Admin" role all permissions

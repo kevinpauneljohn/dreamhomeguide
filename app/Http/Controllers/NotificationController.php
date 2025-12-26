@@ -9,7 +9,7 @@ class NotificationController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function notificationMarkAsRead(Request $request)
+    public function notificationMarkAsRead(Request $request): \Illuminate\Http\JsonResponse
     {
         try {
             $notification = auth()->user()->notifications()->where('id', $request->id)->firstOrFail();
@@ -29,6 +29,6 @@ class NotificationController extends Controller
 
     public function notifications()
     {
-        return auth()->user()->unreadNotifications()->limit(10)->get();
+        return auth()->user()->unreadNotifications()->limit(4)->get();
     }
 }

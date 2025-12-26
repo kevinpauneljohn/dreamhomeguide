@@ -335,6 +335,6 @@ export function reloadActivityLogs() {
     activityLogsDataTable?.ajax.reload(null, false);
 }
 
-navigator.geolocation.getCurrentPosition(function (position) {
-    console.log(position);
-})
+// navigator.geolocation.getCurrentPosition(function (position) {
+//     console.log(position);
+// })

@@ -32,10 +32,16 @@
                 </div>
             </div>
 
-            <a href="{{ route('appointment.index') }}"
-               class="btn btn-sm btn-outline-secondary">
-                <i class="bi bi-arrow-left"></i> Back
-            </a>
+            <div class="d-flex gap-2">
+                <a href="{{ route('appointment.index') }}"
+                   class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Back
+                </a>
+                <a href="{{ route('leads.show', $appointment->lead_id) }}" class="btn btn-primary px-4">
+                    View Lead
+                </a>
+            </div>
+
         </div>
 
         <!-- Main Container -->

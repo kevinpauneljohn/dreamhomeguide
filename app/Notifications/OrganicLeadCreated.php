@@ -56,7 +56,7 @@ class OrganicLeadCreated extends Notification implements ShouldQueue
             ->line('Source: ' . $lead->source)
             ->line(new HtmlString('<strong>Property Interested:</strong><br>' . $propertyHtml))
             ->line(new HtmlString('<strong>Message:</strong><br>' . nl2br(e($message))))
-            ->action('View Lead', url('/leads/' . $lead->id))
+            ->action('View Lead', url('/leads/' . $lead->id. '?notification=read&id='.$this->id))
             ->line('Please follow up as soon as possible.');
     }
 
@@ -77,6 +77,7 @@ class OrganicLeadCreated extends Notification implements ShouldQueue
             'message'   => $this->lead->message,
             'url'       => url('/leads/' . $this->lead->id),
             'property'       => url('/property/' . $this->lead->property_id),
+            'description' => 'Client: '.$this->lead->full_name.'<br/> '.substr($this->lead->message, 0, 30) . '...'
         ];
     }
 }

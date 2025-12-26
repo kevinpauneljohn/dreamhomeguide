@@ -5,9 +5,9 @@ namespace App\Observers;
 use App\Models\Leads;
 use App\Services\LeadService;
 
-class LeadObserver
+readonly class LeadObserver
 {
-    public function __construct(private readonly LeadService $leadService)
+    public function __construct(private LeadService $leadService)
     {
 
     }
