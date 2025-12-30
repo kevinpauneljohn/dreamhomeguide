@@ -143,5 +143,16 @@
                 </li>
             @endcan
 
+            <!-- Permissions -->
+            @can('view permission')
+
+                <li class="nav-item">
+                    <a href="{{route('permissions.index')}}" class="nav-link text-white {{ Route::is('permissions.index') ? 'active' : '' }}">
+                        <i class="fa-solid fa-key"></i>
+                        <span>Permissions</span>
+                    </a>
+                </li>
+            @endcan
+
     </ul>
 </div>

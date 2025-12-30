@@ -9,13 +9,13 @@
         <div>
             <h3 class="fw-bold mb-0">{{$title}}</h3>
             <small class="text-muted">
-                Manage access control and system roles
+                Manage access control and system permissions
             </small>
         </div>
 
         @can('add role')
-            <button type="button" class="btn btn-primary px-4" id="add-role-btn">
-                + Add New Role
+            <button type="button" class="btn btn-primary px-4" id="add-permission-btn">
+                + Add Permission
             </button>
         @endcan
     </div>
@@ -43,15 +43,15 @@
                 <div class="col-md-4">
                     <label class="form-label">Search Role</label>
                     <input type="text" id="search" class="form-control"
-                           placeholder="Search role name…">
+                           placeholder="Search permission">
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label">Permission</label>
-                    <select id="permission" class="form-select">
-                        <option value="">All Permissions</option>
-                        @foreach($permissions as $permission)
-                            <option value="{{$permission->name}}">{{$permission->name}}</option>
+                    <label class="form-label">Roles</label>
+                    <select id="role" class="form-select">
+                        <option value="">All Roles</option>
+                        @foreach($roles as $role)
+                            <option value="{{$role->name}}">{{$role->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -72,11 +72,11 @@
     <!-- Roles Table -->
     <div class="card">
         <div class="card-body">
-            <table id="roles-table" class="table table-bordered table-hover align-middle border rounded">
+            <table id="permissions-table" class="table table-bordered table-hover align-middle border rounded">
                 <thead class="table-light">
                 <tr>
-                    <th style="width: 10%;">Role Name</th>
-                    <th style="width: 30%;">Permissions</th>
+                    <th style="width: 10%;">Permissions</th>
+                    <th style="width: 30%;">Roles</th>
                     <th style="width: 30%;">Users</th>
                     <th style="width: 12%">Created</th>
                     <th class="text-center" style="width: 1%">Actions</th>
@@ -93,9 +93,9 @@
 @endsection
 
 @pushonce('modal')
-    <div class="modal fade" id="roleModal" tabindex="-1">
+    <div class="modal fade" id="permissionModal" tabindex="-1">
         <div class="modal-dialog">
-            <form class="modal-content" id="role-form">
+            <form class="modal-content" id="permission-form">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title"></h5>
@@ -105,15 +105,15 @@
                 <div class="modal-body">
 
                     <div class="mb-3">
-                        <label class="fw-semibold mb-2">Name</label>
-                        <input type="text" name="roles" class="form-control">
+                        <label class="fw-semibold mb-2">Permission</label>
+                        <input type="text" name="permission" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label class="fw-semibold mb-2">Permissions</label>
-                        <select name="permissions[]" class="form-control" id="permissions" multiple>
-                            <option value="">Select Permission</option>
-                            @foreach($permissions as $permission)
-                                <option value="{{$permission->name}}">{{$permission->name}}</option>
+                        <label class="fw-semibold mb-2">Roles</label>
+                        <select name="roles[]" class="form-control" id="roles" multiple>
+                            <option value="">Select Roles</option>
+                            @foreach($roles as $role)
+                                <option value="{{$role->name}}">{{$role->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -131,5 +131,5 @@
 @endpushonce
 
 @push('scripts')
-    @vite(['resources/js/dashboard/roles/roles-table.js'])
+    @vite(['resources/js/dashboard/permissions/permissions-table.js'])
 @endpush

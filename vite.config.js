@@ -71,6 +71,7 @@ export default defineConfig({
 
                 //roles and permissions
                 'resources/js/dashboard/roles/roles-table.js',
+                'resources/js/dashboard/permissions/permissions-table.js',
 
             ],
             refresh: true,

@@ -10,7 +10,7 @@ class RoleService
 
     public function getQuery(array $request)
     {
-        $query = Role::query();
+        $query = Role::query()->where('name', '!=', 'super admin');
 
         // Search
         if (!empty($request['search'])) {
@@ -50,6 +50,19 @@ class RoleService
 
         return $query;
     }
+
+    public function createRole(array $roleData): \Illuminate\Http\JsonResponse
+    {
+        if($role = Role::create(['name' => $roleData['roles']]))
+        {
+            $role->givePermissionTo($roleData['permissions']);
+
+            return response()->json(['success' => true, 'message' => 'Role created successfully.']);
+        }
+        return response()->json(['success' => false, 'message' => 'An error occurred while creating the role.']);
+    }
+
+
     public function getRoles($request): \Illuminate\Http\JsonResponse
     {
         $query = $this->getQuery($request);

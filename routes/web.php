@@ -21,7 +21,8 @@ include __DIR__.'/dashboard/notes.php';
 include __DIR__.'/dashboard/appointment.php';
 include __DIR__.'/dashboard/activities.php';
 include __DIR__.'/dashboard/notifications.php';
-include __DIR__.'/dashboard/roles_and_permissions.php';
+include __DIR__.'/dashboard/roles.php';
+include __DIR__.'/dashboard/permissions.php';
 
 Broadcast::routes([
     'middleware' => ['web']
