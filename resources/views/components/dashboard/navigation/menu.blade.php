@@ -119,8 +119,9 @@
         @can('view lead')
             <li class="nav-item">
                 <a href="{{route('crm.index')}}" class="nav-link text-white {{ Route::is('crm.index') ? 'active' : '' }}">
-                    <i class="bi bi-speedometer2"></i>
-                    <span>CRM</span>
+                    <span>
+                        <i class="bi bi-speedometer2"></i> CRM
+                    </span>
                 </a>
             </li>
         @endcan
@@ -128,8 +129,9 @@
         @can('view lead')
                 <li class="nav-item">
                     <a href="{{route('leads.create')}}" class="nav-link text-white {{ Route::is('leads.create') ? 'active' : '' }}">
-                        <i class="bi bi-person-add"></i>
-                        <span>Add New Lead</span>
+                        <span>
+                            <i class="bi bi-person-add"></i> Add New Lead
+                        </span>
                     </a>
                 </li>
         @endcan
@@ -139,8 +141,9 @@
 
                 <li class="nav-item">
                     <a href="{{route('roles.index')}}" class="nav-link text-white {{ Route::is('roles.index') ? 'active' : '' }}">
-                        <i class="fa-solid fa-user-tag"></i>
-                        <span>Roles</span>
+                        <span>
+                            <i class="fa-solid fa-user-tag"></i> Roles
+                        </span>
                     </a>
                 </li>
             @endcan
@@ -150,8 +153,9 @@
 
                 <li class="nav-item">
                     <a href="{{route('permissions.index')}}" class="nav-link text-white {{ Route::is('permissions.index') ? 'active' : '' }}">
-                        <i class="fa-solid fa-key"></i>
-                        <span>Permissions</span>
+                        <span>
+                            <i class="fa-solid fa-key"></i> Permissions
+                        </span>
                     </a>
                 </li>
             @endcan
