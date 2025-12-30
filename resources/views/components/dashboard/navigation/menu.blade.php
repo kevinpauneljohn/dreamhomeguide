@@ -9,8 +9,10 @@
         <!-- Dashboard -->
         <li class="nav-item">
             <a href="{{route('dashboard')}}" class="nav-link text-white {{ Route::is('dashboard') ? 'active' : '' }}">
-                <i class="bi bi-speedometer2"></i>
-                <span>Dashboard</span>
+
+                <span>
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </span>
             </a>
         </li>
 
