@@ -17,70 +17,60 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        // 1. Create roles
         $superAdmin = Role::create(['name' => 'super admin']);
-        $agent = Role::create(['name' => 'agent']);
-        $team_leader = Role::create(['name' => 'team leader']);
-        $manager = Role::create(['name' => 'manager']);
+        $agent      = Role::create(['name' => 'agent']);
+        $teamLeader = Role::create(['name' => 'team leader']);
+        $manager    = Role::create(['name' => 'manager']);
 
+        // 2. Create user
         User::create([
             'first_name' => 'John Kevin',
-            'last_name' => 'Paunel',
-            'phone' => '09171027662',
-            'email' => 'johnkevinpaunel@gmail.com',
-            'password' => bcrypt('123'),
-            'position' => 'Head Marketer'
+            'last_name'  => 'Paunel',
+            'phone'      => '09171027662',
+            'email'      => 'johnkevinpaunel@gmail.com',
+            'password'   => bcrypt('123'),
+            'position'   => 'Head Marketer'
         ])->assignRole($superAdmin);
 
-        Permission::create(['name' => 'view listing']);
-        Permission::create(['name' => 'add listing']);
-        Permission::create(['name' => 'edit listing']);
-        Permission::create(['name' => 'delete listing']);
-        Permission::create(['name' => 'upload listing images']);
+        // 3. Create ALL permissions first
+        $permissions = [
+            // listings
+            'view listing','add listing','edit listing','delete listing','upload listing images',
 
-        Permission::create(['name' => 'view agent']);
-        Permission::create(['name' => 'add agent']);
-        Permission::create(['name' => 'edit agent']);
-        Permission::create(['name' => 'delete agent']);
+            // agents
+            'view agent','add agent','edit agent','delete agent',
 
-        Permission::create(['name' => 'view user']);
-        Permission::create(['name' => 'add user']);
-        Permission::create(['name' => 'edit user']);
-        Permission::create(['name' => 'delete user']);
+            // users
+            'view user','add user','edit user','delete user',
 
-        Permission::create(['name' => 'view lead']);
-        Permission::create(['name' => 'add lead']);
-        Permission::create(['name' => 'edit lead']);
-        Permission::create(['name' => 'delete lead']);
+            // leads
+            'view lead','add lead','edit lead','delete lead',
 
-        Permission::create(['name' => 'view note']);
-        Permission::create(['name' => 'add note']);
-        Permission::create(['name' => 'edit note']);
-        Permission::create(['name' => 'delete note']);
+            // notes
+            'view note','add note','edit note','delete note',
 
-        Permission::create(['name' => 'view blog']);
-        Permission::create(['name' => 'add blog']);
-        Permission::create(['name' => 'edit blog']);
-        Permission::create(['name' => 'delete blog']);
+            // blogs
+            'view blog','add blog','edit blog','delete blog',
 
-        Permission::create(['name' => 'view appointment']);
-        Permission::create(['name' => 'add appointment']);
-        Permission::create(['name' => 'edit appointment']);
-        Permission::create(['name' => 'delete appointment']);
+            // appointments
+            'view appointment','add appointment','edit appointment','delete appointment',
 
-        Permission::create(['name' => 'view role']);
-        Permission::create(['name' => 'add role']);
-        Permission::create(['name' => 'edit role']);
-        Permission::create(['name' => 'delete role']);
+            // roles
+            'view role','add role','edit role','delete role',
 
-        Permission::create(['name' => 'view permission']);
-        Permission::create(['name' => 'add permission']);
-        Permission::create(['name' => 'edit permission']);
+            // permissions
+            'view permission','add permission','edit permission','delete permission',
+        ];
 
-        $manager = Role::where('name', 'manager')->first();
-        $permissions = Permission::get('name')->pluck('name')->toArray();;
+        foreach ($permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        // 4. Assign permissions AFTER creation
         $manager->syncPermissions($permissions);
-        Permission::create(['name' => 'delete permission']);
+
+        // Optional: Super Admin gets everything
+        $superAdmin->syncPermissions($permissions);
     }
 }

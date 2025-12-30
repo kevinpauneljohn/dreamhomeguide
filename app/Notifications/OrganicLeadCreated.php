@@ -41,10 +41,11 @@ class OrganicLeadCreated extends Notification implements ShouldQueue, ShouldBroa
             'type' => 'organic_lead_created',
             'title' => 'New Organic Lead',
             'message' => $this->lead->full_name,
-            'url' => url(
-                '/leads/' . $this->lead->id .
-                '?notification=read&id=' . $this->id
-            ),
+            'url' => route('leads.show',[
+                'lead' => $this->lead->id,
+                'notification' => 'read',
+                'id' => $this->id
+            ]),
             'created_at' => now()->toDateTimeString(),
         ];
     }

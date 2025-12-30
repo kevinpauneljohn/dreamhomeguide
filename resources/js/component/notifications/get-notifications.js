@@ -62,6 +62,7 @@ const getNotifications = async () => {
         if (notifications.unread_messages.length > 0) {
             notificationCountElement.innerText = notifications.unread_count;
             notifications.unread_messages.forEach(notification => {
+                console.log(notification.data);
                 const item = document.createElement('li');
                 item.id = `notification-item-${notification.id}`;
                 item.classList.add('notification-item');
