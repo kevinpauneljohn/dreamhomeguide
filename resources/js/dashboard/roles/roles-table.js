@@ -246,9 +246,11 @@ window.getRole = (role) => {
             roleFormEl.querySelector('[name=roles]').value = response.data.name;
         }).catch((error) => {
         console.log(error)
-        })
-    roleFormEl.querySelectorAll('input, button[type=submit]')
-        .forEach(el => el.disabled = false);
+        }).finally(() => {
+        roleFormEl.querySelectorAll('input, button[type=submit]')
+            .forEach(el => el.disabled = false);
+    })
+
 }
 
 document.addEventListener('click', function (e) {
