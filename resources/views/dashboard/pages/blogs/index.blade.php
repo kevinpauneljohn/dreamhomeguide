@@ -96,5 +96,5 @@
 @endsection
 
 @push('scripts')
-    @vite(['resources/js/dashboard/blogs/roles-table.js'])
+    @vite(['resources/js/dashboard/blogs/index.js'])
 @endpush
