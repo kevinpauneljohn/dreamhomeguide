@@ -111,7 +111,6 @@
                     <div class="mb-3">
                         <label class="fw-semibold mb-2">Roles</label>
                         <select name="roles[]" class="form-control" id="roles" multiple>
-                            <option value="">Select Roles</option>
                             @foreach($roles as $role)
                                 <option value="{{$role->name}}">{{$role->name}}</option>
                             @endforeach

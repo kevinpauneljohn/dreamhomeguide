@@ -111,7 +111,6 @@
                     <div class="mb-3">
                         <label class="fw-semibold mb-2">Permissions</label>
                         <select name="permissions[]" class="form-control" id="permissions" multiple>
-                            <option value="">Select Permission</option>
                             @foreach($permissions as $permission)
                                 <option value="{{$permission->name}}">{{$permission->name}}</option>
                             @endforeach
