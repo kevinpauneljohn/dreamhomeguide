@@ -83,7 +83,7 @@ class LeadsController extends Controller
             $lead->user_id === auth()->user()->id ||
             Appointment::where('lead_id', $lead->id)
                 ->where('assigned_agent', auth()->user()->id)
-                ->exists();
+                ->exists() || auth()->user()->hasRole(['super admin','manager']);
 
         abort_unless($canView, 403, 'You do not have permission to access this resource.');
 
