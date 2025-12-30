@@ -69,8 +69,18 @@ class DatabaseSeeder extends Seeder
 //        Permission::create(['name' => 'edit appointment']);
 //        Permission::create(['name' => 'delete appointment']);
 
-        $manager = Role::where('name', 'manager')->first();
-        $permissions = Permission::get('name')->pluck('name')->toArray();;
-        $manager->syncPermissions($permissions);
+//        $manager = Role::where('name', 'manager')->first();
+//        $permissions = Permission::get('name')->pluck('name')->toArray();;
+//        $manager->syncPermissions($permissions);
+
+        Permission::create(['name' => 'view role']);
+        Permission::create(['name' => 'add role']);
+        Permission::create(['name' => 'edit role']);
+        Permission::create(['name' => 'delete role']);
+
+        Permission::create(['name' => 'view permission']);
+        Permission::create(['name' => 'add permission']);
+        Permission::create(['name' => 'edit permission']);
+        Permission::create(['name' => 'delete permission']);
     }
 }

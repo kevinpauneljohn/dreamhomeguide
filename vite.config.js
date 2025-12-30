@@ -69,6 +69,9 @@ export default defineConfig({
                 //activity logs
                 'resources/js/component/activities/logs.js',
 
+                //roles and permissions
+                'resources/js/dashboard/roles/roles-table.js',
+
             ],
             refresh: true,
         }),

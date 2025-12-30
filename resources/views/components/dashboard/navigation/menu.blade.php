@@ -123,8 +123,6 @@
             </li>
         @endcan
 
-
-        <!-- Properties -->
         @can('view lead')
                 <li class="nav-item">
                     <a href="{{route('leads.create')}}" class="nav-link text-white {{ Route::is('leads.create') ? 'active' : '' }}">
@@ -133,6 +131,30 @@
                     </a>
                 </li>
         @endcan
+
+            <!-- Roles -->
+            @can('view role')
+                <li class="nav-item">
+                    <a class="nav-link text-white d-flex justify-content-between align-items-center {{ Route::is('roles.index') ? 'active' : '' }}"
+                       data-bs-toggle="collapse"
+                       href="#rolesMenu"
+                       role="button"
+                       aria-expanded="false"
+                       aria-controls="rolesMenu">
+
+                <span>
+                    <i class="fa-solid fa-user-tag"></i> Roles & Permissions
+                </span>
+
+                        <i class="bi bi-caret-down-fill small"></i>
+                    </a>
+
+                    <ul class="collapse {{ Route::is('roles.index') || Route::is('roles.create') ? 'show' : '' }} ps-4" id="rolesMenu">
+                        <li><a href="{{route('roles.index')}}" class="nav-link text-white-50 {{ Route::is('roles.index') ? 'active' : '' }}">View Roles</a></li>
+                        <li><a href="{{route('roles.create')}}" class="nav-link text-white-50 {{ Route::is('roles.create') ? 'active' : '' }}">Add Role</a></li>
+                    </ul>
+                </li>
+            @endcan
 
     </ul>
 </div>

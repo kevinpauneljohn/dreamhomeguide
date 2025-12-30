@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\OnlyAssignedAndCreatorCanView;
+use App\Models\Appointment;
 use App\Models\Leads;
 use App\Http\Requests\StoreLeadsRequest;
 use App\Http\Requests\UpdateLeadsRequest;
@@ -11,6 +13,7 @@ use App\Services\LeadService;
 use App\Services\NoteService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 
 class LeadsController extends Controller
 {
@@ -27,7 +30,7 @@ class LeadsController extends Controller
             new Middleware('can:view lead', only: ['index', 'show','getLeads']),
             new Middleware('can:add lead', only: ['create', 'store']),
             new Middleware('can:edit lead', only: ['edit', 'update']),
-            new Middleware('can:delete lead', only: ['destroy'])
+            new Middleware('can:delete lead', only: ['destroy']),
         ];
     }
 
@@ -69,22 +72,35 @@ class LeadsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id, NoteService $noteService, AppointmentService $appointmentService)
-    {
-        $lead = Leads::findOrFail($id);
-        return view('dashboard.pages.leads.show')->with([
-            'title' => 'View Lead',
-            'lead' => $lead,
-            'genderPhoto' => $this->leadsService->genderPhoto($lead->gender),
-            'noteTypes' => $noteService->noteTypes(),
-            'agents' => User::all(),
-            'leadStatus' => $this->leadsService->leadStatus(),
-            'incomeRange' => $this->leadsService->incomeRange(),
-            'sources' => $this->leadsService->leadSources(),
-            'leadTypes' => $this->leadsService->leadTypes(),
+    public function show(
+        Leads $lead,
+        NoteService $noteService,
+        AppointmentService $appointmentService
+    ) {
+        $userId = auth()->id();
+
+        $canView =
+            $lead->user_id === auth()->user()->id ||
+            Appointment::where('lead_id', $lead->id)
+                ->where('assigned_agent', auth()->user()->id)
+                ->exists();
+
+        abort_unless($canView, 403, 'You do not have permission to access this resource.');
+
+        return view('dashboard.pages.leads.show', [
+            'title'            => 'View Lead',
+            'lead'             => $lead,
+            'genderPhoto'      => $this->leadsService->genderPhoto($lead->gender),
+            'noteTypes'        => $noteService->noteTypes(),
+            'agents'           => User::all(),
+            'leadStatus'       => $this->leadsService->leadStatus(),
+            'incomeRange'      => $this->leadsService->incomeRange(),
+            'sources'          => $this->leadsService->leadSources(),
+            'leadTypes'        => $this->leadsService->leadTypes(),
             'appointmentTypes' => $appointmentService->appointmentTypes(),
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

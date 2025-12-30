@@ -10,6 +10,7 @@ use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
+
 class Leads extends Model
 {
     use SoftDeletes, HasUuids, LogsActivity;
