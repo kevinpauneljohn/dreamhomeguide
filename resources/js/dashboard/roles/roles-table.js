@@ -247,12 +247,16 @@ window.getRole = (role) => {
         }).catch((error) => {
         console.log(error)
         })
+    roleFormEl.querySelectorAll('input, button[type=submit]')
+        .forEach(el => el.disabled = false);
 }
 
 document.addEventListener('click', function (e) {
     const btn = e.target.closest('.edit-role-btn');
     if (!btn) return;
 
+    roleFormEl.querySelectorAll('input, button[type=submit]')
+        .forEach(el => el.disabled = true);
     roleFormEl.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
     roleFormEl.querySelectorAll('input').forEach(el => el.classList.remove('is-invalid'));
     roleId = btn.dataset.id;
