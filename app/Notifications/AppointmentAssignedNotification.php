@@ -42,7 +42,10 @@ class AppointmentAssignedNotification extends Notification implements ShouldQueu
             'type' => 'appointment_assigned',
             'title' => 'New Appointment Assigned',
             'message' => $this->appointment->lead->full_name,
-            'url' => url('/appointments/' . $this->appointment->id),
+//            'url' => url('/appointments/' . $this->appointment->id),
+            'url' => route('appointment.show',[
+                'appointment' => $this->appointment->id
+            ]),
             'created_at' => now()->toDateTimeString(),
         ];
     }
@@ -67,7 +70,11 @@ class AppointmentAssignedNotification extends Notification implements ShouldQueu
             ->line('Created By: ' . $this->appointment->user->full_name)
             ->action(
                 'View Appointment',
-                url('/appointment/' . $this->appointment->id. '?notification=read&id='.$this->id)
+                route('appointment.show',[
+                    'appointment' => $this->appointment->id,
+                    'notification' => 'read',
+                    'id' => $this->id
+                ])
             );
     }
 
@@ -87,7 +94,9 @@ class AppointmentAssignedNotification extends Notification implements ShouldQueu
             'created_by' => $this->appointment->user->full_name,
             'appointment_type' => $this->appointment->appointment_type,
             'date' => Carbon::parse($this->appointment->appointment_date)->format('F d, Y | h:i A'),
-            'url' => url('/appointment/' . $this->appointment->id),
+            'url' => route('appointment.show',[
+                'appointment' => $this->appointment->id
+            ]),
             'description' => 'Appointment Date: '.Carbon::parse($this->appointment->appointment_date)->format('F d, Y | h:i A')
                 .'<br/>'.ucwords($this->appointment->appointment_type)
         ];
