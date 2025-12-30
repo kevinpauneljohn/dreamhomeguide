@@ -102,9 +102,7 @@ class OrganicLeadCreated extends Notification implements ShouldQueue, ShouldBroa
                 'notification' => 'read',
                 'id' => $this->id
             ]),
-            'property'       => route('property.show',[
-                'property' => $this->lead->property_id
-            ]),
+            'property'       => url('/property/' . $this->lead->property_id),
             'description' => 'Client: '.$this->lead->full_name.'<br/> '.substr($this->lead->message, 0, 30) . '...'
         ];
     }
