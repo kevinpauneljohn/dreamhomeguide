@@ -211,6 +211,7 @@ $(function () {
 permissionsTable = $('#permissions-table').DataTable({
     processing: true,
     serverSide: true,
+    searching: false,
     ajax: {
         url: "/get-permissions",
         type: 'GET',
