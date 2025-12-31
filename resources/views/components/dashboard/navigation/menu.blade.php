@@ -126,7 +126,7 @@
             </li>
         @endcan
 
-        @can('view lead')
+        @can('add lead')
                 <li class="nav-item">
                     <a href="{{route('leads.create')}}" class="nav-link text-white {{ Route::is('leads.create') ? 'active' : '' }}">
                         <span>

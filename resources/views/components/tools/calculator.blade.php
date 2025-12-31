@@ -9,6 +9,7 @@
                 </div>
 
                 <div class="modal-body">
+                    <label for="calculator-type">Select Calculator</label>
                     <select id="calculator-type" class="form-select mb-4">
                         <option value=""></option>
                         <option value="mortgage">Mortgage</option>

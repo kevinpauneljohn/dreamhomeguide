@@ -13,7 +13,7 @@
             </small>
         </div>
 
-        @can('add role')
+        @can('add permission')
             <button type="button" class="btn btn-primary px-4" id="add-permission-btn">
                 + Add Permission
             </button>
