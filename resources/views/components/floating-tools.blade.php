@@ -48,9 +48,7 @@
 <x-tools.calculator />
 
 
-
 @pushonce('scripts')
-    @vite('resources/css/components/floating-tools.css')
     @vite('resources/js/component/floatingTools/floating-tools.js')
 @endpushonce
 
