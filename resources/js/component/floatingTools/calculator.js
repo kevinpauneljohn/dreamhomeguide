@@ -1,3 +1,6 @@
+const selectCalculator = document.getElementById('calculator-type');
+
+
 function openCalculatorModal() {
     const modal = new bootstrap.Modal(
         document.getElementById('calculatorModal')
@@ -44,5 +47,33 @@ function formatPeso(amount) {
         maximumFractionDigits: 2
     });
 }
+
+selectCalculator.addEventListener('change', (e) => {
+    // console.log(e.target.value);
+    loadCalculator(e.target.value);
+})
+function loadCalculator(type) {
+    fetch(`/tools/calculator/${type}`)
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById('calculator-content').innerHTML = html;
+            // initializeCalculator(type);
+        });
+}
+
+// function initializeCalculator(type) {
+//     switch (type) {
+//         case 'property':
+//             initPropertyCalculator();
+//             break;
+//         case 'commission':
+//             initCommissionCalculator();
+//             break;
+//         case 'pagibig':
+//             initPagibigCalculator();
+//             break;
+//     }
+// }
+
 
 export {openCalculatorModal};

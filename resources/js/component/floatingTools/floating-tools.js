@@ -22,7 +22,7 @@ document.querySelectorAll('.tool-app').forEach(tool => {
     tool.addEventListener('click', () => {
         const type = tool.dataset.tool;
 
-        console.log(type);
+        // console.log(type);
 
         switch (type) {
             case 'calculator':
@@ -46,5 +46,6 @@ document.querySelectorAll('.tool-app').forEach(tool => {
         }
     });
 });
+
 
 
