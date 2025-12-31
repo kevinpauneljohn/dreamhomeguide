@@ -1,6 +1,16 @@
 @extends('layouts.singlePage')
 
 @section('title', $title)
+@push('preload')
+    @push('preload')
+        <link
+            rel="preload"
+            as="image"
+            href="{{ asset('storage/property_images/'.$property->images->first()->file_name) }}"
+            fetchpriority="high">
+    @endpush
+
+@endpush
 @push('seo')
     <x-seo
         :title="$property->title"

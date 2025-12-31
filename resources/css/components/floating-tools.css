@@ -1,0 +1,114 @@
+/* Tab */
+#tool-tab {
+    position: fixed;
+    right: 0;
+    top: 45%;
+    background: #0d6efd;
+    color: #fff;
+    width: 44px;
+    height: 50px;
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1040;
+    box-shadow: -5px 0 20px rgba(0,0,0,.2);
+}
+
+/* Drawer */
+#tool-drawer {
+    position: fixed;
+    top: 0;
+    right: -150px;
+    width: 150px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -10px 0 30px rgba(0,0,0,.2);
+    transition: right .3s ease;
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Active */
+#tool-drawer.active {
+    right: 0;
+}
+
+/* Header */
+.drawer-header {
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Tools */
+.drawer-tools {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.drawer-tools li {
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.drawer-tools li:hover {
+    background: #f5f7fa;
+}
+
+.drawer-tools i {
+    font-size: 18px;
+    color: #0d6efd;
+}
+
+.tool-grid {
+    padding: 16px;
+    /*display: grid;*/
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+/* App Icon */
+.tool-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 10px;
+    border-radius: 16px;
+    background: #f8f9fb;
+    cursor: pointer;
+    transition: all .2s ease;
+    text-align: center;
+}
+
+.tool-app i {
+    font-size: 22px;
+    color: #0d6efd;
+}
+
+.tool-app span {
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Hover / Active */
+.tool-app:hover {
+    background: #eef3ff;
+    transform: translateY(-2px);
+}
+
+/* Touch-friendly */
+.tool-app:active {
+    transform: scale(0.96);
+}

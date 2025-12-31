@@ -29,6 +29,7 @@
         @vite(['resources/sass/app.scss','resources/js/app.js'])
     @endif
     @stack('css')
+    @stack('preload')
 
     @stack('meta')
 </head>

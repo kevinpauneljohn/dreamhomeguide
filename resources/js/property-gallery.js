@@ -5,3 +5,10 @@ carousel.addEventListener('slide.bs.carousel', function (e) {
     thumbs.forEach(t => t.classList.remove('active-thumb'));
     thumbs[e.to].classList.add('active-thumb');
 });
+
+window.addEventListener('load', () => {
+    const carouselEl = document.getElementById('propertyCarousel');
+    if (carouselEl) {
+        new bootstrap.Carousel(carouselEl);
+    }
+});

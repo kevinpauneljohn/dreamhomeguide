@@ -22,6 +22,7 @@
     <x-dashboard.navigation.top-nav/>
 
     <div class="container-fluid">
+        <x-floating-tools />
         <x-notifications />
         @yield('content')
     </div>

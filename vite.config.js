@@ -9,6 +9,11 @@ export default defineConfig({
                 'resources/css/properties.css',
                 'resources/css/dashboard.css',
 
+                //components css
+                'resources/css/components/floating-tools.css',
+
+                //end components css
+
                 //pages
                 'resources/js/app.js',
                 'resources/js/dashboard/app.js',
@@ -65,6 +70,8 @@ export default defineConfig({
                 'resources/js/component/appointment/calendar.js',
                 'resources/js/component/notifications/notifications-mark-read.js',
                 'resources/js/component/notifications/get-notifications.js',
+                'resources/js/component/floatingTools/floating-tools.js',
+                'resources/js/component/floatingTools/calculator.js',
 
                 //activity logs
                 'resources/js/component/activities/logs.js',

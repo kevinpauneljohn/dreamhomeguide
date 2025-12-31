@@ -5,7 +5,6 @@
 @section('content')
     <div class="container-fluid py-4">
 
-
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="mb-2">
             <ol class="breadcrumb small mb-0">
