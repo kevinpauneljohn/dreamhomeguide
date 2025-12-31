@@ -1,7 +1,8 @@
 <!--floating tools-->
 <!-- Drawer Toggle Tab -->
 <div id="tool-tab" title="Tools">
-    <i class="fa fa-screwdriver-wrench"></i>
+    <i class="fa-solid fa-gear"></i>
+
 </div>
 
 <div id="tool-drawer">
