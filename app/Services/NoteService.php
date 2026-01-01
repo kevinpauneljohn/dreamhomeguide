@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Leads;
 use App\Models\Note;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -181,6 +182,7 @@ class NoteService
     }
     public function getNotes($lead_id): \Illuminate\Http\JsonResponse
     {
+
         $query = Note::where('lead_id', $lead_id)->orderBy('created_at', 'desc');
         return DataTables::of($query)
             ->addColumn('icon', function ($note) {
@@ -206,5 +208,10 @@ class NoteService
                 ];
             })
             ->make(true);
+    }
+
+    private function allowed_to_edit_or_delete_note(Note $note): bool
+    {
+        return $note->user_id == auth()->id();
     }
 }

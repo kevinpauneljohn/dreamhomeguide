@@ -2,6 +2,7 @@ import {Toast} from '@/toast.js'
 import {notesTable} from "../notes/notesTable.js";
 import moment from "moment";
 import {reloadActivityLogs} from "@/component/activities/logs.js";
+import Swal from "sweetalert2";
 
 let noteId = '';
 const addNoteModal = $('#addNoteModal');
@@ -80,7 +81,14 @@ const updateNote = (formData) => {
             });
         }
     }).fail(function (xhr) {
+        const obj = xhr.responseJSON;
 
+        if ('success' in obj && xhr.status === 401) {
+            Swal.fire({
+                title: xhr.responseJSON.message,
+                icon: "error"
+            });
+        }
     }).always(function () {
 
     });

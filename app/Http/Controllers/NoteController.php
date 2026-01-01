@@ -69,26 +69,33 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNoteRequest $request, Note $note)
+    public function update(UpdateNoteRequest $request, Note $note): \Illuminate\Http\JsonResponse
     {
-        // Fill the new values
-        $note->fill($request->only('type', 'description'));
+        if($note->user_id == auth()->id() || auth()->user()->hasRole('super admin'))
+        {
+            // Fill the new values
+            $note->fill($request->only('type', 'description'));
 
-        // Check if any field actually changed
-        if (! $note->isDirty()) {
+            // Check if any field actually changed
+            if (! $note->isDirty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No changes detected.'
+                ], 200);
+            }
+
+            // Save updated note
+            $note->save();
+
             return response()->json([
-                'success' => false,
-                'message' => 'No changes detected.'
+                'success' => true,
+                'message' => 'Note updated successfully.'
             ], 200);
         }
-
-        // Save updated note
-        $note->save();
-
         return response()->json([
-            'success' => true,
-            'message' => 'Note updated successfully.'
-        ], 200);
+            'success' => false,
+            'message' => 'You are not authorized to update this note.'
+        ],401);
     }
 
     /**
@@ -96,9 +103,16 @@ class NoteController extends Controller
      */
     public function destroy(Note $note): \Illuminate\Http\JsonResponse
     {
-        return $note->delete() ?
-            response()->json(['success' => true, 'message' => 'Note deleted.'], 200) :
-            response()->json(['success' => false, 'message' => 'Something went wrong.'], 500);
+        if($note->user_id == auth()->id() || auth()->user()->hasRole('super admin'))
+        {
+            return $note->delete() ?
+                response()->json(['success' => true, 'message' => 'Note deleted.'], 200) :
+                response()->json(['success' => false, 'message' => 'Something went wrong.'], 500);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'You are not authorized to delete this note.'
+        ],401);
     }
 
     public function getNotes(string $lead_id): \Illuminate\Http\JsonResponse

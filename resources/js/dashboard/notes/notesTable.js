@@ -104,10 +104,15 @@ const deleteNote = (note_id) => {
 
     }).fail(function (xhr) {
         console.log(xhr)
-        Swal.fire({
-            title: "Error!",
-            icon: "error"
-        });
+
+        const obj = xhr.responseJSON;
+
+        if ('success' in obj && xhr.status === 401) {
+            Swal.fire({
+                title: xhr.responseJSON.message,
+                icon: "error"
+            });
+        }
     }).always(function () {
 
     });
