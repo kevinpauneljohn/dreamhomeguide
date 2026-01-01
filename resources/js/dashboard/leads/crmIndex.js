@@ -133,11 +133,16 @@ $(function () {
             }
 
         }).fail(function (xhr) {
-            console.log(xhr)
-            Swal.fire({
-                title: "Error!",
-                icon: "error"
-            });
+            console.log(xhr.status)
+            const obj = xhr.responseJSON;
+
+            if ('success' in obj && xhr.status === 401) {
+                Swal.fire({
+                    title: 'You are not authorized to perform this action.',
+                    icon: "error"
+                });
+            }
+
         }).always(function () {
 
         });

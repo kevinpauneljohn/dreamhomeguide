@@ -30,7 +30,7 @@
         <!-- 👤 USER MENU -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                <i class="bi bi-person-circle"></i> {{ auth()->user()->name }}
+                <i class="bi bi-person-circle"></i> {{ auth()->user()->full_name }}
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="#">Profile</a></li>

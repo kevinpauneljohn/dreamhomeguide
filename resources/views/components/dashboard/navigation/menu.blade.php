@@ -34,8 +34,13 @@
                 </a>
 
                 <ul class="collapse {{ Route::is('property.index') || Route::is('property.create') ? 'show' : '' }} ps-4" id="propertiesMenu">
-                    <li><a href="{{route('property.index')}}" class="nav-link text-white-50 {{ Route::is('property.index') ? 'active' : '' }}">View Properties</a></li>
-                    <li><a href="{{route('property.create')}}" class="nav-link text-white-50 {{ Route::is('property.create') ? 'active' : '' }}">Add property</a></li>
+                    @can('view listing')
+                        <li><a href="{{route('property.index')}}" class="nav-link text-white-50 {{ Route::is('property.index') ? 'active' : '' }}">View Properties</a></li>
+                    @endcan
+                    @can('add listing')
+                            <li><a href="{{route('property.create')}}" class="nav-link text-white-50 {{ Route::is('property.create') ? 'active' : '' }}">Add property</a></li>
+                    @endcan
+
                 </ul>
             </li>
         @endcan
@@ -58,8 +63,13 @@
                 </a>
 
                 <ul class="collapse {{ Route::is('user.index') || Route::is('user.create') ? 'show' : '' }} ps-4" id="usersMenu">
-                    <li><a href="{{route('user.index')}}" class="nav-link text-white-50 {{ Route::is('user.index') ? 'active' : '' }}">View Users</a></li>
-                    <li><a href="{{route('user.create')}}" class="nav-link text-white-50 {{ Route::is('user.create') ? 'active' : '' }}">Add User</a></li>
+                    @can('view user')
+                        <li><a href="{{route('user.index')}}" class="nav-link text-white-50 {{ Route::is('user.index') ? 'active' : '' }}">View Users</a></li>
+                    @endcan
+                    @can('add user')
+                            <li><a href="{{route('user.create')}}" class="nav-link text-white-50 {{ Route::is('user.create') ? 'active' : '' }}">Add User</a></li>
+                    @endcan
+
                 </ul>
             </li>
         @endcan
@@ -82,8 +92,12 @@
                 </a>
 
                 <ul class="collapse {{ Route::is('blog.index') || Route::is('blog.create') ? 'show' : '' }} ps-4" id="blogsMenu">
-                    <li><a href="{{route('blog.index')}}" class="nav-link text-white-50 {{ Route::is('blog.index') ? 'active' : '' }}">View Blogs</a></li>
-                    <li><a href="{{route('blog.create')}}" class="nav-link text-white-50 {{ Route::is('blog.create') ? 'active' : '' }}">Add Blog</a></li>
+                    @can('view blog')
+                        <li><a href="{{route('blog.index')}}" class="nav-link text-white-50 {{ Route::is('blog.index') ? 'active' : '' }}">View Blogs</a></li>
+                    @endcan
+                    @can('add blog')
+                            <li><a href="{{route('blog.create')}}" class="nav-link text-white-50 {{ Route::is('blog.create') ? 'active' : '' }}">Add Blog</a></li>
+                    @endcan
                 </ul>
             </li>
         @endcan

@@ -223,7 +223,7 @@ class LeadService
             ->addColumn('full_name', content: function ($lead) {
                 return [
                     'name' => $lead->full_name,
-                    'email' => $lead->email,
+                    'email' => $this->allowed_to_view_lead_details($lead) ? $lead->email : $this->maskDetails($lead->email, 5),
                     'id' => $lead->id,
                 ];
             })
@@ -236,12 +236,16 @@ class LeadService
             ->editColumn('user_id', content: function ($lead) {
                 return $lead->user->full_name ?? 'N/A';
             })
-            ->addColumn('action', content: function ($user) {
+            ->editColumn('phone', content: function ($lead) {
+                return $this->allowed_to_view_lead_details($lead) ? $lead->phone : $this->maskDetails($lead->phone);
+            })
+            ->addColumn('action', content: function ($lead) {
                 return [
                     'view' => (bool)auth()->user()->can('view lead'),
                     'edit' => (bool)auth()->user()->can('edit lead'),
-                    'delete' => (bool)auth()->user()->can('delete lead'),
-                    'id' => $user->id
+                    'delete' => auth()->user()->can('delete lead') && $lead->user_id == auth()->id()
+                        || auth()->user()->hasRole(['super admin','manager']),
+                    'id' => $lead->id
                 ];
             })
             ->make(true);
@@ -282,6 +286,17 @@ class LeadService
     {
         if(!is_null($status))
         $lead->update(['status' => $status]);
+    }
+
+    private function allowed_to_view_lead_details(Leads $lead): bool
+    {
+        return !is_null($lead->user_id) && $lead->user_id == auth()->id()
+            || auth()->user()->hasRole(['super admin','manager']);
+    }
+
+    private function maskDetails($phone, $visible = 4): string
+    {
+        return substr($phone, 0, $visible) . str_repeat('*', max(0, strlen($phone) - $visible));
     }
 
 }

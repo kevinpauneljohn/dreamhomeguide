@@ -130,6 +130,9 @@ class UserService
             ->addColumn('listings', content: function ($user) {
                 return $user->properties->count();
             })
+            ->addColumn('role', content: function ($user) {
+                return $user->getRoleNames()->first();
+            })
             ->addColumn('action', content: function ($user) {
                 return [
                     'view' => (bool)auth()->user()->can('view user'),

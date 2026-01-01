@@ -4,6 +4,7 @@ select2()
 
 import moment from "moment";
 import {reloadActivityLogs} from "@/component/activities/logs.js";
+import Swal from "sweetalert2";
 
 const lead_id = $('input[name=lead_id]').val();
 const leadName = document.querySelector('.lead-name');
@@ -134,7 +135,15 @@ $(document).ready(function () {
                     });
                 }
             },error: function (xhr) {
-                console.log(xhr);
+                const obj = xhr.responseJSON;
+
+                if ('success' in obj && xhr.status === 401) {
+                    Swal.fire({
+                        title: 'You are not authorized to perform this action.',
+                        icon: "error"
+                    });
+                }
+
                 $.each(xhr.responseJSON.errors, function (key, value) {
                     Toast.fire({
                         icon: "warning",

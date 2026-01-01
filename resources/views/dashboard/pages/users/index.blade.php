@@ -80,6 +80,7 @@
                     <th width="300px">User</th>
                     <th>Phone</th>
                     <th class="text-center">Listings</th>
+                    <th>Role</th>
                     <th>Joined</th>
                     <th>Status</th>
                     <th class="text-center" width="40"></th>

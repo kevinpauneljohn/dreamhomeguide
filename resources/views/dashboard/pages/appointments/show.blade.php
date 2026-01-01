@@ -33,7 +33,7 @@
             </div>
 
             <div class="d-flex gap-2">
-                <a href="{{ route('appointment.index') }}"
+                <a onclick="window.history.back()"
                    class="btn btn-sm btn-outline-secondary">
                     <i class="bi bi-arrow-left"></i> Back
                 </a>

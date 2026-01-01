@@ -39,6 +39,12 @@ $(function () {
                 }
             },
             {
+                data: "role",
+                render: function (role) {
+                    return `<span class="badge bg-primary">${role.toUpperCase()}</span>`;
+                }
+            },
+            {
                 data: "created_at",
                 render: function(created_at){
                     return `<small class="text-muted">${created_at}</small>`;

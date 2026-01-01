@@ -29,6 +29,3 @@
 
 @endpush
 
-{{--@pushonce('scripts')--}}
-{{--    @vite('resources/js/component/floatingTools/calculator.js')--}}
-{{--@endpushonce--}}

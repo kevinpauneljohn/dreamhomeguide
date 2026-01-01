@@ -77,7 +77,6 @@ class LeadsController extends Controller
         NoteService $noteService,
         AppointmentService $appointmentService
     ) {
-        $userId = auth()->id();
 
         $canView =
             $lead->user_id === auth()->user()->id ||
@@ -123,9 +122,13 @@ class LeadsController extends Controller
      */
     public function destroy(string $id): \Illuminate\Http\JsonResponse
     {
-        return Leads::destroy($id) ?
-            response()->json(['success' => true, 'message' => 'Lead deleted successfully.']) :
-            response()->json(['success' => false, 'message' => 'An error occurred while deleting the lead.']);
+        $leads = Leads::find($id);
+        if($leads->user_id == auth()->id() || auth()->user()->hasRole(['super admin','manager']))
+        {
+            $leads->delete();
+            return response()->json(['success' => true, 'message' => 'Lead deleted successfully.', $leads]);
+        }
+        return response()->json(['success' => false, 'message' => 'An error occurred while deleting the lead.'],401);
     }
 
     public function getLeads(Request $request): \Illuminate\Http\JsonResponse
@@ -135,20 +138,25 @@ class LeadsController extends Controller
 
     public function updateField(Request $request, Leads $lead): \Illuminate\Http\JsonResponse
     {
-        $field = array_key_first($request->all());
+        if($lead->user_id == auth()->id() || auth()->user()->hasRole(['super admin','manager']))
+        {
+            $field = array_key_first($request->all());
 
-        $validated = $request->validate([
-            $field => $this->leadsService->validationRules($lead->id)[$field]
-        ],['user_id.required' => 'Please select an agent.']);
+            $validated = $request->validate([
+                $field => $this->leadsService->validationRules($lead->id)[$field]
+            ],['user_id.required' => 'Please select an agent.']);
 
-        $lead->fill($validated);
-//
-        if ($lead->isDirty()) {
-            $lead->save();
-            return response()->json(['success' => true, 'message' => ucfirst($field == 'user_id' ? 'Agent' : str_replace('_',' ',$field)) . ' updated successfully.',
-                'field' => $field,'agent' => $lead->user->full_name]);
+            $lead->fill($validated);
+
+            if ($lead->isDirty()) {
+                $lead->save();
+                return response()->json(['success' => true, 'message' => ucfirst($field == 'user_id' ? 'Agent' : str_replace('_',' ',$field)) . ' updated successfully.',
+                    'field' => $field,'agent' => $lead->user->full_name]);
+            }
+
+            return response()->json(['success' => false, 'message' => 'No changes were made.']);
         }
-//
-        return response()->json(['success' => false, 'message' => 'No changes were made.']);
+
+        return response()->json(['success' => false, 'message' => 'You do not have permission to update this field.'],401);
     }
 }
