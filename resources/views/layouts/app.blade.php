@@ -4,28 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
-
-    <meta name="theme-color" content="#0d6efd">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
     <title>@yield('title')</title>
     @stack('seo')
     <!-- Styles / Scripts -->
 {{--    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))--}}
 {{--        @vite(['resources/sass/app.scss','resources/js/app.js'])--}}
 {{--    @endif--}}
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('SW registered', reg))
-                    .catch(err => console.error('SW failed', err));
-            });
-        }
-    </script>
-
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
