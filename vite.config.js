@@ -9,12 +9,10 @@ export default defineConfig({
                 'resources/css/properties.css',
                 'resources/css/dashboard.css',
 
-                //components css
+                // components css
                 'resources/css/components/floating-tools.css',
 
-                //end components css
-
-                //pages
+                // pages
                 'resources/js/app.js',
                 'resources/js/dashboard/app.js',
                 'resources/js/dashboard/permission-table.js',
@@ -23,7 +21,7 @@ export default defineConfig({
                 'resources/js/pages/search-property-full-form.js',
                 'resources/js/pages/list-my-property.js',
 
-                ///dashboard properties
+                // dashboard properties
                 'resources/js/dashboard/properties/properties.js',
                 'resources/js/dashboard/properties/add-property.js',
                 'resources/js/dashboard/properties/edit-property.js',
@@ -33,37 +31,36 @@ export default defineConfig({
                 'resources/js/dashboard/properties/EditImageModal.js',
 
                 'resources/js/dashboard/dashboard.js',
-
                 'resources/js/dashboard/Slugify.js',
 
-                //users
+                // users
                 'resources/js/dashboard/users/create.js',
                 'resources/js/dashboard/users/edit.js',
                 'resources/js/dashboard/users/user-table.js',
 
-                //leads
+                // leads
                 'resources/js/dashboard/leads/create.js',
                 'resources/js/dashboard/leads/crmIndex.js',
                 'resources/js/dashboard/leads/appointment.js',
                 'resources/js/dashboard/leads/edit.js',
 
-                //notes
+                // notes
                 'resources/js/dashboard/notes/create.js',
                 'resources/js/dashboard/notes/notesTable.js',
                 'resources/js/dashboard/notes/editNote.js',
 
-                //contact forms
+                // contact forms
                 'resources/js/contactForms/contact-form.js',
 
-                //blogs dashboard
+                // blogs dashboard
                 'resources/js/dashboard/blogs/create.js',
                 'resources/js/dashboard/blogs/index.js',
                 'resources/js/dashboard/blogs/edit.js',
 
-                //blog post
+                // blog post
                 'resources/js/pages/blog-post.js',
 
-                //mortgage calculator
+                // mortgage calculator
                 'resources/js/pages/mortgage-calculator.js',
                 'resources/js/component/floatingTools/calculator.js',
                 'resources/js/component/floatingTools/apec-homes-pagibig-calculator.js',
@@ -72,24 +69,34 @@ export default defineConfig({
                 'resources/js/component/floatingTools/formatPeso.js',
                 'resources/js/component/floatingTools/plural.js',
 
-                //component
+                // components
                 'resources/js/component/appointment/calendar.js',
                 'resources/js/component/notifications/notifications-mark-read.js',
                 'resources/js/component/notifications/get-notifications.js',
                 'resources/js/component/floatingTools/floating-tools.js',
 
-                //activity logs
+                // activity logs
                 'resources/js/component/activities/logs.js',
 
-                //roles and permissions
+                // roles and permissions
                 'resources/js/dashboard/roles/roles-table.js',
                 'resources/js/dashboard/permissions/permissions-table.js',
 
-                //profile
+                // profile
                 'resources/js/dashboard/profile/update-profile.js',
-
             ],
             refresh: true,
         }),
     ],
+
+    // 👇 ADD THIS SECTION
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    pdf: ['html2pdf.js'],
+                },
+            },
+        },
+    },
 });
