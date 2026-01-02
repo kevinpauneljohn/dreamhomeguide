@@ -67,6 +67,8 @@ export default defineConfig({
                 'resources/js/pages/mortgage-calculator.js',
                 'resources/js/component/floatingTools/calculator.js',
                 'resources/js/component/floatingTools/apec-homes-pagibig-calculator.js',
+                'resources/js/component/floatingTools/apec-homes-inhouse-calculator.js',
+                'resources/js/component/floatingTools/hausland-inhouse-calculator.js',
                 'resources/js/component/floatingTools/formatPeso.js',
                 'resources/js/component/floatingTools/plural.js',
 
