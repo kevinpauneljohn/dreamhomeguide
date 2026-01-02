@@ -15,6 +15,7 @@
                         <option value="mortgage">Mortgage</option>
                         <option value="apecpagibig">Apec Homes - Pag-IBIG</option>
                         <option value="apecinhouse">Apec Homes - In-house</option>
+                        <option value="hauslandinhouse">Hausland - In-house</option>
                     </select>
                     <div id="calculator-content">
                         <div class="text-center py-5">

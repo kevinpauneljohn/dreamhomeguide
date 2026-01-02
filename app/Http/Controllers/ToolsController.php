@@ -8,7 +8,7 @@ class ToolsController extends Controller
 {
     public function calculator(string $type): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        $allowed = ['mortgage', 'apecpagibig', 'apecinhouse'];
+        $allowed = ['mortgage', 'apecpagibig', 'apecinhouse','hauslandinhouse'];
 
         abort_unless(in_array($type, $allowed), 404);
 

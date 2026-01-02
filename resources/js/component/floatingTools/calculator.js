@@ -1,5 +1,6 @@
 import {initApecHomesPagIbigCalculator} from "./apec-homes-pagibig-calculator.js";
 import {initApecHomesInHouseCalculator} from "./apec-homes-inhouse-calculator.js";
+import {initHauslandInHouseCalculator} from "./hausland-inhouse-calculator.js";
 import {formatPeso} from "@/component/floatingTools/formatPeso.js";
 import {plural} from "@/component/floatingTools/plural.js";
 
@@ -81,6 +82,9 @@ function initializeCalculator(type) {
             break;
         case 'apecinhouse':
             initApecHomesInHouseCalculator();
+            break;
+        case 'hauslandinhouse':
+            initHauslandInHouseCalculator();
             break;
     }
 }
