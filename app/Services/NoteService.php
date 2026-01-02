@@ -202,8 +202,8 @@ class NoteService
             })
             ->addColumn('action', content: function ($note) {
                 return [
-                    'edit' => (bool)auth()->user()->can('edit note'),
-                    'delete' => (bool)auth()->user()->can('delete note'),
+                    'edit' => auth()->user()->can('edit note') && $this->allowed_to_edit_or_delete_note($note),
+                    'delete' => auth()->user()->can('delete note') && $this->allowed_to_edit_or_delete_note($note),
                     'id' => $note->id
                 ];
             })

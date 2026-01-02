@@ -24,6 +24,7 @@ document.querySelectorAll('.tool-app').forEach(tool => {
 
         // console.log(type);
 
+
         switch (type) {
             case 'calculator':
                 openCalculatorModal();

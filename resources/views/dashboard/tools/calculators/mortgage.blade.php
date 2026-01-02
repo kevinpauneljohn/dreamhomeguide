@@ -2,12 +2,12 @@
     <div class="row g-3">
         <div class="col-md-6">
             <label>Property Price</label>
-            <input type="number" class="form-control" id="price" placeholder="e.g. 2500000">
+            <input type="number" class="form-control" id="price">
         </div>
 
         <div class="col-md-6">
-            <label>Downpayment (%)</label>
-            <input type="number" class="form-control" id="dpPercent" value="20">
+            <label>Down payment (%)</label>
+            <input type="number" class="form-control" id="dpPercent" min="0" max="100" placeholder="100%">
         </div>
 
         <div class="col-md-6">
@@ -16,17 +16,12 @@
                 @for($year = 1; $year <= 30; $year++)
                     <option value="{{$year}}">{{$year}} {{\Illuminate\Support\Str::plural('Year', $year)}}</option>
                 @endfor
-                <option value="10">10 Years</option>
-                <option value="15">15 Years</option>
-                <option value="20">20 Years</option>
-                <option value="25">25 Years</option>
-                <option value="30">30 Years</option>
             </select>
         </div>
 
         <div class="col-md-6">
             <label>Interest Rate (% / year)</label>
-            <input type="number" class="form-control" id="interest" value="6.5">
+            <input type="number" class="form-control" id="interest" placeholder="12%">
         </div>
     </div>
 </form>
@@ -39,7 +34,15 @@
 
     <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between">
-            <span>Downpayment</span>
+            <span>Property Price</span>
+            <strong id="propertyPrice">₱0</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+            <span>Down payment %</span>
+            <strong id="dpPercentValue"></strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+            <span>Down payment</span>
             <strong id="dpAmount">₱0</strong>
         </li>
         <li class="list-group-item d-flex justify-content-between">
@@ -47,8 +50,15 @@
             <strong id="loanAmount">₱0</strong>
         </li>
         <li class="list-group-item d-flex justify-content-between">
+            <strong id="terms" class="text-secondary"></strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
             <span>Monthly Amortization</span>
             <strong id="monthly">₱0</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+            <span>Required Monthly Income</span>
+            <strong id="monthlyIncome">₱0</strong>
         </li>
     </ul>
 </div>

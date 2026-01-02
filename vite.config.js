@@ -65,13 +65,16 @@ export default defineConfig({
 
                 //mortgage calculator
                 'resources/js/pages/mortgage-calculator.js',
+                'resources/js/component/floatingTools/calculator.js',
+                'resources/js/component/floatingTools/apec-homes-pagibig-calculator.js',
+                'resources/js/component/floatingTools/formatPeso.js',
+                'resources/js/component/floatingTools/plural.js',
 
                 //component
                 'resources/js/component/appointment/calendar.js',
                 'resources/js/component/notifications/notifications-mark-read.js',
                 'resources/js/component/notifications/get-notifications.js',
                 'resources/js/component/floatingTools/floating-tools.js',
-                'resources/js/component/floatingTools/calculator.js',
 
                 //activity logs
                 'resources/js/component/activities/logs.js',

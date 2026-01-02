@@ -23,7 +23,7 @@ class ActivityService
 
                 $props = $activity?->toArray() ?? [];
 
-                // Helper to resolve user name
+                // Helper to resolve username
                 $resolveUserName = function ($id, $fallback = 'Unknown') {
                     if (!$id) return $fallback;
 
