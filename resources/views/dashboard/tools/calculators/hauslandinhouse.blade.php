@@ -130,7 +130,7 @@
 <hr>
 
 <!-- Results -->
-<div id="calc-result" class="d-none">
+<div id="calc-result" class="d-none hausland-inhouse-computation">
     <h6>Hausland In-house Computation</h6>
 
     <ul class="list-group" id="hausland-inhouse-result-list">
@@ -173,4 +173,22 @@
             <span id="amortization"></span>
         </li>
     </ul>
+    <!-- Prepared By Section -->
+    <div class="border-top pt-3 mt-3 small text-muted">
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Prepared by:</strong><br>
+                {{ucwords(strtolower(auth()->user()->full_name))}}
+            </div>
+            <div class="col-md-6 text-md-end">
+                <div><strong>Contact:</strong> <a href="tel:{{auth()->user()->phone}}">{{auth()->user()->phone}}</a> </div>
+                <div><strong>Email:</strong> <a href="mailto:inquiry@johnkevinpaunel.com">inquiry@johnkevinpaunel.com</a></div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<button class="btn btn-outline-primary mt-3" onclick="downloadHauslandPDF()">
+    <i class="fa fa-file-pdf"></i> Download PDF
+</button>
+

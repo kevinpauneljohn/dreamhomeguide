@@ -1,3 +1,4 @@
+import html2pdf from "html2pdf.js";
 import {formatPeso} from "@/component/floatingTools/formatPeso.js";
 import {plural} from "@/component/floatingTools/plural.js";
 
@@ -54,6 +55,27 @@ const initApecHomesPagIbigCalculator = () => {
         formatPeso(requiredIncome);
 
     document.getElementById('calc-result').classList.remove('d-none');
+}
+
+window.downloadApecHomesPagIbigPDF = () => {
+    const element = document.querySelector('.apec-homes-pagibig-computation');
+
+    const options = {
+        margin: 0.5,
+        filename: 'Apec-homes-pag-ibig-Computation.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 2,          // sharp text
+            useCORS: true
+        },
+        jsPDF: {
+            unit: 'in',
+            format: 'letter',
+            orientation: 'portrait'
+        }
+    };
+
+    html2pdf().set(options).from(element).save();
 }
 
 export {initApecHomesPagIbigCalculator}

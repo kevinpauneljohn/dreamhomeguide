@@ -1,3 +1,4 @@
+import html2pdf from "html2pdf.js";
 import {formatPeso} from "@/component/floatingTools/formatPeso.js";
 import {plural} from "@/component/floatingTools/plural.js";
 
@@ -57,16 +58,22 @@ export const initHauslandInHouseCalculator = () => {
 
     document.getElementById('calc-result').classList.remove('d-none');
 
+// Remove previous amortization results
+    document
+        .querySelectorAll('.hausland-amortization')
+        .forEach(el => el.remove());
+
     amortization(loanable_amount, years);
 }
 
 const amortization = (balance, years) => {
     let result, balance2, balance3 = '';
 
+
     if(years === 5)
     {
         balance = balance * 0.022244448;
-        result = `<li class="list-group-item d-flex justify-content-between">
+        result = `<li class="list-group-item d-flex justify-content-between hausland-amortization">
                         <span>1-5 yrs (12%)</span>
                         <strong>${formatPeso(balance)}</strong>
                     </li>
@@ -76,11 +83,11 @@ const amortization = (balance, years) => {
         balance = balance * 0.014347095;
         balance2 = (balance*0.0460251)+balance;
 
-        result = `<li class="list-group-item d-flex justify-content-between">
+        result = `<li class="list-group-item d-flex justify-content-between hausland-amortization">
                         <span>1-5 yrs (12%)</span>
                         <strong>${formatPeso(balance)}</strong>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between">
+                    <li class="list-group-item d-flex justify-content-between hausland-amortization">
                         <span>6-10 yrs (14%)</span>
                         <strong>${formatPeso(balance2)}</strong>
                     </li>
@@ -91,15 +98,15 @@ const amortization = (balance, years) => {
         balance2 = (balance*0.0822151)+balance;
         balance3 = (balance2*0.0451175)+balance2;
 
-        result = `<li class="list-group-item d-flex justify-content-between">
+        result = `<li class="list-group-item d-flex justify-content-between hausland-amortization">
                         <span>1-5 yrs (12%)</span>
                         <strong>${formatPeso(balance)}</strong>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between">
+                    <li class="list-group-item d-flex justify-content-between hausland-amortization">
                         <span>6-10 yrs (14%)</span>
                         <strong>${formatPeso(balance2)}</strong>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between">
+                    <li class="list-group-item d-flex justify-content-between hausland-amortization">
                         <span>11-15 yrs (16%)</span>
                         <strong>${formatPeso(balance3)}</strong>
                     </li>
@@ -134,5 +141,27 @@ window.setLoanableAmount = () => {
 
     loanable_amount_element.value = total_contract_price - equity_exact_amount;
 }
+
+window.downloadHauslandPDF = () => {
+    const element = document.querySelector('.hausland-inhouse-computation');
+
+    const options = {
+        margin: 0.5,
+        filename: 'Hausland-Inhouse-Computation.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 2,          // sharp text
+            useCORS: true
+        },
+        jsPDF: {
+            unit: 'in',
+            format: 'letter',
+            orientation: 'portrait'
+        }
+    };
+
+    html2pdf().set(options).from(element).save();
+}
+
 
 

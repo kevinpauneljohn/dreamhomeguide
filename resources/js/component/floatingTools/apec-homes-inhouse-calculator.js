@@ -1,3 +1,4 @@
+import html2pdf from "html2pdf.js";
 import {formatPeso} from "@/component/floatingTools/formatPeso.js";
 import {plural} from "@/component/floatingTools/plural.js";
 
@@ -44,4 +45,25 @@ export const initApecHomesInHouseCalculator = () => {
 
 
     document.getElementById('calc-result').classList.remove('d-none');
+}
+
+window.downloadApecHomesInHousePDF = () => {
+    const element = document.querySelector('.apec-homes-in-house-computation');
+
+    const options = {
+        margin: 0.5,
+        filename: 'Apec-homes-in-house-Computation.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 2,          // sharp text
+            useCORS: true
+        },
+        jsPDF: {
+            unit: 'in',
+            format: 'letter',
+            orientation: 'portrait'
+        }
+    };
+
+    html2pdf().set(options).from(element).save();
 }
