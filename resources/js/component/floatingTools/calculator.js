@@ -1,4 +1,5 @@
 import {initApecHomesPagIbigCalculator} from "./apec-homes-pagibig-calculator.js";
+import {initApecHomesInHouseCalculator} from "./apec-homes-inhouse-calculator.js";
 import {formatPeso} from "@/component/floatingTools/formatPeso.js";
 import {plural} from "@/component/floatingTools/plural.js";
 
@@ -95,11 +96,6 @@ const initMortgageCalculator = () => {
     document.getElementById('calc-result').classList.remove('d-none');
 }
 
-
-
-const initApecHomesInHouseCalculator = () => {
-
-}
 
 
 export {openCalculatorModal};

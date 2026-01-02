@@ -1,3 +1,6 @@
+<a href="https://drive.google.com/drive/folders/1YzAwNRW2iuITjtszA6bK0mdpokRrON3r?usp=drive_link" target="_blank" class="btn btn-primary mb-4">
+    View Apec Homes Pampanga - Google Drive</a>
+
 <form id="calculator-form">
     <div class="row g-3">
         <div class="col-md-6">
