@@ -13,6 +13,16 @@
 
 
     <title>@yield('title')</title>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('SW registered', reg))
+                    .catch(err => console.error('SW failed', err));
+            });
+        }
+    </script>
+
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/sass/app.scss','resources/js/app.js'])

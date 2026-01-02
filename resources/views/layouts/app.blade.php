@@ -17,6 +17,16 @@
 {{--        @vite(['resources/sass/app.scss','resources/js/app.js'])--}}
 {{--    @endif--}}
     <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('SW registered', reg))
+                    .catch(err => console.error('SW failed', err));
+            });
+        }
+    </script>
+
+    <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};

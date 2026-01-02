@@ -10,6 +10,17 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('SW registered', reg))
+                    .catch(err => console.error('SW failed', err));
+            });
+        }
+    </script>
+
+
     <title>@yield('title')</title>
     @stack('seo')
     <!-- Meta Pixel Code -->
