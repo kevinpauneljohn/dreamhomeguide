@@ -1,4 +1,3 @@
-import html2pdf from "html2pdf.js";
 import {formatPeso} from "@/component/floatingTools/formatPeso.js";
 import {plural} from "@/component/floatingTools/plural.js";
 
@@ -142,8 +141,12 @@ window.setLoanableAmount = () => {
     loanable_amount_element.value = total_contract_price - equity_exact_amount;
 }
 
-window.downloadHauslandPDF = () => {
+window.downloadHauslandPDF = async () => {
     const element = document.querySelector('.hausland-inhouse-computation');
+    if (!element) return;
+
+    // ✅ Lazy-load only when needed
+    const { default: html2pdf } = await import('html2pdf.js');
 
     const options = {
         margin: 0.5,
@@ -160,7 +163,7 @@ window.downloadHauslandPDF = () => {
         }
     };
 
-    html2pdf().set(options).from(element).save();
+    await html2pdf().set(options).from(element).save();
 }
 
 

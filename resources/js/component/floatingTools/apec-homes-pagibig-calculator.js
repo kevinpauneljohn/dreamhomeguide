@@ -1,4 +1,3 @@
-import html2pdf from "html2pdf.js";
 import {formatPeso} from "@/component/floatingTools/formatPeso.js";
 import {plural} from "@/component/floatingTools/plural.js";
 
@@ -57,8 +56,12 @@ const initApecHomesPagIbigCalculator = () => {
     document.getElementById('calc-result').classList.remove('d-none');
 }
 
-window.downloadApecHomesPagIbigPDF = () => {
+window.downloadApecHomesPagIbigPDF = async () => {
     const element = document.querySelector('.apec-homes-pagibig-computation');
+    if (!element) return;
+
+    // ✅ Lazy-load only when needed
+    const { default: html2pdf } = await import('html2pdf.js');
 
     const options = {
         margin: 0.5,
@@ -75,7 +78,7 @@ window.downloadApecHomesPagIbigPDF = () => {
         }
     };
 
-    html2pdf().set(options).from(element).save();
+    await html2pdf().set(options).from(element).save();
 }
 
 export {initApecHomesPagIbigCalculator}

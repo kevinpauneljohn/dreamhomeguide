@@ -24,6 +24,7 @@ include __DIR__.'/dashboard/notifications.php';
 include __DIR__.'/dashboard/roles.php';
 include __DIR__.'/dashboard/permissions.php';
 include __DIR__.'/dashboard/tools.php';
+include __DIR__.'/dashboard/profile.php';
 
 Broadcast::routes([
     'middleware' => ['web']
