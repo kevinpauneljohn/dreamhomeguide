@@ -16,7 +16,16 @@
                         <option value="apecpagibig">Apec Homes - Pag-IBIG</option>
                         <option value="apecinhouse">Apec Homes - In-house</option>
                     </select>
-                    <div id="calculator-content"></div>
+                    <div id="calculator-content">
+                        <div class="text-center py-5">
+                            <i class="fa fa-calculator fa-3x text-primary mb-3"></i>
+                            <h5 class="fw-semibold">Choose a Calculator</h5>
+                            <p class="text-muted">
+                                Select a calculator type to estimate monthly amortization,
+                                down payment, or commission.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="modal-footer">

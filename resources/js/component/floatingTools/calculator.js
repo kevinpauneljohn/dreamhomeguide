@@ -24,7 +24,23 @@ document.getElementById('calculateBtn').addEventListener('click', (e) => {
 selectCalculator.addEventListener('change', (e) => {
     // console.log(e.target.value);
     calculatorType = e.target.value;
-    loadCalculator(e.target.value);
+    if(calculatorType !== '')
+    {
+        loadCalculator(e.target.value);
+    }
+    else{
+        document.getElementById('calculator-content').innerHTML = `
+        <div class="text-center py-5">
+            <i class="fa fa-calculator fa-3x text-primary mb-3"></i>
+            <h5 class="fw-semibold">Choose a Calculator</h5>
+            <p class="text-muted">
+                Select a calculator type to estimate monthly amortization,
+                down payment, or commission.
+            </p>
+        </div>
+    `;
+    }
+
 })
 
 
