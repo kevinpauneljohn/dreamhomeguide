@@ -94,7 +94,7 @@
 
 @pushonce('modal')
     <div class="modal fade" id="roleModal" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <form class="modal-content" id="role-form">
                 @csrf
                 <div class="modal-header">
