@@ -45,13 +45,31 @@ selectCalculator.addEventListener('change', (e) => {
 
 
 function loadCalculator(type) {
+    const container = document.getElementById('calculator-content');
+
+    container.innerHTML = `
+        <div class="d-flex flex-column align-items-center justify-content-center py-5">
+            <div class="spinner-border text-primary mb-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <span class="text-muted">Loading calculator...</span>
+        </div>
+    `;
+
     fetch(`/tools/calculator/${type}`)
         .then(res => res.text())
         .then(html => {
-            document.getElementById('calculator-content').innerHTML = html;
-            // initializeCalculator(type);
+            container.innerHTML = html;
+        })
+        .catch(() => {
+            container.innerHTML = `
+                <div class="alert alert-danger text-center">
+                    Failed to load calculator. Please try again.
+                </div>
+            `;
         });
 }
+
 
 function initializeCalculator(type) {
     switch (type) {
