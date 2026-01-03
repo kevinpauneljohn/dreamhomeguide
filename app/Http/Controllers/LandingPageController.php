@@ -47,6 +47,7 @@ class LandingPageController extends Controller
             'occupation' => ['required'],
             'income_range' => ['required'],
             'message' => ['nullable','max:3000'],
+            'g-recaptcha-response' => 'required|captcha'
         ]);
 
         $request->merge([

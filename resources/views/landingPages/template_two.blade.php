@@ -120,10 +120,15 @@
                             @error('message')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-
                             <small class="text-muted d-flex justify-content-end">
                                 <span id="messageCount">0</span>/3000 characters
                             </small>
+                        </div>
+                        <div class="col-12">
+                            {!! NoCaptcha::display() !!}
+                            @error('g-recaptcha-response')
+                            <div class="text-danger small">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- Hidden Project Tag -->
@@ -203,5 +208,6 @@
 @endpush
 
 @push('scripts')
+    {!! NoCaptcha::renderJs() !!}
     @vite('resources/js/landing-page/form.js')
 @endpush
