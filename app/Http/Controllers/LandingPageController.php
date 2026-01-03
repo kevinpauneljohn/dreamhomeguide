@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Leads;
+use App\Models\Property;
 use App\Services\LeadService;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class LandingPageController extends Controller
 {
@@ -14,6 +14,16 @@ class LandingPageController extends Controller
         return view('landingPages.template_one')->with([
             'title' => 'Alpine Residences',
             'monthlyIncomeRange' => $leadService->incomeRange()
+        ]);
+    }
+
+    public function propertyLandingPage(string $slug, LeadService $leadService): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    {
+        $property = Property::where('slug',$slug)->firstOrFail();
+        return view('landingPages.template_two')->with([
+            'title' => ucwords(strtolower($property->title)),
+            'monthlyIncomeRange' => $leadService->incomeRange(),
+            'property_id' => $property->id,
         ]);
     }
 
@@ -40,11 +50,11 @@ class LandingPageController extends Controller
         $request->merge([
             'status' => 'new',
             'source' => 'Facebook Ads',
-            'message' => $request->message.'<br/> <strong>Alpine Residences</strong>' ?? ''
+            'message' => $request->message ?? ''
         ]);
 
         try {
-            Leads::create($request->only('first_name','last_name','email','phone','financing','occupation','income_range','message','status','source'));
+            Leads::create($request->only('first_name','last_name','email','phone','financing','occupation','income_range','message','status','source','property_id'));
             return redirect()->route('thank-you');
         }catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

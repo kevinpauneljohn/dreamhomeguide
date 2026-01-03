@@ -214,6 +214,7 @@ class LeadService
             $query->where('created_at', '>=', $request['date_range']);
         }
 
+        $query->latest();
         return $query;
     }
     public function getLeads($request): \Illuminate\Http\JsonResponse

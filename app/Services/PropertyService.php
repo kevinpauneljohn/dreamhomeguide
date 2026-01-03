@@ -75,7 +75,8 @@ class PropertyService
                     'edit' => (bool)auth()->user()->can('edit listing'),
                     'upload_images' => (bool)auth()->user()->can('upload listing images'),
                     'delete' => (bool)auth()->user()->can('delete listing'),
-                    'id' => $property->id
+                    'id' => $property->id,
+                    'slug' => $property->slug,
                 ];
             })
             ->make(true);

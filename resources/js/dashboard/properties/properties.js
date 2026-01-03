@@ -83,13 +83,42 @@ $(function () {
                                 ${action.view ? `<li><a href="/property/${action.id}" class="dropdown-item">View</a></li>` : ''}
                                 ${action.edit ? `<li><a href="/property/${action.id}/edit" class="dropdown-item">Edit</a></li>` : ''}
                                 ${action.delete ? `<li><a href="#" onclick="deleteProperty(this, ${action.id})" class="dropdown-item text-danger">Delete</a></li>` : ''}
-                                ${action.upload_images ? `<li><hr class="dropdown-divider"></li><li><a href="/property/images/${action.id}" class="dropdown-item"><i class="bi-card-image"></i> Upload Images</a></li>` : ''}
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a href="#" class="dropdown-item copy-landing-url" data-url="/landing-page/properties/${action.slug}">View landing Page</a></li>
+                                ${action.upload_images ? `<li><a href="/property/images/${action.id}" class="dropdown-item"><i class="bi-card-image"></i> Upload Images</a></li>` : ''}
                             </ul>
                         </div>
                     `;
                 }
             },
         ]
+    });
+
+    document.addEventListener('click', function (e) {
+        const target = e.target.closest('.copy-landing-url');
+        if (!target) return;
+
+        e.preventDefault();
+
+        const url = target.dataset.url;
+        const fullUrl = `${window.location.origin}${url}`;
+
+        navigator.clipboard.writeText(fullUrl)
+            .then(() => {
+                // ✅ Success feedback
+                if (window.Toast) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Landing page URL copied!'
+                    });
+                } else {
+                    alert('Landing page URL copied!');
+                }
+            })
+            .catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy URL');
+            });
     });
 
     $("#search, #category, #listingType, #status").on("change keyup", function () {
