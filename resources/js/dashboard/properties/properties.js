@@ -84,7 +84,7 @@ $(function () {
                                 ${action.edit ? `<li><a href="/property/${action.id}/edit" class="dropdown-item">Edit</a></li>` : ''}
                                 ${action.delete ? `<li><a href="#" onclick="deleteProperty(this, ${action.id})" class="dropdown-item text-danger">Delete</a></li>` : ''}
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a href="#" class="dropdown-item copy-landing-url" data-url="/landing-page/properties/${action.slug}">View landing Page</a></li>
+                                <li><a href="#" class="dropdown-item copy-landing-url" data-url="/landing-page/properties/${action.slug}">Copy landing Page URL</a></li>
                                 ${action.upload_images ? `<li><a href="/property/images/${action.id}" class="dropdown-item"><i class="bi-card-image"></i> Upload Images</a></li>` : ''}
                             </ul>
                         </div>
