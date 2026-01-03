@@ -22,6 +22,7 @@ class Calendar extends Component
             : route('get-user-appointment',['userId' => auth()->id()]);
     }
 
+
     /**
      * Get the view / contents that represent the component.
      */

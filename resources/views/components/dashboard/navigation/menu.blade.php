@@ -174,5 +174,17 @@
                 </li>
             @endcan
 
+            <!-- Permissions -->
+            @can('view appointment')
+
+                <li class="nav-item">
+                    <a href="{{route('appointment.index')}}" class="nav-link text-white {{ Route::is('appointment.index') ? 'active' : '' }}">
+                        <span>
+                            <i class="fa-solid fa-calendar-days"></i> Appointments
+                        </span>
+                    </a>
+                </li>
+            @endcan
+
     </ul>
 </div>

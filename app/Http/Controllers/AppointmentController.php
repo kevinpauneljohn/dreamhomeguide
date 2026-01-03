@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
+use App\Models\Leads;
+use App\Models\User;
 use App\Services\AppointmentService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
@@ -31,7 +33,12 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.pages.appointments.index')->with([
+            'title' => 'My Appointments',
+            'appointmentTypes' => $this->appointmentService->appointmentTypes(),
+            'agents'           => User::all(),
+            'leads'            => auth()->user()->hasRole(['super admin','manager']) ? Leads::all() : Leads::where('user_id',auth()->id())->get(),
+        ]);
     }
 
     /**
@@ -72,8 +79,12 @@ class AppointmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAppointmentRequest $request, Appointment $appointment)
+    public function update(UpdateAppointmentRequest $request, Appointment $appointment): \Illuminate\Http\JsonResponse
     {
+        if($appointment->user_id != auth()->id() || !auth()->user()->hasRole(['super admin','manager']))
+        {
+            return response()->json(['success' => false, 'message' => 'You are not authorized to update this appointment.'],401);
+        }
         return $this->appointmentService->updateAppointment($appointment,
             $request->only('title','appointment_date','location','notes','lead_id','user_id','appointment_type_id','status','appointment_type','assigned_agent'));
     }
@@ -81,7 +92,7 @@ class AppointmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Appointment $appointment)
+    public function destroy(Appointment $appointment): \Illuminate\Http\JsonResponse
     {
         return $appointment->delete() ?
             response()->json(['success' => true, 'message' => 'Appointment deleted successfully.']) :

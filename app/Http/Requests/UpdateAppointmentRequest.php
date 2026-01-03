@@ -22,6 +22,7 @@ class UpdateAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'lead_id' => ['required'],
             'assigned_agent' => ['required'],
             'appointment_type' => ['required'],
             'title' => ['required', 'string', 'max:255'],
@@ -39,6 +40,7 @@ class UpdateAppointmentRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'lead_id.required' => 'leads field is required',
             'assigned_agent.required' => 'Agent field is required',
         ];
     }
