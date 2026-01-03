@@ -71,6 +71,7 @@ export default defineConfig({
 
                 // components
                 'resources/js/component/appointment/calendar.js',
+                'resources/js/component/appointment/my-calendar.js',
                 'resources/js/component/notifications/notifications-mark-read.js',
                 'resources/js/component/notifications/get-notifications.js',
                 'resources/js/component/floatingTools/floating-tools.js',
