@@ -33,6 +33,10 @@
     background-color: #ff7300;
 }
 
+.bg-purple{
+    background-color: purple;
+}
+
 .gradient-nav {
     background: linear-gradient(
         to bottom,
