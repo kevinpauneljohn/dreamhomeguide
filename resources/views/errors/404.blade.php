@@ -98,8 +98,8 @@
                 No worries — let's get you back on track.
             </p>
 
-            <a href="{{ url('/') }}" class="btn btn-custom">
-                ⬅ Return to Home Page
+            <a onclick="window.history.back()" class="btn btn-custom">
+                ⬅ Go Back
             </a>
         </div>
 
