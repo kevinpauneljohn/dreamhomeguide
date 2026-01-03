@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class NotificationController extends Controller
 {
@@ -31,14 +32,21 @@ class NotificationController extends Controller
     {
         return [
             'unread_count' => auth()->user()->unreadNotifications()->count(),
-            'unread_messages' => auth()->user()->unreadNotifications()->limit(4)->get(),
+            'unread_messages' => auth()->user()->unreadNotifications()->limit(10)->get(),
         ];
+    }
+
+    public function getNotifications(): \Illuminate\Http\JsonResponse
+    {
+        return DataTables::of(auth()->user()->notifications()->latest()->get())
+            ->make(true);
     }
 
     public function allNotifications(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         return view('dashboard.pages.notifications.allnotifications')->with([
             'title' => 'Notifications',
+            'notifications' => auth()->user()->notifications()->latest()->paginate(20),
         ]);
     }
 }

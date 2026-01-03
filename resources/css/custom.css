@@ -37,6 +37,10 @@
     background-color: purple;
 }
 
+.unread{
+    background-color: #f4fafc!important;
+}
+
 .gradient-nav {
     background: linear-gradient(
         to bottom,
