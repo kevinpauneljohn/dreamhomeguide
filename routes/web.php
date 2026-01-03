@@ -25,6 +25,9 @@ include __DIR__.'/dashboard/roles.php';
 include __DIR__.'/dashboard/permissions.php';
 include __DIR__.'/dashboard/tools.php';
 include __DIR__.'/dashboard/profile.php';
+include __DIR__.'/dashboard/projects.php';
+include __DIR__.'/dashboard/model_units.php';
+include __DIR__.'/landingPages/pages.php';
 
 Broadcast::routes([
     'middleware' => ['web']

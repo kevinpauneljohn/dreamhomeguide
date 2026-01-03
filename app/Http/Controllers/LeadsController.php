@@ -78,11 +78,18 @@ class LeadsController extends Controller
         AppointmentService $appointmentService
     ) {
 
-        $canView =
-            $lead->user_id === auth()->user()->id ||
-            Appointment::where('lead_id', $lead->id)
-                ->where('assigned_agent', auth()->user()->id)
-                ->exists() || auth()->user()->hasRole(['super admin','manager']);
+        if(is_null($lead->user_id))
+        {
+            $canView = true;
+        }
+        else{
+            $canView = $lead->user_id === auth()->user()->id
+                || Appointment::where('lead_id', $lead->id)
+                    ->where('assigned_agent', auth()->user()->id)
+                    ->exists()
+                || auth()->user()->hasRole(['super admin', 'manager']);
+        }
+
 
         abort_unless($canView, 403, 'You do not have permission to access this resource.');
 
@@ -138,25 +145,69 @@ class LeadsController extends Controller
 
     public function updateField(Request $request, Leads $lead): \Illuminate\Http\JsonResponse
     {
-        if($lead->user_id == auth()->id() || auth()->user()->hasRole(['super admin','manager']))
+        if(is_null($lead->user_id))
         {
-            $field = array_key_first($request->all());
-
-            $validated = $request->validate([
-                $field => $this->leadsService->validationRules($lead->id)[$field]
-            ],['user_id.required' => 'Please select an agent.']);
-
-            $lead->fill($validated);
-
-            if ($lead->isDirty()) {
-                $lead->save();
-                return response()->json(['success' => true, 'message' => ucfirst($field == 'user_id' ? 'Agent' : str_replace('_',' ',$field)) . ' updated successfully.',
-                    'field' => $field,'agent' => $lead->user->full_name]);
-            }
-
-            return response()->json(['success' => false, 'message' => 'No changes were made.']);
+            $canUpdate = true;
+        }else{
+            // 🔐 Authorization
+            $canUpdate = $lead->user_id === auth()->id()
+                || auth()->user()->hasRole(['super admin', 'manager']);
         }
 
-        return response()->json(['success' => false, 'message' => 'You do not have permission to update this field.'],401);
+        if (!$canUpdate) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You do not have permission to update this field.'
+            ], 403);
+        }
+
+        // 🧠 Get single field safely
+        $data = $request->only(array_keys($request->all()));
+        $field = array_key_first($data);
+
+        if (!$field) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No field provided.'
+            ], 422);
+        }
+
+        // 📏 Validation rules
+        $rules = $this->leadsService->validationRules($lead->id);
+
+        if (!isset($rules[$field])) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid field.'
+            ], 422);
+        }
+
+        $validated = $request->validate(
+            [$field => $rules[$field]],
+            ['user_id.required' => 'Please select an agent.']
+        );
+
+        // ✏ Update only if changed
+        $lead->fill($validated);
+
+        if (!$lead->isDirty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No changes were made.'
+            ]);
+        }
+
+        $lead->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => ucfirst($field === 'user_id'
+                    ? 'Agent'
+                    : str_replace('_', ' ', $field)
+                ) . ' updated successfully.',
+            'field' => $field,
+            'agent' => optional($lead->user)->full_name
+        ]);
     }
+
 }

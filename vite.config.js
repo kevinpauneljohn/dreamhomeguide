@@ -85,6 +85,9 @@ export default defineConfig({
 
                 // profile
                 'resources/js/dashboard/profile/update-profile.js',
+
+                //landing page form
+                'resources/js/landing-page/form.js',
             ],
             refresh: true,
         }),

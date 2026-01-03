@@ -16,7 +16,8 @@ class Leads extends Model
     use SoftDeletes, HasUuids, LogsActivity;
 
     protected $fillable = ['first_name', 'last_name', 'email', 'phone','address','source',
-        'source_url','status','user_id','birthday','civil_status','income_range','gender','lead_type','message','property_id'];
+        'source_url','status','financing','occupation',
+        'user_id','birthday','civil_status','income_range','gender','lead_type','message','property_id'];
 
     protected function casts()
     {

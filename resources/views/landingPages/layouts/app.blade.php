@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>@yield('title')</title>
-    @stack('seo')
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/sass/app.scss','resources/js/app.js'])
@@ -35,9 +34,7 @@
 </head>
 <body>
 
-    <x-navigation.menus/>
-        @yield('content')
-    <x-navigation.footer/>
-    @stack('scripts')
+@yield('content')
+@stack('scripts')
 </body>
 </html>

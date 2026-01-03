@@ -15,7 +15,17 @@
                 </span>
             </a>
         </li>
+        <!-- Projects -->
+        @can('view project')
 
+            <li class="nav-item">
+                <a href="{{route('project.index')}}" class="nav-link text-white {{ Route::is('project.index') ? 'active' : '' }}">
+                        <span>
+                            <i class="fa-solid fa-building-columns"></i> Projects
+                        </span>
+                </a>
+            </li>
+        @endcan
         <!-- Properties -->
         @can('view listing')
             <li class="nav-item">
@@ -42,6 +52,30 @@
                     @endcan
 
                 </ul>
+            </li>
+        @endcan
+
+        <!-- Roles -->
+        @can('view role')
+
+            <li class="nav-item">
+                <a href="{{route('roles.index')}}" class="nav-link text-white {{ Route::is('roles.index') ? 'active' : '' }}">
+                        <span>
+                            <i class="fa-solid fa-user-tag"></i> Roles
+                        </span>
+                </a>
+            </li>
+        @endcan
+
+        <!-- Permissions -->
+        @can('view permission')
+
+            <li class="nav-item">
+                <a href="{{route('permissions.index')}}" class="nav-link text-white {{ Route::is('permissions.index') ? 'active' : '' }}">
+                        <span>
+                            <i class="fa-solid fa-key"></i> Permissions
+                        </span>
+                </a>
             </li>
         @endcan
 
@@ -149,30 +183,6 @@
                     </a>
                 </li>
         @endcan
-
-            <!-- Roles -->
-            @can('view role')
-
-                <li class="nav-item">
-                    <a href="{{route('roles.index')}}" class="nav-link text-white {{ Route::is('roles.index') ? 'active' : '' }}">
-                        <span>
-                            <i class="fa-solid fa-user-tag"></i> Roles
-                        </span>
-                    </a>
-                </li>
-            @endcan
-
-            <!-- Permissions -->
-            @can('view permission')
-
-                <li class="nav-item">
-                    <a href="{{route('permissions.index')}}" class="nav-link text-white {{ Route::is('permissions.index') ? 'active' : '' }}">
-                        <span>
-                            <i class="fa-solid fa-key"></i> Permissions
-                        </span>
-                    </a>
-                </li>
-            @endcan
 
             <!-- Permissions -->
             @can('view appointment')
