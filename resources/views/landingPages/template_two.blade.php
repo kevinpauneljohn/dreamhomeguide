@@ -6,8 +6,7 @@
     <section class="hero text-center">
         <div class="container">
             <h1 class="mb-3">
-                🏡 Request Complete Details of <br class="d-none d-md-block">
-                <strong>{{ucwords(strtolower($title))}}</strong>
+                🏡 Request Property Details
             </h1>
             <p class="mb-3">
                 Get updated prices, available units, sample computations, and exclusive promos.
