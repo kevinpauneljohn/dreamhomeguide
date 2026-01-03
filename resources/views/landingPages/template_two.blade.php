@@ -149,7 +149,7 @@
     <!-- FOOTER -->
     <footer class="text-center mt-5 pb-4">
         <small class="text-muted">
-            © {{ date('Y') }} johnkevinpaunel.com
+            © {{ date('Y') }} {{request()->getHost()}}
         </small>
     </footer>
 

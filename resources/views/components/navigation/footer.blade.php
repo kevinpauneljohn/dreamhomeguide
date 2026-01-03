@@ -80,7 +80,7 @@
     </footer>
     <footer class="container-fluid text-center text-white p-2 bg-dark">
         <div class="container">
-            <p>Copyright © {{now()->format('Y')}} johnkevinpaunel.com</p>
+            <p>Copyright © {{now()->format('Y')}} {{request()->getHost()}}</p>
         </div>
     </footer>
 </div>

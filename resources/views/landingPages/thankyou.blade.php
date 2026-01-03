@@ -58,7 +58,7 @@
 
 <footer class="text-center pb-4">
     <small class="text-muted">
-        © {{ date('Y') }} johnkevinpaunel.com
+        © {{ date('Y') }} {{request()->getHost()}}
     </small>
 </footer>
 @push('meta')
