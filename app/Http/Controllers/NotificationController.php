@@ -27,11 +27,18 @@ class NotificationController extends Controller
         }
     }
 
-    public function notifications()
+    public function notifications(): array
     {
         return [
             'unread_count' => auth()->user()->unreadNotifications()->count(),
             'unread_messages' => auth()->user()->unreadNotifications()->limit(4)->get(),
         ];
+    }
+
+    public function allNotifications(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    {
+        return view('dashboard.pages.notifications.allnotifications')->with([
+            'title' => 'Notifications',
+        ]);
     }
 }

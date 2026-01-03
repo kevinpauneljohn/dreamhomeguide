@@ -56,13 +56,13 @@ const getNotifications = async () => {
     try {
         const { data: notifications } = await axios.get('/notifications');
 
-        // Clear dropdown properly
         notificationDropdownElement.innerHTML = '';
 
+        // 🔔 Notifications list
         if (notifications.unread_messages.length > 0) {
             notificationCountElement.innerText = notifications.unread_count;
+
             notifications.unread_messages.forEach(notification => {
-                console.log(notification.data);
                 const item = document.createElement('li');
                 item.id = `notification-item-${notification.id}`;
                 item.classList.add('notification-item');
@@ -70,25 +70,55 @@ const getNotifications = async () => {
                 item.innerHTML = `
                     <a class="dropdown-item small"
                        href="${notification.data.url}?notification=read&id=${notification.id}">
-                        <div class="fw-semibold">${formatNotificationType(notification.data.type)}</div>
-                        <small class="text-muted">${notification.data.description}</small>
+                        <div class="fw-semibold">
+                            ${formatNotificationType(notification.data.type)}
+                        </div>
+                        <small class="text-muted">
+                            ${notification.data.description}
+                        </small>
                     </a>
                 `;
 
                 notificationDropdownElement.appendChild(item);
             });
         } else {
-            notificationDropdownElement.innerHTML = `
+            // 💤 Empty state
+            notificationDropdownElement.insertAdjacentHTML(
+                'beforeend',
+                `
                 <li class="dropdown-item text-muted text-center small">
                     No notifications found
                 </li>
-            `;
+                `
+            );
         }
+
+        // ➖ Divider (ALWAYS visible)
+        notificationDropdownElement.insertAdjacentHTML(
+            'beforeend',
+            `<li><hr class="dropdown-divider"></li>`
+        );
+
+        // 🔗 View all notifications (ALWAYS visible)
+        const viewAllUrl = notificationDropdownElement.dataset.viewAllUrl;
+
+        notificationDropdownElement.insertAdjacentHTML(
+            'beforeend',
+            `
+            <li>
+                <a class="dropdown-item text-center small fw-semibold"
+                   href="/all-notifications">
+                    View all notifications
+                </a>
+            </li>
+            `
+        );
 
     } catch (error) {
         console.error('Failed to fetch notifications', error);
     }
 };
+
 
 export {notificationDropdownElement, formatNotificationType, getNotifications};
 
