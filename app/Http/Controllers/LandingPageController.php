@@ -27,10 +27,12 @@ class LandingPageController extends Controller
         ]);
     }
 
-    public function thankYou(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function thankYou(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
+
         return view('landingPages.thankyou')->with([
-            'title' => 'Alpine Residences',
+            'title' => 'Thank you!',
+            'property' => $request->property
         ]);
     }
 
@@ -54,8 +56,10 @@ class LandingPageController extends Controller
         ]);
 
         try {
-            Leads::create($request->only('first_name','last_name','email','phone','financing','occupation','income_range','message','status','source','property_id'));
-            return redirect()->route('thank-you');
+            $leads = Leads::create($request->only('first_name','last_name','email','phone','financing','occupation','income_range','message','status','source','property_id'));
+            return redirect()->route('thank-you',[
+                'property' => $leads->property->title
+            ]);
         }catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

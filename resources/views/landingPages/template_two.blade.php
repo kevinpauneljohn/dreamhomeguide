@@ -55,7 +55,7 @@
                             <div class="col-md-12 mb-3">
                                 <label class="form-label">Mobile Number</label><span class="text-danger">*</span>
                                 <input type="tel" class="form-control @error('phone') is-invalid @enderror"
-                                       name="phone" placeholder="09XX XXX XXXX" value="{{ old('mobile') }}">
+                                       name="phone" placeholder="09XX XXX XXXX" value="{{ old('phone') }}">
                                 @error('phone')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

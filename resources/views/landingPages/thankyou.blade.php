@@ -21,7 +21,7 @@
                 </h2>
 
                 <p class="text-muted mb-4">
-                    Your request for <strong>Alpine Residences</strong> has been successfully received.
+                    Your request for <strong>{{ucwords(strtolower($property))}}</strong> has been successfully received.
                 </p>
 
                 <p class="mb-4">
