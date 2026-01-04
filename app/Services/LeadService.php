@@ -16,7 +16,7 @@ class LeadService
     {
         return [
             'Facebook Ads', 'Facebook Page', 'Facebook Messenger', 'Website',
-            'Referral', 'Tiktok', 'Instagram', 'Google Forms', 'LinkedIn', 'Walk-in', 'Other'
+            'Referral', 'Tiktok', 'Instagram', 'Google Forms', 'LinkedIn', 'Walk-in','WhatsApp', 'Viber', 'Other'
         ];
     }
     public function leadStatus(): array

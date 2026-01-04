@@ -27,6 +27,9 @@ include __DIR__.'/dashboard/tools.php';
 include __DIR__.'/dashboard/profile.php';
 include __DIR__.'/dashboard/projects.php';
 include __DIR__.'/dashboard/model_units.php';
+include __DIR__.'/dashboard/task.php';
+
+
 include __DIR__.'/landingPages/pages.php';
 
 Broadcast::routes([
