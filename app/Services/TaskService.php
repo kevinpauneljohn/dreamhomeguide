@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Task;
 use Yajra\DataTables\Facades\DataTables;
+use Carbon\Carbon;
 
 class TaskService
 {
@@ -33,6 +34,17 @@ class TaskService
         ];
     }
 
+    public function resolvePriority(string $priority): array
+    {
+        return $this->priorities()[$priority] ?? [
+            'label' => 'Unknown',
+            'badge' => 'secondary',
+            'description' => 'Undefined priority',
+            'sla_hours' => null,
+        ];
+    }
+
+
     public function findPriority(string $priority): array
     {
         foreach ($this->priorities() as $key => $item) {
@@ -43,52 +55,93 @@ class TaskService
 
         return [];
     }
-    public function getQuery(array $request)
+
+    public function getQuery(array $request): \Illuminate\Database\Eloquent\Builder
     {
         $query = Task::query();
 
-        // Search
-        if (!empty($request['search'])) {
-            $query->where(function($q) use ($request) {
-                $q->where('name', 'like', "%{$request['search']}%");
+        /* -----------------------------------------
+         | SEARCH (Task #, Title, Description)
+         ----------------------------------------- */
+        $search = $request['search']['value']
+            ?? $request['search']
+            ?? null;
+
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+
+                // Allow searching by task number (TSK-00012)
+                if (preg_match('/\d+/', $search, $m)) {
+                    $q->orWhere('id', (int) $m[0]);
+                }
             });
         }
 
-        // Filter by permission
-        if (!empty($request['permission'])) {
-            $query->whereHas('permissions', function ($q) use ($request) {
-                $q->where('name', $request['permission']);
-            });
+        /* -----------------------------------------
+         | STATUS FILTER
+         ----------------------------------------- */
+        if (!empty($request['status'])) {
+            $query->where('status', $request['status']);
         }
 
-        // Sorting
-        if (!empty($request['sort'])) {
-            switch ($request['sort']) {
-                case 'name_asc':
-                    $query->orderBy('name', 'asc');
-                    break;
+        /* -----------------------------------------
+         | PRIORITY FILTER
+         ----------------------------------------- */
+        if (!empty($request['priority'])) {
+            $query->where('priority', $request['priority']);
+        }
 
-                case 'name_desc':
-                    $query->orderBy('name', 'desc');
-                    break;
+        /* -----------------------------------------
+         | DUE DATE FILTER
+         ----------------------------------------- */
+        if (!empty($request['due_date'])) {
+            $query->whereDate(
+                'due_date',
+                Carbon::parse($request['due_date'])->toDateString()
+            );
+        }
 
-                case 'newest':
-                    $query->orderBy('created_at', 'asc');
-                    break;
+        /* -----------------------------------------
+         | ORDERING (PRIORITY-BASED)
+         | 1) User-selected due date sorting
+         | 2) Default: latest created tasks
+         ----------------------------------------- */
+        if (!empty($request['order_due']) && in_array($request['order_due'], ['asc', 'desc'])) {
 
-                case 'oldest':
-                    $query->orderBy('created_at', 'desc');
-                    break;
+            $query->orderBy('due_date', $request['order_due']);
 
-            }
+        } else {
+
+            $query->orderByDesc('created_at');
         }
 
         return $query;
     }
-    public function getTasks($request)
+
+
+
+
+
+    public function getTasks($request): \Illuminate\Http\JsonResponse
     {
         $query = $this->getQuery($request);
         return DataTables::of($query)
+            ->editColumn('assigned_to',content:  function ($task) {
+                return $task->assigned_to ? [
+                    'name' => $task->assignedAgent->full_name,
+                    'role' => $task->assignedAgent->getRoleNames()->first(),
+                ] : null;
+            })
+            ->addColumn('action', content: function ($task) {
+                return [
+                    'view' => (bool)auth()->user()->can('view task'),
+                    'edit' => (bool)auth()->user()->can('edit task'),
+                    'delete' => (bool)auth()->user()->can('delete task'),
+                    'id' => $task->id
+                ];
+            })
             ->make(true);
     }
 

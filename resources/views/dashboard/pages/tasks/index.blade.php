@@ -16,9 +16,6 @@
                 <button class="btn btn-dark btn-sm">This Month</button>
                 <button class="btn btn-outline-secondary btn-sm">Reports</button>
 
-                <div class="ms-3">
-                    <input type="text" class="form-control form-control-sm" placeholder="Search task...">
-                </div>
             </div>
         </div>
 
@@ -156,22 +153,48 @@
                                 <h6 class="fw-semibold mb-0">Tasks</h6>
 
                                 <div class="d-flex gap-2 align-items-center">
+
                                     <!-- SEARCH -->
                                     <input
                                         type="text"
-                                        id="taskSearch"
+                                        id="search"
                                         class="form-control form-control-sm"
                                         placeholder="Search task # or title"
                                         style="width: 220px;"
                                     >
 
-                                    <!-- STATUS FILTER -->
-                                    <select class="form-select form-select-sm">
-                                        <option>All Status</option>
-                                        <option>Overdue</option>
-                                        <option>In Progress</option>
-                                        <option>Completed</option>
+                                    <!-- PRIORITY FILTER -->
+                                    <select class="form-select form-select-sm" id="priorities">
+                                        <option value="">All Priorities</option>
+                                        <option value="low">Low</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="high">High</option>
                                     </select>
+
+                                    <!-- STATUS FILTER -->
+                                    <select class="form-select form-select-sm" id="status-filter">
+                                        <option value="">All Status</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="in progress">In Progress</option>
+                                        <option value="completed">Completed</option>
+                                        <option value="overdue">Overdue</option>
+                                    </select>
+
+                                    <!-- DUE DATE FILTER -->
+                                    <input
+                                        type="date"
+                                        id="due-date-filter"
+                                        class="form-control form-control-sm"
+                                        title="Filter by Due Date"
+                                    >
+
+                                    <!-- ORDER BY DUE DATE -->
+                                    <select class="form-select form-select-sm" id="order-by-due">
+                                        <option value="">Default (Latest Created)</option>
+                                        <option value="asc">Due Date ↑ (Soonest)</option>
+                                        <option value="desc">Due Date ↓ (Latest)</option>
+                                    </select>
+
 
                                     <button class="btn btn-sm btn-outline-primary">
                                         <i class="fa fa-filter"></i>
@@ -180,12 +203,14 @@
                             </div>
 
 
+
+
                             <div class="table-responsive">
-                                <table class="table align-middle mb-0 task-table">
+                                <table class="table align-middle mb-0 task-table table-hover" id="task-table">
                                     <thead class="table-light">
                                     <tr>
                                         <th style="width: 110px;">Task #</th>
-                                        <th>Task</th>
+                                        <th style="width: 28%;">Task</th>
                                         <th>Due</th>
                                         <th>Priority</th>
                                         <th>Assigned</th>
@@ -198,124 +223,6 @@
 
                                     <tbody>
 
-                                    <!-- TASK ROW -->
-                                    <tr class="task-row overdue">
-                                        <td>
-                                            <span class="fw-semibold text-muted task-number">TSK-10021</span>
-                                        </td>
-
-                                        <td>
-                                            <strong>Follow-up: Rania Model Inquiry</strong>
-                                            <div class="text-muted small">
-                                                Financing discussion
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <span class="fw-semibold text-danger">Today</span>
-                                            <div class="small text-muted">4:00 PM</div>
-                                        </td>
-
-                                        <td>
-                        <span class="badge bg-danger-subtle text-danger">
-                            High
-                        </span>
-                                        </td>
-
-                                        <td>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <div class="avatar">JP</div>
-                                                <span>John P.</span>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                        <span class="badge bg-info-subtle text-info">
-                            Lead
-                        </span>
-                                            <div class="small text-muted">
-                                                Juan Dela Cruz
-                                            </div>
-                                        </td>
-
-                                        <td>
-                        <span class="badge bg-warning-subtle text-warning">
-                            Overdue
-                        </span>
-                                        </td>
-
-                                        <td class="text-end">
-                                            <div class="btn-group">
-                                                <button class="btn btn-sm btn-outline-success">
-                                                    ✓
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-secondary">
-                                                    <i class="fa fa-eye"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-secondary">
-                                                    <i class="fa fa-ellipsis-vertical"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <!-- NORMAL TASK -->
-                                    <tr class="task-row">
-                                        <td>
-                                            <span class="fw-semibold text-muted task-number">TSK-10021</span>
-                                        </td>
-
-                                        <td>
-                                            <strong>Site Viewing Preparation</strong>
-                                            <div class="text-muted small">
-                                                Print documents
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <span class="fw-semibold">Tomorrow</span>
-                                            <div class="small text-muted">9:00 AM</div>
-                                        </td>
-
-                                        <td>
-                        <span class="badge bg-warning-subtle text-warning">
-                            Medium
-                        </span>
-                                        </td>
-
-                                        <td>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <div class="avatar">AR</div>
-                                                <span>Agent Rose</span>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                        <span class="badge bg-primary-subtle text-primary">
-                            Appointment
-                        </span>
-                                            <div class="small text-muted">
-                                                Solana Zaragoza
-                                            </div>
-                                        </td>
-
-                                        <td>
-                        <span class="badge bg-info-subtle text-info">
-                            In Progress
-                        </span>
-                                        </td>
-
-                                        <td class="text-end">
-                                            <div class="btn-group">
-                                                <button class="btn btn-sm btn-outline-success">
-                                                    ✓
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-secondary">
-                                                    <i class="fa fa-eye"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
 
                                     </tbody>
                                 </table>

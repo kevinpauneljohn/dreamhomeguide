@@ -115,4 +115,20 @@ class User extends Authenticatable
         return $this->hasMany(Appointment::class, 'assigned_agent');
     }
 
+    /**
+     * Tasks created by this user
+     */
+    public function createdTasks(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Task::class, 'user_id', 'id');
+    }
+
+    /**
+     * Tasks assigned to this user (agent tasks)
+     */
+    public function assignedTasks(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Task::class, 'assigned_to', 'id');
+    }
+
 }

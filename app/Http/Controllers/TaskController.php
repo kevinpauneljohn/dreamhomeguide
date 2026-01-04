@@ -47,11 +47,15 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        $priorities = $this->taskService->priorities();
+
         return view('dashboard.pages.tasks.show')->with([
-            'title' => 'Task Details',
-            'task' => $task,
+            'title'     => 'Task Details',
+            'task'      => $task,
+            'priority' => $this->taskService->resolvePriority($task->priority),
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

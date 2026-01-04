@@ -1,230 +1,265 @@
 @extends('dashboard.layouts.app')
-@section('title', $title)
-@section('content')
 
+@section('title', 'Task Details')
+
+@section('content')
     <div class="container-fluid py-4">
 
-        <!-- PAGE HEADER -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-                <small class="text-muted">Execution & Follow-up Monitoring</small>
-                <h4 class="fw-bold mb-0">Task Overview</h4>
-            </div>
+        {{-- =========================
+            BREADCRUMB
+        ========================== --}}
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{{ route('dashboard') }}">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ route('task.index') }}">Tasks</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Task #TSK-{{ str_pad($task->id, 5, '0', STR_PAD_LEFT) }}
+                </li>
+            </ol>
+        </nav>
 
-            <div class="d-flex gap-2">
-                <button class="btn btn-sm btn-outline-secondary">Today</button>
-                <button class="btn btn-sm btn-outline-secondary">This Week</button>
-                <button class="btn btn-sm btn-dark">This Month</button>
+        @php
+            $statusMap = [
+                'pending'     => ['label' => 'Pending', 'badge' => 'secondary'],
+                'in progress' => ['label' => 'In Progress', 'badge' => 'info'],
+                'completed'   => ['label' => 'Completed', 'badge' => 'success'],
+                'overdue'     => ['label' => 'Overdue', 'badge' => 'warning'],
+            ];
+
+            $status = $statusMap[$task->status] ?? [
+                'label' => ucfirst($task->status),
+                'badge' => 'secondary',
+            ];
+        @endphp
+
+        {{-- =========================
+            HEADER CARD
+        ========================== --}}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h3 class="fw-bold mb-2">
+                            {{ $task->title }}
+                        </h3>
+
+                        <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <span class="badge bg-{{ $priority['badge'] }}">
+                            {{ $priority['label'] }} Priority
+                        </span>
+
+                            <span class="badge bg-{{ $status['badge'] }}">
+                            {{ $status['label'] }}
+                        </span>
+
+                            <span class="text-muted small">
+                            <i class="fa fa-hashtag me-1"></i>
+                            TSK-{{ str_pad($task->id, 5, '0', STR_PAD_LEFT) }}
+                        </span>
+                        </div>
+                    </div>
+
+                    {{-- QUICK ACTIONS --}}
+                    <div class="d-flex gap-2">
+                        @can('edit task')
+                            <a href="{{ route('task.edit', $task) }}" class="btn btn-outline-secondary btn-sm">
+                                <i class="fa fa-pen"></i>
+                            </a>
+                        @endcan
+
+                        @can('delete task')
+                            <button class="btn btn-outline-danger btn-sm">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        @endcan
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- KPI CARDS -->
-        <div class="row g-3 mb-4">
-            <div class="col-lg-3">
+        <div class="row g-4">
+
+            {{-- =========================
+                LEFT COLUMN
+            ========================== --}}
+            <div class="col-lg-8">
+
+                {{-- DESCRIPTION --}}
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-body">
+                        <h6 class="fw-semibold mb-3 text-uppercase text-muted">
+                            Description
+                        </h6>
+                        <p class="mb-0">
+                            {{ $task->description ?: 'No description provided.' }}
+                        </p>
+                    </div>
+                </div>
+
+                {{-- LINKED RECORDS --}}
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-body">
+                        <h6 class="fw-semibold mb-3 text-uppercase text-muted">
+                            Linked Records
+                        </h6>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <small class="text-muted">Lead</small>
+                                <div class="fw-semibold">
+                                    @if($task->lead)
+                                        <a href="{{ route('leads.show', $task->lead) }}">
+                                            {{ $task->lead->full_name ?? 'View Lead' }}
+                                        </a>
+                                    @else
+                                        —
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <small class="text-muted">Appointment</small>
+                                <div>—</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- ACTIVITY --}}
                 <div class="card shadow-sm border-0">
                     <div class="card-body">
-                        <small class="text-muted">Total Tasks</small>
-                        <h4 class="fw-bold mb-0">100</h4>
+                        <h6 class="fw-semibold mb-3 text-uppercase text-muted">
+                            Activity
+                        </h6>
+
+                        <ul class="list-unstyled small mb-0">
+                            <li class="mb-2">
+                                <strong>{{ $task->creator?->full_name ?? 'System' }}</strong>
+                                created this task
+                                <span class="text-muted">
+                                {{ $task->created_at->format('M d, Y h:i A') }}
+                            </span>
+                            </li>
+
+                            @if($task->status === 'completed')
+                                <li>
+                                    Task completed
+                                    <span class="text-muted">
+                                    {{ $task->updated_at->format('M d, Y h:i A') }}
+                                </span>
+                                </li>
+                            @endif
+                        </ul>
                     </div>
                 </div>
+
             </div>
 
-            <div class="col-lg-3">
-                <div class="card shadow-sm border-0 bg-warning-subtle">
+            {{-- =========================
+                RIGHT COLUMN
+            ========================== --}}
+            <div class="col-lg-4">
+
+                {{-- ASSIGNMENT --}}
+                <div class="card shadow-sm border-0 mb-4">
                     <div class="card-body">
-                        <small class="text-muted">In Progress</small>
-                        <h4 class="fw-bold mb-0">14</h4>
-                    </div>
-                </div>
-            </div>
+                        <h6 class="fw-semibold mb-3 text-uppercase text-muted">
+                            Assignment
+                        </h6>
 
-            <div class="col-lg-3">
-                <div class="card shadow-sm border-0 bg-danger-subtle">
-                    <div class="card-body">
-                        <small class="text-muted">Overdue</small>
-                        <h4 class="fw-bold mb-0">6</h4>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3">
-                <div class="card shadow-sm border-0 bg-success-subtle">
-                    <div class="card-body">
-                        <small class="text-muted">Completed</small>
-                        <h4 class="fw-bold mb-0">32</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- OVERVIEW SECTION -->
-        <div class="row g-4 mb-4">
-
-            <!-- TASK STATUS -->
-            <div class="col-lg-6">
-                <div class="card shadow-sm border-0 h-100">
-                    <div class="card-body">
-                        <h6 class="fw-semibold mb-3">Task Status Overview</h6>
-
-                        <div class="d-flex justify-content-around text-center">
-                            <div>
-                                <span class="dot bg-warning"></span>
-                                <small class="d-block text-muted">In Progress</small>
-                                <h6 class="fw-bold">14</h6>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="avatar">
+                                {{ strtoupper(substr($task->assignedAgent?->full_name ?? 'NA', 0, 2)) }}
                             </div>
                             <div>
-                                <span class="dot bg-success"></span>
-                                <small class="d-block text-muted">Completed</small>
-                                <h6 class="fw-bold">32</h6>
+                                <div class="fw-semibold">
+                                    {{ !is_null($task->assignedAgent) ? ucwords(strtolower($task->assignedAgent->full_name)) : 'NA' }}
+                                </div>
+                                <small class="text-muted">
+                                    {{ $task->assignedAgent?->getRoleNames()->first() ?? '—' }}
+                                </small>
                             </div>
-                            <div>
-                                <span class="dot bg-secondary"></span>
-                                <small class="d-block text-muted">Not Started</small>
-                                <h6 class="fw-bold">54</h6>
-                            </div>
+                        </div>
+
+                        <hr>
+
+                        <small class="text-muted">Created By</small>
+                        <div class="fw-semibold">
+                            {{ !is_null($task->creator) ? ucwords(strtolower($task->creator->full_name)) : 'System' }}
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- PRIORITY -->
-            <div class="col-lg-6">
-                <div class="card shadow-sm border-0 h-100">
+                {{-- TIMELINE --}}
+                <div class="card shadow-sm border-0 mb-4">
                     <div class="card-body">
-                        <h6 class="fw-semibold mb-3">Task Priority Breakdown</h6>
+                        <h6 class="fw-semibold mb-3 text-uppercase text-muted">
+                            Timeline
+                        </h6>
 
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>High Priority</span>
-                            <strong class="text-danger">18</strong>
+                        <div class="mb-2">
+                            <small class="text-muted">Due Date</small>
+                            <div class="fw-semibold">
+                                {{ optional($task->due_date)->format('M d, Y h:i A') ?? '—' }}
+                            </div>
                         </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Medium Priority</span>
-                            <strong class="text-warning">47</strong>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span>Low Priority</span>
-                            <strong class="text-success">35</strong>
+
+                        <div>
+                            <small class="text-muted">Status</small><br>
+                            <span class="badge bg-{{ $status['badge'] }}">
+                            {{ $status['label'] }}
+                        </span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+                {{-- TASK CONTROLS --}}
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h6 class="fw-semibold mb-3 text-uppercase text-muted">
+                            Task Controls
+                        </h6>
 
-        <!-- EXECUTION TREND -->
-        <div class="card shadow-sm border-0 mb-4">
-            <div class="card-body">
-                <h6 class="fw-semibold mb-3">Execution Trend</h6>
-                <div class="line-chart-placeholder"></div>
+                        <div class="d-grid gap-2">
+                            @if($task->status !== 'completed')
+                                <button class="btn btn-success">
+                                    ✓ Mark as Completed
+                                </button>
+                            @endif
 
-                <div class="d-flex justify-content-between mt-3">
-                    <small class="text-muted">Avg. Completion Time</small>
-                    <strong>1.8 days</strong>
+                            @can('edit task')
+                                <button class="btn btn-outline-secondary">
+                                    Reassign Task
+                                </button>
+                            @endcan
+                        </div>
+                    </div>
                 </div>
+
             </div>
+
         </div>
-
-        <!-- TASK TABLE -->
-        <div class="card shadow-sm border-0">
-            <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                <h6 class="fw-semibold mb-0">
-                    <i class="fa-solid fa-list-check"></i> Tasks
-                </h6>
-
-                <div class="d-flex gap-2 align-items-center">
-                    <input
-                        type="text"
-                        id="taskSearch"
-                        class="form-control form-control-sm"
-                        placeholder="Search task # or title"
-                        style="width:220px;"
-                    >
-
-                    <select class="form-select form-select-sm">
-                        <option>All Status</option>
-                        <option>Overdue</option>
-                        <option>In Progress</option>
-                        <option>Completed</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table align-middle mb-0 task-table">
-                    <thead class="table-light">
-                    <tr>
-                        <th>Task #</th>
-                        <th>Task</th>
-                        <th>Due</th>
-                        <th>Priority</th>
-                        <th>Assigned</th>
-                        <th>Linked To</th>
-                        <th>Status</th>
-                        <th class="text-end">Action</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr class="task-row overdue">
-                        <td class="task-number">TSK-10021</td>
-                        <td>
-                            <strong>Follow-up: Rania Model Inquiry</strong>
-                            <div class="text-muted small">Financing discussion</div>
-                        </td>
-                        <td>
-                            <span class="fw-semibold text-danger">Today</span>
-                            <div class="small text-muted">4:00 PM</div>
-                        </td>
-                        <td><span class="badge bg-danger-subtle text-danger">High</span></td>
-                        <td>John P.</td>
-                        <td>
-                            <span class="badge bg-info-subtle text-info">Lead</span>
-                            <div class="small text-muted">Juan Dela Cruz</div>
-                        </td>
-                        <td><span class="badge bg-warning-subtle text-warning">Overdue</span></td>
-                        <td class="text-end">
-                            <button class="btn btn-sm btn-outline-success">✓</button>
-                            <button class="btn btn-sm btn-outline-secondary">
-                                <i class="fa fa-eye"></i>
-                            </button>
-                        </td>
-                    </tr>
-
-                    <tr class="task-row">
-                        <td class="task-number">TSK-10022</td>
-                        <td>
-                            <strong>Site Viewing Preparation</strong>
-                            <div class="text-muted small">Print documents</div>
-                        </td>
-                        <td>
-                            Tomorrow
-                            <div class="small text-muted">9:00 AM</div>
-                        </td>
-                        <td><span class="badge bg-warning-subtle text-warning">Medium</span></td>
-                        <td>Agent Rose</td>
-                        <td>
-                            <span class="badge bg-primary-subtle text-primary">Appointment</span>
-                            <div class="small text-muted">Solana Zaragoza</div>
-                        </td>
-                        <td><span class="badge bg-info-subtle text-info">In Progress</span></td>
-                        <td class="text-end">
-                            <button class="btn btn-sm btn-outline-success">✓</button>
-                            <button class="btn btn-sm btn-outline-secondary">
-                                <i class="fa fa-eye"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
     </div>
-
 @endsection
-
 @push('css')
+    <style>
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
 
+    </style>
 @endpush
 
 @push('scripts')
