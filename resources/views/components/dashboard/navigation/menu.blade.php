@@ -37,7 +37,10 @@
                    aria-controls="propertiesMenu">
 
                 <span>
-                    <i class="bi bi-bar-chart"></i> Properties
+                    <i class="bi bi-buildings"></i> Properties
+
+
+
                 </span>
 
                     <i class="bi bi-caret-down-fill small"></i>
