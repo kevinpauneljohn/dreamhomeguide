@@ -41,5 +41,36 @@
     </div>
         @yield('content')
     <x-navigation.footer/>
+
+    <!-- Facebook Messenger Chat Plugin -->
+    <div id="fb-root"></div>
+
+    <div id="fb-customer-chat"
+         class="fb-customerchat"
+         attribution="biz_inbox">
+    </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "1928768050502869");
+    </script>
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v19.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 </body>
 </html>
