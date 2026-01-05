@@ -3,7 +3,7 @@
     {{-- MAIN IMAGES --}}
     <div class="carousel-inner">
         @foreach($images as $index => $image)
-            <div class="carousel-item {{ $image->is_thumbnail ? 'active' : '' }}">
+            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                 <img
                     src="{{ asset('storage/property_images/'.$image->file_name) }}"
                     class="d-block w-100"
@@ -23,9 +23,8 @@
         @foreach($images as $index => $image)
             <img
                 src="{{ asset('storage/property_images/'.$image->file_name) }}"
-                class="img-thumbnail thumb {{ $image->is_thumbnail ? 'active-thumb' : '' }}"
-                data-bs-target="#propertyCarousel"
-                data-bs-slide-to="{{ $index }}"
+                class="img-thumbnail thumb {{ $index === 0 ? 'active-thumb' : '' }}"
+                data-index="{{ $index }}"
                 alt="Thumbnail {{ $image->id }}"
                 width="120"
                 height="80"
@@ -35,9 +34,3 @@
         @endforeach
     </div>
 </div>
-
-
-
-@push('scripts')
-    @vite('resources/js/property-gallery.js')
-@endpush
