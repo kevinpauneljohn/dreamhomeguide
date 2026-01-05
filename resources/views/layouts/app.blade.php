@@ -52,7 +52,7 @@
 
 
     <script>
-        var chatbox = document.getElementById('fb-customer-chat');
+        var chatbox = document.getElementById('fb-customerchat');
         chatbox.setAttribute("page_id", "1928768050502869");
     </script>
 
