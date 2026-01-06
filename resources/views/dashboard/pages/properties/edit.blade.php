@@ -130,7 +130,7 @@
                 <div class="row g-3 mb-3">
                     <div class="col-md-4 price">
                         <label class="form-label fw-semibold">Price (₱)</label><span class="text-danger">*</span>
-                        <input type="number" name="price" id="price" class="form-control" min="0" value="{{$property->price}}" placeholder="5000000" >
+                        <input type="number" name="price" step="0.01" id="price" class="form-control" min="0" value="{{$property->price}}" placeholder="5000000" >
                     </div>
 
                     <div class="col-md-4 bedrooms">
@@ -152,12 +152,12 @@
 
                     <div class="col-md-4 lot_area">
                         <label class="form-label fw-semibold">Lot Area (sqm)</label>
-                        <input type="number" name="lot_area" class="form-control" id="lot_area" min="0" value="{{$property->lot_area}}" placeholder="150">
+                        <input type="number" name="lot_area" step="0.01" class="form-control" id="lot_area" min="0" value="{{$property->lot_area}}" placeholder="150">
                     </div>
 
                     <div class="col-md-4 floor_area">
                         <label class="form-label fw-semibold">Floor Area (sqm)</label>
-                        <input type="number" name="floor_area" id="floor_area" class="form-control" min="0" value="{{$property->floor_area}}" placeholder="100">
+                        <input type="number" name="floor_area" step="0.01" id="floor_area" class="form-control" min="0" value="{{$property->floor_area}}" placeholder="100">
                     </div>
                 </div>
             </div>
