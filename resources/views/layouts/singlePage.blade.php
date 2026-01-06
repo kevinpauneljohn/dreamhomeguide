@@ -42,6 +42,8 @@
         @yield('content')
     <x-navigation.footer/>
 
+    @stack('scripts')
+
     <!-- Facebook Messenger Chat Plugin -->
     <div id="fb-root"></div>
 
