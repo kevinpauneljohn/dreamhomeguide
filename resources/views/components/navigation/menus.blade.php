@@ -1,6 +1,14 @@
 <nav class="navbar navbar-expand-sm gradient-nav fixed-top">
     <div class="container">
-        <a class="navbar-brand text-white" href="{{ route('home') }}">John Kevin Paunel</a>
+        <a class="navbar-brand d-flex align-items-center gap-2 text-white" href="{{ route('home') }}">
+            <img
+                src="{{ asset('images/johnkevinpaunel_logo.svg') }}"
+                alt="John Kevin Paunel Logo"
+                height="36"
+                class="navbar-logo"
+            >
+            <span class="fw-semibold">John Kevin Paunel</span>
+        </a>
 
         <!-- Toggler for Offcanvas -->
         <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainOffcanvas">
