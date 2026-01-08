@@ -22,7 +22,7 @@ class PropertyService
 
     private function propertyQuery(): \Illuminate\Database\Eloquent\Builder
     {
-        return Property::query();
+        return Property::query()->latest('created_at', 'desc');
     }
 
     public function getQuery(array $request): \Illuminate\Database\Eloquent\Builder
