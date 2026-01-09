@@ -52,7 +52,13 @@
             <div class="row d-flex justify-content-between align-items-start">
                 <div class="col-lg-8">
                     <h1 class="property-title">{{ ucwords(strtolower($property->title)) }}</h1>
+
+                    <div class="text-muted small mt-1">
+                        <i class="fa-regular fa-clock"></i>
+                        Posted on {{ $property->created_at->format('F d, Y') }}
+                    </div>
                 </div>
+
                 <div class="col-lg-4 d-flex justify-content-end">
                     {{-- Floating Action Icons --}}
                     <div class="property-actions d-flex gap-2">
