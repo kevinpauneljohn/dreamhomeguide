@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Property;
 use App\Models\PropertyImage;
+use App\Models\PropertyView;
 use Yajra\DataTables\Facades\DataTables;
 
 class PropertyService
@@ -210,5 +211,33 @@ class PropertyService
     {
         $query = $this->searchPropertyQuery($request);
         return $query->paginate(12);
+    }
+
+    public function propertyViewsRecording($property, $request): void
+    {
+        $referrer = $request->headers->get('referer') ?? 'Direct';
+
+        if(!$this->isBot($request->userAgent()))
+        {
+            PropertyView::firstOrCreate(
+                [
+                    'property_id' => $property->id,
+                    'ip_address'  => $request->ip(),
+                ],
+                [
+                    'referrer_url' => $referrer,
+                    'utm_source'   => $request->get('utm_source'),
+                    'utm_medium'   => $request->get('utm_medium'),
+                    'utm_campaign' => $request->get('utm_campaign'),
+                    'utm_content'  => $request->get('utm_content'),
+                    'user_agent'   => $request->userAgent(),
+                ]
+            );
+        }
+    }
+
+    public function isBot($userAgent): bool
+    {
+        return preg_match('/bot|crawl|spider|slurp|facebookexternalhit/i', $userAgent);
     }
 }

@@ -56,18 +56,9 @@ class ListingController extends Controller
     public function showBySlug(string $slug, Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         $property = Property::where('slug',$slug)->firstOrFail();
-        $ip = $request->ip();
 
-        PropertyView::firstOrCreate(
-            [
-                'property_id' => $property->id,
-                'ip_address'  => $ip,
-            ],
-            [
-                'user_agent' => $request->userAgent(),
-            ]
-        );
 
+        $this->propertyService->propertyViewsRecording($property, $request);
 
         return view('pages.listings.profile')->with([
             'title' => ucwords(strtolower($property->title)),
