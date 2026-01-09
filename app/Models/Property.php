@@ -27,4 +27,15 @@ class Property extends Model
     {
         return $this->hasMany(Leads::class);
     }
+
+    public function views(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(PropertyView::class);
+    }
+
+    public function viewsCount(): int
+    {
+        return $this->views()->count();
+    }
+
 }

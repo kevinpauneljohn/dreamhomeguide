@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
+use App\Models\PropertyView;
 use App\Services\PropertyService;
 use Illuminate\Http\Request;
 
@@ -52,9 +53,22 @@ class ListingController extends Controller
         //
     }
 
-    public function showBySlug(string $slug): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function showBySlug(string $slug, Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         $property = Property::where('slug',$slug)->firstOrFail();
+        $ip = $request->ip();
+
+        PropertyView::firstOrCreate(
+            [
+                'property_id' => $property->id,
+                'ip_address'  => $ip,
+            ],
+            [
+                'user_agent' => $request->userAgent(),
+            ]
+        );
+
+
         return view('pages.listings.profile')->with([
             'title' => ucwords(strtolower($property->title)),
             'property' => $property,
