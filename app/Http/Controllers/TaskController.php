@@ -9,6 +9,7 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\User;
 use App\Services\TaskService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -93,7 +94,20 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        //
+        $request->merge([
+            'is_public' => $request->has('is_public'),
+            'appointment_id' => $request->linked_type == 'appointment' ? $request->linked_id : null,
+            'lead_id' => $request->linked_type == 'lead' ? $request->linked_id : null,
+            'due_date' => Carbon::parse($request->due_date)->format('Y-m-d H:i:s')
+        ]);
+
+        $task->fill($request->only('title','description','type','due_date','priority','user_id','lead_id','appointment_id','assigned_to','is_public'));
+        if($task->isDirty())
+        {
+            $task->save();
+            return response()->json(['success' => true, 'message' => 'Task updated successfully.']);
+        }
+        return response()->json(['success' => false, 'message' => 'No changes were made to the task.']);
     }
 
     /**

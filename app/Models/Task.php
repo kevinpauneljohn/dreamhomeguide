@@ -26,6 +26,11 @@ class Task extends Model
 
     protected $appends = ['linked_record'];
 
+    protected $casts = [
+        'due_date' => 'datetime:Y-m-d H:i:s',
+        'is_public' => 'boolean'
+    ];
+
 
     /**
      * Task creator (who created the task)

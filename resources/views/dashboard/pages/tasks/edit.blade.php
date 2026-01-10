@@ -18,17 +18,17 @@
                 <a href="{{ route('task.index') }}" class="btn btn-outline-secondary">
                     Cancel
                 </a>
-                <button type="submit" form="createTaskForm" class="btn btn-primary">
+                <button type="submit" form="editTaskForm" class="btn btn-primary">
                     Update Task
                 </button>
             </div>
         </div>
 
         <!-- FORM -->
-        <form id="createTaskForm" method="POST" action="{{ route('task.store') }}">
+        <form id="editTaskForm">
             @csrf
 
-            <input type="hidden" name="link" value="{{request('type')}}">
+            <input type="hidden" name="task_id" value="{{$task->id}}">
 
             <div class="row g-4">
 
