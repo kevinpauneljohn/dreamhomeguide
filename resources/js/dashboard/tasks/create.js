@@ -18,9 +18,6 @@ const id   = params.get('id');
 
 const link = document.querySelector('input[name=link]');
 
-reminderCheckbox.addEventListener('change', () => {
-    reminderInput.disabled = !reminderCheckbox.checked;
-});
 
 linkedTypeSelect.addEventListener('change', () => {
     linkedRecordSelect.disabled = linkedTypeSelect.value === '';
