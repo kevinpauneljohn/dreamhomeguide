@@ -20,7 +20,12 @@ class Task extends Model
         'priority',
         'is_public',
         'status',
+        'appointment_id',
+        'type'
     ];
+
+    protected $appends = ['linked_record'];
+
 
     /**
      * Task creator (who created the task)
@@ -37,4 +42,39 @@ class Task extends Model
     {
         return $this->belongsTo(User::class, 'assigned_to', 'id');
     }
+
+    // Task.php
+
+    public function lead(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Leads::class);
+    }
+
+    public function appointment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Appointment::class);
+    }
+
+
+    public function getLinkedRecordAttribute(): ?array
+    {
+        if ($this->lead_id) {
+            return [
+                'type' => 'lead',
+                'label' => 'Lead',
+                'id' => $this->lead_id,
+            ];
+        }
+
+        if ($this->appointment_id) {
+            return [
+                'type' => 'appointment',
+                'label' => 'Appointment',
+                'id' => $this->appointment_id,
+            ];
+        }
+
+        return null;
+    }
+
 }

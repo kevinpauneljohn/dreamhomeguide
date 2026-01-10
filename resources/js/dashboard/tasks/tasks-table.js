@@ -135,15 +135,21 @@ export const initializeTaskTable = ()  => {
 
             /* LINKED TO */
             {
-                data: 'lead_id',
-                render: leadId => {
-                    if (!leadId) {
+                data: 'linked_record',
+                render: linked => {
+
+                    if (!linked) {
                         return `<span class="text-muted">—</span>`;
                     }
 
+                    const map = {
+                        lead: 'bg-info-subtle text-info',
+                        appointment: 'bg-primary-subtle text-primary',
+                    };
+
                     return `
-                        <span class="badge bg-info-subtle text-info">
-                            Lead
+                        <span class="badge ${map[linked.type]}">
+                            ${linked.label}
                         </span>
                         <div class="small text-muted">
                             Linked Record
@@ -152,6 +158,7 @@ export const initializeTaskTable = ()  => {
                 },
                 orderable: false
             },
+
 
             /* STATUS */
             {

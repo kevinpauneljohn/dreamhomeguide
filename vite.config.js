@@ -89,6 +89,7 @@ export default defineConfig({
                 //tasks
                 'resources/js/dashboard/tasks/dashboard.js',
                 'resources/js/dashboard/tasks/tasks-table.js',
+                'resources/js/dashboard/tasks/create.js',
 
                 //landing page form
                 'resources/js/landing-page/form.js',

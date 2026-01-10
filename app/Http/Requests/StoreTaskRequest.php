@@ -11,7 +11,7 @@ class StoreTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->user()->can('add task');
     }
 
     /**
@@ -22,7 +22,12 @@ class StoreTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string','max:10000'],
+            'type' => ['required', 'string', 'max:255'],
+            'due_date' => ['required', 'date'],
+            'priority' => ['required', 'string', 'max:255'],
+            'assigned_to' => ['required', 'string', 'max:255'],
         ];
     }
 }

@@ -196,9 +196,9 @@
                                     </select>
 
 
-                                    <button class="btn btn-sm btn-outline-primary">
-                                        <i class="fa fa-filter"></i>
-                                    </button>
+                                    <a href="{{route('task.create')}}" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
                                 </div>
                             </div>
 

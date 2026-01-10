@@ -123,7 +123,15 @@
 
                             <div class="col-md-6">
                                 <small class="text-muted">Appointment</small>
-                                <div>—</div>
+                                <div class="fw-semibold">
+                                    @if($task->appointment)
+                                        <a href="{{ route('appointment.show', ['appointment' => $task->appointment]) }}">
+                                            {{ $task->appointment->title ?? 'View Lead' }}
+                                        </a>
+                                    @else
+                                        —
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>

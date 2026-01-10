@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Middleware\OnlyAssignedAndCreatorCanView;
 use App\Models\Appointment;
 use App\Models\Leads;
 use App\Http\Requests\StoreLeadsRequest;

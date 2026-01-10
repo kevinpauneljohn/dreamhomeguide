@@ -56,7 +56,8 @@ class AppointmentService
     {
         if($appointment = Appointment::create($appointmentData))
         {
-            return response()->json(['success' => true, 'message' => 'Appointment saved successfully.', 'type' => $appointment->appointment_type]);;
+            return response()->json(['success' => true, 'message' => 'Appointment saved successfully.',
+                'type' => $appointment->appointment_type, 'appointment_id' => $appointment->id]);
         }
         return response()->json(['success' => false, 'message' => 'An error occurred while saving your appointment.']);
     }
