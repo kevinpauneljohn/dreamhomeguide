@@ -164,6 +164,14 @@
                                     >
 
                                     <!-- PRIORITY FILTER -->
+                                    <select class="form-select form-select-sm" id="agent-filter">
+                                        <option value="">All Agent</option>
+                                        @foreach($agents as $agent)
+                                            <option value="{{$agent->id}}">{{ucwords($agent->full_name)}} - {{$agent->getRoleNames()->first()}}</option>
+                                        @endforeach
+                                    </select>
+
+                                    <!-- PRIORITY FILTER -->
                                     <select class="form-select form-select-sm" id="priorities">
                                         <option value="">All Priorities</option>
                                         <option value="low">Low</option>

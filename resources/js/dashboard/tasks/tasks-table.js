@@ -8,7 +8,7 @@ $(function () {
     initializeTaskTable()
 
     /* EXTERNAL SEARCH */
-    $('#search, #status-filter, #priorities, #due-date-filter, #order-by-due')
+    $('#search, #status-filter, #priorities, #due-date-filter, #order-by-due, #agent-filter')
         .on('keyup change', function () {
             $('#task-table').DataTable().ajax.reload();
         });
@@ -32,6 +32,7 @@ export const initializeTaskTable = ()  => {
             type: "GET",
             data: function (d) {
                 d.search     = $('#search').val();
+                d.assigned_to = $('#agent-filter').val();
                 d.status     = $('#status-filter').val();
                 d.priority   = $('#priorities').val();
                 d.due_date   = $('#due-date-filter').val();

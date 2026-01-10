@@ -26,6 +26,7 @@ class TaskController extends Controller
     {
         return view('dashboard.pages.tasks.index')->with([
             'title' => 'Tasks',
+            'agents' => User::select('id','first_name','last_name','email')->get()
         ]);
     }
 

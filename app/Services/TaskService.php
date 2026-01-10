@@ -80,6 +80,13 @@ class TaskService
         }
 
         /* -----------------------------------------
+         | Assigned To FILTER
+         ----------------------------------------- */
+        if (!empty($request['assigned_to'])) {
+            $query->where('assigned_to', $request['assigned_to']);
+        }
+
+        /* -----------------------------------------
          | STATUS FILTER
          ----------------------------------------- */
         if (!empty($request['status'])) {
