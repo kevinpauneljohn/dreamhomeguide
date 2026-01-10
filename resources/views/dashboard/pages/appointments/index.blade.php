@@ -91,6 +91,13 @@
                             <textarea class="form-control" name="notes" rows="3" placeholder="Additional instructions…"></textarea>
                         </div>
 
+                        <div class="form-group mb-3 create-task d-none">
+                            <input class="form-check-input" name="task" type="checkbox" value="create" id="create-task-input" checked>
+                            <label class="form-check-label" for="checkDefault">
+                                Create a task for this appointment
+                            </label>
+                        </div>
+
                     </div>
 
                     <div class="modal-footer">

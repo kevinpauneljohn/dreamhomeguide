@@ -15,8 +15,8 @@
             </div>
 
             <div class="d-flex gap-2">
-                <a href="{{ route('task.index') }}" class="btn btn-outline-secondary">
-                    Cancel
+                <a onclick="window.history.back()" class="btn btn-outline-secondary">
+                    Back
                 </a>
                 <button type="submit" form="editTaskForm" class="btn btn-primary">
                     Update Task
@@ -203,8 +203,8 @@
 
             <!-- FOOTER ACTIONS -->
             <div class="d-flex justify-content-end gap-2 mt-4 mb-4">
-                <a href="{{ route('task.index') }}" class="btn btn-outline-secondary">
-                    Cancel
+                <a onclick="window.history.back()" class="btn btn-outline-secondary">
+                    Back
                 </a>
                 <button type="submit" id="submitTaskBtn" class="btn btn-primary">
                     Update Task

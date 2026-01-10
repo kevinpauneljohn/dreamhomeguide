@@ -25,6 +25,9 @@ const setMode = (value) => {
 
 const getMode = () => mode;
 let currentEventUrl = `/get-appointment/user/${appointmentUserId}`;
+
+const createTaskCheckbox = document.getElementById('create-task-input');
+const createTask = document.querySelector('.create-task');
 $(function () {
 
     // Initialize calendar but DO NOT render yet
@@ -43,6 +46,8 @@ $(function () {
                 text: "Create Appointment",
                 click: function () {
                     removeErrorMessages();
+                    createTask.classList.remove('d-none');
+                    createTaskCheckbox.setAttribute('checked', 'checked');
                     const modal = new bootstrap.Modal('#addAppointmentModal');
                     modal.show();
                 }
@@ -183,6 +188,19 @@ $(function () {
                     })
                     appointmentForm.reset();
                     calendar.refetchEvents();
+
+                    if(createTaskCheckbox.checked)
+                    {
+                        Swal.fire({
+                            title: "Good job!",
+                            text: "Redirecting to create task page in 2 seconds!",
+                            showConfirmButton: false,
+                            icon: "success"
+                        });
+                        setTimeout(function (){
+                            window.location.href = `/task/create?type=appointment&id=${response.data.appointment_id}`
+                        },2000)
+                    }
                 }
                 else if(response.data.success === false)
                 {
@@ -363,6 +381,8 @@ $(function () {
         removeErrorMessages();
         mode = 'edit';
 
+        createTask.classList.add('d-none');
+        createTaskCheckbox.removeAttribute('checked');
         appointmentForm.querySelector('.modal-title').textContent = 'Edit Appointment';
 
         appointmentForm.querySelector('select[name=lead_id]').value = event.extendedProps.lead_id;

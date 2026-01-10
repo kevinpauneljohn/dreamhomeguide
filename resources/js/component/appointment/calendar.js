@@ -198,13 +198,13 @@ const createAppointment = (formData) => {
                 {
                     Swal.fire({
                         title: "Good job!",
-                        text: "Redirecting to create task page in 3  seconds!",
+                        text: "Redirecting to create task page in 2 seconds!",
                         showConfirmButton: false,
                         icon: "success"
                     });
                     setTimeout(function (){
                         window.location.href = `/task/create?type=appointment&id=${response.data.appointment_id}`
-                    },3000)
+                    },2000)
                 }
             }
             else if(response.data.success === false)
