@@ -19,7 +19,7 @@
                     Cancel
                 </a>
                 <button type="submit" form="createTaskForm" class="btn btn-primary">
-                    Save Task
+                    Update Task
                 </button>
             </div>
         </div>
@@ -48,8 +48,8 @@
                                        name="title"
                                        class="form-control"
                                        placeholder="e.g. Send sample computation"
-                                       value="@if(request('type') === 'appointment' && request()->has('id')) {{ucwords($appointment->title)}} @endif"
-                                       >
+                                       value="{{$task->title}}"
+                                >
                             </div>
 
                             <div class="mb-3">
@@ -57,19 +57,19 @@
                                 <textarea name="description"
                                           class="form-control"
                                           rows="8"
-                                          placeholder="Add notes or instructions for this task">@if(request('type') === 'appointment' && request()->has('id')){{$appointment->notes}}@endif</textarea>
+                                          placeholder="Add notes or instructions for this task">{{$task->description}}</textarea>
                             </div>
 
                             <div>
                                 <label class="form-label">Task Type</label>
                                 <select name="type" class="form-select">
                                     <option value=""></option>
-                                    <option value="follow_up">Follow-up</option>
-                                    <option value="appointment">Appointment</option>
-                                    <option value="call">Call</option>
-                                    <option value="meeting">Meeting</option>
-                                    <option value="documentation">Documentation</option>
-                                    <option value="internal">Internal Task</option>
+                                    <option value="follow_up" @if($task->type == 'follow_up')selected @endif>Follow-up</option>
+                                    <option value="appointment" @if($task->type == 'appointment')selected @endif>Appointment</option>
+                                    <option value="call" @if($task->type == 'call')selected @endif>Call</option>
+                                    <option value="meeting" @if($task->type == 'meeting')selected @endif>Meeting</option>
+                                    <option value="documentation" @if($task->type == 'documentation')selected @endif>Documentation</option>
+                                    <option value="internal" @if($task->type == 'internal')selected @endif>Internal Task</option>
                                 </select>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                                     <input type="datetime-local"
                                            name="due_date"
                                            class="form-control"
-                                            value="@if(request('type') === 'appointment' && request()->has('id')){{$appointment->appointment_date}}@endif">
+                                           value="{{$task->due_date}}">
                                 </div>
 
 
@@ -94,9 +94,9 @@
                                     <label class="form-label">Priority</label>
                                     <select name="priority" class="form-select">
                                         <option value=""></option>
-                                        <option value="low">Low</option>
-                                        <option value="medium">Medium</option>
-                                        <option value="high">High</option>
+                                        <option value="low" @if($task->priority == 'low')selected @endif>Low</option>
+                                        <option value="medium" @if($task->priority == 'medium')selected @endif>Medium</option>
+                                        <option value="high" @if($task->priority == 'high')selected @endif>High</option>
                                     </select>
                                 </div>
 
@@ -112,14 +112,15 @@
                             <div class="mb-3">
                                 <label class="form-label">Linked Type</label>
                                 <select name="linked_type" id="linkedType" class="form-select">
-                                    <option value="">None</option>
-                                    <option value="lead">Lead</option>
-                                    <option value="appointment" @if(request('appointment')) selected @endif>Appointment</option>
+                                    <option value="" @if(is_null($task->lead_id) && is_null($task->appointment_id)) @endif>None</option>
+                                    <option value="lead" @if(!is_null($task->lead_id))selected @endif>Lead</option>
+                                    <option value="appointment" @if(!is_null($task->appointment_id))selected @endif>Appointment</option>
                                 </select>
                             </div>
 
                             <div>
                                 <label class="form-label">Linked Record</label>
+                                <input type="hidden" id="link_value" value="{{$task->lead_id ?? $task->appointment_id}}">
                                 <select name="linked_id"
                                         id="linkedRecord"
                                         class="form-select"
@@ -144,7 +145,7 @@
                                 <label class="form-label">Assign To</label>
                                 <select name="assigned_to" class="form-select">
                                     @foreach($agents ?? [] as $agent)
-                                        <option value="{{ $agent->id }}" @if(request('type') === 'appointment' && request()->has('id')) @if($appointment->assigned_agent == $agent->id)selected @endif @endif>
+                                        <option value="{{ $agent->id }}" @if($task->assigned_to == $agent->id)selected @endif>
                                             {{ ucwords(strtolower($agent->full_name)) }} ({{ $agent->getRoleNames()->first() ?? 'User' }})
                                         </option>
                                     @endforeach
@@ -152,15 +153,15 @@
                             </div>
 
                             <div>
+
                                 <label class="form-label">Created By</label>
                                 <input type="text"
                                        class="form-control"
-                                       value="{{ auth()->user()->full_name }}"
+                                       value="{{ $task->creator ? $task->creator->full_name : ''}}"
                                        disabled>
                             </div>
                         </div>
                     </div>
-
 
                     <!-- VISIBILITY -->
                     <div class="card border-0 shadow-sm">
@@ -171,7 +172,7 @@
                                 <input class="form-check-input"
                                        type="checkbox"
                                        name="is_public"
-                                       checked>
+                                       @if($task->is_public)checked @endif>
                                 <label class="form-check-label">
                                     Visible to assigned user
                                 </label>
@@ -205,11 +206,8 @@
                 <a href="{{ route('task.index') }}" class="btn btn-outline-secondary">
                     Cancel
                 </a>
-                <button type="submit" name="create_another" value="1" class="btn btn-outline-primary">
-                    Save & Create Another
-                </button>
                 <button type="submit" id="submitTaskBtn" class="btn btn-primary">
-                    Save Task
+                    Update Task
                 </button>
             </div>
 
@@ -219,5 +217,5 @@
 @endsection
 
 @push('scripts')
-    @vite('resources/js/dashboard/tasks/create.js')
+    @vite('resources/js/dashboard/tasks/edit.js')
 @endpush

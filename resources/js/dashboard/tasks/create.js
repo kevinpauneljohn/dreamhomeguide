@@ -6,8 +6,6 @@ select2()
 
 const reminderCheckbox = document.getElementById('enableReminder');
 const reminderInput = document.getElementById('reminderAt');
-const linkedType = document.getElementById('linkedType');
-const linkedRecord = document.getElementById('linkedRecord');
 
 const linkedTypeSelect = document.getElementById('linkedType');
 const linkedRecordSelect = document.getElementById('linkedRecord');
@@ -24,8 +22,8 @@ reminderCheckbox.addEventListener('change', () => {
     reminderInput.disabled = !reminderCheckbox.checked;
 });
 
-linkedType.addEventListener('change', () => {
-    linkedRecord.disabled = linkedType.value === '';
+linkedTypeSelect.addEventListener('change', () => {
+    linkedRecordSelect.disabled = linkedTypeSelect.value === '';
 });
 
 $(function(){
@@ -99,7 +97,7 @@ createTaskForm.addEventListener('submit', (e) => {
                 title: response.data.message
             })
             createTaskForm.reset();
-            window.location.replace('/task')
+            window.location.replace(response.data.redirect)
         }
     }).catch(error => {
         console.log(error);

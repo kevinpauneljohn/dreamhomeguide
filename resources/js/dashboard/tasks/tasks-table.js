@@ -56,14 +56,25 @@ export const initializeTaskTable = ()  => {
             /* TASK (TITLE + DESCRIPTION) */
             {
                 data: null,
-                render: row => `
+                render: row => {
+                    const maxLength = 60;
+                    const desc = row.description ?? '';
+
+                    const truncated =
+                        desc.length > maxLength
+                            ? desc.substring(0, maxLength) + '…'
+                            : desc;
+
+                    return `
                     <strong>${row.title}</strong>
-                    <div class="text-muted small">
-                        ${row.description ?? ''}
+                    <div class="text-muted small" title="${desc}">
+                        ${truncated}
                     </div>
-                `,
+                `;
+                },
                 orderable: false
             },
+
 
             /* DUE DATE */
             {

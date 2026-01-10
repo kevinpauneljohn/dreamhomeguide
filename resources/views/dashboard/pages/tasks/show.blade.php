@@ -22,6 +22,12 @@
             </ol>
         </nav>
 
+        @if(request()->has('success'))
+            <div class="alert alert-success " role="alert" id="success-alert">
+                Task marked as completed successfully!
+            </div>
+        @endif
+
         @php
             $statusMap = [
                 'pending'     => ['label' => 'Pending', 'badge' => 'secondary'],
@@ -267,9 +273,10 @@
             font-size: 0.75rem;
         }
 
+
     </style>
 @endpush
 
 @push('scripts')
-    @vite('resources/js/dashboard/tasks/dashboard.js')
+    @vite('resources/js/dashboard/tasks/show.js')
 @endpush

@@ -51,10 +51,11 @@ class TaskController extends Controller
         $request->merge([
             'is_public' => $request->has('is_public'),
             'appointment_id' => $request->linked_type == 'appointment' ? $request->linked_id : null,
-            'lead_id' => $request->linked_type == 'lead' ? $request->linked_id : null
+            'lead_id' => $request->linked_type == 'lead' ? $request->linked_id : null,
+            'user_id' => auth()->id(),
         ]);
-        return Task::create($request->only('title','description','type','due_date','priority','user_id','lead_id','appointment_id','assigned_to','is_public')) ?
-            response()->json(['success' => true, 'message' => 'Task created successfully.']) :
+        $task = Task::create($request->only('title','description','type','due_date','priority','user_id','lead_id','appointment_id','assigned_to','is_public'));
+        return  $task->exists() ? response()->json(['success' => true, 'message' => 'Task created successfully.', 'redirect' => '/task/'.$task->id.'?success=Task created successfully.']) :
             response()->json(['success' => false, 'message' => 'An error occurred while creating the task.']);
     }
 
@@ -76,9 +77,15 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Task $task)
+    public function edit(Task $task, Request $request)
     {
-        //
+        return view('dashboard.pages.tasks.edit')->with([
+            'title' => 'Edit Task',
+            'task' => $task,
+            'priorities' => $this->taskService->priorities(),
+            'agents' => User::select('id','first_name','last_name','email')->get(),
+            'appointment' => $request->get('type') == 'appointment' && $request->has('id') ? Appointment::findOrFail($request->get('id')) : null,
+        ]);
     }
 
     /**
