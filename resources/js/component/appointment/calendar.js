@@ -145,6 +145,16 @@ $(function () {
             formData.append('appointment_date', moment(info.event.start).format('YYYY-MM-DDTHH:mm'));
             editAppointment(formData)
         },
+        eventAllow: function(dropInfo, draggedEvent) {
+            const today = moment().startOf('day');
+            const newStart = moment(dropInfo.start);
+
+            // Disallow dragging to past dates
+            return newStart.isSameOrAfter(today);
+        },
+        validRange: {
+            start: moment().format('YYYY-MM-DD')
+        }
     });
 
 });
@@ -215,13 +225,34 @@ const createAppointment = (formData) => {
                 })
             }
         }).catch(error => {
-        const errors = error.response.data.errors;
+        if (error.response && error.response.data && error.response.data.errors) {
+            const errors = error.response.data.errors;
 
-        Object.keys(errors).forEach(key => {
-            appointmentForm.querySelector(`[name=${key}]`).classList.add('is-invalid');
-            appointmentForm.querySelector(`[name=${key}]`)
-                .insertAdjacentHTML('afterend', `<p class="invalid-feedback">${errors[key][0]}</p>`);
-        });
+            Object.keys(errors).forEach(key => {
+                appointmentForm.querySelector(`[name=${key}]`).classList.add('is-invalid');
+                appointmentForm.querySelector(`[name=${key}]`)
+                    .insertAdjacentHTML('afterend', `<p class="invalid-feedback">${errors[key][0]}</p>`);
+            });
+        }
+        // ❌ No server response (network / 500 / 419)
+        else {
+            console.error('Request failed:', error);
+
+            if(error.response.status === 422)
+            {
+                Toast.fire({
+                    icon: 'error',
+                    title: error.response.data.message
+                })
+            }else{
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Something went wrong. Please try again.'
+                });
+            }
+
+        }
+
     }).finally(() => {
         afterSaveAppointment();
     })
@@ -253,11 +284,33 @@ const editAppointment = (formData) => {
         }).catch(error => {
         const errors = error.response.data.errors;
 
-        Object.keys(errors).forEach(key => {
-            appointmentForm.querySelector(`[name=${key}]`).classList.add('is-invalid');
-            appointmentForm.querySelector(`[name=${key}]`)
-                .insertAdjacentHTML('afterend', `<p class="invalid-feedback">${errors[key][0]}</p>`);
-        });
+        if (error.response && error.response.data && error.response.data.errors) {
+            Object.keys(errors).forEach(key => {
+                appointmentForm.querySelector(`[name=${key}]`).classList.add('is-invalid');
+                appointmentForm.querySelector(`[name=${key}]`)
+                    .insertAdjacentHTML('afterend', `<p class="invalid-feedback">${errors[key][0]}</p>`);
+            });
+        }
+        // ❌ Server crash / 500 / logic error
+        else {
+            console.error('Edit appointment failed:', error);
+
+            if(error.response.status === 422)
+            {
+                Toast.fire({
+                    icon: 'error',
+                    title: error.response.data.message
+                })
+            }else{
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Server error while updating appointment'
+                });
+            }
+
+        }
+
+
     }).finally(() => {
         afterSaveAppointment();
     })

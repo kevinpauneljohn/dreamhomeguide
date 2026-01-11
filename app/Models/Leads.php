@@ -92,4 +92,9 @@ class Leads extends Model
         return $this->belongsTo(Property::class);
     }
 
+    public function tasks(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
+
 }

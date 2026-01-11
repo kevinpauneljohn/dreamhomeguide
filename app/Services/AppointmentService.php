@@ -6,6 +6,7 @@ use App\Mail\SendAppointmentNotification;
 use App\Models\Appointment;
 use App\Models\Leads;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class AppointmentService
@@ -54,6 +55,16 @@ class AppointmentService
 
     public function saveAppointment(array $appointmentData): \Illuminate\Http\JsonResponse
     {
+        // Normalize and validate date
+        $appointmentDate = Carbon::parse($appointmentData['appointment_date']);
+
+        if ($appointmentDate->lt(Carbon::now()->startOfDay())) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Appointments cannot be set in the past.'
+            ], 422);
+        }
+
         if($appointment = Appointment::create($appointmentData))
         {
             return response()->json(['success' => true, 'message' => 'Appointment saved successfully.',
@@ -64,6 +75,16 @@ class AppointmentService
 
     public function updateAppointment(Appointment $appointment, array $appointmentData): \Illuminate\Http\JsonResponse
     {
+        // Normalize and validate date
+        $appointmentDate = Carbon::parse($appointmentData['appointment_date']);
+
+        if ($appointmentDate->lt(Carbon::now()->startOfDay())) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Appointments cannot be set in the past.'
+            ], 422);
+        }
+
         if($appointment->fill($appointmentData)->isDirty())
         {
             if($appointment->save())

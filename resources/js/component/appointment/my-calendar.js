@@ -136,6 +136,16 @@ $(function () {
             formData.append('appointment_date', moment(info.event.start).format('YYYY-MM-DDTHH:mm'));
             editAppointment(formData)
         },
+        eventAllow: function(dropInfo, draggedEvent) {
+            const today = moment().startOf('day');
+            const newStart = moment(dropInfo.start);
+
+            // Disallow dragging to past dates
+            return newStart.isSameOrAfter(today);
+        },
+        validRange: {
+            start: moment().format('YYYY-MM-DD')
+        }
     });
 
     calendar.render();
@@ -211,6 +221,7 @@ $(function () {
                 }
             })
             .catch(error => {
+
                 if (error.response && error.response.data && error.response.data.errors) {
 
                     const errors = error.response.data.errors;
@@ -231,10 +242,19 @@ $(function () {
                 else {
                     console.error('Request failed:', error);
 
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Something went wrong. Please try again.'
-                    });
+                    if(error.response.status === 422)
+                    {
+                        Toast.fire({
+                            icon: 'error',
+                            title: error.response.data.message
+                        })
+                    }else{
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Something went wrong. Please try again.'
+                        });
+                    }
+
                 }
         }).finally(() => {
             afterSaveAppointment();
@@ -283,10 +303,19 @@ $(function () {
             else {
                 console.error('Edit appointment failed:', error);
 
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Server error while updating appointment'
-                });
+                if(error.response.status === 422)
+                {
+                    Toast.fire({
+                        icon: 'error',
+                        title: error.response.data.message
+                    })
+                }else{
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Server error while updating appointment'
+                    });
+                }
+
             }
         }).finally(() => {
             afterSaveAppointment();
