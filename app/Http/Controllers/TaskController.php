@@ -23,11 +23,38 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
+        $user = auth()->user();
+
+        $taskCounts = Task::query()
+            ->when(
+                ! $user->hasAnyRole(['manager', 'super admin']),
+                function ($query) use ($user) {
+                    $query->where(function ($q) use ($user) {
+                        $q->where('user_id', $user->id)
+                            ->orWhere('assigned_to', $user->id);
+                    });
+                }
+            )
+            ->selectRaw("
+        COUNT(*) as total,
+        SUM(status = 'in progress') as in_progress,
+        SUM(status = 'completed') as completed,
+        SUM(status = 'pending') as pending,
+        SUM(status = 'overdue') as overdue
+    ")
+            ->first();
+
+
         return view('dashboard.pages.tasks.index')->with([
             'title' => 'Tasks',
-            'agents' => User::select('id','first_name','last_name','email')->get()
+            'agents' => User::select('id','first_name','last_name','email')->get(),
+            'inProgressTasks' => $taskCounts->in_progress,
+            'completedTasks' => $taskCounts->completed,
+            'pendingTasks' => $taskCounts->pending,
+            'overdueTasks' => $taskCounts->overdue,
+            'allTasks' => $taskCounts->total,
         ]);
     }
 
@@ -65,6 +92,16 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        $user = auth()->user();
+
+        $canView =
+            $task->user_id === $user->id ||
+            $task->assigned_to === $user->id ||
+            $user->hasAnyRole(['super admin', 'manager']);
+
+        if (! $canView) {
+            abort(403);
+        }
 
         $task->load(['lead', 'appointment', 'assignedAgent', 'creator']);
         return view('dashboard.pages.tasks.show')->with([
@@ -80,6 +117,10 @@ class TaskController extends Controller
      */
     public function edit(Task $task, Request $request)
     {
+        if($task->user_id !== auth()->id() && !auth()->user()->hasRole(['super admin','manager']))
+        {
+            abort(403);
+        }
         return view('dashboard.pages.tasks.edit')->with([
             'title' => 'Edit Task',
             'task' => $task,
@@ -92,8 +133,12 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTaskRequest $request, Task $task)
+    public function update(UpdateTaskRequest $request, Task $task): \Illuminate\Http\JsonResponse
     {
+        if($task->user_id !== auth()->id() && !auth()->user()->hasRole(['super admin','manager']))
+        {
+            return response()->json(['success' => false, 'message' => 'You are not authorized to update this task.'],401);
+        }
         $request->merge([
             'is_public' => $request->has('is_public'),
             'appointment_id' => $request->linked_type == 'appointment' ? $request->linked_id : null,

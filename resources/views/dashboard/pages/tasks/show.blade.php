@@ -22,6 +22,22 @@
             </ol>
         </nav>
 
+        <!-- PAGE HEADER -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h4 class="fw-bold mb-1">{{$title}}</h4>
+                <small class="text-muted">
+                    Review the details of this task and make any necessary changes.
+                </small>
+            </div>
+
+            <div class="d-flex gap-2">
+                <a onclick="window.history.back()" class="btn btn-outline-secondary">
+                    Back
+                </a>
+            </div>
+        </div>
+
         @if(request()->has('success'))
             <div class="alert alert-success " role="alert" id="success-alert">
                 Task marked as completed successfully!

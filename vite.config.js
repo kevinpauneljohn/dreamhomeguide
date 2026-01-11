@@ -87,11 +87,16 @@ export default defineConfig({
                 'resources/js/dashboard/profile/update-profile.js',
 
                 //tasks
+                //js
                 'resources/js/dashboard/tasks/dashboard.js',
                 'resources/js/dashboard/tasks/tasks-table.js',
                 'resources/js/dashboard/tasks/create.js',
                 'resources/js/dashboard/tasks/show.js',
                 'resources/js/dashboard/tasks/edit.js',
+
+                //css
+                'resources/css/task/task.css',
+                //edn of tasks
 
                 //landing page form
                 'resources/js/landing-page/form.js',

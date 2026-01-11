@@ -82,13 +82,13 @@
                                     <i class="fa fa-arrow-up-right-from-square text-muted"></i>
                                 </div>
 
-                                <!-- Donut Chart Placeholder -->
+                                <!-- Donut Chart -->
                                 <div class="d-flex justify-content-center my-4">
-                                    <div class="chart-placeholder rounded-circle position-relative">
+                                    <div class="chart-placeholder rounded-circle position-relative" data-total="{{$allTasks}}" data-completed="{{$completedTasks}}">
                                         <div class="chart-center text-center">
-                                            <small class="text-muted">Total</small>
-                                            <h5 class="fw-bold mb-0">100</h5>
-                                            <small class="text-muted">Tasks</small>
+                                            <small class="text-muted">Completed</small>
+                                            <h5 class="fw-bold mb-0" id="taskPercent">0%</h5>
+                                            <small class="text-muted">of Tasks</small>
                                         </div>
                                     </div>
                                 </div>
@@ -98,22 +98,23 @@
                                     <div>
                                         <span class="dot bg-warning"></span>
                                         <small class="d-block text-muted">In Progress</small>
-                                        <h6 class="fw-bold mb-0">14</h6>
+                                        <h6 class="fw-bold mb-0">{{$inProgressTasks}}</h6>
                                     </div>
                                     <div>
                                         <span class="dot bg-success"></span>
                                         <small class="d-block text-muted">Completed</small>
-                                        <h6 class="fw-bold mb-0">32</h6>
+                                        <h6 class="fw-bold mb-0">{{$completedTasks}}</h6>
                                     </div>
                                     <div>
                                         <span class="dot bg-secondary"></span>
                                         <small class="d-block text-muted">Not Started</small>
-                                        <h6 class="fw-bold mb-0">54</h6>
+                                        <h6 class="fw-bold mb-0">{{$pendingTasks}}</h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
 
                     <!-- PERFORMANCE / KPI -->
@@ -243,67 +244,13 @@
         </div>
         <div class="row g-4">
 
-
-
-
         </div>
-
-
     </div>
 
 @endsection
 
 @push('css')
-    <style>
-        .task-table th {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: .04em;
-        }
-
-        .task-row.overdue {
-            background: #fff5f5;
-        }
-
-        .avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: #e5e7eb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.75rem;
-        }
-
-        .badge {
-            font-weight: 500;
-        }
-
-        .btn-group .btn {
-            padding: 4px 8px;
-        }
-
-        .chart-placeholder {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 12px solid #e5e7eb;
-            position: relative;
-        }
-
-        .chart-center {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-
-    </style>
+    @vite('resources/css/task/task.css')
 @endpush
 
 @push('scripts')

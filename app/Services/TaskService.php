@@ -58,7 +58,18 @@ class TaskService
 
     public function getQuery(array $request): \Illuminate\Database\Eloquent\Builder
     {
-        $query = Task::query();
+        $user = auth()->user();
+
+        $query = Task::query()
+            ->when(
+                ! $user->hasAnyRole(['manager', 'super admin']),
+                function ($q) use ($user) {
+                    $q->where(function ($sub) use ($user) {
+                        $sub->where('user_id', $user->id)
+                            ->orWhere('assigned_to', $user->id);
+                    });
+                }
+            );
 
         /* -----------------------------------------
          | SEARCH (Task #, Title, Description)
@@ -150,6 +161,11 @@ class TaskService
                 ];
             })
             ->make(true);
+    }
+
+    public function taskCountDegrees($taskCount, $totalTasks): float|int
+    {
+        return ($taskCount / $totalTasks) * 360;
     }
 
 

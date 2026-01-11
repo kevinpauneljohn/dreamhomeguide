@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Contracts\Activity;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Task extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, LogsActivity;
 
     protected $fillable = [
         'title',
@@ -30,6 +33,27 @@ class Task extends Model
         'due_date' => 'datetime:Y-m-d H:i:s',
         'is_public' => 'boolean'
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly($this->fillable)
+            ->logOnlyDirty()
+            ->useLogName('tasks');
+        // Chain fluent methods for configuration options
+    }
+
+    public function tapActivity(Activity $activity, string $eventName): void
+    {
+        $activity->properties = $activity->properties->merge([
+            'lead_id' => $this->lead_id,
+            'lead_name' => $this->lead()->first()->full_name,
+            'user_id' => $this->user_id,
+            'creator' => $this->creator()->first()->full_name,
+            'assigned_to' => $this->assigned_to,
+            'assigned_agent' => $this->assignedAgent()->first()->full_name
+        ]);
+    }
 
 
     /**

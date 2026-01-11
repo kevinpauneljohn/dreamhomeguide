@@ -1,16 +1,26 @@
 import {initializeTaskTable} from "@/dashboard/tasks/tasks-table.js";
-//
-// document.getElementById('taskSearch').addEventListener('keyup', function () {
-//     const search = this.value.toLowerCase();
-//     const rows = document.querySelectorAll('.task-table tbody tr');
-//
-//     rows.forEach(row => {
-//         const taskNumber = row.querySelector('.task-number')?.innerText.toLowerCase() || '';
-//         const taskTitle  = row.querySelector('strong')?.innerText.toLowerCase() || '';
-//
-//         row.style.display =
-//             taskNumber.includes(search) || taskTitle.includes(search)
-//                 ? ''
-//                 : 'none';
-//     });
-// });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const chart = document.querySelector('.chart-placeholder');
+
+    const total = chart.dataset.total;
+    const completed = chart.dataset.completed;
+
+    if (total === 0) return;
+
+    const percentage = Math.round((completed / total) * 100);
+    const degrees = (completed / total) * 360;
+
+
+    const percentText = document.getElementById('taskPercent');
+
+    chart.style.background = `
+        conic-gradient(
+            #198754 0deg ${degrees}deg,
+            #e9ecef ${degrees}deg 360deg
+        )
+    `;
+
+    percentText.textContent = percentage + '%';
+});
+
