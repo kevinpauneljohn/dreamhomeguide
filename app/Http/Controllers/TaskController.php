@@ -39,10 +39,10 @@ class TaskController extends Controller
             )
             ->selectRaw("
         COUNT(*) as total,
-        SUM(status = 'in progress') as in_progress,
-        SUM(status = 'completed') as completed,
-        SUM(status = 'pending') as pending,
-        SUM(status = 'overdue') as overdue
+        COALESCE(SUM(status = 'in progress'), 0) as in_progress,
+        COALESCE(SUM(status = 'completed'), 0) as completed,
+        COALESCE(SUM(status = 'pending'), 0) as pending,
+        COALESCE(SUM(status = 'overdue'), 0) as overdue
     ")
             ->first();
 

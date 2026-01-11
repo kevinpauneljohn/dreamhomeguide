@@ -2,15 +2,18 @@ import {initializeTaskTable} from "@/dashboard/tasks/tasks-table.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const chart = document.querySelector('.chart-placeholder');
+    if (!chart) return;
 
-    const total = chart.dataset.total;
-    const completed = chart.dataset.completed;
+    // Convert dataset values to numbers
+    const total = Number(chart.dataset.total || 0);
+    const completed = Number(chart.dataset.completed || 0);
 
-    // HARD GUARD: no tasks → show 0%
+    const percentText = document.getElementById('taskPercent');
+
+    // HARD GUARD: no tasks or invalid data
     if (!total || total <= 0) {
-        document.querySelector('.chart-placeholder').style.background =
-            'conic-gradient(#e9ecef 0deg 360deg)';
-        document.getElementById('taskPercent').textContent = '0%';
+        chart.style.background = 'conic-gradient(#e9ecef 0deg 360deg)';
+        percentText.textContent = '0%';
         return;
     }
 
@@ -26,4 +29,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     percentText.textContent = percentage + '%';
 });
+
 
