@@ -155,9 +155,11 @@ class TaskService
             ->addColumn('action', content: function ($task) {
                 return [
                     'view' => (bool)auth()->user()->can('view task'),
-                    'edit' => (bool)auth()->user()->can('edit task'),
-                    'delete' => (bool)auth()->user()->can('delete task'),
-                    'id' => $task->id
+                    'edit' => auth()->user()->can('edit task') && $task->status !== 'completed',
+                    'delete' => auth()->user()->can('delete task') && $task->status !== 'completed',
+                    'id' => $task->id,
+                    'title' => ucwords(strtolower($task->title)),
+                    'ticket_number' => sprintf('TSK-%05d', $task->id),
                 ];
             })
             ->make(true);

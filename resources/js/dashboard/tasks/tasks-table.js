@@ -1,5 +1,7 @@
 import Datatables from "datatables.net-bs5";
 import moment from "moment";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 export const taskTable = $('#task-table');
 
@@ -235,14 +237,15 @@ export const initializeTaskTable = ()  => {
                                     class="btn btn-sm btn-outline-secondary dropdown-toggle"
                                     data-bs-toggle="dropdown"
                                 >
-                                    <i class="fa fa-ellipsis-vertical"></i>
+
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
                                         <a
-                                            href="#"
+
                                             class="dropdown-item text-danger"
-                                            onclick="deleteTask(${action.id})"
+                                            onclick="deleteTask(${action.id}, '${action.title}', '${action.ticket_number}')"
+                                            style="cursor: pointer"
                                         >
                                             Delete
                                         </a>
@@ -259,5 +262,31 @@ export const initializeTaskTable = ()  => {
 
         ]
     });
+}
+
+window.deleteTask = (id, title, ticket) => {
+    Swal.fire({
+        title: `Delete task #${ticket}?`,
+        text: `Title: ${title}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            axios.delete(`/task/${id}`)
+                .then(response => {
+                console.log(response)
+                    if(response.data.success === true)
+                    {
+                        Swal.fire('Deleted!', 'Task has been deleted.', 'success');
+                        $('#task-table').DataTable().ajax.reload();
+                    }
+            }).catch(error => {
+                console.log(error)
+            })
+        }
+    })
 }
 
