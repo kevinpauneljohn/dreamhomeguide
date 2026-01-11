@@ -1,3 +1,4 @@
+import {deleteTask} from "@/dashboard/tasks/delete.js";
 const params = new URLSearchParams(window.location.search);
 
 const success = params.get('success');

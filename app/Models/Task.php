@@ -47,9 +47,9 @@ class Task extends Model
     {
         $activity->properties = $activity->properties->merge([
             'lead_id' => $this->lead_id,
-            'lead_name' => !is_null($this->lead_id) ? $this->lead()->first()->full_name : '',
+            'lead_name' => !is_null($this->lead_id) ? $this->lead()->first()->full_name : null,
             'user_id' => $this->user_id,
-            'creator' => $this->creator()->first()->full_name,
+            'creator' => !is_null($this->user_id) ? $this->creator()->first()->full_name : null,
             'assigned_to' => $this->assigned_to,
             'assigned_agent' => $this->assignedAgent()->first()->full_name
         ]);

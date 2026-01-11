@@ -1,7 +1,7 @@
 import Datatables from "datatables.net-bs5";
 import moment from "moment";
-import Swal from "sweetalert2";
-import axios from "axios";
+import {deleteTask} from "./delete";
+window.deleteTask = deleteTask;
 
 export const taskTable = $('#task-table');
 
@@ -264,29 +264,8 @@ export const initializeTaskTable = ()  => {
     });
 }
 
-window.deleteTask = (id, title, ticket) => {
-    Swal.fire({
-        title: `Delete task #${ticket}?`,
-        text: `Title: ${title}`,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            axios.delete(`/task/${id}`)
-                .then(response => {
-                console.log(response)
-                    if(response.data.success === true)
-                    {
-                        Swal.fire('Deleted!', 'Task has been deleted.', 'success');
-                        $('#task-table').DataTable().ajax.reload();
-                    }
-            }).catch(error => {
-                console.log(error)
-            })
-        }
-    })
-}
+document.addEventListener('task:deleted', () => {
+    taskTable.DataTable().ajax.reload(null, false);
+});
+
 
