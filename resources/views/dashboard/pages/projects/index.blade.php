@@ -56,10 +56,9 @@
             <table id="projects-table" class="table table-bordered table-hover align-middle border rounded">
                 <thead class="table-light">
                 <tr>
-                    <th style="width: 10%;">Project</th>
+                    <th style="width: 20%;">Project</th>
                     <th style="width: 18%;">Slug</th>
                     <th style="width: 20%;">Address</th>
-                    <th style="width: 30%;">Description</th>
                     <th style="width: 12%">Created</th>
                     <th>Status</th>
                     <th class="text-center" style="width: 1%">Actions</th>

@@ -46,9 +46,6 @@ export const initializeProjectTable = ()  => {
                 data: 'address'
             },
             {
-                data: 'description'
-            },
-            {
                 data: 'created_at',
                 render: function (data) {
                     return data
