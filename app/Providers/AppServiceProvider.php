@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Models\Appointment;
 use App\Models\Leads;
+use App\Models\Task;
 use App\Observers\AppointmentObserver;
 use App\Observers\LeadObserver;
+use App\Observers\TaskObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -27,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Leads::observe(LeadObserver::class);
         Appointment::observe(AppointmentObserver::class);
+        Task::observe(TaskObserver::class);
 
         Paginator::useBootstrapFive();
         // Implicitly grant "Super Admin" role all permissions

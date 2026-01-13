@@ -55,6 +55,7 @@ const formatNotificationType = (type) => {
 const getNotifications = async () => {
     try {
         const { data: notifications } = await axios.get('/notifications');
+        console.log(notifications);
 
         notificationDropdownElement.innerHTML = '';
 
@@ -67,14 +68,17 @@ const getNotifications = async () => {
                 item.id = `notification-item-${notification.id}`;
                 item.classList.add('notification-item');
 
+                const description = notification.data.description ?? 'View details';
+                const type = notification.data.type ?? 'notification';
+
                 item.innerHTML = `
                     <a class="dropdown-item small"
                        href="${notification.data.url}?notification=read&id=${notification.id}">
                         <div class="fw-semibold">
-                            ${formatNotificationType(notification.data.type)}
+                            ${formatNotificationType(type)}
                         </div>
                         <small class="text-muted">
-                            ${notification.data.description}
+                            ${description}
                         </small>
                     </a>
                 `;

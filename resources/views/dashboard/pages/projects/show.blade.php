@@ -8,7 +8,7 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h3 class="fw-bold mb-0">{{ $project->name }}</h3>
+                <h3 class="fw-bold mb-0">{{ ucwords(strtolower($project->name)) }}</h3>
                 <small class="text-muted">
                     {{ $project->address ?? 'No address provided' }}
                 </small>

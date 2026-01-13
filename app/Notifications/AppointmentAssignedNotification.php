@@ -32,7 +32,7 @@ class AppointmentAssignedNotification extends Notification implements ShouldQueu
      */
     public function via(object $notifiable): array
     {
-        return ['mail','database','broadcast'];
+        return ['database','broadcast'];
     }
 
     public function toBroadcast(object $notifiable): array
