@@ -61,6 +61,7 @@
                     <th style="width: 20%;">Address</th>
                     <th style="width: 30%;">Description</th>
                     <th style="width: 12%">Created</th>
+                    <th>Status</th>
                     <th class="text-center" style="width: 1%">Actions</th>
                 </tr>
                 </thead>

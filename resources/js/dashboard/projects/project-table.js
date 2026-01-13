@@ -56,6 +56,9 @@ export const initializeProjectTable = ()  => {
                         : '';
                 }
             },
+            {
+                data: 'status'
+            },
 
             {
                 data: "action",
