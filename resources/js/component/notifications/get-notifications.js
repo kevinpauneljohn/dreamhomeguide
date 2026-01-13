@@ -55,8 +55,6 @@ const formatNotificationType = (type) => {
 const getNotifications = async () => {
     try {
         const { data: notifications } = await axios.get('/notifications');
-        console.log(notifications);
-
         notificationDropdownElement.innerHTML = '';
 
         // 🔔 Notifications list

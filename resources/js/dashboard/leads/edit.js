@@ -1,4 +1,4 @@
-import {Toast} from "@/toast.js";
+    import {Toast} from "@/toast.js";
 import select2 from 'select2';
 select2()
 

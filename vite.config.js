@@ -101,7 +101,12 @@ export default defineConfig({
                 //projects
                 'resources/js/dashboard/projects/main.js',
                 'resources/js/dashboard/projects/create.js',
+                'resources/js/dashboard/projects/show.js',
+                'resources/js/dashboard/projects/edit.js',
+                'resources/js/dashboard/projects/delete.js',
                 'resources/js/dashboard/projects/project-table.js',
+                'resources/js/dashboard/projects/mode.js',
+                'resources/js/dashboard/projects/submitProject.js',
 
                 //end of projects
 

@@ -72,7 +72,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return $project;
     }
 
     /**
@@ -80,7 +80,15 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $project->fill($request->only('name','slug','description','address','status'));
+        if($project->isDirty())
+        {
+            $project->save();
+            return response()->json(['success' => true, 'message' => 'Project updated successfully.', 'data' => $project->fresh()], 200);
+        }
+        return response()->json(['success' => false, 'message' => 'No changes were made.']);
+
+
     }
 
     /**
@@ -88,7 +96,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        return $project->delete() ?
+            response()->json(['success' => true, 'message' => 'Project deleted successfully.'], 200) :
+            response()->json(['success' => false, 'message' => 'An error occurred while deleting the project.'], 500);
     }
 
     public function getProjects(Request $request): \Illuminate\Http\JsonResponse

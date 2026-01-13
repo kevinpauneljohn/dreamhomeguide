@@ -1,4 +1,6 @@
 import Datatables from "datatables.net-bs5";
+import {removeProject} from "@/dashboard/projects/delete.js";
+window.removeProject = removeProject;
 import moment from "moment";
 export const projectsTable = $('#projects-table');
 
@@ -68,8 +70,8 @@ export const initializeProjectTable = ()  => {
                             </button>
                             <ul class="dropdown-menu">
                                 ${action.view ? `<li><a href="/project/${action.id}" class="dropdown-item">View</a></li>` : ''}
-                                ${action.edit ? `<li><a href="/project/${action.id}/edit" class="dropdown-item">Edit</a></li>` : ''}
-                                ${action.delete ? `<li><a onclick="removeUser(this)" class="dropdown-item text-danger" style="cursor: pointer">Delete</a></li>` : ''}
+                                ${action.edit ? `<li><a data-project-id="${action.id}" class="dropdown-item edit-project" style="cursor: pointer">Edit</a></li>` : ''}
+                                ${action.delete ? `<li><a data-project-id="${action.id}" onclick="removeProject(this)" class="dropdown-item text-danger delete-project" style="cursor: pointer">Delete</a></li>` : ''}
                             </ul>
                         </div>
                     `;
@@ -79,7 +81,11 @@ export const initializeProjectTable = ()  => {
     });
 }
 
-document.addEventListener('project:created', () => {
+document.addEventListener('project:created_or_updated', () => {
+    projectsTable.DataTable().ajax.reload();
+})
+
+document.addEventListener('project:deleted', () => {
     projectsTable.DataTable().ajax.reload();
 })
 
