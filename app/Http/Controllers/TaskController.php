@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Services\TaskService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 
 class TaskController extends Controller
 {
@@ -19,6 +20,16 @@ class TaskController extends Controller
     )
     {
 
+    }
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('can:view task', only: ['index', 'show','getTasks']),
+            new Middleware('can:add task', only: ['create', 'store','linkType']),
+            new Middleware('can:edit task', only: ['edit', 'update','linkType']),
+            new Middleware('can:delete task', only: ['destroy'])
+        ];
     }
     /**
      * Display a listing of the resource.

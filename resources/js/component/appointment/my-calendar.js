@@ -143,9 +143,9 @@ $(function () {
             // Disallow dragging to past dates
             return newStart.isSameOrAfter(today);
         },
-        validRange: {
-            start: moment().format('YYYY-MM-DD')
-        }
+        // validRange: {
+        //     start: moment().format('YYYY-MM-DD')
+        // }
     });
 
     calendar.render();

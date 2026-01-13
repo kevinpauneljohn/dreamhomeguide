@@ -14,7 +14,8 @@
         </div>
 
         @can('add project')
-            <button type="button" class="btn btn-primary px-4" id="add-project-btn">
+            <button type="button" class="btn btn-primary px-4" id="add-project-btn" data-bs-toggle="modal"
+                    data-bs-target="#projectModal">
                 + Add New Project
             </button>
         @endcan
@@ -43,25 +44,7 @@
                 <div class="col-md-4">
                     <label class="form-label">Search Role</label>
                     <input type="text" id="search" class="form-control"
-                           placeholder="Search role name…">
-                </div>
-
-                <div class="col-md-4">
-                    <label class="form-label">Permission</label>
-                    <select id="permission" class="form-select">
-                        <option value="">All Permissions</option>
-
-                    </select>
-                </div>
-
-                <div class="col-md-4">
-                    <label class="form-label">Sort</label>
-                    <select id="sort" class="form-select">
-                        <option value="name_asc">Role Name A–Z</option>
-                        <option value="name_desc">Role Name Z–A</option>
-                        <option value="newest">Newest</option>
-                        <option value="oldest">Oldest</option>
-                    </select>
+                           placeholder="Search project…">
                 </div>
             </div>
         </div>
@@ -70,11 +53,12 @@
     <!-- Roles Table -->
     <div class="card">
         <div class="card-body">
-            <table id="roles-table" class="table table-bordered table-hover align-middle border rounded">
+            <table id="projects-table" class="table table-bordered table-hover align-middle border rounded">
                 <thead class="table-light">
                 <tr>
                     <th style="width: 10%;">Project</th>
-                    <th style="width: 30%;">Location</th>
+                    <th style="width: 18%;">Slug</th>
+                    <th style="width: 20%;">Address</th>
                     <th style="width: 30%;">Description</th>
                     <th style="width: 12%">Created</th>
                     <th class="text-center" style="width: 1%">Actions</th>
@@ -104,18 +88,32 @@
 
                     <div class="mb-3">
                         <label class="fw-semibold mb-2">Name</label>
-                        <input type="text" name="roles" class="form-control">
+                        <input type="text" name="name" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label class="fw-semibold mb-2">Permissions</label>
-
+                        <label class="fw-semibold mb-2">Slug</label>
+                        <input type="text" name="slug" class="form-control">
                     </div>
-
+                    <div class="mb-3">
+                        <label class="fw-semibold mb-2">Address</label>
+                        <input type="text" name="address" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-semibold mb-2">Description</label>
+                        <textarea name="description" class="form-control" rows="8"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-semibold mb-2">Status</label>
+                        <select name="status" class="form-select">
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" id="save-project-btn">Save</button>
                 </div>
 
             </form>
@@ -123,6 +121,6 @@
     </div>
 @endpushonce
 
-{{--@push('scripts')--}}
-{{--    @vite(['resources/js/dashboard/roles/roles-table.js'])--}}
-{{--@endpush--}}
+@push('scripts')
+    @vite(['resources/js/dashboard/projects/main.js'])
+@endpush

@@ -98,6 +98,13 @@ export default defineConfig({
                 'resources/css/task/task.css',
                 //edn of tasks
 
+                //projects
+                'resources/js/dashboard/projects/main.js',
+                'resources/js/dashboard/projects/create.js',
+                'resources/js/dashboard/projects/project-table.js',
+
+                //end of projects
+
                 //landing page form
                 'resources/js/landing-page/form.js',
             ],

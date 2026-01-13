@@ -5,9 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Services\ProjectService;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 
 class ProjectController extends Controller
 {
+    public function __construct(
+        public ProjectService $projectService
+    )
+    {
+
+    }
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('can:view task', only: ['index', 'show','getProjects']),
+            new Middleware('can:add task', only: ['create', 'store']),
+            new Middleware('can:edit task', only: ['edit', 'update']),
+            new Middleware('can:delete task', only: ['destroy'])
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -30,9 +49,11 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProjectRequest $request)
+    public function store(StoreProjectRequest $request): \Illuminate\Http\JsonResponse
     {
-        //
+        return Project::create($request->only('name','slug','description','address','status')) ?
+            response()->json(['success' => true, 'message' => 'Project created successfully.'], 201) :
+            response()->json(['success' => false, 'message' => 'An error occurred while creating the project.'], 500);
     }
 
     /**
@@ -42,7 +63,7 @@ class ProjectController extends Controller
     {
         return view('dashboard.pages.projects.show')->with([
             'title' => $project->name,
-            'projects' => $project,
+            'project' => $project,
         ]);
     }
 
@@ -68,5 +89,10 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
+    }
+
+    public function getProjects(Request $request): \Illuminate\Http\JsonResponse
+    {
+        return $this->projectService->getProjects($request->all());
     }
 }

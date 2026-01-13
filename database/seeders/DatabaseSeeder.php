@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -80,6 +81,8 @@ class DatabaseSeeder extends Seeder
 //        // Optional: Super Admin gets everything
 //        $superAdmin->syncPermissions($permissions);
 
-        Task::factory()->count(5)->create();
+//        Task::factory()->count(5)->create();
+
+        Project::factory()->count(5)->create();
     }
 }
