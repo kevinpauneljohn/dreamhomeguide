@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateModelUnitRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateModelUnitRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->user()->can('edit model unit');
     }
 
     /**
@@ -22,7 +23,19 @@ class UpdateModelUnitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'project_id' => ['required'],
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => [
+                'required',
+                'string',
+                'max:255',
+                'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
+                Rule::unique('model_units', 'slug')->ignore($this->route('model_unit')->id)
+            ],
+            'description' => ['nullable', 'string', 'max:2000'],
+            'status' => ['required'],
+            'type' => ['required'],
+            'lot_area' => ['required'],
         ];
     }
 }

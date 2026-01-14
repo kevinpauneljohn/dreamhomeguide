@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const generateSlug = () => {
-    document.addEventListener('keyup', () => {
+    document.addEventListener('input', () => {
         slug.value = slugify(name.value);
     })
 }

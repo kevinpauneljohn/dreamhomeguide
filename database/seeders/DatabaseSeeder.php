@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ModelUnit;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
@@ -83,6 +84,8 @@ class DatabaseSeeder extends Seeder
 
 //        Task::factory()->count(5)->create();
 
-        Project::factory()->count(5)->create();
+//        Project::factory()->count(5)->create();
+        // Published units only
+        ModelUnit::factory()->count(5)->published()->create();
     }
 }

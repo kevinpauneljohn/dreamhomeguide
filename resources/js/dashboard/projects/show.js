@@ -10,6 +10,11 @@ const projectSlug = document.querySelectorAll('.project-slug');
 const projectCreatedAt = document.querySelectorAll('.project-created-at');
 const projectStatus = document.querySelector('.project-status');
 const projectDescription = document.querySelector('.project-description');
+
+const setPageTitle = (name) => {
+    document.title = `${name}`;
+};
+
 const setProjectName = (name) => {
     projectName.forEach(el => {
         el.textContent = name;
@@ -49,6 +54,7 @@ const projectInfo = (projectData) => {
     setProjectCreatedAt(projectData.created_at);
     setProjectStatus(projectData.status);
     setProjectDescription(projectData.description);
+    setPageTitle(projectData.name);
 }
 
 
@@ -67,12 +73,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 
-
-    console.log('Project ID:', projectId);
-
     try {
         const { data } = await axios.get(`/project/${projectId}/edit`);
-        console.log('Project data:', data);
         projectInfo(data);
     } catch (error) {
         console.error('Failed to fetch project', error);

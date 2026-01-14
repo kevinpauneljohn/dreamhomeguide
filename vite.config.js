@@ -107,8 +107,16 @@ export default defineConfig({
                 'resources/js/dashboard/projects/project-table.js',
                 'resources/js/dashboard/projects/mode.js',
                 'resources/js/dashboard/projects/submitProject.js',
-
                 //end of projects
+
+                //model units
+                'resources/js/dashboard/modelUnits/model-unit-table.js',
+                'resources/js/dashboard/modelUnits/add.js',
+                'resources/js/dashboard/modelUnits/edit.js',
+                'resources/js/dashboard/modelUnits/delete.js',
+                'resources/js/dashboard/modelUnits/submit-model-unit.js',
+                'resources/js/dashboard/modelUnits/button-loader.js',
+                //end of model units
 
                 //landing page form
                 'resources/js/landing-page/form.js',

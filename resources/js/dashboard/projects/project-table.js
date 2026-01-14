@@ -39,7 +39,7 @@ export const initializeProjectTable = ()  => {
 
         columns: [
             {
-                data: 'name'
+                data: 'name',
             },
             {
                 data: 'slug'

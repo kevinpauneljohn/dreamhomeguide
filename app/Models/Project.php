@@ -11,4 +11,9 @@ class Project extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = ['name','slug','thumbnail','description','address','status'];
+
+    public function units(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ModelUnit::class);
+    }
 }

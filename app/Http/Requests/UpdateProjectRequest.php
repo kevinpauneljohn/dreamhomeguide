@@ -29,7 +29,7 @@ class UpdateProjectRequest extends FormRequest
                 'string',
                 'max:255',
                 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
-                Rule::unique('properties', 'slug')->ignore($this->project)
+                Rule::unique('projects', 'slug')->ignore($this->project)
             ],
             'description' => ['nullable', 'string', 'max:2000'],
             'address' => ['required', 'string', 'max:255'],
