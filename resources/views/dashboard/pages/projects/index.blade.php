@@ -56,10 +56,9 @@
             <table id="projects-table" class="table table-bordered table-hover align-middle border rounded">
                 <thead class="table-light">
                 <tr>
-                    <th style="width: 20%;">Project</th>
-                    <th style="width: 25%;">Slug</th>
-                    <th style="width: 30%;">Address</th>
-                    <th style="width: 12%">Created</th>
+                    <th>Project</th>
+                    <th>Address</th>
+                    <th>Created</th>
                     <th>Status</th>
                     <th class="text-center" style="width: 1%">Actions</th>
                 </tr>
@@ -120,6 +119,7 @@
         </div>
     </div>
 @endpushonce
+
 
 @push('scripts')
     @vite(['resources/js/dashboard/projects/main.js'])

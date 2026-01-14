@@ -10,6 +10,7 @@ const projectSlug = document.querySelectorAll('.project-slug');
 const projectCreatedAt = document.querySelectorAll('.project-created-at');
 const projectStatus = document.querySelector('.project-status');
 const projectDescription = document.querySelector('.project-description');
+const projectAddress = document.querySelector('.project-address');
 
 const setPageTitle = (name) => {
     document.title = `${name}`;
@@ -20,6 +21,10 @@ const setProjectName = (name) => {
         el.textContent = name;
     });
 };
+
+const setProjectAddress = (address) => {
+    projectAddress.textContent = address;
+}
 
 const setProjectSlug = (slug) => {
     projectSlug.forEach(el => {
@@ -55,6 +60,7 @@ const projectInfo = (projectData) => {
     setProjectStatus(projectData.status);
     setProjectDescription(projectData.description);
     setPageTitle(projectData.name);
+    setProjectAddress(projectData.address);
 }
 
 

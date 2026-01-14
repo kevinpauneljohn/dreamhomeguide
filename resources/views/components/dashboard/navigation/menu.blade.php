@@ -19,7 +19,7 @@
         @can('view project')
 
             <li class="nav-item">
-                <a href="{{route('project.index')}}" class="nav-link text-white {{ Route::is('project.index') ? 'active' : '' }}">
+                <a href="{{route('project.index')}}" class="nav-link text-white {{ Route::is('project.index') || Route::is('project.show') ? 'active' : '' }}">
                         <span>
                             <i class="fa-solid fa-building-columns"></i> Projects
                         </span>

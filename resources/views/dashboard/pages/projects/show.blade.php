@@ -4,31 +4,47 @@
 
 @section('content')
 
-<!-- Page Header -->
-<span data-project-id="{{$project->id}}" id="project"></span>
+    <!-- Page Header -->
+    <span data-project-id="{{ $project->id }}" id="project"></span>
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
+
+        <!-- Left: Back + Title -->
+        <div class="d-flex align-items-start gap-3">
+            <a onclick="window.history.back();"
+               class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1" style="cursor: pointer;">
+                <i class="bi bi-arrow-left"></i>
+                <span class="d-none d-sm-inline">Back</span>
+            </a>
+
             <div>
                 <h3 class="fw-bold mb-0 project-name"></h3>
                 <small class="text-muted">
                     {{ $project->address ?? 'No address provided' }}
                 </small>
             </div>
-
-            <div class="d-flex gap-2">
-                @can('edit project')
-                    <button data-project-id="{{$project->id}}" class="btn btn-outline-primary edit-project" id="edit-project-btn">
-                        Edit Project
-                    </button>
-                @endcan
-
-                @can('delete project')
-                    <button data-project-id="{{$project->id}}" class="btn btn-outline-danger delete-project" id="delete-project-btn">
-                        Delete
-                    </button>
-                @endcan
-            </div>
         </div>
+
+        <!-- Right: Actions -->
+        <div class="d-flex gap-2">
+            @can('edit project')
+                <button data-project-id="{{ $project->id }}"
+                        class="btn btn-outline-primary edit-project"
+                        id="edit-project-btn">
+                    <i class="bi bi-pencil me-1"></i> Edit
+                </button>
+            @endcan
+
+            @can('delete project')
+                <button data-project-id="{{ $project->id }}"
+                        class="btn btn-outline-danger delete-project"
+                        id="delete-project-btn">
+                    <i class="bi bi-trash me-1"></i> Delete
+                </button>
+            @endcan
+        </div>
+    </div>
+
 
 
 <!-- Breadcrumb -->
@@ -65,15 +81,26 @@
     <div class="col-md-4">
         <div class="card h-100">
             <div class="card-body">
-                <h6 class="text-muted mb-1">Created</h6>
-                <p class="fw-semibold mb-0 project-created-at">
+                <h6 class="text-muted mb-1">Address</h6>
+                <p class="fw-semibold mb-0 project-address">
 {{--                    {{ $project->created_at->format('M d, Y h:i A') }}--}}
                 </p>
             </div>
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-2">
+        <div class="card h-100">
+            <div class="card-body">
+                <h6 class="text-muted mb-1">Created</h6>
+                <p class="fw-semibold mb-0 project-created-at">
+                    {{--                    {{ $project->created_at->format('M d, Y h:i A') }}--}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
         <div class="card h-100">
             <div class="card-body project-status ">
             </div>
@@ -250,6 +277,18 @@
     </div>
 @endpushonce
 
+@push('css')
+    <style>
+        @media (max-width: 768px) {
+            .page-back-btn {
+                position: sticky;
+                top: 10px;
+                z-index: 10;
+            }
+        }
+
+    </style>
+@endpush
 
 @push('scripts')
     @vite(['resources/js/dashboard/projects/show.js'])
