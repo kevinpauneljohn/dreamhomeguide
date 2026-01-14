@@ -72,7 +72,7 @@ $(function () {
                                 <i class="bi bi-three-dots-vertical"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                ${action.view ? `<li><a href="/project/${action.id}" class="dropdown-item">View</a></li>` : ''}
+                                ${action.view ? `<li><a href="/model-units/${action.id}" class="dropdown-item">View</a></li>` : ''}
                                 ${action.edit ? `<li><a data-model-unit-id="${action.id}" class="dropdown-item edit-model-unit" style="cursor: pointer">Edit</a></li>` : ''}
                                 ${action.delete ? `<li><a data-model-unit-id="${action.id}" class="dropdown-item text-danger delete-model-unit" style="cursor: pointer">Delete</a></li>` : ''}
                             </ul>

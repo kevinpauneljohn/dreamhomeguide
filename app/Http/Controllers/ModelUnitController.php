@@ -58,7 +58,11 @@ class ModelUnitController extends Controller
      */
     public function show(ModelUnit $modelUnit)
     {
-        //
+        return view('dashboard.pages.modelUnits.show')->with([
+            'title' => 'Model Unit',
+            'modelUnit' => $modelUnit,
+            'project' => $modelUnit->project,
+        ]);
     }
 
     /**
