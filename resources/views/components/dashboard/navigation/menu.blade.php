@@ -203,12 +203,14 @@
             @can('view task')
 
                 <li class="nav-item">
-                    <a href="{{route('task.index')}}" class="nav-link text-white {{ Route::is('task.index') ? 'active' : '' }}">
-                        <span>
-                            <i class="fa-solid fa-bolt"></i> Tasks
-                        </span>
+                    <a href="{{ route('task.index') }}"
+                       class="nav-link text-white {{ request()->routeIs('task.*') ? 'active' : '' }}">
+                    <span>
+                        <i class="fa-solid fa-bolt"></i> Tasks
+                    </span>
                     </a>
                 </li>
+
             @endcan
 
     </ul>

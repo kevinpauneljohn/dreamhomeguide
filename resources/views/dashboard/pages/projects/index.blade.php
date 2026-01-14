@@ -42,7 +42,7 @@
         <div class="card-body">
             <div class="row g-3 align-items-end">
                 <div class="col-md-4">
-                    <label class="form-label">Search Role</label>
+                    {{--<label class="form-label">Search Project</label>--}}
                     <input type="text" id="search" class="form-control"
                            placeholder="Search project…">
                 </div>
