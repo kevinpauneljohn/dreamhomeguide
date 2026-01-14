@@ -1,7 +1,7 @@
 <!-- SIDEBAR -->
 <div id="sidebar" class="sidebar bg-dark text-white position-fixed p-3">
     <h5 class="pb-3 border-bottom text-center">
-        <a href="{{route('home')}}" class="text-white text-decoration-none"><span class="sidebar-title">DHG</span></a>
+        <span class="sidebar-title">DHG</span>
     </h5>
 
     <ul class="nav nav-pills flex-column mt-3">
