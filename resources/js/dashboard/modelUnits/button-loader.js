@@ -12,4 +12,18 @@ const resetLoading = (element) => {
     element.innerHTML = element.dataset.originalText || 'Save';
 };
 
-export {setLoading, resetLoading};
+const disableForm = (form) => {
+    [...form.elements].forEach(el => {
+        el.dataset.wasDisabled = el.disabled;
+        el.disabled = true;
+    });
+};
+
+const enableForm = (form) => {
+    [...form.elements].forEach(el => {
+        el.disabled = el.dataset.wasDisabled === 'true';
+        delete el.dataset.wasDisabled;
+    });
+};
+
+export {setLoading, resetLoading, disableForm, enableForm};

@@ -58,6 +58,18 @@
             </li>
         @endcan
 
+        <!-- Computations -->
+        @can('view computation')
+
+            <li class="nav-item">
+                <a href="{{route('computations.index')}}" class="nav-link text-white {{ Route::is('computations.index') ? 'active' : '' }}">
+                        <span>
+                            <i class="fa-solid fa-calculator"></i> Computations
+                        </span>
+                </a>
+            </li>
+        @endcan
+
         <!-- Roles -->
         @can('view role')
 

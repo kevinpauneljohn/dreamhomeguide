@@ -11,7 +11,7 @@ class StoreComputationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->user()->can('add computation');
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreComputationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'project_id' => ['required', 'exists:projects,id'],
+            'model_unit_id' => ['required', 'exists:model_units,id'],
+            'financing' => ['required'],
+            'computation' => ['required','max:10000'],
         ];
     }
 }

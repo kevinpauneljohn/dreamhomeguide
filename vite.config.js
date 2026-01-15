@@ -118,6 +118,16 @@ export default defineConfig({
                 'resources/js/dashboard/modelUnits/button-loader.js',
                 //end of model units
 
+                //computations
+                'resources/js/dashboard/computations/computations-table.js',
+                'resources/js/dashboard/computations/submitComputation.js',
+                'resources/js/dashboard/computations/add.js',
+                'resources/js/dashboard/computations/edit.js',
+                'resources/js/dashboard/computations/delete.js',
+                'resources/js/dashboard/computations/view.js',
+                'resources/css/computations.css',
+                //end of computations
+
                 //landing page form
                 'resources/js/landing-page/form.js',
             ],
