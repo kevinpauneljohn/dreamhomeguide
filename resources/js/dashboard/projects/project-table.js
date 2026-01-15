@@ -90,8 +90,8 @@ export const initializeProjectTable = () => {
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             ${action.view ? `<li><a href="/project/${action.id}" class="dropdown-item"><i class="bi bi-eye me-2"></i>View</a></li>` : ''}
-                            ${action.edit ? `<li><a data-project-id="${action.id}" class="dropdown-item edit-project"><i class="bi bi-pencil me-2"></i>Edit</a></li>` : ''}
-                            ${action.delete ? `<li><a data-project-id="${action.id}" class="dropdown-item text-danger delete-project"><i class="bi bi-trash me-2"></i>Delete</a></li>` : ''}
+                            ${action.edit ? `<li><a data-project-id="${action.id}" class="dropdown-item edit-project" style="cursor: pointer"><i class="bi bi-pencil me-2"></i>Edit</a></li>` : ''}
+                            ${action.delete ? `<li><a data-project-id="${action.id}" class="dropdown-item text-danger delete-project" style="cursor: pointer"><i class="bi bi-trash me-2"></i>Delete</a></li>` : ''}
                         </ul>
                     </div>
                 `
