@@ -93,9 +93,6 @@ const saveComputation = (formData) => {
                     title: response.data.message || 'Saved successfully'
                 });
 
-                const modal = bootstrap.Modal.getInstance(computationModal);
-                modal.hide();
-
                 // Reset form
                 computationForm.reset();
 
