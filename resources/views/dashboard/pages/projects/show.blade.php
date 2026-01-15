@@ -242,6 +242,7 @@
                             <option value="single-attached">Single Attached</option>
                             <option value="duplex">Duplex</option>
                             <option value="bungalow">Bungalow</option>
+                            <option value="townhouse">Townhouse</option>
                             <option value="condominium">Condominium</option>
                             <option value="lot">Lot</option>
                             <option value="shop-house">Shop House</option>
