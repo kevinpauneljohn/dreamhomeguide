@@ -74,6 +74,7 @@ projectForm.addEventListener('submit', async (e) => {
                     icon: 'success',
                     title: result.message
                 })
+                projectForm.reset();
                 document.dispatchEvent(
                     new CustomEvent('project:created_or_updated')
                 );
