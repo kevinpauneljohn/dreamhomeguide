@@ -35,7 +35,7 @@ const initializeTable = () => {
                 name: 'project',
                 render: row => `
             <div class="fw-semibold">${row.project}</div>
-            <div class="text-muted small">${row.model_unit}</div>
+            <div class="text-muted small">${row.model_unit} ${row.type}</div>
         `
             },
             {
