@@ -58,7 +58,7 @@ export const removeComputation = () => {
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it",
+            confirmButtonText: "Yes, remove it",
             cancelButtonText: "Cancel",
             focusCancel: true
         });
