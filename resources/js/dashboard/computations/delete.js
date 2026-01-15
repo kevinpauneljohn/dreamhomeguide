@@ -41,7 +41,7 @@ export const removeComputation = () => {
                             ${computation.data.project_name}
                         </div>
                         <div class="text-muted small">
-                            Model Unit: ${computation.data.model_unit_name}
+                            Model Unit: ${computation.data.model_unit_name} - (${computation.data.type})
                         </div>
                         <div class="mt-1">
                             <span class="badge bg-secondary text-uppercase">
