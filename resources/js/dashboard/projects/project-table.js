@@ -6,6 +6,7 @@ export const projectsTable = $('#projects-table');
 
 $(function () {
     initializeProjectTable()
+    removeProject();
 
     /* EXTERNAL SEARCH */
     $('#search').on('keyup change', function () {
