@@ -9,7 +9,7 @@ UNIT LOCATION: END UNIT
 
 FINANCING: DEFERRED-CASH
 PROPERTY LOCATION:
-{$computation->project->location}
+{$computation->project->address}
 
 LOT AREA: {$computation->modelUnit->lot_area}
 FLOOR AREA: {$computation->modelUnit->floor_area}
