@@ -18,7 +18,7 @@
                 <a onclick="window.history.back()" class="btn btn-outline-secondary">
                     Back
                 </a>
-                <button type="submit" form="createTaskForm" class="btn btn-primary">
+                <button type="submit" form="createTaskForm" class="btn btn-primary save-task">
                     Save Task
                 </button>
             </div>
@@ -208,7 +208,7 @@
 {{--                <button type="submit" name="create_another" value="1" class="btn btn-outline-primary">--}}
 {{--                    Save & Create Another--}}
 {{--                </button>--}}
-                <button type="submit" id="submitTaskBtn" class="btn btn-primary">
+                <button type="submit" id="submitTaskBtn" class="btn btn-primary save-task">
                     Save Task
                 </button>
             </div>

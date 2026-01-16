@@ -18,7 +18,7 @@
                 <a onclick="window.history.back()" class="btn btn-outline-secondary">
                     Back
                 </a>
-                <button type="submit" form="editTaskForm" class="btn btn-primary">
+                <button type="submit" form="editTaskForm" class="btn btn-primary update-task-btn">
                     Update Task
                 </button>
             </div>
@@ -206,7 +206,7 @@
                 <a onclick="window.history.back()" class="btn btn-outline-secondary">
                     Back
                 </a>
-                <button type="submit" id="submitTaskBtn" class="btn btn-primary">
+                <button type="submit" id="submitTaskBtn" class="btn btn-primary update-task-btn">
                     Update Task
                 </button>
             </div>

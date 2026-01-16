@@ -1,6 +1,7 @@
 import select2 from 'select2';
 import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css'
 import {Toast} from "@/toast.js";
+import {setLoading, resetLoading} from "@/dashboard/modelUnits/button-loader.js";
 
 select2()
 
@@ -17,7 +18,7 @@ const type = params.get('type');
 const id   = params.get('id');
 
 const link = document.querySelector('input[name=link]');
-
+const saveTaskBtn = document.querySelector('.save-task');
 
 linkedTypeSelect.addEventListener('change', () => {
     linkedRecordSelect.disabled = linkedTypeSelect.value === '';
@@ -84,7 +85,7 @@ createTaskForm.addEventListener('submit', (e) => {
         <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
         Saving...
     `;
-
+    setLoading(saveTaskBtn, 'Saving...');
     axios.post('/task', formData).then(response => {
         console.log(response);
         if(response.data.success === true)
@@ -109,5 +110,6 @@ createTaskForm.addEventListener('submit', (e) => {
         // Restore button state
         submitBtn.disabled = false;
         submitBtn.innerHTML = 'Save Task';
+        resetLoading(saveTaskBtn, 'Save Task');
     })
 })

@@ -1,7 +1,7 @@
 import select2 from 'select2';
 import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css'
 import {Toast} from "@/toast.js";
-
+import {setLoading, resetLoading} from "@/dashboard/modelUnits/button-loader.js";
 select2()
 
 const linkedTypeSelect = document.getElementById('linkedType');
@@ -9,6 +9,7 @@ const linkedValueId = document.getElementById('link_value');
 const linkedRecordSelect = document.getElementById('linkedRecord');
 const editTaskForm = document.getElementById('editTaskForm');
 const task_id = document.querySelector('input[name=task_id]').value;
+const updateTaskBtn = document.querySelector('.update-task-btn');
 
 linkedTypeSelect.addEventListener('change', () => {
     linkedRecordSelect.disabled = linkedTypeSelect.value === '';
@@ -70,6 +71,8 @@ editTaskForm.addEventListener('submit', (e) => {
         Updating...
     `;
 
+    setLoading(updateTaskBtn, 'Updating...');
+
     formData.append('_method', 'PUT');
     axios.post('/task/'+task_id, formData).then(response => {
         console.log(response);
@@ -99,5 +102,6 @@ editTaskForm.addEventListener('submit', (e) => {
         // Restore button state
         submitBtn.disabled = false;
         submitBtn.innerHTML = 'Update Task';
+        resetLoading(updateTaskBtn);
     })
 })
