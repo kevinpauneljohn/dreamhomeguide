@@ -90,6 +90,11 @@ export default defineConfig({
                 'resources/js/dashboard/tasks/show.js',
                 'resources/js/dashboard/tasks/edit.js',
 
+                //task activities
+                'resources/css/task/show.css',
+                'resources/js/dashboard/task-activities/task-activity-table.js',
+                //end ot task activities
+
                 //css
                 'resources/css/task/task.css',
                 //edn of tasks

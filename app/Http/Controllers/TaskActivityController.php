@@ -60,6 +60,7 @@ class TaskActivityController extends Controller
                     'status' => $newStatus,
                 ]);
 
+                $request->merge(['task_status' => $newStatus]);
                 // Create task activity
                 $activity = TaskActivity::create($request->only('task_id', 'user_id', 'accomplishment','task_status'));
 
@@ -116,5 +117,12 @@ class TaskActivityController extends Controller
     public function destroy(TaskActivity $taskActivity)
     {
         //
+    }
+
+    public function getTaskActivities(Task $task): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    {
+        return view('dashboard.pages.taskActivities.activity')->with([
+            'task' => $task,
+        ]);
     }
 }

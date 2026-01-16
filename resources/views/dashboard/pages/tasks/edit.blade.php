@@ -18,7 +18,7 @@
                 <a onclick="window.history.back()" class="btn btn-outline-secondary">
                     Back
                 </a>
-                <button type="submit" form="editTaskForm" class="btn btn-primary update-task-btn">
+                <button type="submit" form="editTaskForm" class="btn btn-primary update-task-btn" @if($task->status == 'completed')disabled @endif>
                     Update Task
                 </button>
             </div>
@@ -49,6 +49,7 @@
                                        class="form-control"
                                        placeholder="e.g. Send sample computation"
                                        value="{{$task->title}}"
+                                       @if($task->status == 'completed')disabled @endif
                                 >
                             </div>
 
@@ -57,12 +58,13 @@
                                 <textarea name="description"
                                           class="form-control"
                                           rows="8"
+                                          @if($task->status == 'completed')disabled @endif
                                           placeholder="Add notes or instructions for this task">{{$task->description}}</textarea>
                             </div>
 
                             <div>
                                 <label class="form-label">Task Type</label>
-                                <select name="type" class="form-select">
+                                <select name="type" class="form-select" @if($task->status == 'completed')disabled @endif>
                                     <option value=""></option>
                                     <option value="follow_up" @if($task->type == 'follow_up')selected @endif>Follow-up</option>
                                     <option value="appointment" @if($task->type == 'appointment')selected @endif>Appointment</option>
@@ -86,13 +88,14 @@
                                     <input type="datetime-local"
                                            name="due_date"
                                            class="form-control"
+                                           @if($task->status == 'completed')disabled @endif
                                            value="{{$task->due_date}}">
                                 </div>
 
 
                                 <div class="col-md-6">
                                     <label class="form-label">Priority</label>
-                                    <select name="priority" class="form-select">
+                                    <select name="priority" class="form-select" @if($task->status == 'completed')disabled @endif>
                                         <option value=""></option>
                                         <option value="low" @if($task->priority == 'low')selected @endif>Low</option>
                                         <option value="medium" @if($task->priority == 'medium')selected @endif>Medium</option>
@@ -111,7 +114,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Linked Type</label>
-                                <select name="linked_type" id="linkedType" class="form-select">
+                                <select name="linked_type" id="linkedType" class="form-select" @if($task->status == 'completed')disabled @endif>
                                     <option value="" @if(is_null($task->lead_id) && is_null($task->appointment_id)) @endif>None</option>
                                     <option value="lead" @if(!is_null($task->lead_id))selected @endif>Lead</option>
                                     <option value="appointment" @if(!is_null($task->appointment_id))selected @endif>Appointment</option>
@@ -143,7 +146,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Assign To</label>
-                                <select name="assigned_to" class="form-select">
+                                <select name="assigned_to" class="form-select" @if($task->status == 'completed')disabled @endif>
                                     @foreach($agents ?? [] as $agent)
                                         <option value="{{ $agent->id }}" @if($task->assigned_to == $agent->id)selected @endif>
                                             {{ ucwords(strtolower($agent->full_name)) }} ({{ $agent->getRoleNames()->first() ?? 'User' }})
@@ -172,6 +175,7 @@
                                 <input class="form-check-input"
                                        type="checkbox"
                                        name="is_public"
+                                       @if($task->status == 'completed')disabled @endif
                                        @if($task->is_public)checked @endif>
                                 <label class="form-check-label">
                                     Visible to assigned user
@@ -206,7 +210,7 @@
                 <a onclick="window.history.back()" class="btn btn-outline-secondary">
                     Back
                 </a>
-                <button type="submit" id="submitTaskBtn" class="btn btn-primary update-task-btn">
+                <button type="submit" id="submitTaskBtn" class="btn btn-primary update-task-btn" @if($task->status == 'completed')disabled @endif>
                     Update Task
                 </button>
             </div>

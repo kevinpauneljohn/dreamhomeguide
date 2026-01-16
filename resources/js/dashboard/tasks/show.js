@@ -1,6 +1,7 @@
 import {deleteTask} from "@/dashboard/tasks/delete.js";
 import {Toast} from "@/toast.js";
 import {setLoading, resetLoading} from "@/dashboard/modelUnits/button-loader.js";
+import {getTaskActivities} from "@/dashboard/task-activities/task-activity-table.js";
 
 const changeStatusButton = document.getElementById('change-status-button');
 const taskData = document.getElementById('task-data');
@@ -119,6 +120,7 @@ statusUpdateForm.addEventListener('submit', async (e) => {
             icon: 'success',
             title: data.message
         });
+        getTaskActivities();
 
         // Backend is source of truth
         taskInfo(data.data.task);

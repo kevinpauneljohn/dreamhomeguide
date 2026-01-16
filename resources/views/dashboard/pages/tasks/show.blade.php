@@ -158,30 +158,20 @@
                 {{-- ACTIVITY --}}
                 <div class="card shadow-sm border-0">
                     <div class="card-body">
+
                         <h6 class="fw-semibold mb-3 text-uppercase text-muted">
                             Activity
                         </h6>
 
-                        <ul class="list-unstyled small mb-0">
-                            <li class="mb-2">
-                                <strong>{{ $task->creator?->full_name ?? 'System' }}</strong>
-                                created this task
-                                <span class="text-muted">
-                                {{ $task->created_at->format('M d, Y h:i A') }}
-                            </span>
-                            </li>
+                        <ul class="list-unstyled activity-lite mb-0" id="task-activity-list">
 
-                            @if($task->status === 'completed')
-                                <li>
-                                    Task completed
-                                    <span class="text-muted">
-                                    {{ $task->updated_at->format('M d, Y h:i A') }}
-                                </span>
-                                </li>
-                            @endif
+
+
                         </ul>
+
                     </div>
                 </div>
+
 
             </div>
 
@@ -268,48 +258,61 @@
         </div>
     </div>
 @endsection
-
 @push('modal')
-    <!-- Computation Modal -->
-    <div class="modal fade" id="taskActivityModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="taskActivityModal" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <form id="status-update-form">
+            <form id="status-update-form" novalidate>
                 @csrf
 
                 <div class="modal-content border-0 shadow">
 
                     <!-- Header -->
                     <div class="modal-header bg-light">
-                        <h5 class="modal-title fw-semibold">
-                            <!-- Set dynamically via JS -->
-                        </h5>
+                        <div>
+                            <h5 class="modal-title fw-semibold mb-0">
+                                <!-- Set dynamically via JS -->
+                            </h5>
+                            <small class="text-muted">
+                                This note will be saved in the task activity log.
+                            </small>
+                        </div>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
                     <!-- Body -->
                     <div class="modal-body px-4 py-3">
+
+                        <!-- Hidden fields -->
+                        <input type="hidden" name="task_id" id="task_id" value="{{ $task->id }}">
+                        <input type="hidden" name="user_id" id="user_id" value="{{ auth()->id() }}">
+                        <input type="hidden" name="task_status" id="task_status">
+
                         <div class="mb-3">
                             <label for="accomplishment" class="form-label fw-medium">
                                 Accomplishments / Notes / Reasons for Change
                             </label>
-                            <input type="hidden" name="task_id" id="task_id" value="{{$task->id}}">
-                            <input type="hidden" name="user_id" id="user_id" value="{{auth()->id()}}">
-                            <input type="hidden" name="task_status" id="task_status">
+
                             <textarea
                                 id="accomplishment"
                                 name="accomplishment"
                                 class="form-control"
-                                rows="9"
-                                placeholder="Describe the work done, notes, or reasons related to this task…"
+                                rows="8"
+                                required
+                                placeholder="Describe the work done, notes, or reasons related to this task..."
                             ></textarea>
+
+                            <div class="form-text">
+                                Be concise but clear. This will be visible in the activity history.
+                            </div>
                         </div>
+
                     </div>
 
                     <!-- Footer -->
                     <div class="modal-footer bg-light">
                         <button
                             type="button"
-                            class="btn btn-secondary"
+                            class="btn btn-outline-secondary"
                             data-bs-dismiss="modal">
                             Close
                         </button>
@@ -329,26 +332,11 @@
 
 @endpush
 
-
-
 @push('css')
-    <style>
-        .avatar {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: #e5e7eb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.75rem;
-        }
-
-
-    </style>
+    @vite('resources/css/task/show.css')
 @endpush
 
 @push('scripts')
+
     @vite('resources/js/dashboard/tasks/show.js')
 @endpush

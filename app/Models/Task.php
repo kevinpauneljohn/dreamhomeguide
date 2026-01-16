@@ -108,7 +108,8 @@ class Task extends Model
 
     public function taskActivities(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(TaskActivity::class);
+        return $this->hasMany(TaskActivity::class)
+            ->latest();
 
     }
 
