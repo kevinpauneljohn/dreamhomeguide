@@ -201,24 +201,6 @@
                     {{-- Body --}}
                     <div class="modal-body">
 
-                        {{-- Highlight Box --}}
-{{--                        <div class="p-3 mb-3 rounded bg-light border">--}}
-{{--                            <div class="small text-muted">Estimated Monthly Amortization</div>--}}
-{{--                            <div class="fs-3 fw-bold" id="viewMA">—</div>--}}
-{{--                        </div>--}}
-
-                        {{-- Meta Info --}}
-{{--                        <div class="row mb-3">--}}
-{{--                            <div class="col-md-6">--}}
-{{--                                <div class="small text-muted">Project</div>--}}
-{{--                                <div class="fw-semibold" id="viewProject">—</div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-6">--}}
-{{--                                <div class="small text-muted">Model Unit</div>--}}
-{{--                                <div class="fw-semibold" id="viewModelUnit">—</div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
                         {{-- Computation --}}
                         <label class="fw-semibold mb-1 d-flex align-items-center gap-2">
                             Copy-Ready Computation

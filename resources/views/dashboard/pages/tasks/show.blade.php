@@ -74,10 +74,6 @@
                             {{ $priority['label'] }} Priority
                         </span>
 
-                            <span class="badge bg-{{ $status['badge'] }}">
-                            {{ $status['label'] }}
-                        </span>
-
                             <span class="text-muted small">
                             <i class="fa fa-hashtag me-1"></i>
                             TSK-{{ str_pad($task->id, 5, '0', STR_PAD_LEFT) }}
@@ -240,9 +236,7 @@
 
                         <div>
                             <small class="text-muted">Status</small><br>
-                            <span class="badge bg-{{ $status['badge'] }}">
-                            {{ $status['label'] }}
-                        </span>
+                            <span class="badge" id="badge-status"></span>
                         </div>
                     </div>
                 </div>
@@ -254,12 +248,11 @@
                             Task Controls
                         </h6>
 
+                        <span id="task-data" data-task-id="{{ $task->id }}" data-title="{{ $task->title }}" data-ticket="{{sprintf('TSK-%05d', $task->id)}}"></span>
                         <div class="d-grid gap-2">
-                            @if($task->status !== 'completed')
-                                <button class="btn btn-success">
-                                    ✓ Mark as Completed
-                                </button>
-                            @endif
+                            <button class="btn" id="change-status-button" data-task-id="{{ $task->id }}" data-title="{{ $task->title }}" data-ticket="{{sprintf('TSK-%05d', $task->id)}}">
+
+                            </button>
 
                             @can('edit task')
                                 <button class="btn btn-outline-secondary">
@@ -275,6 +268,69 @@
         </div>
     </div>
 @endsection
+
+@push('modal')
+    <!-- Computation Modal -->
+    <div class="modal fade" id="taskActivityModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <form id="status-update-form">
+                @csrf
+
+                <div class="modal-content border-0 shadow">
+
+                    <!-- Header -->
+                    <div class="modal-header bg-light">
+                        <h5 class="modal-title fw-semibold">
+                            <!-- Set dynamically via JS -->
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="modal-body px-4 py-3">
+                        <div class="mb-3">
+                            <label for="accomplishment" class="form-label fw-medium">
+                                Accomplishments / Notes / Reasons for Change
+                            </label>
+                            <input type="hidden" name="task_id" id="task_id" value="{{$task->id}}">
+                            <input type="hidden" name="user_id" id="user_id" value="{{auth()->id()}}">
+                            <input type="hidden" name="task_status" id="task_status">
+                            <textarea
+                                id="accomplishment"
+                                name="accomplishment"
+                                class="form-control"
+                                rows="9"
+                                placeholder="Describe the work done, notes, or reasons related to this task…"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="modal-footer bg-light">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                            Close
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            id="submit-accomplishment-button">
+                            Submit
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+@endpush
+
+
+
 @push('css')
     <style>
         .avatar {

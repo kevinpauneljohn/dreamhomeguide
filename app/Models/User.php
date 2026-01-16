@@ -131,4 +131,10 @@ class User extends Authenticatable
         return $this->hasMany(Task::class, 'assigned_to', 'id');
     }
 
+    public function taskActivities(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(TaskActivity::class);
+
+    }
+
 }

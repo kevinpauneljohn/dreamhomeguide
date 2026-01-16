@@ -106,4 +106,10 @@ class Task extends Model
         return null;
     }
 
+    public function taskActivities(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(TaskActivity::class);
+
+    }
+
 }

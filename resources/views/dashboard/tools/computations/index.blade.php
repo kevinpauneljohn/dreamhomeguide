@@ -48,7 +48,7 @@ TEXT;
         <div class="card-body">
 
             <div class="text-muted small mb-2">
-                Created: {{ $computation->created_at->format('M d, Y h:i A') }}
+                Updated: {{ $computation->updated_at->format('M d, Y h:i A') }}
             </div>
 
             <pre class="bg-light p-3 rounded mb-0"

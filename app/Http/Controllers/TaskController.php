@@ -198,4 +198,9 @@ class TaskController extends Controller
             'options' => $options
         ]);
     }
+
+    public function getTaskDetails(Task $task)
+    {
+        return $task;
+    }
 }
