@@ -1,4 +1,5 @@
 import axios from "axios";
+import {setLoading, resetLoading} from "@/dashboard/modelUnits/button-loader.js";
 import select2 from 'select2';
 import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css'
 select2()
@@ -6,6 +7,7 @@ const computationModal = document.getElementById('computationToolModal');
 const modal = bootstrap.Modal.getOrCreateInstance(computationModal);
 const computationForm = document.getElementById('computationToolForm');
 const computationResultWrapper = document.getElementById('computationResultWrapper');
+const searchComputationBtn = document.getElementById('searchComputationBtn');
 
 const project = $('#computationToolModal #project');
 let project_id;
@@ -62,6 +64,7 @@ computationForm.addEventListener('submit', (e) => {
 
     const formData = new FormData(computationForm);
 
+    setLoading(searchComputationBtn, 'Searching...');
     axios.post('/tools/get-computation-result', formData)
         .then((response) => {
             // ✅ Show results
@@ -83,7 +86,7 @@ computationForm.addEventListener('submit', (e) => {
 
             // 🔔 Optional user feedback
             alert('Please select a project and model unit first.');
-        });
+        }).finally(() => resetLoading(searchComputationBtn, 'Search'));
 
 });
 

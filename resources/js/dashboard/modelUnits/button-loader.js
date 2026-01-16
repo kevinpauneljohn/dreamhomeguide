@@ -1,15 +1,15 @@
-const setLoading = (element) => {
+const setLoading = (element, buttonText = 'Saving...') => {
     element.disabled = true;
     element.dataset.originalText = element.innerHTML;
     element.innerHTML = `
         <span class="spinner-border spinner-border-sm me-1"></span>
-        Saving...
+        ${buttonText}
     `;
 };
 
-const resetLoading = (element) => {
+const resetLoading = (element, buttonText = 'Save') => {
     element.disabled = false;
-    element.innerHTML = element.dataset.originalText || 'Save';
+    element.innerHTML = element.dataset.originalText || buttonText;
 };
 
 const disableForm = (form) => {
