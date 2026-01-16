@@ -64,12 +64,27 @@ computationForm.addEventListener('submit', (e) => {
 
     axios.post('/tools/get-computation-result', formData)
         .then((response) => {
+            // ✅ Show results
             computationResultWrapper.classList.remove('d-none');
             computationResultWrapper.innerHTML = response.data;
         })
         .catch(error => {
+
             console.error(error.response?.data || error);
+
+            // ❌ Clear computation result
+            computationResultWrapper.innerHTML = '';
+
+            // ❌ Hide computation wrapper
+            computationResultWrapper.classList.add('d-none');
+
+            // 🔁 Reset model unit (optional but recommended)
+            $('#model_unit').val(null).trigger('change');
+
+            // 🔔 Optional user feedback
+            alert('Please select a project and model unit first.');
         });
+
 });
 
 document.addEventListener('click', function (e) {
