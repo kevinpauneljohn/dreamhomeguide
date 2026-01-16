@@ -47,6 +47,7 @@
 </div>
 
 <x-tools.calculator />
+<x-tools.computation />
 
 
 @pushonce('scripts')

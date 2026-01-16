@@ -1,4 +1,5 @@
 import {openCalculatorModal} from "./calculator.js";
+import {openComputationModal} from "@/component/floatingTools/computation.js";
 
 const tab = document.getElementById('tool-tab');
 const drawer = document.getElementById('tool-drawer');
