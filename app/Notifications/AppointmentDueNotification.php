@@ -53,23 +53,29 @@ class AppointmentDueNotification extends Notification implements ShouldQueue, Sh
     {
         $dateFormatted = Carbon::parse($this->appointment->appointment_date)
             ->format('F d, Y | h:i A');
+
         return [
             'title' => $this->reminderType === 'due_today'
                 ? 'Appointment Due Today'
                 : 'Appointment in 3 Days',
+
             'message' => $this->appointment->title,
+
             'appointment_id' => $this->appointment->id,
             'reminder_type' => $this->reminderType,
             'type' => $this->type,
-            'appointment_date' => $this->appointment->appointment_date
-                ->format('M d, Y h:i A'),
+
+            'appointment_date' => $dateFormatted,
+
             'url' => route('appointment.show', $this->appointment->id),
+
             'description' =>
                 'Appointment Date: ' . $dateFormatted .
                 '<br/>' . ucwords($this->appointment->title) .
                 '<br/>' . ucwords($this->appointment->appointment_type),
         ];
     }
+
 
     public function toBroadcast($notifiable): BroadcastMessage
     {
