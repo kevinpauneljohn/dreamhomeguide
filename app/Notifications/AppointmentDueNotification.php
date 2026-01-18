@@ -62,7 +62,6 @@ class AppointmentDueNotification extends Notification implements ShouldQueue, Sh
             'message' => $this->appointment->title,
 
             'appointment_id' => $this->appointment->id,
-            'reminder_type' => $this->reminderType,
             'type' => $this->type,
 
             'appointment_date' => $dateFormatted,
