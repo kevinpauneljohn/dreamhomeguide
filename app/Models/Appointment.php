@@ -12,6 +12,10 @@ class Appointment extends Model
     use LogsActivity;
     protected $fillable = ['title','appointment_date','location','notes','user_id','status','lead_id','appointment_type','assigned_agent'];
 
+    protected $casts = [
+        'appointment_date' => 'datetime',
+    ];
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
@@ -44,4 +48,13 @@ class Appointment extends Model
         return $this->belongsTo(User::class,'assigned_agent');
 
     }
+
+    public function notifications(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(
+            \Illuminate\Notifications\DatabaseNotification::class,
+            'notifiable'
+        );
+    }
+
 }
