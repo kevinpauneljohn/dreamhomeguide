@@ -47,7 +47,7 @@ class CheckDueDateAppointments extends Command
 
         foreach ($appointments as $appointment)
         {
-            echo $appointment;
+
             // Identify notification type
             if ($appointment->appointment_date->isSameDay($today)) {
                 $type = 'due_today';
@@ -73,6 +73,7 @@ class CheckDueDateAppointments extends Command
                 new AppointmentDueNotification($appointment, $type, 'an_appointment_is_due')
             );
 
+            echo $type;
             $this->info(
                 "Appointment {$type} notification sent to {$appointment->agent->full_name}"
             );
