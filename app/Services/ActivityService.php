@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Leads;
+use App\Models\ModelUnit;
+use App\Models\Project;
 use App\Models\User;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -43,6 +45,24 @@ class ActivityService
                         : 'Unknown Lead';
                 };
 
+                $resolveProjectName = function ($id) {
+                    if (!$id) return 'Unknown Project';
+
+                    $project = Project::find($id);
+                    return $project
+                        ? trim($project->name)
+                        : 'Unknown Project';
+                };
+
+                $resolveModelName = function ($id) {
+                    if (!$id) return 'Unknown Model Unit';
+
+                    $modelUnit = ModelUnit::find($id);
+                    return $modelUnit
+                        ? trim($modelUnit->name)
+                        : 'Unknown Model Unit';
+                };
+
                 /*
                 |--------------------------------------------------------------------------
                 | OLD VALUES (updated / deleted)
@@ -60,6 +80,18 @@ class ActivityService
                     if (isset($props['properties']['old']['assigned_agent'])) {
                         $props['properties']['old']['assigned_agent_name'] =
                             $resolveUserName($props['properties']['old']['assigned_agent'], 'Unassigned');
+                    }
+
+                    // project
+                    if (isset($props['properties']['old']['project_id'])) {
+                        $props['properties']['old']['project_id'] =
+                            $resolveProjectName($props['properties']['old']['project_id'], 'Unknown Project');
+                    }
+
+                    // model unit
+                    if (isset($props['properties']['old']['model_unit_id'])) {
+                        $props['properties']['old']['model_unit_id'] =
+                            $resolveModelName($props['properties']['old']['model_unit_id'], 'Unknown Model Unit');
                     }
                 }
 
@@ -79,6 +111,18 @@ class ActivityService
                     if (isset($props['properties']['attributes']['assigned_agent'])) {
                         $props['properties']['attributes']['assigned_agent'] =
                             $resolveUserName($props['properties']['attributes']['assigned_agent'], 'Unassigned');
+                    }
+
+                    // Project
+                    if (isset($props['properties']['attributes']['project_id'])) {
+                        $props['properties']['attributes']['project_id'] =
+                            $resolveProjectName($props['properties']['attributes']['project_id'], 'Unknown Project');;
+                    }
+
+                    // Model Unit
+                    if (isset($props['properties']['attributes']['model_unit_id'])) {
+                        $props['properties']['attributes']['model_unit_id'] =
+                            $resolveModelName($props['properties']['attributes']['model_unit_id'], 'Model Unit');;
                     }
                 }
 

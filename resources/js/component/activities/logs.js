@@ -306,7 +306,7 @@ window.showActivityModal = (activity) => {
                         </td>
                     </tr>
                 `}
-                ${activity.log_name === 'leads' || activity.log_name === 'login' || activity.log_name === 'logout' ? '' : `
+                ${activity.log_name === 'leads' || activity.log_name === 'login' || activity.log_name === 'logout' || activity.log_name === 'computations' ? '' : `
                     <tr>
                         <td colspan="2" class="fw-semibold text-capitalize">Lead Name</td>
                         <td class="text-right text-success">
