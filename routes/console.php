@@ -11,9 +11,9 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 
-Schedule::command('appointments:check-due')->everyMinute()
+Schedule::command('appointments:check-due')->hourly()
 ->withoutOverlapping(10)->runInBackground();
 
-Schedule::command('tasks:check-due')->everyMinute()
+Schedule::command('tasks:check-due')->hourly()
     ->withoutOverlapping(10)->runInBackground();
 
