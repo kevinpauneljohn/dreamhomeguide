@@ -20,6 +20,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withCommands([
         \App\Console\Commands\CheckDueDateAppointments::class,
     ])
+    ->withSchedule(function(\Illuminate\Console\Scheduling\Schedule $schedule){
+
+    })
     ->withMiddleware(function (Middleware $middleware): void {
         // Global middleware
         $middleware->use([

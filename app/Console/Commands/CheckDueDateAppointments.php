@@ -79,5 +79,7 @@ class CheckDueDateAppointments extends Command
                 "Appointment {$type} notification sent to {$appointment->agent->full_name}"
             );
         }
+
+        $this->info('appointments');
     }
 }

@@ -72,5 +72,7 @@ class CheckDueTasks extends Command
             $user->notify(new TaskDueNotification($task, $type, $type));
 
         }
+
+        $this->info('tasks');
     }
 }
