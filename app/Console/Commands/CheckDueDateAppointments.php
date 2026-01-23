@@ -61,7 +61,8 @@ class CheckDueDateAppointments extends Command
             $alreadyNotified = $appointment->agent->notifications()
                 ->where('type', \App\Notifications\AppointmentDueNotification::class)
                 ->whereJsonContains('data->appointment_id', $appointment->id)
-                ->whereJsonContains('data->type', 'appointment_' . $type)
+                ->whereJsonContains('data->appointment_date', $appointment->appointment_date->format('F d, Y | h:i A'))
+                ->whereJsonContains('data->type', $type)
                 ->whereDate('created_at', $today)
                 ->exists();
 
@@ -69,11 +70,11 @@ class CheckDueDateAppointments extends Command
                 continue;
             }
 
+
             $appointment->agent->notify(
-                new AppointmentDueNotification($appointment, $type, 'an_appointment_is_due')
+                new AppointmentDueNotification($appointment, $type, $type)
             );
 
-            echo $type;
             $this->info(
                 "Appointment {$type} notification sent to {$appointment->agent->full_name}"
             );
