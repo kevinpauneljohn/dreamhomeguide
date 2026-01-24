@@ -5,9 +5,9 @@
 **** Sample Computation Only ****
 PROJECT: {$computation->project->name}
 MODEL UNIT: {$computation->modelUnit->name}
-UNIT LOCATION: END UNIT
+UNIT LOCATION: {$computation->type}
 
-FINANCING: DEFERRED-CASH
+FINANCING: {$computation->financing}
 PROPERTY LOCATION:
 {$computation->project->address}
 
