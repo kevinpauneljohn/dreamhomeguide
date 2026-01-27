@@ -2,9 +2,62 @@ import {setLoading, resetLoading} from "@/dashboard/modelUnits/button-loader.js"
 import axios from "axios";
 import {Toast} from "@/toast.js";
 
-const completeStatusModal = document.getElementById('complete-status-note-modal');
+const completeStatusModalEl = document.getElementById('complete-status-note-modal');
+const completeStatusModal = bootstrap.Modal.getOrCreateInstance(completeStatusModalEl);
 const statusUpdateForm = document.getElementById('status-update-form');
 const submitBtn = document.getElementById('submit-accomplishment-button');
+const appointmentStatusBadge = document.getElementById('appointment-status');
+const appointmentId = appointmentStatusBadge.dataset.appointmentId;
+const completeStatusButton = document.getElementById('complete-status-button');
+const rescheduleButton = document.getElementById('re-schedule-btn');
+
+const statusBgColor = (status) => {
+    switch (status) {
+        case 'pending':
+            return 'bg-secondary';
+        case 'completed':
+            return 'bg-success';
+        case 'cancelled':
+            return 'bg-danger';
+    }
+}
+
+
+const replaceBgClass = (element, newBgClass) => {
+    element.classList.remove(
+        'bg-primary',
+        'bg-secondary',
+        'bg-success',
+        'bg-danger',
+        'bg-warning',
+        'bg-info',
+        'bg-light',
+        'bg-dark'
+    );
+
+    element.classList.add(newBgClass);
+};
+
+const getAppointmentStatus = async () => {
+    const response = await axios.get(`/appointment/status/${appointmentId}`)
+    const status = response.data;
+    replaceBgClass(appointmentStatusBadge, statusBgColor(status));
+    appointmentStatusBadge.textContent = status.toUpperCase();
+    completeStatusButton.disabled = status === 'completed';
+    rescheduleButton.disabled = status === 'completed';
+}
+
+const getTaskActivities = () => {
+    axios.get(`/get-appointment-activities/${appointmentId}`)
+        .then(response => {
+            document.getElementById('appointment-activity-list').innerHTML = response.data;
+        });
+
+}
+document.addEventListener('DOMContentLoaded', () => {
+    getAppointmentStatus().then(response => {});
+    getTaskActivities();
+})
 
 statusUpdateForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -27,9 +80,21 @@ statusUpdateForm.addEventListener('submit', (e) => {
                 icon: 'success',
                 title: response.data.message,
             })
+
+            getAppointmentStatus().then(response => {});
+            getTaskActivities();
+            statusUpdateForm.reset();
+            completeStatusModal.hide();
         }
     }).catch((error) => {
-        // console.log(error.response.data.errors)
+        console.log(error.response.data)
+        if(error.response.data.success === false)
+        {
+            Toast.fire({
+                icon: 'warning',
+                title: error.response.data.message,
+            })
+        }
         const errors = error.response.data.errors;
 
         Object.keys(errors).forEach(key => {

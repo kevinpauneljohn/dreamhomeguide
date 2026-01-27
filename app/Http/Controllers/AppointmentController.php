@@ -108,4 +108,9 @@ class AppointmentController extends Controller
     {
         return $this->appointmentService->appointments_in_calendar_format($userId);
     }
+
+    public function getAppointmentStatus(Appointment $appointment)
+    {
+        return $appointment->status;
+    }
 }

@@ -34,10 +34,18 @@ class AppointmentActivityController extends Controller
         ]);
 
         $request->merge(['user_id' => auth()->id(), 'status' => 'completed']);
+
+        $appointment = Appointment::findOrFail($request->appointment_id);
+
+        if($appointment->status === 'completed')
+        {
+            return response()->json(['success' => false, 'message' => 'Appointment was already completed'], 400);
+        }
+
         $appointmentActivity = AppointmentActivity::create($request->only('accomplishment','appointment_id','user_id','status'));
         if($appointmentActivity->exists())
         {
-            $appointment = Appointment::findOrFail($appointmentActivity->appointment_id);
+
             $appointment->status = 'completed';
             $appointment->save();
             return response()->json(['success' => true, 'message' => 'Appointment Completed'], 201);
@@ -75,5 +83,12 @@ class AppointmentActivityController extends Controller
     public function destroy(AppointmentActivity $appointmentActivity)
     {
         //
+    }
+
+    public function getAppointmentActivities(Appointment $appointment)
+    {
+        return view('dashboard.pages.appointmentActivities.activity')->with([
+            'appointment' => $appointment,
+        ]);
     }
 }

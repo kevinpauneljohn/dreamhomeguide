@@ -1,7 +1,9 @@
 <button
     data-bs-toggle="modal"
     data-bs-target="#complete-status-note-modal"
-    class="btn btn-sm btn-success">
+    class="btn btn-sm btn-success"
+    id="complete-status-button"
+>
     <i class="bi bi-check"></i> Complete Status
 </button>
 

@@ -3,7 +3,6 @@ const taskId = document.getElementById('task-data').dataset.taskId;
 
 document.addEventListener('DOMContentLoaded', () => {
     getTaskActivities()
-    console.log('open')
 })
 
 
