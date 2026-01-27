@@ -137,6 +137,10 @@ export default defineConfig({
                 'resources/js/component/floatingTools/floating-tools.js',
                 'resources/js/component/floatingTools/computation.js',
                 //end of floating tools
+
+                //appointments
+                'resources/js/dashboard/appointments/show.js',
+                //edn of appointments
             ],
             refresh: true,
         }),

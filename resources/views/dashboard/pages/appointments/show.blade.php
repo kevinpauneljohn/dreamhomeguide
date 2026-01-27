@@ -60,7 +60,7 @@
 
                     <span class="badge rounded-pill px-3 py-2
                     @if($appointment->status === 'scheduled') bg-primary
-                    @elseif($appointment->status === 'done') bg-success
+                    @elseif($appointment->status === 'completed') bg-success
                     @elseif($appointment->status === 'cancelled') bg-danger
                     @else bg-secondary
                     @endif
@@ -158,21 +158,17 @@
             <div class="card-footer bg-white border-top d-flex justify-content-end gap-2 px-4 py-3">
 
                 <a href="{{ route('appointment.edit', $appointment->id) }}"
-                   class="btn btn-sm btn-outline-primary">
-                    <i class="bi bi-pencil"></i> Edit
+                   class="btn btn-sm btn-outline-dark">
+                    <i class="bi bi-calendar"></i> Re-schedule
                 </a>
 
-                <form action="{{ route('appointment.destroy', $appointment->id) }}"
-                      method="POST"
-                      onsubmit="return confirm('Delete this appointment? This action cannot be undone.')">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-sm btn-outline-danger">
-                        <i class="bi bi-trash"></i> Delete
-                    </button>
-                </form>
+                <x-appointment.complete-status appointmentId="{{$appointment->id}}"/>
 
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    @vite('resources/js/dashboard/appointments/show.js')
+@endpush
