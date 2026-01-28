@@ -109,6 +109,17 @@ class AppointmentService
         }
 
         return collect($appointments)->mapWithKeys(function ($item, $key){
+            // 🎨 Background color logic
+            $bgColor = '';
+
+            if ($item->status === 'completed') {
+                // Yellow-green for completed appointments
+                $bgColor = '#b7e4c7';
+            } elseif ($item->assigned_agent === auth()->id()) {
+                // Yellow for appointments assigned to current user
+                $bgColor = '#f6e388';
+            }
+
             return [
                 $key => [
                     'id' => $item->id,
@@ -123,7 +134,7 @@ class AppointmentService
                     'location' => $item->location,
                     'notes' => $item->notes,
                     'lead_id' => $item->lead_id,
-                    'bgColor' => $item->assigned_agent == auth()->id() ? '#f6e388' : '',
+                    'bgColor' => $bgColor,
                     'showEditButton' => $item->user_id == auth()->id(),
                     'showCloseButton' => $item->user_id == auth()->id(),
                     'showViewButton' => true,

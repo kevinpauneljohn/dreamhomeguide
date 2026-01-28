@@ -90,7 +90,7 @@ statusUpdateForm.addEventListener('submit', (e) => {
             })
 
             getAppointmentStatus().then(response => {});
-            getTaskActivities();
+            getAppointmentActivities();
             statusUpdateForm.reset();
             completeStatusModal.hide();
         }
