@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\Appointment;
 use App\Models\Task;
 use App\Models\User;
 use App\Notifications\TaskNotification;
@@ -34,9 +35,18 @@ class TaskObserver
     public function updated(Task $task): void
     {
         /// Example: status changed to completed
-        if ($task->wasChanged('status') && $task->status === 'completed') {
+        if ($task->wasChanged('status')) {
             // future: TaskCompletedNotification
+            if($task->status === 'completed' && $task->complete_appointment && !is_null($task->appointment_id) && $task->appointment->status !== 'completed')
+            {
+                $task->appointment()->update(['status' => 'completed']);
+            }
+            else if($task->status !== 'completed' && $task->complete_appointment && !is_null($task->appointment_id) && $task->appointment->status === 'completed')
+            {
+                $task->appointment()->update(['status' => 'pending']);
+            }
         }
+
 
         // Example: reassigned
         if ($task->wasChanged('assigned_to')) {

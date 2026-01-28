@@ -62,4 +62,9 @@ class Appointment extends Model
         return $this->hasMany(AppointmentActivity::class);
     }
 
+    public function tasks(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
+
 }

@@ -85,9 +85,16 @@ class AppointmentActivityController extends Controller
         //
     }
 
-    public function getAppointmentActivities(Appointment $appointment)
+    public function getAppointmentActivities(Appointment $appointment): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         return view('dashboard.pages.appointmentActivities.activity')->with([
+            'appointment' => $appointment,
+        ]);
+    }
+
+    public function getAppointmentTasks(Appointment $appointment): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    {
+        return view('dashboard.pages.appointmentActivities.tasks')->with([
             'appointment' => $appointment,
         ]);
     }

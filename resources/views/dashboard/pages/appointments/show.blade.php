@@ -136,7 +136,7 @@
                 </div>
 
                 {{-- Activity Timeline --}}
-                <div class="card shadow-sm border-0">
+                <div class="card shadow-sm border-0 mb-4">
                     <div class="card-body">
 
                         <h6 class="fw-semibold mb-3 text-uppercase text-muted">
@@ -144,6 +144,23 @@
                         </h6>
 
                         <ul class="list-unstyled activity-lite mb-0" id="appointment-activity-list">
+
+
+
+                        </ul>
+
+                    </div>
+                </div>
+
+                {{-- Related Tasks --}}
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+
+                        <h6 class="fw-semibold mb-3 text-uppercase text-muted">
+                            Related Tasks
+                        </h6>
+
+                        <ul class="list-unstyled activity-lite mb-0" id="related-tasks-list">
 
 
 

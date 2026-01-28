@@ -47,16 +47,24 @@ const getAppointmentStatus = async () => {
     rescheduleButton.disabled = status === 'completed';
 }
 
-const getTaskActivities = () => {
+const getAppointmentActivities = () => {
     axios.get(`/get-appointment-activities/${appointmentId}`)
         .then(response => {
             document.getElementById('appointment-activity-list').innerHTML = response.data;
         });
-
 }
+
+const getAppointmentTasks = () => {
+    axios.get(`/get-appointment-tasks/${appointmentId}`)
+        .then(response => {
+            document.getElementById('related-tasks-list').innerHTML = response.data;
+        });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     getAppointmentStatus().then(response => {});
-    getTaskActivities();
+    getAppointmentActivities();
+    getAppointmentTasks();
 })
 
 statusUpdateForm.addEventListener('submit', (e) => {

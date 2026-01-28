@@ -24,7 +24,8 @@ class Task extends Model
         'is_public',
         'status',
         'appointment_id',
-        'type'
+        'type',
+        'complete_appointment'
     ];
 
     protected $appends = ['linked_record'];
