@@ -26,9 +26,6 @@ linkedTypeSelect.addEventListener('change', () => {
 
 $(function(){
 
-    console.log(type); // "appointment"
-    console.log(id);   // "28"
-
     $('select[name=assigned_to]').select2({
         theme: 'bootstrap-5',
         placeholder: 'Assign Agent',

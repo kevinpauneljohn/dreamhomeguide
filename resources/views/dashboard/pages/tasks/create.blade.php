@@ -163,7 +163,7 @@
 
 
                     <!-- VISIBILITY -->
-                    <div class="card border-0 shadow-sm">
+                    <div class="card border-0 shadow-sm mb-4">
                         <div class="card-body">
                             <h6 class="fw-semibold mb-3">Visibility</h6>
 
@@ -197,6 +197,23 @@
                         </div>
                     </div>
 
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="fw-semibold mb-3">Trigger Appointment Status Completion</h6>
+
+                            <div class="form-check">
+                                <input class="form-check-input"
+                                       type="checkbox"
+                                       name="complete_appointment"
+                                       disabled
+                                       >
+                                <label class="form-check-label">
+                                    Enable Appointment Status Completion
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -219,5 +236,6 @@
 @endsection
 
 @push('scripts')
-    @vite('resources/js/dashboard/tasks/create.js')
+    @vite(['resources/js/dashboard/tasks/create.js','resources/js/dashboard/tasks/enable-status-completion.js'])
+    @vite(['resources/js/dashboard/tasks/enable-status-completion.js'])
 @endpush

@@ -89,6 +89,7 @@ export default defineConfig({
                 'resources/js/dashboard/tasks/create.js',
                 'resources/js/dashboard/tasks/show.js',
                 'resources/js/dashboard/tasks/edit.js',
+                'resources/js/dashboard/tasks/enable-status-completion.js',
 
                 //task activities
                 'resources/css/task/show.css',

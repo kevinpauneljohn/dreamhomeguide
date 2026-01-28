@@ -89,11 +89,12 @@ class TaskController extends Controller
     {
         $request->merge([
             'is_public' => $request->has('is_public'),
+            'complete_appointment' => $request->has('complete_appointment'),
             'appointment_id' => $request->linked_type == 'appointment' ? $request->linked_id : null,
             'lead_id' => $request->linked_type == 'lead' ? $request->linked_id : null,
             'user_id' => auth()->id(),
         ]);
-        $task = Task::create($request->only('title','description','type','due_date','priority','user_id','lead_id','appointment_id','assigned_to','is_public'));
+        $task = Task::create($request->only('title','description','type','due_date','priority','user_id','lead_id','appointment_id','assigned_to','is_public','complete_appointment'));
         return  $task->exists() ? response()->json(['success' => true, 'message' => 'Task created successfully.', 'redirect' => '/task/'.$task->id.'?success=Task created successfully.']) :
             response()->json(['success' => false, 'message' => 'An error occurred while creating the task.']);
     }

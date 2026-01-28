@@ -2,34 +2,40 @@
 
     @php
         $status = $task->status;
+        $isNewTask = $task->created_at->equalTo($task->updated_at);
 
         $statusMap = [
-            'completed'   => [
+            'completed' => [
                 'bg'   => 'bg-success',
                 'icon' => 'fa-check',
-                'text' => 'completed the appointment from this task: ',
+                'text' => 'completed the assigned appointment task',
             ],
-            'pending'     => [
+
+            'pending' => [
                 'bg'   => 'bg-warning',
-                'icon' => 'fa-rotate-left',
-                'text' => 'reopened the appointment this task: ',
+                'icon' => $isNewTask ? 'fa-plus' : 'fa-rotate-left',
+                'text' => $isNewTask
+                    ? 'has a pending assigned appointment task'
+                    : 'has a reopened assigned appointment task',
             ],
+
             'in progress' => [
                 'bg'   => 'bg-primary',
                 'icon' => 'fa-spinner',
-                'text' => 'started working on the appointment',
+                'text' => 'is working on the assigned appointment task',
             ],
-            'overdue'     => [
+
+            'overdue' => [
                 'bg'   => 'bg-danger',
                 'icon' => 'fa-exclamation',
-                'text' => 'appointment became overdue',
+                'text' => 'has an overdue assigned appointment task',
             ],
         ];
 
         $ui = $statusMap[$status] ?? [
             'bg'   => 'bg-secondary',
             'icon' => 'fa-circle-info',
-            'text' => 'updated the appointment',
+            'text' => 'updated the assigned appointment task',
         ];
 
         $taskNumber = 'TSK-' . str_pad($task->id, 5, '0', STR_PAD_LEFT);
@@ -46,14 +52,19 @@
         <div class="flex-grow-1">
 
             <div class="fw-medium">
-                <strong>{{ $task->assignedAgent->full_name ?? 'System' }}</strong>
+
+                {{-- Assigned Agent is the ACTOR --}}
+                <strong>{{ $task->assignedAgent?->full_name ?? 'System' }}</strong>
+
                 {{ $ui['text'] }}
 
-                {{-- Task Number Link --}}
-                <a href="{{ route('task.show', $task->id) }}" title="Click to view task details."
+                {{-- Task Number --}}
+                <a href="{{ route('task.show', $task->id) }}"
+                   title="Click to view task details"
                    class="ms-1 text-decoration-none text-primary fw-semibold">
                     {{ $taskNumber }}
                 </a>
+
             </div>
 
             <div class="small text-muted mb-1">
@@ -66,6 +77,7 @@
                     “{{ $task->description }}”
                 </div>
             @endif
+
         </div>
 
     </li>
