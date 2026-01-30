@@ -243,12 +243,6 @@
                             <button class="btn" id="change-status-button" data-task-id="{{ $task->id }}" data-title="{{ $task->title }}" data-ticket="{{sprintf('TSK-%05d', $task->id)}}">
 
                             </button>
-
-                            @can('edit task')
-                                <button class="btn btn-outline-secondary">
-                                    Reassign Task
-                                </button>
-                            @endcan
                         </div>
                     </div>
                 </div>

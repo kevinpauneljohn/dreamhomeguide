@@ -111,6 +111,22 @@ class AppointmentController extends Controller
 
     public function getAppointmentStatus(Appointment $appointment)
     {
-        return $appointment->status;
+        return [
+            'status' => $appointment->status,
+            'appointment_date' => $appointment->appointment_date
+        ];
+    }
+
+    public function reScheduleAppointment(Appointment $appointment, Request $request): \Illuminate\Http\JsonResponse
+    {
+        $request->validate([
+            'appointment_date' => ['required', 'date','after_or_equal:today'],
+        ]);
+        $appointment->update(['appointment_date' => $request->appointment_date]);
+        if($appointment->wasChanged('appointment_date'))
+        {
+            return response()->json(['success' => true, 'message' => 'Appointment rescheduled successfully.']);
+        }
+        return response()->json(['success' => false, 'message' => 'No changes were made.']);
     }
 }

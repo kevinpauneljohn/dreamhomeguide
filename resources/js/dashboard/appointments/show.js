@@ -1,6 +1,8 @@
 import {setLoading, resetLoading} from "@/dashboard/modelUnits/button-loader.js";
 import axios from "axios";
+import moment from "moment";
 import {Toast} from "@/toast.js";
+import {rescheduleButton} from "@/dashboard/appointments/re-schedule-appoinment.js";
 
 const completeStatusModalEl = document.getElementById('complete-status-note-modal');
 const completeStatusModal = bootstrap.Modal.getOrCreateInstance(completeStatusModalEl);
@@ -9,7 +11,8 @@ const submitBtn = document.getElementById('submit-accomplishment-button');
 const appointmentStatusBadge = document.getElementById('appointment-status');
 const appointmentId = appointmentStatusBadge.dataset.appointmentId;
 const completeStatusButton = document.getElementById('complete-status-button');
-const rescheduleButton = document.getElementById('re-schedule-btn');
+const appointmentDateDisplay = document.getElementById('appointment-date-display');
+
 
 const statusBgColor = (status) => {
     switch (status) {
@@ -40,12 +43,26 @@ const replaceBgClass = (element, newBgClass) => {
 
 const getAppointmentStatus = async () => {
     const response = await axios.get(`/appointment/status/${appointmentId}`)
-    const status = response.data;
+    const status = response.data.status;
+    const formattedDate = moment(response.data.appointment_date)
+        .format('MMM DD, YYYY hh:mm A')
+        .replace(',', '');
+    const inputDate = moment(response.data.appointment_date)
+        .format('YYYY-MM-DDTHH:mm');
+
     replaceBgClass(appointmentStatusBadge, statusBgColor(status));
     appointmentStatusBadge.textContent = status.toUpperCase();
     completeStatusButton.disabled = status === 'completed';
     rescheduleButton.disabled = status === 'completed';
+
+    appointmentDateDisplay.textContent = formattedDate;
+    document.querySelector('input[name="appointment_date"]').value = inputDate;
+
 }
+
+document.addEventListener('update:appointment-status', () => {
+    getAppointmentStatus().then(response => {});
+})
 
 const getAppointmentActivities = () => {
     axios.get(`/get-appointment-activities/${appointmentId}`)

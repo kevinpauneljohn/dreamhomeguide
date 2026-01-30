@@ -181,8 +181,8 @@
 
                         <div class="mb-3">
                             <div class="small text-muted mb-1">Appointment Date</div>
-                            <div class="fw-semibold">
-                                {{ \Carbon\Carbon::parse($appointment->appointment_date)->format('M d, Y h:i A') }}
+                            <div class="fw-semibold" id="appointment-date-display">
+{{--                                {{ \Carbon\Carbon::parse($appointment->appointment_date)->format('M d, Y h:i A') }}--}}
                             </div>
                         </div>
 
@@ -267,6 +267,29 @@
         </div>
 
     </div>
+
+    @push('modal')
+        <div id="re-schedule-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <form id="re-schedule-form">
+                    @csrf
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Re-schedule Appointment</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label class="fw-semibold">Date</label>
+                            <input type="datetime-local" name="appointment_date" class="form-control" >
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary w-100" id="save-reschedule-appointment-btn">Save changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endpush
 @endsection
 @push('css')
     @vite('resources/css/task/show.css')

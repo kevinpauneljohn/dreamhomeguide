@@ -141,6 +141,7 @@ export default defineConfig({
 
                 //appointments
                 'resources/js/dashboard/appointments/show.js',
+                'resources/js/dashboard/appointments/re-schedule-appointment.js',
                 //edn of appointments
             ],
             refresh: true,

@@ -8,4 +8,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/get-appointments',[AppointmentController::class,'getAppointments'])->name('get-appointments');
     Route::get('/get-appointment/user/{userId}',[AppointmentController::class,'getUserAppointments'])->name('get-user-appointment');
     Route::get('/appointment/status/{appointment}',[AppointmentController::class,'getAppointmentStatus'])->name('appointment.status');
+    Route::put('/appointment/{appointment}/re-schedule',[AppointmentController::class,'reScheduleAppointment'])->name('appointment.reschedule');
 });
