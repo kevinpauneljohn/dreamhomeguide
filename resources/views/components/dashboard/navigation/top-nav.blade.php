@@ -15,7 +15,7 @@
                 </span>
             </a>
 
-            <ul class="dropdown-menu dropdown-menu-end shadow" style="width: 320px" id="notification-dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-end shadow notification-dropdown" id="notification-dropdown-menu">
 
 {{--                <li><hr class="dropdown-divider"></li>--}}
 {{--                <li>--}}
@@ -30,12 +30,23 @@
         <!-- 👤 USER MENU -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                <i class="bi bi-person-circle"></i> {{ auth()->user()->full_name }}
+                <i class="bi bi-person-circle"></i>
+
+                <!-- Hide username on mobile -->
+                <span class="d-none d-md-inline">
+            {{ auth()->user()->full_name }}
+        </span>
             </a>
+
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="{{route('profile')}}">Profile</a></li>
-{{--                <li><a class="dropdown-item" href="#">Settings</a></li>--}}
+                <li>
+                    <a class="dropdown-item" href="{{ route('profile') }}">
+                        Profile
+                    </a>
+                </li>
+
                 <li><hr class="dropdown-divider"></li>
+
                 <li>
                     <a class="dropdown-item" href="{{ route('logout') }}">
                         Logout
@@ -43,7 +54,9 @@
                 </li>
             </ul>
         </li>
+
     </ul>
 </nav>
+
 
 

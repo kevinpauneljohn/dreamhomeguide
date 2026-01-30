@@ -64,3 +64,25 @@
     border-radius: 50%;
     display: inline-block;
 }
+
+/* TASK FILTER BAR */
+.task-filter-bar > * {
+    min-width: 160px;
+}
+
+/* SEARCH INPUT SLIGHTLY WIDER */
+#search {
+    min-width: 220px;
+}
+
+/* MOBILE FIXES */
+@media (max-width: 768px) {
+    .task-filter-bar {
+        flex-direction: column;
+    }
+
+    .task-filter-bar > * {
+        width: 100%;
+        min-width: 100%;
+    }
+}

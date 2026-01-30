@@ -686,3 +686,41 @@
     opacity: 0;
     transition: opacity 0.5s ease;
 }
+
+
+/*top nav */
+/* ===============================
+   NOTIFICATION DROPDOWN – MOBILE FIX
+   =============================== */
+
+.notification-dropdown {
+    width: 320px;
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+/* MOBILE BEHAVIOR */
+@media (max-width: 576px) {
+
+    .notification-dropdown {
+        position: fixed !important;
+
+        /* Anchor to viewport, not bell icon */
+        top: 60px !important;   /* navbar height */
+        left: 12px !important;
+        right: 12px !important;
+
+        width: auto !important;
+        max-width: none !important;
+
+        max-height: calc(100vh - 80px) !important;
+        overflow-y: auto !important;
+
+        transform: none !important;
+        margin: 0 !important;
+
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,.2);
+        z-index: 2000;
+    }
+}

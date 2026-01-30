@@ -120,66 +120,75 @@
 
                     <div class="col-lg-12">
                         <div class="card border-0 shadow-sm mt-4">
-                            <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                                <h6 class="fw-semibold mb-0">Tasks</h6>
+                            <div class="card-header bg-white border-0 pb-2">
+                                <div class="d-flex flex-column gap-3">
 
-                                <div class="d-flex gap-2 align-items-center">
+                                    <!-- TOP ROW: TITLE + ADD BUTTON -->
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="fw-semibold mb-0">Tasks</h6>
 
-                                    <!-- SEARCH -->
-                                    <input
-                                        type="text"
-                                        id="search"
-                                        class="form-control form-control-sm"
-                                        placeholder="Search task # or title"
-                                        style="width: 220px;"
-                                    >
+                                        <a href="{{ route('task.create') }}"
+                                           class="btn btn-sm btn-primary d-flex align-items-center justify-content-center"
+                                           style="width: 34px; height: 34px;">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
 
-                                    <!-- PRIORITY FILTER -->
-                                    <select class="form-select form-select-sm" id="agent-filter">
-                                        <option value="">All Agent</option>
-                                        @foreach($agents as $agent)
-                                            <option value="{{$agent->id}}">{{ucwords($agent->full_name)}} - {{$agent->getRoleNames()->first()}}</option>
-                                        @endforeach
-                                    </select>
+                                    <!-- FILTER BAR -->
+                                    <div class="task-filter-bar d-flex flex-wrap flex-lg-nowrap gap-2">
 
-                                    <!-- PRIORITY FILTER -->
-                                    <select class="form-select form-select-sm" id="priorities">
-                                        <option value="">All Priorities</option>
-                                        <option value="low">Low</option>
-                                        <option value="medium">Medium</option>
-                                        <option value="high">High</option>
-                                    </select>
+                                        <!-- SEARCH -->
+                                        <input
+                                            type="text"
+                                            id="search"
+                                            class="form-control form-control-sm"
+                                            placeholder="Search task # or title"
+                                        >
 
-                                    <!-- STATUS FILTER -->
-                                    <select class="form-select form-select-sm" id="status-filter">
-                                        <option value="">All Status</option>
-                                        <option value="pending">Pending</option>
-                                        <option value="in progress">In Progress</option>
-                                        <option value="completed">Completed</option>
-                                        <option value="overdue">Overdue</option>
-                                    </select>
+                                        <!-- AGENT -->
+                                        <select class="form-select form-select-sm" id="agent-filter">
+                                            <option value="">All Agent</option>
+                                            @foreach($agents as $agent)
+                                                <option value="{{ $agent->id }}">
+                                                    {{ ucwords($agent->full_name) }} - {{ $agent->getRoleNames()->first() }}
+                                                </option>
+                                            @endforeach
+                                        </select>
 
-                                    <!-- DUE DATE FILTER -->
-                                    <input
-                                        type="date"
-                                        id="due-date-filter"
-                                        class="form-control form-control-sm"
-                                        title="Filter by Due Date"
-                                    >
+                                        <!-- PRIORITY -->
+                                        <select class="form-select form-select-sm" id="priorities">
+                                            <option value="">All Priorities</option>
+                                            <option value="low">Low</option>
+                                            <option value="medium">Medium</option>
+                                            <option value="high">High</option>
+                                        </select>
 
-                                    <!-- ORDER BY DUE DATE -->
-                                    <select class="form-select form-select-sm" id="order-by-due">
-                                        <option value="">Default (Latest Created)</option>
-                                        <option value="asc">Due Date ↑ (Soonest)</option>
-                                        <option value="desc">Due Date ↓ (Latest)</option>
-                                    </select>
+                                        <!-- STATUS -->
+                                        <select class="form-select form-select-sm" id="status-filter">
+                                            <option value="">All Status</option>
+                                            <option value="pending">Pending</option>
+                                            <option value="in progress">In Progress</option>
+                                            <option value="completed">Completed</option>
+                                            <option value="overdue">Overdue</option>
+                                        </select>
 
+                                        <!-- DUE DATE -->
+                                        <input
+                                            type="date"
+                                            id="due-date-filter"
+                                            class="form-control form-control-sm"
+                                        >
 
-                                    <a href="{{route('task.create')}}" class="btn btn-sm btn-primary">
-                                        <i class="fa fa-plus"></i>
-                                    </a>
+                                        <!-- ORDER -->
+                                        <select class="form-select form-select-sm" id="order-by-due">
+                                            <option value="">Default (Latest Created)</option>
+                                            <option value="asc">Due Date ↑</option>
+                                            <option value="desc">Due Date ↓</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
+
 
 
 
