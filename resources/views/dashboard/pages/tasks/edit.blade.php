@@ -207,8 +207,8 @@
 
             <!-- FOOTER ACTIONS -->
             <div class="d-flex justify-content-end gap-2 mt-4 mb-4">
-                <a onclick="window.history.back()" class="btn btn-outline-secondary">
-                    Back
+                <a href="{{route('task.index')}}" class="btn btn-outline-secondary">
+                    Back to tasks
                 </a>
                 <button type="submit" id="submitTaskBtn" class="btn btn-primary update-task-btn" @if($task->status == 'completed')disabled @endif>
                     Update Task

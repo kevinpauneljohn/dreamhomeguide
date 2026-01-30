@@ -15,8 +15,8 @@
             </div>
 
             <div class="d-flex gap-2">
-                <a onclick="window.history.back()" class="btn btn-outline-secondary">
-                    Back
+                <a href="{{route('task.index')}}" class="btn btn-outline-secondary">
+                    Back to Tasks
                 </a>
                 <button type="submit" form="createTaskForm" class="btn btn-primary save-task">
                     Save Task
@@ -219,8 +219,8 @@
 
             <!-- FOOTER ACTIONS -->
             <div class="d-flex justify-content-end gap-2 mt-4 mb-4">
-                <a onclick="window.history.back()" class="btn btn-outline-secondary">
-                    Back
+                <a href="{{route('task.index')}}" class="btn btn-outline-secondary">
+                    Back to Tasks
                 </a>
 {{--                <button type="submit" name="create_another" value="1" class="btn btn-outline-primary">--}}
 {{--                    Save & Create Another--}}

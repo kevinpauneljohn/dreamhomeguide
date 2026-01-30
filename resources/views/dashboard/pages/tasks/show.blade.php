@@ -32,8 +32,8 @@
             </div>
 
             <div class="d-flex gap-2">
-                <a onclick="window.history.back()" class="btn btn-outline-secondary">
-                    Back
+                <a href="{{route('task.index')}}" class="btn btn-outline-secondary">
+                    Back to Tasks
                 </a>
             </div>
         </div>
