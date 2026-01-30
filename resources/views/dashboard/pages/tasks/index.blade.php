@@ -118,35 +118,57 @@
 
 
                     <!-- PERFORMANCE / KPI -->
+                    <!-- TASK ATTENTION & RISK -->
                     <div class="col-lg-6">
                         <div class="card shadow-sm border-0 h-100">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between mb-3">
-                                    <h6 class="fw-semibold">Lead & Appointment Activity</h6>
-                                    <i class="fa fa-sliders text-muted"></i>
+                                    <h6 class="fw-semibold">Task Attention & Risk</h6>
+                                    <i class="fa fa-triangle-exclamation text-muted"></i>
                                 </div>
 
-                                <!-- Line Chart Placeholder -->
-                                <div class="line-chart-placeholder mb-3"></div>
+                                <!-- TOP ALERT METRICS -->
+                                <div class="row g-3 mb-3">
+                                    <div class="col-6">
+                                        <div class="p-3 rounded bg-danger-subtle">
+                                            <small class="text-muted d-block">Overdue Tasks</small>
+                                            <h4 class="fw-bold text-danger mb-0">
+                                                {{ $overdueTasks }}
+                                            </h4>
+                                        </div>
+                                    </div>
 
-                                <!-- KPIs -->
+                                    <div class="col-6">
+                                        <div class="p-3 rounded bg-warning-subtle">
+                                            <small class="text-muted d-block">Due Today</small>
+                                            <h4 class="fw-bold text-warning mb-0">
+                                                {{ $dueTodayTasks }}
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SECONDARY METRICS -->
                                 <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <small class="text-muted">Total Leads</small>
-                                    <strong>124</strong>
+                                    <small class="text-muted">High Priority Tasks</small>
+                                    <strong class="text-danger">{{ $highPriorityTasks }}</strong>
                                 </div>
 
                                 <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <small class="text-muted">Appointments Set</small>
-                                    <strong>38</strong>
+                                    <small class="text-muted">Due This Week</small>
+                                    <strong>{{ $dueThisWeekTasks }}</strong>
                                 </div>
 
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">Conversion Rate</small>
-                                    <strong class="text-success">30.6%</strong>
+                                    <small class="text-muted">Completion Rate</small>
+                                    <strong class="text-success">
+                                        {{ $completionRate }}%
+                                    </strong>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="col-lg-12">
                         <div class="card border-0 shadow-sm mt-4">

@@ -44,6 +44,12 @@ class CheckDueTasks extends Command
                 ? 'task_overdue'
                 : 'task_near_due';
 
+            if($task->due_date->isPast() && $task->status !== 'overdue')
+            {
+                $task->update(['status' => 'overdue']);
+                $this->info('tasks');
+            }
+
             // Prevent duplicate notifications
             $alreadyNotified = DB::table('notifications')
                 ->where('type', TaskDueNotification::class)
@@ -67,12 +73,12 @@ class CheckDueTasks extends Command
                 continue;
             }
 
-            echo $task->due_date->toDateTimeString();
+//            echo $task->due_date->toDateTimeString();
 
             $user->notify(new TaskDueNotification($task, $type, $type));
 
         }
 
-        $this->info('tasks');
+
     }
 }

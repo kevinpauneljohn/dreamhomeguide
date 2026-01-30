@@ -60,6 +60,7 @@ class TaskService
     {
         $user = auth()->user();
 
+        //only tasks assigned to the user will be displayed or if the user is the super admin or manager all tasks will be displayed
         $query = Task::query()
             ->when(
                 ! $user->hasAnyRole(['manager', 'super admin']),

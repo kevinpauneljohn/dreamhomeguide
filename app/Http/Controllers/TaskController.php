@@ -38,7 +38,8 @@ class TaskController extends Controller
     {
         $user = auth()->user();
 
-        $taskCounts = Task::query()
+        // 🔹 BASE TASK QUERY (reusable)
+        $taskQuery = Task::query()
             ->when(
                 ! $user->hasAnyRole(['manager', 'super admin']),
                 function ($query) use ($user) {
@@ -47,27 +48,62 @@ class TaskController extends Controller
                             ->orWhere('assigned_to', $user->id);
                     });
                 }
-            )
+            );
+
+        // 🔹 STATUS COUNTS
+        $taskCounts = (clone $taskQuery)
             ->selectRaw("
-        COUNT(*) as total,
-        COALESCE(SUM(status = 'in progress'), 0) as in_progress,
-        COALESCE(SUM(status = 'completed'), 0) as completed,
-        COALESCE(SUM(status = 'pending'), 0) as pending,
-        COALESCE(SUM(status = 'overdue'), 0) as overdue
-    ")
+            COUNT(*) as total,
+            COALESCE(SUM(status = 'in progress'), 0) as in_progress,
+            COALESCE(SUM(status = 'completed'), 0) as completed,
+            COALESCE(SUM(status = 'pending'), 0) as pending,
+            COALESCE(SUM(status = 'overdue'), 0) as overdue
+        ")
             ->first();
 
+        // 🔹 TASK ATTENTION METRICS
+        $dueTodayTasks = (clone $taskQuery)
+            ->whereDate('due_date', now()->toDateString())
+            ->whereNotIn('status', ['completed'])
+            ->count();
+
+        $dueThisWeekTasks = (clone $taskQuery)
+            ->whereBetween('due_date', [
+                now()->startOfWeek(),
+                now()->endOfWeek(),
+            ])
+            ->whereNotIn('status', ['completed'])
+            ->count();
+
+        $highPriorityTasks = (clone $taskQuery)
+            ->where('priority', 'high')
+            ->whereNotIn('status', ['completed'])
+            ->count();
+
+        // 🔹 COMPLETION RATE
+        $completionRate = $taskCounts->total > 0
+            ? round(($taskCounts->completed / $taskCounts->total) * 100, 1)
+            : 0;
 
         return view('dashboard.pages.tasks.index')->with([
             'title' => 'Tasks',
             'agents' => User::select('id','first_name','last_name','email')->get(),
+
+            // Existing
             'inProgressTasks' => $taskCounts->in_progress,
-            'completedTasks' => $taskCounts->completed,
-            'pendingTasks' => $taskCounts->pending,
-            'overdueTasks' => $taskCounts->overdue,
-            'allTasks' => $taskCounts->total,
+            'completedTasks'  => $taskCounts->completed,
+            'pendingTasks'    => $taskCounts->pending,
+            'overdueTasks'    => $taskCounts->overdue,
+            'allTasks'        => $taskCounts->total,
+
+            // New (Task Attention Panel)
+            'dueTodayTasks'       => $dueTodayTasks,
+            'dueThisWeekTasks'    => $dueThisWeekTasks,
+            'highPriorityTasks'   => $highPriorityTasks,
+            'completionRate'      => $completionRate,
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
