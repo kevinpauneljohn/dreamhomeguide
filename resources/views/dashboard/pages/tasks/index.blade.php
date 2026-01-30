@@ -10,68 +10,17 @@
                 <h3 class="fw-bold mb-0">Task Dashboard</h3>
             </div>
 
-            <div class="d-flex gap-2 align-items-center">
-                <button class="btn btn-outline-secondary btn-sm">Today</button>
-                <button class="btn btn-outline-secondary btn-sm">This Week</button>
-                <button class="btn btn-dark btn-sm">This Month</button>
-                <button class="btn btn-outline-secondary btn-sm">Reports</button>
+{{--            <div class="d-flex gap-2 align-items-center">--}}
+{{--                <button class="btn btn-outline-secondary btn-sm">Today</button>--}}
+{{--                <button class="btn btn-outline-secondary btn-sm">This Week</button>--}}
+{{--                <button class="btn btn-dark btn-sm">This Month</button>--}}
+{{--                <button class="btn btn-outline-secondary btn-sm">Reports</button>--}}
 
-            </div>
+{{--            </div>--}}
         </div>
 
         <div class="row mb-4">
-            <div class="col-lg-3">
-                <!-- MY TASKS -->
-                <div class="col-lg-12">
-                    <div class="card shadow-sm border-0 h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h6 class="fw-semibold mb-0">My Tasks</h6>
-                                <button class="btn btn-sm btn-outline-primary">+</button>
-                            </div>
-
-                            <div class="btn-group w-100 mb-3">
-                                <button class="btn btn-sm btn-dark">Today</button>
-                                <button class="btn btn-sm btn-outline-secondary">Tomorrow</button>
-                            </div>
-
-                            <select class="form-select form-select-sm mb-3">
-                                <option>On Going Tasks</option>
-                                <option>Completed</option>
-                                <option>Overdue</option>
-                            </select>
-
-                            <!-- TASK ITEM -->
-                            <div class="task-item mb-3 p-3 rounded">
-                                <span class="badge bg-warning mb-2">Follow-up</span>
-                                <h6 class="fw-semibold mb-1">Rania Model – Inquiry</h6>
-                                <small class="text-muted">
-                                    Call client re financing options
-                                </small>
-                                <div class="mt-2 d-flex justify-content-between">
-                                    <small class="text-muted">4:00 PM</small>
-                                    <input type="checkbox">
-                                </div>
-                            </div>
-
-                            <div class="task-item mb-3 p-3 rounded">
-                                <span class="badge bg-info mb-2">Appointment</span>
-                                <h6 class="fw-semibold mb-1">Site Viewing – Solana</h6>
-                                <small class="text-muted">
-                                    Prepare documents
-                                </small>
-                                <div class="mt-2 d-flex justify-content-between">
-                                    <small class="text-muted">Tomorrow</small>
-                                    <input type="checkbox">
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-lg-9">
+            <div class="col-lg-12">
                 <div class="row">
                     <!-- OVERVIEW -->
                     <div class="col-lg-6">
@@ -79,7 +28,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between mb-3">
                                     <h6 class="fw-semibold">Task Overview</h6>
-                                    <i class="fa fa-arrow-up-right-from-square text-muted"></i>
+{{--                                    <i class="fa fa-arrow-up-right-from-square text-muted"></i>--}}
                                 </div>
 
                                 <!-- Donut Chart -->
@@ -117,7 +66,6 @@
 
 
 
-                    <!-- PERFORMANCE / KPI -->
                     <!-- TASK ATTENTION & RISK -->
                     <div class="col-lg-6">
                         <div class="card shadow-sm border-0 h-100">

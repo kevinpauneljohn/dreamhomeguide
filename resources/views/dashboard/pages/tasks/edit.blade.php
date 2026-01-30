@@ -15,8 +15,8 @@
             </div>
 
             <div class="d-flex gap-2">
-                <a onclick="window.history.back()" class="btn btn-outline-secondary">
-                    Back
+                <a href="{{route('task.index')}}" class="btn btn-outline-secondary">
+                    Back to tasks
                 </a>
                 <button type="submit" form="editTaskForm" class="btn btn-primary update-task-btn" @if($task->status == 'completed')disabled @endif>
                     Update Task
