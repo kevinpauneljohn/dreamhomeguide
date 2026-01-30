@@ -27,7 +27,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Global middleware
         $middleware->use([
             \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
-//            \App\Http\Middleware\HandleCors::class,
+            \App\Http\Middleware\HandleCors::class,
         ]);
 
         // Web middleware stack (THIS FIXES YOUR LOGIN SESSION)
