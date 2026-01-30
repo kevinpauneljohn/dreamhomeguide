@@ -47,7 +47,7 @@ class NoteController extends Controller
      */
     public function store(StoreNoteRequest $request)
     {
-        return $this->noteService->saveNote($request->all());
+        return $this->noteService->saveNote($request->only('lead_id','user_id','type','description'));
     }
 
     /**

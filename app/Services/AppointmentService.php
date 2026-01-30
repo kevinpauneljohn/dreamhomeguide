@@ -130,7 +130,7 @@ class AppointmentService
                     'appointment_type' => $item->appointment_type,
                     'assigned_agent' => $item->user_id ? User::find($item->assigned_agent)->full_name : 'Unassigned',
                     'agent_id' => $item->assigned_agent,
-                    'client' => Leads::find($item->lead_id)->full_name,
+                    'client' => optional(Leads::find($item->lead_id))->full_name ?? 'No Client',
                     'location' => $item->location,
                     'notes' => $item->notes,
                     'lead_id' => $item->lead_id,

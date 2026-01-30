@@ -114,7 +114,11 @@ $(function () {
 
         },
         eventDidMount: function(info) {
-
+            console.log(info.event.extendedProps.client);
+            if(info.event.extendedProps.client === "No Client")
+            {
+                info.el.style.display = 'none';
+            }
             info.el.setAttribute('title', 'Type: '+info.event.extendedProps.appointment_type +
                 '\nClient: '+ info.event.extendedProps.client+
                 '\nAssigned To: '+ info.event.extendedProps.assigned_agent+
