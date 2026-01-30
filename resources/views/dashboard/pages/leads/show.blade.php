@@ -631,7 +631,7 @@
                 <form class="modal-content" id="addNoteForm">
                     @csrf
                     <input type="hidden" name="lead_id" value="{{$lead->id}}">
-                    <input type="hidden" name="user_id" value="{{$lead->user_id}}">
+                    <input type="hidden" name="user_id" value="{{auth()->id()}}">
                     <div class="modal-header">
                         <h5 class="modal-title">Add Note</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
