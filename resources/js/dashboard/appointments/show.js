@@ -2,7 +2,7 @@ import {setLoading, resetLoading} from "@/dashboard/modelUnits/button-loader.js"
 import axios from "axios";
 import moment from "moment";
 import {Toast} from "@/toast.js";
-import {rescheduleButton} from "@/dashboard/appointments/re-schedule-appoinment.js";
+import {rescheduleButton} from "@/dashboard/appointments/re-schedule-appointment.js";
 
 const completeStatusModalEl = document.getElementById('complete-status-note-modal');
 const completeStatusModal = bootstrap.Modal.getOrCreateInstance(completeStatusModalEl);
