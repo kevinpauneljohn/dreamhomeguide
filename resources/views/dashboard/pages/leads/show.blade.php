@@ -426,16 +426,42 @@
                         <!-- Calendar -->
                         <div class="card shadow-sm border-0 mb-4">
                             <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <span class="badge bg-primary rounded-pill m-1">Tripping</span>
-                                    <span class="badge bg-warning rounded-pill m-1">Follow Up</span>
-                                    <span class="badge bg-success rounded-pill m-1">Assistance</span>
-                                    <span class="badge bg-danger rounded-pill m-1">Reservations</span>
-                                    <span class="badge rounded-pill m-1" style="background-color: #6f42c1">Send Update</span>
-                                    <select class="form-select form-select-sm ms-auto w-25" aria-label="Default select example" id="view-appointments-filter">
-                                        <option value="all">All</option>
-                                        <option value="self" selected>My Appointments</option>
-                                    </select>
+                                <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+
+                                    <!-- Status Badges -->
+                                    <div class="d-flex flex-wrap gap-1">
+                                        <span class="badge bg-primary rounded-pill">Tripping</span>
+                                        <span class="badge bg-warning rounded-pill">Follow Up</span>
+                                        <span class="badge bg-success rounded-pill">Assistance</span>
+                                        <span class="badge bg-danger rounded-pill">Reservations</span>
+                                        <span class="badge rounded-pill" style="background-color:#6f42c1">
+                            Send Update
+                        </span>
+                                    </div>
+
+                                    <!-- Desktop Filter -->
+                                    <div class="ms-md-auto d-none d-md-flex align-items-center gap-2">
+                                        <span class="text-muted small">View:</span>
+                                        <select
+                                            class="form-select form-select-sm calendar-filter"
+                                            id="view-appointments-filter"
+                                        >
+                                            <option value="all">All Appointments</option>
+                                            <option value="self" selected>My Appointments</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Mobile Filter -->
+                                    <div class="w-100 d-md-none mt-2">
+                                        <select
+                                            class="form-select form-select-sm"
+                                            id="view-appointments-filter-mobile"
+                                        >
+                                            <option value="all">All Appointments</option>
+                                            <option value="self" selected>My Appointments</option>
+                                        </select>
+                                    </div>
+
                                 </div>
                                 <!-- calendar here -->
                                 <x-appointment.calendar />
