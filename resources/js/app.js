@@ -8,32 +8,32 @@ import '../css/custom.css'
 import $ from 'jquery';
 window.$ = window.jQuery = $;
 
-document.addEventListener('DOMContentLoaded', async () => {
-
-    // Capacitor exists ONLY inside mobile app
-    if (window.Capacitor?.getPlatform?.() === 'android') {
-
-        // Dynamically access plugin (no import!)
-        const { StatusBar } = window.Capacitor.Plugins || {};
-
-        if (StatusBar) {
-            await StatusBar.setOverlaysWebView({ overlay: true });
-
-            // SET STATUS BAR BACKGROUND COLOR
-            await StatusBar.setBackgroundColor({
-                color: '#0d6efd' // example: Bootstrap primary
-            });
-
-            // SET ICON COLOR (IMPORTANT)
-            await StatusBar.setStyle({
-                style: 'LIGHT' // LIGHT = white icons, DARK = dark icons
-            });
-        }
-
-        document.body.classList.add('android');
-    }
-
-});
+// document.addEventListener('DOMContentLoaded', async () => {
+//
+//     // Capacitor exists ONLY inside mobile app
+//     if (window.Capacitor?.getPlatform?.() === 'android') {
+//
+//         // Dynamically access plugin (no import!)
+//         const { StatusBar } = window.Capacitor.Plugins || {};
+//
+//         if (StatusBar) {
+//             await StatusBar.setOverlaysWebView({ overlay: true });
+//
+//             // SET STATUS BAR BACKGROUND COLOR
+//             await StatusBar.setBackgroundColor({
+//                 color: '#0d6efd' // example: Bootstrap primary
+//             });
+//
+//             // SET ICON COLOR (IMPORTANT)
+//             await StatusBar.setStyle({
+//                 style: 'LIGHT' // LIGHT = white icons, DARK = dark icons
+//             });
+//         }
+//
+//         document.body.classList.add('android');
+//     }
+//
+// });
 
 
 
