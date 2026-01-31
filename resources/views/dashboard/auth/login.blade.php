@@ -47,7 +47,7 @@
                 </ul>
             </div>
         @endif
-        <h3 class="text-center brand-title mb-3">DHG Admin</h3>
+        <h3 class="text-center brand-title mb-3">DHG Admin test</h3>
         <p class="text-center text-muted mb-4">Sign in to continue</p>
 
         <!-- LOGIN FORM -->
