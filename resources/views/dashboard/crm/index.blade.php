@@ -65,42 +65,81 @@
 
     </div>
 
-    <!-- FILTER BAR -->
-    <div class="card shadow-sm mb-4 border-0">
-        <div class="card-body d-flex flex-wrap gap-3 align-items-center">
+    <!-- DESKTOP FILTER BAR -->
+    <div class="card shadow-sm mb-4 border-0 d-md-block">
+        <div class="card-body">
+            <div class="row g-2 align-items-center">
 
-            <div class="input-group w-25">
-                <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
-                <input type="text" id="search" class="form-control" placeholder="Search name, email, phone…">
+                <!-- Search -->
+                <div class="col-md-4">
+                    <div class="input-group">
+                    <span class="input-group-text bg-white">
+                        <i class="bi bi-search"></i>
+                    </span>
+                        <input
+                            type="text"
+                            id="search"
+                            class="form-control"
+                            placeholder="Search name, email, phone…"
+                        >
+                    </div>
+                </div>
+
+                <!-- Status -->
+                <div class="col-md-2">
+                    <div class="input-group">
+                    <span class="input-group-text bg-white">
+                        <i class="bi bi-funnel"></i>
+                    </span>
+                        <select class="form-select" id="status">
+                            <option value="">All Status</option>
+                            @foreach($statuses as $key => $value)
+                                <option value="{{ $key }}">{{ $key }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Source -->
+                <div class="col-md-2">
+                    <div class="input-group">
+                    <span class="input-group-text bg-white">
+                        <i class="bi bi-diagram-3"></i>
+                    </span>
+                        <select class="form-select" id="source">
+                            <option value="">All Sources</option>
+                            @foreach($sources as $source)
+                                <option value="{{ $source }}">{{ $source }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Date -->
+                <div class="col-md-2">
+                    <div class="input-group">
+                    <span class="input-group-text bg-white">
+                        <i class="bi bi-calendar"></i>
+                    </span>
+                        <input
+                            type="date"
+                            class="form-control"
+                            id="date_range"
+                        >
+                    </div>
+                </div>
+
+{{--                <!-- Reset -->--}}
+{{--                <div class="col-md-2 text-end">--}}
+{{--                    <button id="resetFilters" class="btn btn-outline-secondary w-100">--}}
+{{--                        Reset--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+
             </div>
-
-            <div class="input-group w-25">
-                <span class="input-group-text bg-white"><i class="bi bi-funnel"></i></span>
-                <select class="form-select" id="status">
-                    <option value="">Status</option>
-                    @foreach($statuses as $key => $value)
-                        <option value="{{ $key }}">{{ $key }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="input-group w-25">
-                <span class="input-group-text bg-white"><i class="bi bi-diagram-3"></i></span>
-                <select class="form-select" id="source">
-                    <option value="">Source</option>
-                    @foreach($sources as $source)
-                        <option value="{{ $source }}">{{ $source }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="input-group w-auto">
-                <span class="input-group-text bg-white"><i class="bi bi-calendar"></i></span>
-                <input type="date" class="form-control" id="date_range">
-            </div>
-
         </div>
     </div>
+
 
     <!-- LEADS TABLE -->
     <div class="card shadow-sm border-0">
