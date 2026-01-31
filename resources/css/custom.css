@@ -745,25 +745,25 @@
 /*    padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);*/
 /*}*/
 
-:root {
-    --safe-top: env(safe-area-inset-top, 0px);
-    --safe-bottom: env(safe-area-inset-bottom, 0px);
-    --app-primary: #0d6efd;
-}
+/*:root {*/
+/*    --safe-top: env(safe-area-inset-top, 0px);*/
+/*    --safe-bottom: env(safe-area-inset-bottom, 0px);*/
+/*    --app-primary: #0d6efd;*/
+/*}*/
 
 /* Fake status bar background */
-.safe-top-bar {
-    height: var(--safe-top);
-    background-color: var(--app-primary);
-}
+/*.safe-top-bar {*/
+/*    height: var(--safe-top);*/
+/*    background-color: var(--app-primary);*/
+/*}*/
 
-/* Layout */
-body {
-    margin: 0;
-    padding-top: var(--safe-top);
-    padding-bottom: var(--safe-bottom);
-    background-color: #f8f9fa;
-}
+/*!* Layout *!*/
+/*body {*/
+/*    margin: 0;*/
+/*    padding-top: var(--safe-top);*/
+/*    padding-bottom: var(--safe-bottom);*/
+/*    background-color: #f8f9fa;*/
+/*}*/
 
 .top-nav,
 .sticky-top-nav {
