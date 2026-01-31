@@ -17,15 +17,15 @@
     @endif
     @stack('css')
 </head>
-<body class="bg-light">
-<div id="sidebarOverlay" class="sidebar-overlay safe-area"></div>
+<body class="bg-lighta">
+<div id="sidebarOverlay" class="sidebar-overlay"></div>
 
 <div id="app-user-id" data-user-id="{{ auth()->id() }}">
 
 <x-dashboard.navigation.menu/>
 
 <!-- CONTENT -->
-<div id="content" class="content-wrapper">
+<div id="content" class="content-wrapper safe-area">
     <x-dashboard.navigation.top-nav/>
 
     <div class="container-fluid">
