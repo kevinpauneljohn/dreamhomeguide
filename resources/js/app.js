@@ -19,15 +19,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (StatusBar) {
             await StatusBar.setOverlaysWebView({ overlay: true });
 
-            // SET STATUS BAR BACKGROUND COLOR
-            await StatusBar.setBackgroundColor({
-                color: '#0d6efd' // example: Bootstrap primary
-            });
-
-            // SET ICON COLOR (IMPORTANT)
-            await StatusBar.setStyle({
-                style: 'LIGHT' // LIGHT = white icons, DARK = dark icons
-            });
         }
 
         document.body.classList.add('android');
