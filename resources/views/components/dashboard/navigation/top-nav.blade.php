@@ -1,5 +1,5 @@
 <!-- TOP NAV -->
-<nav class="navbar navbar-expand bg-white shadow-sm mb-4 px-3">
+<nav class="navbar navbar-expand bg-white shadow-sm mb-4 px-3 top-nav sticky-top-nav">
     <button id="toggleSidebar" class="btn btn-outline-secondary me-3">
         <i class="bi bi-list"></i>
     </button>

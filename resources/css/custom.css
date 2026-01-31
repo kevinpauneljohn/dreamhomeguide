@@ -765,6 +765,15 @@ body {
     background-color: #f8f9fa;
 }
 
+.top-nav,
+.sticky-top-nav {
+    position: sticky;
+    top: env(safe-area-inset-top);
+    z-index: 1035; /* below modals, above content */
+    background: #fff;
+}
+
+
 
 
 

@@ -39,7 +39,6 @@
 @stack('modal')
 
 @vite(['resources/js/dashboard/app.js'])
-    <script src="statusbar.js"></script>
 
 @stack('scripts')
 </body>

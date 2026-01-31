@@ -397,7 +397,7 @@
                             {{--                    <p class="text-muted">No notes added yet.</p>--}}
                             {{--                </div>--}}
 
-                            <div class="card-body">
+                            <div class="card-body table-responsive">
                                 <table id="notes-table" class="table table-hover align-middle notes-table">
                                     <thead class="table-light">
                                     <tr>
@@ -795,5 +795,6 @@
 @endpushonce
 
 @pushonce('scripts')
-    @vite(['resources/js/dashboard/notes/create.js','resources/js/dashboard/notes/editNote.js','resources/js/dashboard/leads/edit.js'])
+    @vite(['resources/js/dashboard/notes/create.js','resources/js/dashboard/notes/editNote.js'])
+    @vite(['resources/js/dashboard/leads/edit.js'])
 @endpushonce
