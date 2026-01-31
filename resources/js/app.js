@@ -44,18 +44,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     /* -------------------------------
      * NETWORK
      * ------------------------------- */
-    if (Network) {
-        const status = await Network.getStatus();
-        console.log('Initial network status:', status);
-        alert('Connected: ' + status.connected);
-
-        Network.addListener('networkStatusChange', status => {
-            console.log('Network changed:', status);
-            alert('Connected: ' + status.connected);
-        });
-    } else {
-        console.warn('Network plugin not found');
-    }
+    // if (Network) {
+    //     const status = await Network.getStatus();
+    //     console.log('Initial network status:', status);
+    //     alert('Connected: ' + status.connected);
+    //
+    //     Network.addListener('networkStatusChange', status => {
+    //         console.log('Network changed:', status);
+    //         alert('Connected: ' + status.connected);
+    //     });
+    // } else {
+    //     console.warn('Network plugin not found');
+    // }
 
     document.body.classList.add('android');
 });
