@@ -270,7 +270,7 @@
 
     @push('modal')
         <div id="re-schedule-modal" class="modal fade" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-dialog ">
                 <form id="re-schedule-form">
                     @csrf
                     <div class="modal-content">
