@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             await StatusBar.setStyle({
                 style: 'LIGHT' // LIGHT = white icons, DARK = dark icons
             });
+
+            await StatusBar.hide();
         }
 
         document.body.classList.add('android');
