@@ -25,7 +25,7 @@
 <x-dashboard.navigation.menu/>
 
 <!-- CONTENT -->
-<div id="content" class="content-wrapper safe-area">
+<div id="content" class="content-wrapper">
     <x-dashboard.navigation.top-nav/>
 
     <div class="container-fluid">
