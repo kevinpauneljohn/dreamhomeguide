@@ -744,7 +744,4 @@ body {
 .safe-area {
     padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);
 }
-.navbar {
-    padding-top: calc(var(--safe-top) + 0.5rem);
-}
 
