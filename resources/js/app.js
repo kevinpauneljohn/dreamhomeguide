@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const { StatusBar } = window.Capacitor.Plugins || {};
 
         if (StatusBar) {
-            await StatusBar.setOverlaysWebView({ overlay: true });
+            // await StatusBar.setOverlaysWebView({ overlay: true });
 
             // SET STATUS BAR BACKGROUND COLOR
             await StatusBar.setBackgroundColor({
