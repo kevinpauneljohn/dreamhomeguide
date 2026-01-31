@@ -23,7 +23,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <!-- OVERVIEW -->
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 mb-3">
                         <div class="card shadow-sm border-0 h-100">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between mb-3">
@@ -65,9 +65,8 @@
                     </div>
 
 
-
                     <!-- TASK ATTENTION & RISK -->
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 mb-3">
                         <div class="card shadow-sm border-0 h-100">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between mb-3">
@@ -119,7 +118,7 @@
 
 
                     <div class="col-lg-12">
-                        <div class="card border-0 shadow-sm mt-4">
+                        <div class="card border-0 shadow-sm">
                             <div class="card-header bg-white border-0 pb-2">
                                 <div class="d-flex flex-column gap-3">
 
