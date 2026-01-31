@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (window.Capacitor?.getPlatform?.() === 'android') {
 
         // Dynamically access plugin (no import!)
-        const { StatusBar, Style, SystemBars } = window.Capacitor.Plugins || {};
+        const { StatusBar, Network } = window.Capacitor.Plugins || {};
 
         if (StatusBar) {
             await StatusBar.setOverlaysWebView({ overlay: false });
@@ -28,10 +28,22 @@ document.addEventListener('DOMContentLoaded', async () => {
             await StatusBar.setStyle({
                 style: 'LIGHT' // LIGHT = white icons, DARK = dark icons
             });
+        }
 
+        /* -------------------------------
+         * NETWORK STATUS
+         * ------------------------------- */
+        if (Network) {
 
-            await SystemBars.setStyle({ style: SystemBarsStyle.Dark });
+            // Get initial network status
+            const status = await Network.getStatus();
+            handleNetworkStatus(status);
 
+            // Listen for changes
+            Network.addListener('networkStatusChange', status => {
+                handleNetworkStatus(status);
+                alert(status.connected);
+            });
         }
 
         document.body.classList.add('android');
