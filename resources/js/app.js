@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Capacitor exists ONLY inside mobile app
     if (window.Capacitor?.getPlatform?.() === 'android') {
 
+        alert(window.Capacitor?.getPlatform?.())
         // Dynamically access plugin (no import!)
         const { StatusBar } = window.Capacitor.Plugins || {};
 
