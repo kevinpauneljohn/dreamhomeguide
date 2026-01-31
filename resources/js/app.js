@@ -14,10 +14,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (window.Capacitor?.getPlatform?.() === 'android') {
 
         // Dynamically access plugin (no import!)
-        const { StatusBar, SystemBars } = window.Capacitor.Plugins || {};
+        const { StatusBar, Style, SystemBars } = window.Capacitor.Plugins || {};
 
         if (StatusBar) {
-            await StatusBar.setOverlaysWebView({ overlay: true });
+            await StatusBar.setOverlaysWebView({ overlay: false });
 
             // SET STATUS BAR BACKGROUND COLOR
             await StatusBar.setBackgroundColor({
