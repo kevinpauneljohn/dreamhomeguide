@@ -26,8 +26,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // SET ICON COLOR (IMPORTANT)
             await StatusBar.setStyle({
-                style: 'DARK' // LIGHT = white icons, DARK = dark icons
+                style: 'LIGHT' // LIGHT = white icons, DARK = dark icons
             });
+
 
         }
 
