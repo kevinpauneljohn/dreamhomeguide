@@ -87,7 +87,7 @@
         {{-- Table --}}
         <div class="card">
             <div class="card-body p-0">
-                <div class="p-3">
+                <div class="p-3 table-responsive">
                     <table class="table table-hover align-middle bordered mb-0" id="computationsTable">
                         <thead class="table-light">
                         <tr>

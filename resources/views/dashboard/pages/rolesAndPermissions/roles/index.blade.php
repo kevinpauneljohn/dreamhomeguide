@@ -71,7 +71,7 @@
 
     <!-- Roles Table -->
     <div class="card">
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table id="roles-table" class="table table-bordered table-hover align-middle border rounded">
                 <thead class="table-light">
                 <tr>

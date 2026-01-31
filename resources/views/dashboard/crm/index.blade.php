@@ -108,7 +108,7 @@
             <h5 class="fw-bold mb-0">Lead List</h5>
         </div>
 
-        <div class="card-body p-1">
+        <div class="card-body p-1 table-responsive">
             <table id="crm-table" class="table table-hover table-striped align-middle">
                 <thead class="table-light">
                 <tr>

@@ -72,7 +72,7 @@
 
     <!-- Agents Table -->
     <div class="card">
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table id="users-table" class="table table-hover align-middle border rounded">
                 <thead>
                 <tr>

@@ -73,7 +73,7 @@
 
     {{-- Blog Table --}}
     <div class="card">
-        <div class="card-body">
+        <div class="card-body table-responsive">
 
             <table id="blogs-table" class="table table-striped table-hover w-100 border">
                 <thead>
