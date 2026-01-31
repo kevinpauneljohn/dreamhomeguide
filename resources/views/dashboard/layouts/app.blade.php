@@ -18,7 +18,7 @@
     @stack('css')
 </head>
 <body class="bg-light">
-<div id="sidebarOverlay" class="sidebar-overlay"></div>
+<div id="sidebarOverlay" class="sidebar-overlay safe-area"></div>
 
 <div id="app-user-id" data-user-id="{{ auth()->id() }}">
 
