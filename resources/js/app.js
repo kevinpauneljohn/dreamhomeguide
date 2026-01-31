@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (window.Capacitor?.getPlatform?.() === 'android') {
 
         // Dynamically access plugin (no import!)
-        const { StatusBar } = window.Capacitor.Plugins || {};
+        const { StatusBar, SystemBars } = window.Capacitor.Plugins || {};
 
         if (StatusBar) {
             await StatusBar.setOverlaysWebView({ overlay: true });
