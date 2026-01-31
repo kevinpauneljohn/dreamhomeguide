@@ -16,5 +16,10 @@ class ModelUnit extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function sales(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Sale::class);
+    }
 }
 

@@ -211,7 +211,6 @@
                 </li>
             @endcan
 
-            <!-- Permissions -->
             @can('view task')
 
                 <li class="nav-item">
@@ -219,6 +218,19 @@
                        class="nav-link text-white {{ request()->routeIs('task.*') ? 'active' : '' }}">
                     <span>
                         <i class="fa-solid fa-bolt"></i> Tasks
+                    </span>
+                    </a>
+                </li>
+
+            @endcan
+
+            @can('view sales')
+
+                <li class="nav-item">
+                    <a href="{{ route('sales.index') }}"
+                       class="nav-link text-white {{ request()->routeIs('sales.*') ? 'active' : '' }}">
+                    <span>
+                        <i class="fa-solid fa-chart-line"></i> Sales
                     </span>
                     </a>
                 </li>

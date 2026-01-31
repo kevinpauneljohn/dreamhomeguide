@@ -142,4 +142,14 @@ class User extends Authenticatable
         return $this->hasMany(AppointmentActivity::class);
     }
 
+    public function sales(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Sales::class);
+    }
+
+    public function commissions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Commission::class);
+    }
+
 }

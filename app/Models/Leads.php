@@ -97,4 +97,9 @@ class Leads extends Model
         return $this->hasMany(Task::class);
     }
 
+    public function sales(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Sales::class);
+    }
+
 }

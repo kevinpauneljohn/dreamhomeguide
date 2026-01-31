@@ -31,6 +31,7 @@ include __DIR__.'/dashboard/task.php';
 include __DIR__.'/dashboard/task_activity.php';
 include __DIR__.'/dashboard/computations.php';
 include __DIR__.'/dashboard/appointment-activity.php';
+include __DIR__.'/dashboard/sales.php';
 
 
 include __DIR__.'/landingPages/pages.php';
