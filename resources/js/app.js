@@ -10,48 +10,56 @@ window.$ = window.jQuery = $;
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // Capacitor exists ONLY inside mobile app
-    if (window.Capacitor?.getPlatform?.() === 'android') {
-
-        // Dynamically access plugin (no import!)
-        const { StatusBar, Network } = window.Capacitor.Plugins || {};
-
-        if (StatusBar) {
-            await StatusBar.setOverlaysWebView({ overlay: false });
-
-            // SET STATUS BAR BACKGROUND COLOR
-            await StatusBar.setBackgroundColor({
-                color: '#00000072' // example: Bootstrap primary
-            });
-
-            // SET ICON COLOR (IMPORTANT)
-            await StatusBar.setStyle({
-                style: 'LIGHT' // LIGHT = white icons, DARK = dark icons
-            });
-        }
-
-        /* -------------------------------
-         * NETWORK STATUS
-         * ------------------------------- */
-        if (Network) {
-
-            // Get initial network status
-            const status = await Network.getStatus();
-            handleNetworkStatus(status);
-
-            alert(status.connected);
-
-            // Listen for changes
-            Network.addListener('networkStatusChange', status => {
-                handleNetworkStatus(status);
-                alert(status.connected);
-            });
-        }
-
-        document.body.classList.add('android');
+    // ✅ Reliable Capacitor detection
+    if (!window.Capacitor || !window.Capacitor.isNativePlatform()) {
+        console.log('Not running inside Capacitor');
+        return;
     }
 
+    console.log('Running inside Capacitor');
+
+    const Plugins = window.Capacitor.Plugins || {};
+    const StatusBar = Plugins.StatusBar;
+    const Network = Plugins.Network;
+
+    /* -------------------------------
+     * STATUS BAR
+     * ------------------------------- */
+    if (StatusBar) {
+        await StatusBar.setOverlaysWebView({ overlay: false });
+
+        await StatusBar.setBackgroundColor({
+            color: '#00000072'
+        });
+
+        await StatusBar.setStyle({
+            style: 'LIGHT'
+        });
+
+        console.log('StatusBar configured');
+    } else {
+        console.warn('StatusBar plugin not found');
+    }
+
+    /* -------------------------------
+     * NETWORK
+     * ------------------------------- */
+    if (Network) {
+        const status = await Network.getStatus();
+        console.log('Initial network status:', status);
+        alert('Connected: ' + status.connected);
+
+        Network.addListener('networkStatusChange', status => {
+            console.log('Network changed:', status);
+            alert('Connected: ' + status.connected);
+        });
+    } else {
+        console.warn('Network plugin not found');
+    }
+
+    document.body.classList.add('android');
 });
+
 
 
 
