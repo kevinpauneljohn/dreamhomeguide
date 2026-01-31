@@ -2,11 +2,11 @@
 @section('title', $title)
 @section('content')
 
-    <div class="card card-default w-75 mx-auto">
+    <div class="card card-default mx-auto">
         <div class="card-header card-header-border-bottom">
             All Notifications
         </div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table table-bordered align-middle">
                 <thead class="table-light">
                 <tr>

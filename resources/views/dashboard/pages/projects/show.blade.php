@@ -140,7 +140,7 @@
             @endcan
         </div>
     </div>
-    <div class="card-body">
+    <div class="card-body table-responsive">
         <table id="model-units-table" class="table table-bordered table-hover align-middle w-100">
             <thead class="table-light">
             <tr>
