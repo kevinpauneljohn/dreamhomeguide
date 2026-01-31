@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
 
 
+            await SystemBars.setStyle({ style: SystemBarsStyle.Dark });
+
         }
 
         document.body.classList.add('android');
