@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
          * NETWORK STATUS
          * ------------------------------- */
         if (Network) {
-
+            alert('Network plugin loaded');
             // Get initial network status
             const status = await Network.getStatus();
             handleNetworkStatus(status);
