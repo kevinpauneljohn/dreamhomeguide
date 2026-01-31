@@ -21,15 +21,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // SET STATUS BAR BACKGROUND COLOR
             await StatusBar.setBackgroundColor({
-                color: '#0d6efd' // example: Bootstrap primary
+                color: '#00000072' // example: Bootstrap primary
             });
 
             // SET ICON COLOR (IMPORTANT)
             await StatusBar.setStyle({
-                style: 'LIGHT' // LIGHT = white icons, DARK = dark icons
+                style: 'DARK' // LIGHT = white icons, DARK = dark icons
             });
 
-            await StatusBar.hide();
         }
 
         document.body.classList.add('android');
