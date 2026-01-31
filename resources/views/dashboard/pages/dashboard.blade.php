@@ -215,13 +215,5 @@
 @endsection
 
 @push('css')
-    <style>
-        .dashboard-main .card {
-            border-radius: 16px;
-        }
-
-        .kpi-card h3 {
-            letter-spacing: -0.5px;
-        }
-    </style>
+    @vite(['resources/css/dashboard/dashboard.css'])
 @endpush

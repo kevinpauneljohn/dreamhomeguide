@@ -1,0 +1,149 @@
+.dashboard-main {
+    background: #f8fafc;
+}
+
+.dashboard-main .card {
+    border-radius: 18px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    transition: all .25s ease;
+}
+
+.dashboard-main .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+}
+
+/* ================================
+   KPI STRIP
+================================ */
+.kpi-card {
+    background: linear-gradient(180deg, #ffffff, #f9fafb);
+}
+
+.kpi-card h3 {
+    letter-spacing: -0.6px;
+}
+
+.kpi-card small {
+    font-size: .8rem;
+}
+
+/* ================================
+   SECTION HEADERS
+================================ */
+.card-header {
+    padding: 1.1rem 1.25rem;
+}
+
+.card-header h6 {
+    font-weight: 600;
+    letter-spacing: .3px;
+}
+
+/* ================================
+   LEAD FLOW HEALTH
+================================ */
+.dashboard-main .row.text-center h5 {
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.dashboard-main .row.text-center small {
+    font-size: .8rem;
+    color: #64748b;
+}
+
+/* Status indicators */
+.badge {
+    border-radius: 999px;
+    font-weight: 600;
+    padding: .35em .7em;
+}
+
+/* ================================
+   SALES MOMENTUM
+================================ */
+.dashboard-main .small strong {
+    font-weight: 700;
+}
+
+/* ================================
+   AGENT TABLE
+================================ */
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #64748b;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table tbody td {
+    padding: .85rem .75rem;
+    vertical-align: middle;
+}
+
+.table tbody tr {
+    transition: background .2s ease;
+}
+
+.table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* Conversion pills */
+.table .badge {
+    min-width: 48px;
+    text-align: center;
+}
+
+/* Health badges */
+.badge.bg-success {
+    background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+}
+
+.badge.bg-primary {
+    background: linear-gradient(135deg, #2563eb, #3b82f6) !important;
+}
+
+.badge.bg-secondary {
+    background: linear-gradient(135deg, #64748b, #94a3b8) !important;
+}
+
+.badge.bg-danger {
+    background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+}
+
+.badge.bg-warning {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
+    color: #1f2937 !important;
+}
+
+/* ================================
+   ACTION REQUIRED PANEL
+================================ */
+.dashboard-main ul.list-unstyled li {
+    padding: .55rem .75rem;
+    border-radius: 10px;
+    background: #f9fafb;
+    margin-bottom: .5rem;
+    font-size: .85rem;
+}
+
+.dashboard-main ul.list-unstyled li:last-child {
+    margin-bottom: 0;
+}
+
+/* ================================
+   RESPONSIVE POLISH
+================================ */
+@media (max-width: 768px) {
+    .kpi-card h3 {
+        font-size: 1.4rem;
+    }
+}

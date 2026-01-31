@@ -29,6 +29,7 @@ export default defineConfig({
 
                 'resources/js/dashboard/dashboard.js',
                 'resources/js/dashboard/Slugify.js',
+                'resources/css/dashboard/dashboard.css',
 
                 // users
                 'resources/js/dashboard/users/create.js',
