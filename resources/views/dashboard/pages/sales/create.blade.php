@@ -14,14 +14,16 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ route('sales.store') }}">
+        <form id="create-sales-form" novalidate>
             @csrf
 
             <div class="row g-4">
 
                 {{-- LEFT: SALE DETAILS --}}
                 <div class="col-lg-8">
-
+                    <div class="alert alert-success d-none" role="alert">
+                        test
+                    </div>
                     {{-- CLIENT & PROPERTY --}}
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-header bg-white border-0">
@@ -36,8 +38,8 @@
 
                                 {{-- CLIENT --}}
                                 <div class="col-md-6">
-                                    <label class="form-label">Client / Lead</label>
-                                    <select name="lead_id" class="form-select" required>
+                                    <label class="form-label">Client / Lead</label> <span class="text-danger">*</span>
+                                    <select name="lead_id" id="lead_id" class="form-select" required>
                                         <option value="">Select Client</option>
                                         @foreach($leads as $lead)
                                             <option value="{{$lead->id}}">{{$lead->full_name}}</option>
@@ -47,8 +49,8 @@
 
                                 {{-- AGENT --}}
                                 <div class="col-md-6">
-                                    <label class="form-label">Assigned Agent</label>
-                                    <select name="user_id" class="form-select" required>
+                                    <label class="form-label">Assigned Agent</label> <span class="text-danger">*</span>
+                                    <select name="user_id" id="user_id" class="form-select" required>
                                         <option value="">Select Agent</option>
                                         @foreach($agents as $agent)
                                             <option value="{{$agent->id}}" @if($agents->count() === 1)selected @endif>{{$agent->full_name}}</option>
@@ -58,8 +60,8 @@
 
                                 {{-- PROJECT (NEW) --}}
                                 <div class="col-md-6">
-                                    <label class="form-label">Project</label>
-                                    <select name="project_id" class="form-select" required>
+                                    <label class="form-label">Project</label> <span class="text-danger">*</span>
+                                    <select name="project_id" id="project_id" class="form-select" required>
                                         <option value="">Select Project</option>
                                          @foreach($projects as $project)
                                          <option value="{{ $project->id }}">{{ $project->name }}</option>
@@ -69,7 +71,7 @@
 
                                 {{-- MODEL UNIT --}}
                                 <div class="col-md-6">
-                                    <label class="form-label">Model Unit</label>
+                                    <label class="form-label">Model Unit</label> <span class="text-danger">*</span>
                                     <select name="model_unit_id" class="form-select" required>
                                         <option value="">Select Model Unit</option>
                                     </select>
@@ -77,7 +79,7 @@
 
                                 {{-- RESERVATION DATE --}}
                                 <div class="col-md-6">
-                                    <label class="form-label">Reservation Date</label>
+                                    <label class="form-label">Reservation Date</label> <span class="text-danger">*</span>
                                     <input type="date" name="reservation_date" class="form-control" required>
                                 </div>
 
@@ -89,13 +91,13 @@
 
                                 {{-- BLOCK --}}
                                 <div class="col-md-6">
-                                    <label class="form-label">Block No.</label>
+                                    <label class="form-label">Block No.</label> <span class="text-danger">*</span>
                                     <input type="text" name="block_no" class="form-control">
                                 </div>
 
                                 {{-- LOT --}}
                                 <div class="col-md-6">
-                                    <label class="form-label">Lot No.</label>
+                                    <label class="form-label">Lot No.</label> <span class="text-danger">*</span>
                                     <input type="text" name="lot_no" class="form-control">
                                 </div>
 
@@ -150,12 +152,12 @@
                         <div class="card-body">
 
                             <div class="mb-3">
-                                <label class="form-label">Total Contract Price</label>
+                                <label class="form-label">Total Contract Price</label> <span class="text-danger">*</span>
                                 <input
                                     type="number"
                                     step="0.01"
                                     name="total_contract_price"
-                                    class="form-control form-control-lg"
+                                    class="form-control"
                                     required
                                 >
                             </div>
@@ -182,13 +184,10 @@
                                     <option value="Pag-IBIG">Pag-IBIG</option>
                                     <option value="Bank">Bank</option>
                                     <option value="In-house">In-house</option>
-                                    <option value="Cash">Cash</option>
+                                    <option value="Spot Cash">Spot Cash</option>
+                                    <option value="Deferred Cash">Cash</option>
+                                    <option value="NHMFC">NHMFC</option>
                                 </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Commission Rate (%)</label>
-                                <input type="number" step="0.01" name="commission_rate" class="form-control">
                             </div>
 
                             <div class="mb-3">
@@ -196,7 +195,6 @@
                                 <select name="status" class="form-select" required>
                                     <option value="reserved">Reserved</option>
                                     <option value="completed">Completed</option>
-                                    <option value="cancelled">Cancelled</option>
                                 </select>
                             </div>
 
@@ -204,7 +202,7 @@
 
                             {{-- ACTIONS --}}
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary btn-lg">
+                                <button type="submit" class="btn btn-primary btn-lg" id="save-sales-btn">
                                     <i class="fa-solid fa-floppy-disk me-1"></i> Save Sale
                                 </button>
 
@@ -225,17 +223,9 @@
 @endsection
 
 @push('css')
-    <style>
-        .sales-create .card {
-            border-radius: 16px;
-        }
+@vite(['resources/css/sales.css'])
+@endpush
 
-        .sales-create .form-label {
-            font-weight: 500;
-        }
-
-        .sales-create textarea {
-            resize: none;
-        }
-    </style>
+@push('scripts')
+    @vite(['resources/js/dashboard/sales/create.js'])
 @endpush

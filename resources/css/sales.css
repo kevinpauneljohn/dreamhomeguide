@@ -1,0 +1,11 @@
+.sales-create .card {
+    border-radius: 16px;
+}
+
+.sales-create .form-label {
+    font-weight: 500;
+}
+
+.sales-create textarea {
+    resize: none;
+}

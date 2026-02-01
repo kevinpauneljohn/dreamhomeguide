@@ -11,10 +11,13 @@ class Sales extends Model
     /** @use HasFactory<\Database\Factories\SalesFactory> */
     use HasFactory, SoftDeletes;
 
+    protected $table = 'sales';
+
     protected $fillable = [
         'reservation_date',
         'user_id',
         'lead_id',
+        'project_id',
         'model_unit_id',
         'lot_area',
         'floor_area',
@@ -47,6 +50,11 @@ class Sales extends Model
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function project(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Project::class);
     }
 
 }

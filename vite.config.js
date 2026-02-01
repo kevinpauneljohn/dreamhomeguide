@@ -68,6 +68,7 @@ export default defineConfig({
                 'resources/js/component/floatingTools/plural.js',
 
                 // components
+                'resources/css/appointment/my-calendar.css',
                 'resources/js/component/appointment/calendar.js',
                 'resources/js/component/appointment/my-calendar.js',
                 'resources/js/component/notifications/notifications-mark-read.js',
@@ -144,6 +145,11 @@ export default defineConfig({
                 'resources/js/dashboard/appointments/show.js',
                 'resources/js/dashboard/appointments/re-schedule-appointment.js',
                 //edn of appointments
+
+                //sales
+                'resources/css/sales.css',
+                'resources/js/dashboard/sales/create.js',
+                //end of sales
             ],
             refresh: true,
         }),

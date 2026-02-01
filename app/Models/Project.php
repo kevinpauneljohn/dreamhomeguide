@@ -16,4 +16,9 @@ class Project extends Model
     {
         return $this->hasMany(ModelUnit::class);
     }
+
+    public function sales(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Sales::class);
+    }
 }

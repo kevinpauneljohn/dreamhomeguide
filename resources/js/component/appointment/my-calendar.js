@@ -18,6 +18,8 @@ let appointment_id;
 const appointmentForm = document.getElementById('appointment-form');
 const appointmentUserId = document.getElementById('app-user-id').dataset.userId;
 let mode = 'create';
+let activeStatFilter = null;
+
 
 const setMode = (value) => {
     mode = value;
@@ -28,6 +30,7 @@ let currentEventUrl = `/get-appointment/user/${appointmentUserId}`;
 
 const createTaskCheckbox = document.getElementById('create-task-input');
 const createTask = document.querySelector('.create-task');
+
 $(function () {
 
     // Initialize calendar but DO NOT render yet
@@ -114,7 +117,6 @@ $(function () {
 
         },
         eventDidMount: function(info) {
-            console.log(info.event.extendedProps.client);
             if(info.event.extendedProps.client === "No Client")
             {
                 info.el.style.display = 'none';
@@ -202,6 +204,7 @@ $(function () {
                     })
                     appointmentForm.reset();
                     calendar.refetchEvents();
+                    appointmentStatus();
 
                     if(createTaskCheckbox.checked)
                     {
@@ -277,6 +280,7 @@ $(function () {
                         icon: 'success',
                         title: response.data.message
                     })
+                    appointmentStatus();
                     calendar.refetchEvents();
                 }
                 else if(response.data.success === false)
@@ -351,8 +355,8 @@ $(function () {
                                 icon: 'success',
                                 title: response.data.message
                             })
+                            appointmentStatus()
                             calendar.refetchEvents();
-                            reloadActivityLogs();
                         }
                         else if(response.data.success === false)
                         {
@@ -431,5 +435,20 @@ $(function () {
         modal.show();
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    appointmentStatus()
+})
+
+const appointmentStatus = () => {
+    fetch('/appointments/stats')
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('stat-today').textContent = data.today;
+            document.getElementById('stat-upcoming').textContent = data.upcoming;
+            document.getElementById('stat-pending').textContent = data.pending;
+            document.getElementById('stat-overdue').textContent = data.overdue;
+        });
+}
 
 

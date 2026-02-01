@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateAppointmentRequest;
 use App\Models\Leads;
 use App\Models\User;
 use App\Services\AppointmentService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -128,5 +129,37 @@ class AppointmentController extends Controller
             return response()->json(['success' => true, 'message' => 'Appointment rescheduled successfully.']);
         }
         return response()->json(['success' => false, 'message' => 'No changes were made.']);
+    }
+
+    public function stats()
+    {
+        $userId = auth()->id();
+        $now = Carbon::now();
+
+        return response()->json([
+            'today' => Appointment::whereDate('appointment_date', Carbon::today())
+                ->where('assigned_agent', $userId)
+                ->where('status', '!=', 'completed')
+                ->count(),
+
+            'upcoming' => Appointment::whereBetween('appointment_date', [
+                Carbon::tomorrow(),
+                Carbon::today()->addDays(7)->endOfDay()
+            ])
+                ->where('assigned_agent', $userId)
+                ->where('status', '!=', 'completed')
+                ->count(),
+
+            'pending' => Appointment::where('status', 'pending')
+                ->where('assigned_agent', $userId)
+                ->where('status', '!=', 'completed')
+                ->count(),
+
+            'overdue' => Appointment::where('status', 'pending')
+                ->where('appointment_date', '<', $now)
+                ->where('assigned_agent', $userId)
+                ->where('status', '!=', 'completed')
+                ->count(),
+        ]);
     }
 }

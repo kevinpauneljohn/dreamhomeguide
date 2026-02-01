@@ -4,6 +4,76 @@
 @section('content')
 
     @can('view appointment')
+        {{-- PAGE HEADER --}}
+        <div class="mb-4">
+            <small class="text-muted">CRM</small>
+            <h3 class="fw-bold mb-0">Appointments</h3>
+        </div>
+
+        {{-- SUMMARY CARDS --}}
+        <div class="row g-3 mb-4">
+
+            <div class="col-md-6 col-xl-3">
+                <div class="card stat-card stat-today">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="stat-label">Today</p>
+                                <h3 class="stat-value" id="stat-today">0</h3>
+                                <small class="text-muted">Appointments</small>
+                            </div>
+                            <i class="bi bi-calendar-day stat-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="card stat-card stat-upcoming">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="stat-label">Upcoming</p>
+                                <h3 class="stat-value" id="stat-upcoming">0</h3>
+                                <small class="text-muted">Next 7 days</small>
+                            </div>
+                            <i class="bi bi-arrow-right-circle stat-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="card stat-card stat-pending">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="stat-label">Pending</p>
+                                <h3 class="stat-value" id="stat-pending">0</h3>
+                                <small class="text-muted">Needs action</small>
+                            </div>
+                            <i class="bi bi-hourglass-split stat-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="card stat-card stat-overdue">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="stat-label">Overdue</p>
+                                <h3 class="stat-value" id="stat-overdue">0</h3>
+                                <small class="text-muted">Late follow-ups</small>
+                            </div>
+                            <i class="bi bi-exclamation-triangle stat-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <!-- Calendar -->
         <div class="card shadow-sm border-0 mb-4">
             <div class="card-body">
@@ -137,7 +207,9 @@
         </div>
     @endif
 @endpush
-
+@push('css')
+    @vite(['resources/css/appointment/my-calendar.css'])
+@endpush
 @push('scripts')
     @vite('resources/js/component/appointment/my-calendar.js')
 @endpush

@@ -1,0 +1,71 @@
+/* ===== SUMMARY CARDS (MINIMAL) ===== */
+.stat-card {
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 6px 16px rgba(0,0,0,.04);
+    transition: all .15s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.06);
+}
+
+/* Top accent line (subtle meaning, not loud) */
+.stat-card::before {
+    content: '';
+    display: block;
+    height: 4px;
+    border-radius: 14px 14px 0 0;
+}
+
+/* Labels & values */
+.stat-label {
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    color: #6c757d;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: #212529;
+}
+
+.stat-icon {
+    font-size: 1.8rem;
+    color: #adb5bd;
+}
+
+/* ===== CARD ACCENTS (VERY SUBTLE) ===== */
+.stat-today::before {
+    background: #0d6efd; /* bootstrap primary */
+}
+
+.stat-upcoming::before {
+    background: #198754; /* bootstrap success */
+}
+
+.stat-pending::before {
+    background: #ffc107; /* bootstrap warning */
+}
+
+.stat-overdue::before {
+    background: #dc3545; /* bootstrap danger */
+}
+
+/* ===== FULLCALENDAR HEADER BUTTONS ===== */
+@media (max-width: 576px) {
+    .fc .fc-button {
+        padding: .2rem .5rem !important;
+        font-size: .7rem !important;
+    }
+
+    .fc .fc-toolbar-title {
+        font-size: 1rem;
+    }
+}

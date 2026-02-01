@@ -8,9 +8,27 @@ use App\Models\Sales;
 use App\Http\Requests\StoreSalesRequest;
 use App\Http\Requests\UpdateSalesRequest;
 use App\Models\User;
+use App\Services\SalesService;
+use Illuminate\Routing\Controllers\Middleware;
 
 class SalesController extends Controller
 {
+    public function __construct(
+        protected SalesService $salesService
+    )
+    {
+
+    }
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('can:view sales', only: ['index', 'show']),
+            new Middleware('can:add sales', only: ['create', 'store']),
+            new Middleware('can:edit sales', only: ['edit', 'update']),
+            new Middleware('can:delete sales', only: ['destroy'])
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -39,15 +57,19 @@ class SalesController extends Controller
      */
     public function store(StoreSalesRequest $request)
     {
-        //
+        $request->merge(['commission_rate' => 3]);
+        return $this->salesService->createSales($request->all());
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Sales $sales)
+    public function show($sales)
     {
-        //
+        return view('dashboard.pages.sales.show')->with([
+            'title' => 'Sales',
+            'sale' => Sales::findOrFail($sales),
+        ]);
     }
 
     /**
