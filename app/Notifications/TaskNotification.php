@@ -31,7 +31,7 @@ class TaskNotification extends Notification implements ShouldQueue, ShouldBroadc
      */
     public function via(object $notifiable): array
     {
-        return ['database','broadcast'];
+        return ['database','broadcast','mail'];
     }
 
     public function toBroadcast(object $notifiable): array
