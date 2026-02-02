@@ -6,11 +6,25 @@
     <div class="container-fluid py-4 sales-create">
 
         {{-- PAGE HEADER --}}
+
         <div class="mb-4">
             <small class="text-muted">Sales Management</small>
-            <div class="d-flex align-items-center gap-2">
-                <i class="fa-solid fa-handshake fs-4 text-primary"></i>
-                <h3 class="fw-bold mb-0">Create Sale</h3>
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                {{-- LEFT: ICON + TITLE --}}
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-handshake fs-4 text-primary"></i>
+                    <h3 class="fw-bold mb-0">Create Sale</h3>
+                </div>
+
+                {{-- RIGHT: BACK BUTTON --}}
+                <a href="{{ route('sales.index') }}"
+                   class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back
+                </a>
+
             </div>
         </div>
 
