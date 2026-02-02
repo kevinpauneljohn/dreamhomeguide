@@ -149,37 +149,63 @@
 
                 {{-- FILTERS --}}
                 <div class="row g-2 mb-3">
-                    <div class="col-md-3">
-                        <input type="text" class="form-control form-control-sm"
+
+                    <!-- Search -->
+                    <div class="col-md-2">
+                        <input type="text" name="search"
+                               class="form-control form-control-sm"
                                placeholder="Search client or deal">
                     </div>
 
+                    <!-- Project -->
                     <div class="col-md-2">
-                        <select class="form-select form-select-sm">
-                            <option>All Agents</option>
+                        <select name="projects" class="form-select form-select-sm">
+                            <option value="">All Projects</option>
+                            @foreach($projects as $project)
+                                <option value="{{ $project->id }}">{{ $project->name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
+                    <!-- Agent -->
                     <div class="col-md-2">
-                        <select class="form-select form-select-sm">
-                            <option>All Status</option>
+                        <select name="agents" class="form-select form-select-sm">
+                            <option value="">All Agents</option>
+                            @foreach($agents as $agent)
+                                <option value="{{ $agent->id }}">{{ $agent->full_name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
+                    <!-- Status -->
                     <div class="col-md-2">
-                        <input type="date" class="form-control form-control-sm">
-                    </div>
-
-                    <div class="col-md-3">
-                        <select class="form-select form-select-sm">
-                            <option>Latest Created</option>
+                        <select name="status" class="form-select form-select-sm">
+                            <option value="">All Status</option>
+                            <option value="reserved">Reserved</option>
+                            <option value="cancelled">Cancelled</option>
+                            <option value="completed">Completed</option>
                         </select>
                     </div>
+
+                    <!-- Date -->
+                    <div class="col-md-2">
+                        <input name="date_created" type="date" class="form-control form-control-sm">
+                    </div>
+
+                    <!-- Sort -->
+                    <div class="col-md-2">
+                        <select name="sort" class="form-select form-select-sm">
+                            <option value="latest">Latest Created</option>
+                            <option value="oldest">Oldest Created</option>
+                        </select>
+                    </div>
+
                 </div>
+
 
                 {{-- TABLE --}}
                 <div class="table-responsive">
-                    <table class="table align-middle table-hover mb-0">
+                    <table id="sales-table" class="table align-middle table-hover mb-0">
                         <thead class="table-light">
                         <tr>
                             <th>CLIENT</th>
@@ -264,4 +290,8 @@
             vertical-align: middle;
         }
     </style>
+@endpush
+
+@push('scripts')
+    @vite(['resources/js/dashboard/sales/index.js'])
 @endpush

@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Sales;
+use Carbon\Carbon;
+use Yajra\DataTables\Facades\DataTables;
 
 class SalesService
 {
@@ -13,5 +15,179 @@ class SalesService
             response()->json(['success' => true, 'message' => 'Sales created successfully!',
                 'sales' => $sales->id, 'project_id' => $sales->modelUnit->project->id], 201, []) :
             response()->json(['success' => false, 'message' => 'Something went wrong!'], 500);
+    }
+
+    public function getQuery(array $request)
+    {
+        $user = auth()->user();
+
+        /*
+        |--------------------------------------------------------------------------
+        | BASE QUERY
+        | - Agents see only their own sales
+        | - Manager / Super Admin see all
+        |--------------------------------------------------------------------------
+        */
+        $query = Sales::query()
+            ->with(['lead', 'project', 'agent'])
+            ->when(
+                ! $user->hasAnyRole(['manager', 'super admin']),
+                fn ($q) => $q->where('user_id', $user->id)
+            );
+
+        /*
+        |--------------------------------------------------------------------------
+        | SEARCH (Lead Name, Phone, Sale ID)
+        |--------------------------------------------------------------------------
+        */
+        $search = $request['search']['value']
+            ?? $request['search']
+            ?? null;
+
+        if (! empty($search)) {
+            $query->where(function ($q) use ($search) {
+
+                $q->whereHas('lead', function ($lead) use ($search) {
+                    $lead->whereRaw(
+                        "CONCAT(first_name,' ',last_name) LIKE ?",
+                        ["%{$search}%"]
+                    )
+                        ->orWhere('phone', 'like', "%{$search}%");
+                });
+
+                // Search by numeric Sale ID
+                if (preg_match('/\d+/', $search, $m)) {
+                    $q->orWhere('id', (int) $m[0]);
+                }
+            });
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | PROJECT FILTER
+        |--------------------------------------------------------------------------
+        */
+        if (! empty($request['project_id'])) {
+            $query->where('project_id', $request['project_id']);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | AGENT FILTER
+        |--------------------------------------------------------------------------
+        */
+        if (! empty($request['agent_id'])) {
+            $query->where('user_id', $request['agent_id']);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | STATUS FILTER
+        |--------------------------------------------------------------------------
+        */
+        if (! empty($request['status'])) {
+            $query->where('status', $request['status']);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | DATE CREATED FILTER
+        |--------------------------------------------------------------------------
+        */
+        if (! empty($request['date_created'])) {
+            $query->whereDate(
+                'created_at',
+                Carbon::parse($request['date_created'])->toDateString()
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | SORTING
+        |--------------------------------------------------------------------------
+        */
+        if (! empty($request['sort']) && $request['sort'] === 'oldest') {
+            $query->orderBy('created_at', 'asc');
+        } else {
+            $query->orderByDesc('created_at');
+        }
+
+        return $query;
+    }
+
+    /**
+     * DataTables response
+     */
+    public function getSales($request): \Illuminate\Http\JsonResponse
+    {
+        $query = $this->getQuery($request);
+
+        return DataTables::of($query)
+
+            /* -----------------------------------------
+             | CLIENT (LEAD)
+             ----------------------------------------- */
+            ->addColumn('client', function ($sale) {
+                return [
+                    'name'  => trim($sale->lead->first_name.' '.$sale->lead->last_name),
+                    'phone' => $sale->lead->phone,
+                ];
+            })
+
+            /* -----------------------------------------
+             | PROJECT
+             ----------------------------------------- */
+            ->addColumn('project', fn ($sale) =>
+            $sale->project?->name
+            )
+
+            /* -----------------------------------------
+             | AMOUNT
+             ----------------------------------------- */
+            ->addColumn('amount', fn ($sale) =>
+            $sale->total_contract_price
+            )
+
+            /* -----------------------------------------
+             | AGENT
+             ----------------------------------------- */
+            ->addColumn('agent', function ($sale) {
+                return [
+                    'name' => trim(
+                        $sale->agent->first_name.' '.$sale->agent->last_name
+                    ),
+                    'initials' => strtoupper(
+                        substr($sale->agent->first_name, 0, 1) .
+                        substr($sale->agent->last_name, 0, 1)
+                    ),
+                    'role' => $sale->agent->getRoleNames()->first(),
+                ];
+            })
+
+            /* -----------------------------------------
+             | STATUS
+             ----------------------------------------- */
+            ->addColumn('status', fn ($sale) => $sale->status)
+
+            /* -----------------------------------------
+             | DATE
+             ----------------------------------------- */
+            ->addColumn('date', fn ($sale) =>
+                $sale->created_at
+            )
+
+            /* -----------------------------------------
+             | ACTIONS
+             ----------------------------------------- */
+            ->addColumn('action', function ($sale) {
+                return [
+                    'view'   => auth()->user()->can('view sale'),
+                    'edit'   => auth()->user()->can('edit sale') && $sale->status !== 'completed',
+                    'delete' => auth()->user()->can('delete sale') && $sale->status !== 'completed',
+                    'id'     => $sale->id,
+                ];
+            })
+
+            ->make(true);
     }
 }

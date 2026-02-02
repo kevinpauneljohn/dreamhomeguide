@@ -9,6 +9,7 @@ use App\Http\Requests\StoreSalesRequest;
 use App\Http\Requests\UpdateSalesRequest;
 use App\Models\User;
 use App\Services\SalesService;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 
 class SalesController extends Controller
@@ -34,8 +35,12 @@ class SalesController extends Controller
      */
     public function index()
     {
+        $projects = Project::all();
+        $agents = User::all();
         return view('dashboard.pages.sales.index')->with([
             'title' => 'Sales',
+            'projects' => $projects,
+            'agents' => $agents,
         ]);
     }
 
@@ -75,9 +80,15 @@ class SalesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Sales $sales)
+    public function edit($sales)
     {
-        //
+        return view('dashboard.pages.sales.edit')->with([
+            'title' => 'Edit Sales',
+            'leads' => auth()->user()->hasRole(['super admin','manager']) ? Leads::all() : Leads::where('user_id', auth()->id())->get(),
+            'projects' => Project::all(),
+            'agents' => auth()->user()->hasRole(['super admin','manager']) ? User::all() : User::where('id',auth()->id())->get(),
+            'sales' => Sales::findOrFail($sales)
+        ]);
     }
 
     /**
@@ -101,5 +112,10 @@ class SalesController extends Controller
         return view('dashboard.pages.sales.pipeline')->with([
             'title' => 'Sales Pipeline',
         ]);
+    }
+
+    public function getSalesDataTables(Request $request): \Illuminate\Http\JsonResponse
+    {
+        return $this->salesService->getSales($request->all());
     }
 }

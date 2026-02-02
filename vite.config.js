@@ -149,6 +149,7 @@ export default defineConfig({
                 //sales
                 'resources/css/sales.css',
                 'resources/js/dashboard/sales/create.js',
+                'resources/js/dashboard/sales/index.js',
                 //end of sales
             ],
             refresh: true,
