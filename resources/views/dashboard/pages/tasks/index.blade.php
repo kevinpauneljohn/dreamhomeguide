@@ -200,7 +200,7 @@
                                         <th style="width: 28%;">Task</th>
                                         <th>Due</th>
                                         <th>Priority</th>
-                                        <th>Assigned</th>
+                                        <th style="width: 30%;">Assigned</th>
                                         <th>Linked To</th>
                                         <th>Status</th>
                                         <th class="text-end">Action</th>
