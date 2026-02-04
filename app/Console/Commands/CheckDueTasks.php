@@ -44,10 +44,23 @@ class CheckDueTasks extends Command
                 ? 'task_overdue'
                 : 'task_near_due';
 
+            /**
+             * CASE 1: Task became overdue
+             */
             if($task->due_date->isPast() && $task->status !== 'overdue')
             {
                 $task->update(['status' => 'overdue']);
                 $this->info('tasks');
+            }
+
+            /**
+             * CASE 2: Task was overdue but due_date was moved to future
+             */
+            if (!$task->due_date->isPast()
+                && $task->status === 'overdue')
+            {
+                $task->update(['status' => 'in progress']);
+                $this->info("Task #{$task->id} reverted to in_progress");
             }
 
             // Prevent duplicate notifications
