@@ -35,7 +35,7 @@ class StoreSalesRequest extends FormRequest
             'remarks' => ['nullable', 'string', 'max:2000'],
             'total_contract_price' => ['required', 'numeric'],
             'down_payment' => ['nullable', 'numeric'],
-            'dp_terms' => ['nullable', 'numeric'],
+            'dp_terms' => ['required', 'numeric'],
             'financing' => ['nullable', 'string', 'max:255'],
         ];
     }

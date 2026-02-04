@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
 
-@section('title', 'Create Sale')
+@section('title', $title)
 
 @section('content')
     <div class="container-fluid py-4 sales-create">
@@ -14,7 +14,7 @@
                 {{-- LEFT: ICON + TITLE --}}
                 <div class="d-flex align-items-center gap-2">
                     <i class="fa-solid fa-handshake fs-4 text-primary"></i>
-                    <h3 class="fw-bold mb-0">Edit Sale</h3>
+                    <h3 class="fw-bold mb-0">{{$title}}</h3>
                 </div>
 
                 {{-- RIGHT: BACK BUTTON --}}
@@ -28,9 +28,9 @@
         </div>
 
 
-        <form id="create-sales-form" novalidate>
+        <form id="edit-sales-form" data-sales="{{$sales->id}}" novalidate>
             @csrf
-
+            <input type="hidden" name="model_id" value="{{$sales->model_unit_id}}">
             <div class="row g-4">
 
                 {{-- LEFT: SALE DETAILS --}}
@@ -56,7 +56,7 @@
                                     <select name="lead_id" id="lead_id" class="form-select" required>
                                         <option value="">Select Client</option>
                                         @foreach($leads as $lead)
-                                            <option value="{{$lead->id}}">{{$lead->full_name}}</option>
+                                            <option value="{{$lead->id}}" @if($sales->lead_id === $lead->id)selected @endif>{{$lead->full_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -67,7 +67,7 @@
                                     <select name="user_id" id="user_id" class="form-select" required>
                                         <option value="">Select Agent</option>
                                         @foreach($agents as $agent)
-                                            <option value="{{$agent->id}}" @if($agents->count() === 1)selected @endif>{{$agent->full_name}}</option>
+                                            <option value="{{$agent->id}}" @if($sales->user_id === $agent->id)selected @endif>{{$agent->full_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -78,7 +78,7 @@
                                     <select name="project_id" id="project_id" class="form-select" required>
                                         <option value="">Select Project</option>
                                         @foreach($projects as $project)
-                                            <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                            <option value="{{ $project->id }}" @if($sales->project_id === $project->id)selected @endif>{{ $project->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -94,37 +94,37 @@
                                 {{-- RESERVATION DATE --}}
                                 <div class="col-md-6">
                                     <label class="form-label">Reservation Date</label> <span class="text-danger">*</span>
-                                    <input type="date" name="reservation_date" class="form-control" required>
+                                    <input type="date" name="reservation_date" class="form-control" value="{{ optional($sales->reservation_date)->format('Y-m-d') }}" required>
                                 </div>
 
                                 {{-- PHASE --}}
                                 <div class="col-md-6">
                                     <label class="form-label">Phase</label>
-                                    <input type="text" name="phase" class="form-control" placeholder="e.g. Phase 2">
+                                    <input type="text" name="phase" class="form-control" value="{{$sales->phase}}" placeholder="e.g. Phase 2">
                                 </div>
 
                                 {{-- BLOCK --}}
                                 <div class="col-md-6">
                                     <label class="form-label">Block No.</label> <span class="text-danger">*</span>
-                                    <input type="text" name="block_no" class="form-control">
+                                    <input type="text" name="block_no" class="form-control" value="{{$sales->block_no}}">
                                 </div>
 
                                 {{-- LOT --}}
                                 <div class="col-md-6">
                                     <label class="form-label">Lot No.</label> <span class="text-danger">*</span>
-                                    <input type="text" name="lot_no" class="form-control">
+                                    <input type="text" name="lot_no" class="form-control" value="{{$sales->lot_no}}">
                                 </div>
 
                                 {{-- LOT AREA --}}
                                 <div class="col-md-6">
                                     <label class="form-label">Lot Area (sqm)</label>
-                                    <input type="number" step="0.01" name="lot_area" class="form-control">
+                                    <input type="number" step="0.01" name="lot_area" class="form-control" value="{{$sales->lot_area}}">
                                 </div>
 
                                 {{-- FLOOR AREA --}}
                                 <div class="col-md-6">
                                     <label class="form-label">Floor Area (sqm)</label>
-                                    <input type="number" step="0.01" name="floor_area" class="form-control">
+                                    <input type="number" step="0.01" name="floor_area" class="form-control" value="{{$sales->floor_area}}">
                                 </div>
 
                             </div>
@@ -146,7 +146,7 @@
                             rows="4"
                             class="form-control"
                             placeholder="Add internal notes, client preferences, or special conditions..."
-                        ></textarea>
+                        >{{$sales->remarks}}</textarea>
                         </div>
                     </div>
 
@@ -172,21 +172,22 @@
                                     step="0.01"
                                     name="total_contract_price"
                                     class="form-control"
+                                    value="{{$sales->total_contract_price}}"
                                     required
                                 >
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Down Payment</label>
-                                <input type="number" step="0.01" name="down_payment" class="form-control">
+                                <input type="number" step="0.01" name="down_payment" class="form-control" value="{{$sales->down_payment}}">
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">DP Terms (months)</label>
+                                <label class="form-label">DP Terms (months)</label> <span class="text-danger">*</span>
                                 <select name="dp_terms" class="form-select">
                                     <option value="">Select Terms</option>
                                     @for($month = 1; $month <= 64; $month++)
-                                        <option value="{{$month}}">{{$month}}</option>
+                                        <option value="{{$month}}" @if($sales->dp_terms == $month)selected @endif>{{$month}}</option>
                                     @endfor
                                 </select>
                             </div>
@@ -195,20 +196,21 @@
                                 <label class="form-label">Financing</label>
                                 <select name="financing" class="form-select">
                                     <option value="">Select Financing</option>
-                                    <option value="Pag-IBIG">Pag-IBIG</option>
-                                    <option value="Bank">Bank</option>
-                                    <option value="In-house">In-house</option>
-                                    <option value="Spot Cash">Spot Cash</option>
-                                    <option value="Deferred Cash">Cash</option>
-                                    <option value="NHMFC">NHMFC</option>
+                                    <option value="Pag-IBIG" @if($sales->financing == 'Pag-IBIG')selected @endif>Pag-IBIG</option>
+                                    <option value="Bank" @if($sales->financing == 'Bank')selected @endif>Bank</option>
+                                    <option value="In-house" @if($sales->financing == 'In-house')selected @endif>In-house</option>
+                                    <option value="Spot Cash" @if($sales->financing == 'Spot Cash')selected @endif>Spot Cash</option>
+                                    <option value="Deferred Cash" @if($sales->financing == 'Deferred Cash')selected @endif>Cash</option>
+                                    <option value="NHMFC" @if($sales->financing == 'NHMFC')selected @endif>NHMFC</option>
                                 </select>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
                                 <select name="status" class="form-select" required>
-                                    <option value="reserved">Reserved</option>
-                                    <option value="completed">Completed</option>
+                                    <option value="reserved" @if($sales->status == 'reserved')selected @endif>Reserved</option>
+                                    <option value="completed" @if($sales->status == 'completed')selected @endif>Completed</option>
+                                    <option value="cancelled" @if($sales->status == 'cancelled')selected @endif>Cancelled</option>
                                 </select>
                             </div>
 
@@ -241,5 +243,5 @@
 @endpush
 
 @push('scripts')
-    @vite(['resources/js/dashboard/sales/create.js'])
+    @vite(['resources/js/dashboard/sales/edit.js'])
 @endpush

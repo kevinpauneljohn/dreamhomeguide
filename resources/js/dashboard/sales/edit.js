@@ -1,60 +1,61 @@
-import axios from "axios";
-
 import {setLoading, resetLoading} from "@/dashboard/modelUnits/button-loader.js";
 import {changeUnits} from "@/dashboard/sales/changeUnit.js";
+import {Toast} from "@/toast.js";
 
-$(function(){
+$(document).ready(function () {
+    const project_id = $('#project_id').val();
+    let model_id = $('input[name=model_id]').val();
+    changeUnits(project_id, model_id);
 
     $(document).on('change', '#project_id', function () {
         const project_id = $(this).val();
-        changeUnits(project_id);
+        changeUnits(project_id, model_id);
     });
 
-});
-
+})
 
 document.addEventListener('DOMContentLoaded', function () {
-    const createSalesForm = document.getElementById('create-sales-form');
-    if (!createSalesForm) return;
-
+    const editSalesForm = document.getElementById('edit-sales-form');
     const alertEl = document.querySelector('.alert');
     const saveSalesBtn = document.getElementById('save-sales-btn');
 
-    createSalesForm.addEventListener('submit', (e) => {
+    if (!editSalesForm) return;
+
+    editSalesForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const formData = new FormData(createSalesForm);
 
-        createSale(formData);
-    })
+        const formData = new FormData(editSalesForm);
+        formData.append('_method', 'PUT');
 
-    const createSale = (formData) => {
-        createSalesForm.querySelectorAll('.is-invalid').forEach((el) => el.classList.remove('is-invalid'));
-        createSalesForm.querySelectorAll('.invalid-feedback').forEach((el) => el.remove());
-
+        editSalesForm.querySelectorAll('.is-invalid').forEach((el) => el.classList.remove('is-invalid'));
+        editSalesForm.querySelectorAll('.invalid-feedback').forEach((el) => el.remove());
         setLoading(saveSalesBtn);
-        axios.post('/sales', formData)
+
+        axios.post(`/sales/${editSalesForm.dataset.sales}`, formData)
             .then(response => {
-            console.log(response.data.project_id);
-            if(response.data.success === true)
-            {
-                createSalesForm.reset();
-
-                $('#lead_id').val(null).trigger('change');
-                $('#user_id').val(null).trigger('change');
-                $('#project_id').val(null).trigger('change');
-                $('select[name="model_unit_id"]').html(`<option value=""></option>`).trigger('change');
-
-
-                alertEl.classList.remove('d-none');
-                alertEl.innerHTML = `View Sales Details<a href="/sales/${response.data.sales}">here</a>
+                console.log(response.data);
+                if(response.data.success === true)
+                {
+                    Toast.fire({
+                        icon: 'success',
+                        title: response.data.message
+                    })
+                    alertEl.classList.remove('d-none');
+                    alertEl.innerHTML = `View Sales Details <a href="/sales/${response.data.sales}">here</a>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
-            }
-        }).catch(error => {
+                }
+                else{
+                    Toast.fire({
+                        icon: 'warning',
+                        title: response.data.message
+                    })
+                }
+            }).catch(error => {
             const errors = error.response.data.errors;
             console.log(errors);
 
             Object.keys(errors).forEach(key => {
-                const field = createSalesForm.querySelector(`[name="${key}"]`);
+                const field = editSalesForm.querySelector(`[name="${key}"]`);
                 if (!field) return;
 
                 // Mark invalid
@@ -75,10 +76,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     );
                 }
             });
-
         }).finally(() => {
             resetLoading(saveSalesBtn);
         })
-    }
-})
+    });
+});
 

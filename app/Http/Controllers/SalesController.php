@@ -94,9 +94,9 @@ class SalesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSalesRequest $request, Sales $sales)
+    public function update(UpdateSalesRequest $request,$sales)
     {
-        //
+        return $this->salesService->updateSales($sales, $request->all());
     }
 
     /**

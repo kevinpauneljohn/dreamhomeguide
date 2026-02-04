@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
 
-@section('title', 'Create Sale')
+@section('title', $title)
 
 @section('content')
     <div class="container-fluid py-4 sales-create">
@@ -15,7 +15,7 @@
                 {{-- LEFT: ICON + TITLE --}}
                 <div class="d-flex align-items-center gap-2">
                     <i class="fa-solid fa-handshake fs-4 text-primary"></i>
-                    <h3 class="fw-bold mb-0">Create Sale</h3>
+                    <h3 class="fw-bold mb-0">{{$title}}</h3>
                 </div>
 
                 {{-- RIGHT: BACK BUTTON --}}
@@ -182,7 +182,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">DP Terms (months)</label>
+                                <label class="form-label">DP Terms (months)</label> <span class="text-danger">*</span>
                                 <select name="dp_terms" class="form-select">
                                     <option value="">Select Terms</option>
                                     @for($month = 1; $month <= 64; $month++)

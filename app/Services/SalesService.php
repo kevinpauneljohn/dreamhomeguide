@@ -8,13 +8,28 @@ use Yajra\DataTables\Facades\DataTables;
 
 class SalesService
 {
-    public function createSales(array $salesData)
+    public function createSales(array $salesData): \Illuminate\Http\JsonResponse
     {
         $sales = Sales::create($salesData);
         return $sales ?
             response()->json(['success' => true, 'message' => 'Sales created successfully!',
                 'sales' => $sales->id, 'project_id' => $sales->modelUnit->project->id], 201, []) :
             response()->json(['success' => false, 'message' => 'Something went wrong!'], 500);
+    }
+
+    public function updateSales($sales, array $salesData)
+    {
+        $sales = Sales::findOrFail($sales);
+
+        $sales->fill($salesData);
+
+        if ($sales->isDirty()) {
+            $sales->save();
+
+            return response()->json(['success' => true, 'message' => 'Sales updated successfully!', 'sales' => $sales->id], 200);
+        }
+
+        return response()->json(['success' => false, 'message' => 'No changes were made.']);
     }
 
     public function getQuery(array $request)

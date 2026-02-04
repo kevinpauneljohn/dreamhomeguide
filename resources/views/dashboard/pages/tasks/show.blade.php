@@ -113,7 +113,7 @@
                             Description
                         </h6>
                         <p class="mb-0">
-                            {{ $task->description ?: 'No description provided.' }}
+                            {!! nl2br($task->description) ?: 'No description provided.' !!}
                         </p>
                     </div>
                 </div>

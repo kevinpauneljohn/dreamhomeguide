@@ -150,6 +150,8 @@ export default defineConfig({
                 'resources/css/sales.css',
                 'resources/js/dashboard/sales/create.js',
                 'resources/js/dashboard/sales/index.js',
+                'resources/js/dashboard/sales/edit.js',
+                'resources/js/dashboard/sales/changeUnit.js',
                 //end of sales
             ],
             refresh: true,

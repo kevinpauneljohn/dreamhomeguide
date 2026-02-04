@@ -121,7 +121,7 @@
                     </div>
                     <div class="card-body">
                         <p class="text-muted mb-0">
-                            {{ $sale->remarks ?? 'No remarks provided.' }}
+                            {!! nl2br($sale->remarks) ?? 'No remarks provided.' !!}
                         </p>
                     </div>
                 </div>
