@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Commission extends Model
 {
     protected $fillable = [
-        'user_id','project_id'
+        'user_id','project_id','rate'
     ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

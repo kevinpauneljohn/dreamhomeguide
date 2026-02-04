@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Commission;
 use App\Http\Requests\StoreCommissionRequest;
 use App\Http\Requests\UpdateCommissionRequest;
+use App\Services\CommissionService;
 
 class CommissionController extends Controller
 {
+    public function __construct(
+        public CommissionService $commissionService
+    )
+    {
+
+    }
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +36,10 @@ class CommissionController extends Controller
      */
     public function store(StoreCommissionRequest $request)
     {
-        //
+        $commission = Commission::create($request->only('project_id','user_id','rate'));
+
+        return $commission ? response()->json(['success' => true, 'message' => 'Commission created successfully.'], 201)
+            : response()->json(['success' => false, 'message' => 'An error occurred while creating the commission.'], 500);
     }
 
     /**
@@ -62,5 +72,10 @@ class CommissionController extends Controller
     public function destroy(Commission $commission)
     {
         //
+    }
+
+    public function getCommissionsTable($user)
+    {
+        return $this->commissionService->commissionTable($user);
     }
 }

@@ -122,6 +122,12 @@
                             </button>
                         </li>
 
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#commissions">
+                                Commissions
+                            </button>
+                        </li>
+
                     </ul>
 
                     <!-- TAB CONTENT -->
@@ -213,6 +219,44 @@
                             <x-activities.logs userId="{{ $user->id }}"/>
                         </div>
 
+                        <!-- Commissions TAB -->
+                        <div class="tab-pane fade" id="commissions">
+
+                            <div class="d-flex justify-content-between mb-3">
+                                <button class="btn btn-primary" id="add-commission-btn">
+                                    Add Commission
+                                </button>
+                            </div>
+
+                            <table class="table table-bordered" id="commission-table">
+                                <thead>
+                                <tr>
+                                    <th>Date Assigned</th>
+                                    <th>Commission Rate</th>
+                                    <th>Project</th>
+                                    <th width="120">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+{{--                                @foreach($commissions as $commission)--}}
+{{--                                    <tr>--}}
+{{--                                        <td>{{ $commission->date_assigned->format('M d, Y') }}</td>--}}
+{{--                                        <td>{{ $commission->rate }}%</td>--}}
+{{--                                        <td>{{ $commission->project->name }}</td>--}}
+{{--                                        <td>--}}
+{{--                                            <button class="btn btn-sm btn-danger"--}}
+{{--                                                    onclick="deleteCommission({{ $commission->id }})">--}}
+{{--                                                Delete--}}
+{{--                                            </button>--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                @endforeach--}}
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
                     </div><!-- /tab-content -->
 
                 </div>
@@ -222,3 +266,47 @@
     </div>
 
 @endsection
+
+@push('modal')
+    <div class="modal fade" id="commission-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="commission-form" data-user-id="{{ $user->id }}">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group mb-2">
+                            <label for="project_id">Project</label>
+                            <select name="project_id" id="project_id" class="form-select">
+                                @foreach($projects as $project)
+                                    <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="rate">Rate%</label>
+                            <select name="rate" id="rate" class="form-select">
+                                <option value="">Select Rate</option>
+                                @for($rate = 0.5; $rate <= 8; $rate = $rate + 0.5)
+                                    <option value="{{$rate}}">{{$rate}}%</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="save-commission-btn">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@endpush
+
+@push('scripts')
+    @vite(['resources/js/dashboard/commissions/create.js'])
+    @vite(['resources/js/dashboard/commissions/commission-table.js'])
+@endpush

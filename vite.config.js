@@ -153,6 +153,12 @@ export default defineConfig({
                 'resources/js/dashboard/sales/edit.js',
                 'resources/js/dashboard/sales/changeUnit.js',
                 //end of sales
+
+                //commissions
+                'resources/js/dashboard/commissions/commission-table.js',
+                'resources/js/dashboard/commissions/create.js',
+                'resources/js/dashboard/commissions/mode.js',
+                //end of commissions
             ],
             refresh: true,
         }),

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Project;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -63,7 +64,8 @@ class UserController implements HasMiddleware
     {
         return view('dashboard.pages.users.show')->with([
             'title' => 'View User',
-            'user' => $user
+            'user' => $user,
+            'projects' => Project::all()
         ]);
     }
 

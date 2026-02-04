@@ -11,7 +11,7 @@ class StoreCommissionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->user()->can('add commission');
     }
 
     /**
@@ -22,7 +22,7 @@ class StoreCommissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'rate' => ['required','numeric'],
         ];
     }
 }
