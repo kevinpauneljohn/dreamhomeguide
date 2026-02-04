@@ -35,7 +35,7 @@ class CheckDueTasks extends Command
             ->whereNull('deleted_at')
             ->whereNotIn('status', ['completed'])
             ->whereNotNull('assigned_to')
-            ->where('due_date', '<=', $now->copy()->addHours(1))
+//            ->where('due_date', '<=', $now->copy()->addHours(1))
             ->get();
 
         foreach ($tasks as $task) {
@@ -50,7 +50,7 @@ class CheckDueTasks extends Command
             if($task->due_date->isPast() && $task->status !== 'overdue')
             {
                 $task->update(['status' => 'overdue']);
-                $this->info('tasks');
+                $this->info("Task #{$task->id} marked overdue");
             }
 
             /**
@@ -62,6 +62,20 @@ class CheckDueTasks extends Command
                 $task->update(['status' => 'in progress']);
                 $this->info("Task #{$task->id} reverted to in_progress");
             }
+            /**
+             * =========================
+             * NOTIFICATION LOGIC
+             * =========================
+             */
+
+            // Only notify near-due / overdue tasks
+            if ($task->due_date->greaterThan($now->copy()->addHours(1))) {
+                continue;
+            }
+
+            $type = $task->due_date->isPast()
+                ? 'task_overdue'
+                : 'task_near_due';
 
             // Prevent duplicate notifications
             $alreadyNotified = DB::table('notifications')
@@ -79,14 +93,10 @@ class CheckDueTasks extends Command
                 continue;
             }
 
-
             $user = User::find($task->assigned_to);
-
             if (! $user) {
                 continue;
             }
-
-//            echo $task->due_date->toDateTimeString();
 
             $user->notify(new TaskDueNotification($task, $type, $type));
 
