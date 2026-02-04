@@ -39,10 +39,8 @@ const changeUnits = (project, unit) => {
         url: "/get-project-units/" + project,
         type: "GET",
         data: {"model_id" : unit},
-        // dataType: "html",
     })
         .done(function (data) {
-            console.log(data);
             $('select[name="model_unit_id"]').html(data).trigger('change');
         })
         .fail(function (xhr) {
