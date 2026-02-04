@@ -102,9 +102,11 @@ class SalesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sales $sales)
+    public function destroy($sales)
     {
-        //
+        return Sales::findOrFail($sales)->delete() ?
+            response()->json(['success' => true, 'message' => 'Sales deleted successfully.']) :
+            response()->json(['success' => false, 'message' => 'An error occurred while deleting the sales.']);
     }
 
     public function pipeline()

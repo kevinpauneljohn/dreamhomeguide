@@ -3,6 +3,7 @@ import axios from 'axios';
 import moment from 'moment';
 import select2 from 'select2';
 import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css'
+import Swal from "sweetalert2";
 select2()
 
 let salesTable;
@@ -116,6 +117,8 @@ $(function(){
                 className: 'text-end',
                 render: action => {
 
+                    console.log(action);
+
                     let buttons = '';
 
                     // View
@@ -159,7 +162,13 @@ $(function(){
                                         <a
 
                                             class="dropdown-item text-danger"
-                                            onclick="deleteTask(${action.id}, '${action.title}', '${action.ticket_number}')"
+                                            onclick="deleteSale(
+                                                ${action.id},
+                                                '${action.client}',
+                                                '${action.project}',
+                                                '${action.tcp}',
+                                                '${action.assigned_agent}'
+                                            )"
                                             style="cursor: pointer"
                                         >
                                             Delete
@@ -182,5 +191,63 @@ $(function(){
         .on('keyup change', function () {
             salesTable.ajax.reload();
         });
-
 });
+
+window.deleteSale = function (id, clientName, projectName, amount, assigned_agent) {
+
+    const formattedAmount = Number(amount).toLocaleString();
+
+    Swal.fire({
+        title: 'Delete Sale?',
+        html: `
+            <div class="text-start">
+                <p class="mb-2"><strong>Client:</strong> ${clientName}</p>
+                <p class="mb-2"><strong>Project:</strong> ${projectName}</p>
+                <p class="mb-2"><strong>Amount:</strong> ₱${formattedAmount}</p>
+                <p class="mb-2"><strong>Agent:</strong> ${assigned_agent}</p>
+                <hr>
+                <p class="text-danger mb-0">
+                    This action cannot be undone.
+                </p>
+            </div>
+        `,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, delete sale',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+
+        if (!result.isConfirmed) return;
+
+        axios.delete(`/sales/${id}`)
+            .then(response => {
+
+                if (response.data?.success === true) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted',
+                        text: 'Sales record has been deleted.',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+
+                        // 🔥 reload AFTER user clicks OK
+                        salesTable.ajax.reload(null, false);
+
+                    });
+                }
+
+            })
+            .catch(error => {
+                console.error(error);
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Delete Failed',
+                    text: error.response?.data?.message ?? 'Something went wrong.'
+                });
+            });
+    });
+};
+

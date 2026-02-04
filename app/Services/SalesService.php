@@ -200,6 +200,10 @@ class SalesService
                     'edit'   => auth()->user()->can('edit sale') && $sale->status !== 'completed',
                     'delete' => auth()->user()->can('delete sale') && $sale->status !== 'completed',
                     'id'     => $sale->id,
+                    'client' => $sale->lead->full_name,
+                    'project' => $sale->project->name,
+                    'tcp' => $sale->total_contract_price,
+                    'assigned_agent' => $sale->agent->full_name,
                 ];
             })
 
