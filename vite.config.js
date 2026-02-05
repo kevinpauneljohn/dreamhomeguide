@@ -158,6 +158,7 @@ export default defineConfig({
                 'resources/js/dashboard/commissions/commission-table.js',
                 'resources/js/dashboard/commissions/create.js',
                 'resources/js/dashboard/commissions/mode.js',
+                'resources/js/dashboard/commissions/edit.js',
                 //end of commissions
             ],
             refresh: true,

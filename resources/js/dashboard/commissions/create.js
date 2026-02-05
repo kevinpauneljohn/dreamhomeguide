@@ -4,6 +4,7 @@ select2()
 import {setLoading, resetLoading} from "@/dashboard/modelUnits/button-loader.js";
 import {setMode, getMode} from "@/dashboard/commissions/mode.js";
 import {Toast} from "@/toast.js";
+import {updateCommission} from "@/dashboard/commissions/edit.js";
 
 $(function(){
     const projectSelect = $('select[name=project_id]');
@@ -25,14 +26,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const addCommissionBtn = document.getElementById('add-commission-btn');
     const saveCommissionBtn = document.getElementById('save-commission-btn');
 
+
+
     if (!commissionModalEl || !addCommissionBtn) return;
 
     const commissionModal =
         bootstrap.Modal.getOrCreateInstance(commissionModalEl);
 
     addCommissionBtn.addEventListener('click', () => {
+        $('select[name=project_id]').val(null).trigger('change');
+        commissionForm.reset();
+
         commissionModalEl.querySelector('.modal-title').textContent = 'Add Commission';
         commissionModal.show();
+
+        const idInput = commissionForm.querySelector('input[name="id"]');
+        if (idInput) idInput.remove();
     });
 
     commissionForm.addEventListener('submit', (e) => {
@@ -44,8 +53,65 @@ document.addEventListener('DOMContentLoaded', () => {
         commissionForm.querySelectorAll('.invalid-feedback').forEach((el) => el.remove());
         setLoading(saveCommissionBtn);
 
+        if(getMode() === 'create')
+        {
+            createCommission(formData);
+        }
+        else if(getMode() === 'edit'){
+
+            formData.append('_method', 'PUT');
+
+            updateCommission(formData)
+                .then(response => {
+                    if (response.data.success) {
+
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.data.message
+                        });
+
+
+                        // reload datatable
+                        $('#commission-table').DataTable().ajax.reload(null, false);
+                    }else{
+                        Toast.fire({
+                            icon: 'warning',
+                            title: response.data.message
+                        });
+                    }
+
+                })
+                .catch(error => {
+
+                    const errors = error.response?.data?.errors ?? {};
+
+                    Object.keys(errors).forEach(key => {
+                        const field = commissionForm.querySelector(`[name="${key}"]`);
+                        if (!field) return;
+
+                        field.classList.add('is-invalid');
+
+                        if ($(field).hasClass('select2-hidden-accessible')) {
+                            $(field).next('.select2-container')
+                                .addClass('is-invalid')
+                                .after(`<div class="invalid-feedback d-block">${errors[key][0]}</div>`);
+                        } else {
+                            field.insertAdjacentHTML(
+                                'afterend',
+                                `<div class="invalid-feedback">${errors[key][0]}</div>`
+                            );
+                        }
+                    });
+
+                })
+                .finally(() => resetLoading(saveCommissionBtn));
+        }
+
+    })
+
+    const createCommission = (formData) => {
         axios.post('/commission', formData).then(response => {
-            console.log(response.data);
             if (response.data.success) {
                 $('select[name=project_id]').val(null).trigger('change');
                 commissionForm.reset();
@@ -53,10 +119,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     icon: 'success',
                     title: response.data.message
                 });
+                $('#commission-table').DataTable().ajax.reload(null, false);
             }
         }).catch(error => {
             const errors = error.response.data.errors;
-            console.log(errors);
 
             Object.keys(errors).forEach(key => {
                 const field = commissionForm.querySelector(`[name="${key}"]`);
@@ -81,6 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }).finally(() => resetLoading(saveCommissionBtn));
-    })
+    }
 });
 

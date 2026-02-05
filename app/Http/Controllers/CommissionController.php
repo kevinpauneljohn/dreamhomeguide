@@ -55,7 +55,7 @@ class CommissionController extends Controller
      */
     public function edit(Commission $commission)
     {
-        //
+        return $commission;
     }
 
     /**
@@ -63,7 +63,17 @@ class CommissionController extends Controller
      */
     public function update(UpdateCommissionRequest $request, Commission $commission)
     {
-        //
+        if(!$request->has('project_id'))
+        {
+            $request->merge(['project_id' => null]);
+        }
+        $commission->fill($request->only('rate','user_id','project_id'));
+        if($commission->isDirty())
+        {
+            $commission->save();
+            return response()->json(['success' => true, 'message' => 'Commission updated successfully.'], 200);
+        }
+        return response()->json(['success' => false, 'message' => 'No changes were made.']);
     }
 
     /**

@@ -1,5 +1,6 @@
 import DataTable from 'datatables.net-bs5';
 import moment from 'moment';
+import {editCommission} from "@/dashboard/commissions/edit.js";
 
 let commissionTable;
 const commissionForm = document.getElementById('commission-form');
@@ -42,7 +43,8 @@ commissionTable = $('#commission-table').DataTable({
         {
             data: 'action',
             className: 'text-end',
-            render: action => `
+            render: action =>
+                `
                 <div class="btn-group">
                     <button
                         class="btn btn-sm btn-outline-secondary"

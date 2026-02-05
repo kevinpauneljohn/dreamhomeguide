@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateCommissionRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateCommissionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->user()->can('edit commission');
     }
 
     /**
@@ -22,7 +23,8 @@ class UpdateCommissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'rate' => ['required','numeric'],
         ];
     }
+
 }
