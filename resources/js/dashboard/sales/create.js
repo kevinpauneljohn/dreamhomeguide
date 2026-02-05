@@ -2,6 +2,7 @@ import axios from "axios";
 
 import {setLoading, resetLoading} from "@/dashboard/modelUnits/button-loader.js";
 import {changeUnits} from "@/dashboard/sales/changeUnit.js";
+import {Toast} from "@/toast.js";
 
 $(function(){
 
@@ -34,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
         setLoading(saveSalesBtn);
         axios.post('/sales', formData)
             .then(response => {
-            console.log(response.data.project_id);
             if(response.data.success === true)
             {
                 createSalesForm.reset();
@@ -48,6 +48,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 alertEl.classList.remove('d-none');
                 alertEl.innerHTML = `View Sales Details<a href="/sales/${response.data.sales}">here</a>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
+            }else{
+                Toast.fire({
+                    icon: 'warning',
+                    title: response.data.message
+                })
             }
         }).catch(error => {
             const errors = error.response.data.errors;

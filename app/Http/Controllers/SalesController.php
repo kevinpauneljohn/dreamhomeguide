@@ -8,6 +8,7 @@ use App\Models\Sales;
 use App\Http\Requests\StoreSalesRequest;
 use App\Http\Requests\UpdateSalesRequest;
 use App\Models\User;
+use App\Services\CommissionService;
 use App\Services\SalesService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
@@ -60,9 +61,16 @@ class SalesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSalesRequest $request)
+    public function store(StoreSalesRequest $request, CommissionService $commissionService)
     {
-        $request->merge(['commission_rate' => 3]);
+        $rate = $commissionService->getCommissionRate($request->project_id, $request->user_id);
+        if ($rate === null) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No commission rate found for this project and agent.'
+            ]);
+        }
+        $request->merge(['commission_rate' => $commissionService->getCommissionRate($request->project_id, $request->user_id)]);
         return $this->salesService->createSales($request->all());
     }
 

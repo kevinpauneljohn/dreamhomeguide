@@ -7,6 +7,15 @@ use Yajra\DataTables\Facades\DataTables;
 
 class CommissionService
 {
+
+    public function getCommissionRate($project_id, $user_id): ?float
+    {
+        return Commission::where('project_id', $project_id)
+            ->where('user_id', $user_id)
+            ->value('rate'); // returns null if not found
+    }
+
+
     public function commissionTable(string $userId)
     {
         $query = Commission::query()
