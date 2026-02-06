@@ -35,8 +35,10 @@ document.addEventListener('DOMContentLoaded', function () {
         setLoading(saveSalesBtn);
         axios.post('/sales', formData)
             .then(response => {
+                console.log(response.data);
             if(response.data.success === true)
             {
+
                 createSalesForm.reset();
 
                 $('#lead_id').val(null).trigger('change');

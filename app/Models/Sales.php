@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Contracts\Activity;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Sales extends Model
 {
     /** @use HasFactory<\Database\Factories\SalesFactory> */
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, LogsActivity;
 
     protected $table = 'sales';
 
@@ -36,6 +39,25 @@ class Sales extends Model
     protected $casts = [
         'reservation_date' => 'date'
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly($this->fillable)
+            ->logOnlyDirty()
+            ->useLogName('sales');
+        // Chain fluent methods for configuration options
+    }
+
+    public function tapActivity(Activity $activity, string $eventName): void
+    {
+        $activity->properties = $activity->properties->merge([
+            'lead_id' => $this->lead_id,
+            'lead_name' => !is_null($this->lead_id) ? $this->lead()->first()->full_name : null,
+            'user_id' => $this->user_id,
+            'agent' => $this->agent()->first()->full_name
+        ]);
+    }
 
     public function lead(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

@@ -10,9 +10,18 @@ class CommissionService
 
     public function getCommissionRate($project_id, $user_id): ?float
     {
-        return Commission::where('project_id', $project_id)
+        $commission = Commission::where('project_id', $project_id)
             ->where('user_id', $user_id)
-            ->value('rate'); // returns null if not found
+            ->value('rate');
+
+        if(is_null($commission))
+        {
+            return Commission::where('project_id', null)
+                ->where('user_id', $user_id)
+                ->value('rate');
+        }else{
+            return $commission;
+        }
     }
 
 
