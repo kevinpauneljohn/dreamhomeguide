@@ -8,4 +8,8 @@ const getMode = () => {
     return mode;
 }
 
-export {setMode, getMode};
+const getCommissionDetails = async (commissionId) => {
+    return axios.get(`/commission/${commissionId}/edit`);
+}
+
+export {setMode, getMode, getCommissionDetails};

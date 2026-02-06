@@ -41,4 +41,12 @@ class StoreCommissionRequest extends FormRequest
             'project_id.unique' => 'This user already has a commission for this project.',
         ];
     }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'project_id' => $this->project_id === '' ? null : $this->project_id,
+        ]);
+    }
+
 }

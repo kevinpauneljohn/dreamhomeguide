@@ -281,6 +281,7 @@
                         <div class="form-group mb-2">
                             <label for="project_id">Project</label>
                             <select name="project_id" id="project_id" class="form-select">
+                                <option value="">Select Project</option>
                                 @foreach($projects as $project)
                                     <option value="{{ $project->id }}">{{ $project->name }}</option>
                                 @endforeach

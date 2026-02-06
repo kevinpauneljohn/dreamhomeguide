@@ -1,4 +1,4 @@
-import {setMode} from "@/dashboard/commissions/mode.js";
+import {setMode, getCommissionDetails} from "@/dashboard/commissions/mode.js";
 
 const commissionModalEl = document.getElementById('commission-modal');
 const commissionForm = document.getElementById('commission-form');
@@ -31,8 +31,8 @@ const editCommission = async (commissionId) => {
     try {
         const response = await getCommissionDetails(commissionId);
 
-        $('select[name=project_id]').val(response.data.project_id).trigger('change');
-        $('select[name=rate]').val(response.data.rate).trigger('change');
+        $('#commission-form select[name=project_id]').val(response.data.project_id).trigger('change');
+        $('#commission-form select[name=rate]').val(response.data.rate).trigger('change');
 
 
 
@@ -47,9 +47,7 @@ const updateCommission = async (formData) => {
     return axios.post(`/commission/${id}`, formData);
 };
 
-const getCommissionDetails = async (commissionId) => {
-    return axios.get(`/commission/${commissionId}/edit`);
-}
+
 
 window.editCommission = editCommission;
 

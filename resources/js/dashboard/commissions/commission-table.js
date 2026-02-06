@@ -1,6 +1,7 @@
 import DataTable from 'datatables.net-bs5';
 import moment from 'moment';
 import {editCommission} from "@/dashboard/commissions/edit.js";
+import {deleteCommission} from "@/dashboard/commissions/delete.js";
 
 let commissionTable;
 const commissionForm = document.getElementById('commission-form');

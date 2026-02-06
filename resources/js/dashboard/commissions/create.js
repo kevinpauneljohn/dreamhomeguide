@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
         bootstrap.Modal.getOrCreateInstance(commissionModalEl);
 
     addCommissionBtn.addEventListener('click', () => {
+
+        console.log(getMode());
+        setMode('create');
         $('select[name=project_id]').val(null).trigger('change');
         commissionForm.reset();
 
@@ -112,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const createCommission = (formData) => {
         axios.post('/commission', formData).then(response => {
+            console.log(response);
             if (response.data.success) {
                 $('select[name=project_id]').val(null).trigger('change');
                 commissionForm.reset();

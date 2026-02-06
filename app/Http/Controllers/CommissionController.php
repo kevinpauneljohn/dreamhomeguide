@@ -55,7 +55,7 @@ class CommissionController extends Controller
      */
     public function edit(Commission $commission)
     {
-        return $commission;
+        return collect($commission)->merge(['project_name' => $commission->project->name ?? 'All Projects']);
     }
 
     /**
@@ -81,7 +81,9 @@ class CommissionController extends Controller
      */
     public function destroy(Commission $commission)
     {
-        //
+        return $commission->delete() ?
+            response()->json(['success' => true, 'message' => 'Commission deleted successfully.']) :
+            response()->json(['success' => false, 'message' => 'An error occurred while deleting the commission.']);
     }
 
     public function getCommissionsTable($user)

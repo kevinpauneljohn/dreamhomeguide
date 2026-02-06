@@ -22,9 +22,36 @@ class UpdateCommissionRequest extends FormRequest
      */
     public function rules(): array
     {
+        $commissionId = $this->route('commission'); // route-model binding or ID
+        $userId = $this->user_id ?? $this->route('commission')->user_id;
+
         return [
-            'rate' => ['required','numeric'],
+            'rate' => ['required', 'numeric'],
+
+            'project_id' => [
+                'nullable',
+                'integer',
+                'exists:projects,id',
+
+                Rule::unique('commissions')
+                    ->where(fn ($query) => $query->where('user_id', $userId))
+                    ->ignore($commissionId),
+            ],
         ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'project_id.unique' => 'This user already has a commission for this project.',
+        ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'project_id' => $this->project_id === '' ? null : $this->project_id,
+        ]);
     }
 
 }
