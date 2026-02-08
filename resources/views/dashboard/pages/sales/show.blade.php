@@ -43,7 +43,15 @@
                             <div class="col-md-6">
                                 <div class="profile-field">
                                     <span>Client / Lead</span>
-                                    <strong>{{ $sale->lead->full_name ?? '—' }}</strong>
+                                    @if($sale->lead)
+                                        <a href="{{ route('leads.show', $sale->lead) }}"
+                                           class="text-decoration-none text-primary fw-semibold">
+                                            {{ $sale->lead->full_name }}
+                                        </a>
+                                    @else
+                                        <strong>—</strong>
+                                    @endif
+
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -52,6 +60,53 @@
                                     <strong>{{ ucwords($sale->agent->full_name) ?? '—' }}</strong>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- LEAD DETAILS --}}
+                <div class="card profile-card accent-info mb-4">
+                    <div class="card-header">
+                        <h6><i class="bi bi-person-lines-fill"></i> Lead Details</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row gy-3">
+
+                            <div class="col-md-6">
+                                <div class="profile-field">
+                                    <span>Address</span>
+                                    <strong>{{ $sale->lead->address ?? '—' }}</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="profile-field">
+                                    <span>Phone</span>
+                                    <strong>{{ $sale->lead->phone ?? '—' }}</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="profile-field">
+                                    <span>Email</span>
+                                    <strong>{{ $sale->lead->email ?? '—' }}</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="profile-field">
+                                    <span>Gender</span>
+                                    <strong>{{ ucfirst($sale->lead->gender) ?? '—' }}</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="profile-field">
+                                    <span>Civil Status</span>
+                                    <strong>{{ ucfirst($sale->lead->civil_status) ?? '—' }}</strong>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
