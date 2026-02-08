@@ -15,3 +15,6 @@ Schedule::command('appointments:check-due')->hourly()
 Schedule::command('tasks:check-due')->hourly()
     ->withoutOverlapping(10)->runInBackground();
 
+Schedule::command('leads:update-statuses')->dailyAt('06:00')
+    ->withoutOverlapping(10)->runInBackground();
+
