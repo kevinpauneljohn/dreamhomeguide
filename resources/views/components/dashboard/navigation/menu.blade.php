@@ -1,11 +1,11 @@
 <!-- SIDEBAR -->
-<div id="sidebar" class="sidebar bg-dark text-white position-fixed p-3">
+<div id="sidebar" class="sidebar bg-dark text-white position-fixed">
     <h5 class="pb-3 border-bottom text-center">
         <span class="sidebar-title">DHG</span>
     </h5>
 
     {{-- ================= MAIN ================= --}}
-    <ul class="nav nav-pills flex-column mt-3">
+    <ul class="nav nav-pills flex-column">
 
         <!-- Dashboard -->
         <li class="nav-item">
@@ -19,10 +19,14 @@
 
     </ul>
 
-    <hr/>
+    @if(auth()->user()->can('view lead') || auth()->user()->can('add lead')
+        || auth()->user()->can('view appointment') || auth()->user()->can('view task') || auth()->user()->can('view sales')
+        || auth()->user()->can('add sales'))
+        <hr/>
+    @endif
 
     {{-- ================= CRM ================= --}}
-    <ul class="nav nav-pills flex-column mt-3">
+    <ul class="nav nav-pills flex-column">
 
         @can('view lead')
             <li class="nav-item">
@@ -36,7 +40,7 @@
                     <i class="bi bi-caret-down-fill small"></i>
                 </a>
 
-                <ul class="collapse {{ (Route::is('crm.index') || Route::is('leads.*')) ? 'show' : '' }} ps-4"
+                <ul class="collapse {{ (Route::is('crm.index') || Route::is('leads.*')) ? 'show' : '' }}"
                     id="leadsMenu">
                     <li>
                         <a href="{{ route('crm.index') }}"
@@ -96,7 +100,7 @@
                     <i class="bi bi-caret-down-fill small"></i>
                 </a>
 
-                <ul class="collapse {{ request()->routeIs('sales.*') ? 'show' : '' }} ps-4"
+                <ul class="collapse {{ request()->routeIs('sales.*') ? 'show' : '' }}"
                     id="salesMenu">
                     <li>
                         <a href="{{ route('sales.index') }}"
@@ -124,10 +128,12 @@
 
     </ul>
 
-    <hr/>
+    @if(auth()->user()->can('view project') || auth()->user()->can('view listing') || auth()->user()->can('add listing'))
+        <hr/>
+    @endif
 
     {{-- ================= INVENTORY ================= --}}
-    <ul class="nav nav-pills flex-column mt-3">
+    <ul class="nav nav-pills flex-column">
 
         @can('view project')
             <li class="nav-item">
@@ -154,7 +160,7 @@
                     <i class="bi bi-caret-down-fill small"></i>
                 </a>
 
-                <ul class="collapse {{ Route::is('property.*') ? 'show' : '' }} ps-4"
+                <ul class="collapse {{ Route::is('property.*') ? 'show' : '' }}"
                     id="propertiesMenu">
                     <li>
                         <a href="{{ route('property.index') }}"
@@ -176,10 +182,13 @@
 
     </ul>
 
-    <hr/>
+    @if(auth()->user()->can('view computation'))
+        <hr/>
+    @endif
+
 
     {{-- ================= TOOLS & REPORTS ================= --}}
-    <ul class="nav nav-pills flex-column mt-3">
+    <ul class="nav nav-pills flex-column">
 
         @can('view computation')
             <li class="nav-item">
@@ -202,7 +211,7 @@
                 <i class="bi bi-caret-down-fill small"></i>
             </a>
 
-            <ul class="collapse ps-4" id="reportsMenu">
+            <ul class="collapse" id="reportsMenu">
                 <li><a href="#" class="nav-link text-white-50">Sales Report</a></li>
                 <li><a href="#" class="nav-link text-white-50">Agent Performance</a></li>
                 <li><a href="#" class="nav-link text-white-50">Commission Summary</a></li>
@@ -211,10 +220,12 @@
 
     </ul>
 
-    <hr/>
+    @if(auth()->user()->can('view user') || auth()->user()->can('add user') || auth()->user()->can('view role') || auth()->user()->can('view permission'))
+        <hr/>
+    @endif
 
     {{-- ================= ADMIN ================= --}}
-    <ul class="nav nav-pills flex-column mt-3">
+    <ul class="nav nav-pills flex-column">
 
         @can('view user')
             <li class="nav-item">
@@ -228,7 +239,7 @@
                     <i class="bi bi-caret-down-fill small"></i>
                 </a>
 
-                <ul class="collapse {{ Route::is('user.*') ? 'show' : '' }} ps-4"
+                <ul class="collapse {{ Route::is('user.*') ? 'show' : '' }}"
                     id="usersMenu">
                     <li>
                         <a href="{{ route('user.index') }}"
@@ -272,10 +283,12 @@
 
     </ul>
 
-    <hr/>
+    @if(auth()->user()->can('view blog'))
+        <hr/>
+    @endif
 
     {{-- ================= CONTENT ================= --}}
-    <ul class="nav nav-pills flex-column mt-3">
+    <ul class="nav nav-pills flex-column">
 
         @can('view blog')
             <li class="nav-item">
