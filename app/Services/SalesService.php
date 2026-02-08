@@ -217,7 +217,9 @@ class SalesService
         $user = auth()->user();
 
         $query = Sales::whereMonth('reservation_date', $now->month)
-            ->whereYear('reservation_date', $now->year);
+            ->whereYear('reservation_date', $now->year)
+            ->where('status', 'completed')
+            ->orWhere('status', 'reserved');
 
         // 🔐 ROLE-BASED VISIBILITY
         if ($user->hasRole(['agent'])) {
@@ -237,6 +239,8 @@ class SalesService
             )
             ->whereMonth('reservation_date', $now->month)
                 ->whereYear('reservation_date', $now->year)
+            ->where('status', 'completed')
+            ->orWhere('status', 'reserved')
                 ->with([
                     'agent' => function ($q) {
                         $q->select('id', 'first_name', 'last_name', 'profile_photo')
