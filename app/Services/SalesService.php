@@ -218,18 +218,21 @@ class SalesService
         /* ---------------------------------------------
          | TOTAL SALES (CURRENT MONTH)
          --------------------------------------------- */
-        return Sales::whereMonth('created_at', $now->month)
-            ->whereYear('created_at', $now->year)
+        return Sales::whereMonth('reservation_date', $now->month)
+            ->whereYear('reservation_date', $now->year)
             ->sum('total_contract_price');
     }
 
     public function getAgentRanking(): \Illuminate\Database\Eloquent\Collection|array|\LaravelIdea\Helper\App\Models\_IH_Sales_C
     {
+        $now = Carbon::now();
         return Sales::select(
                 'user_id',
                 DB::raw('COUNT(id) as units_sold'),
                 DB::raw('SUM(total_contract_price) as total_amount')
             )
+            ->whereMonth('reservation_date', $now->month)
+                ->whereYear('reservation_date', $now->year)
                 ->with([
                     'agent' => function ($q) {
                         $q->select('id', 'first_name', 'last_name', 'profile_photo')
