@@ -214,13 +214,17 @@ class SalesService
     public function getCurrentMonthSales()
     {
         $now = Carbon::now();
+        $user = auth()->user();
 
-        /* ---------------------------------------------
-         | TOTAL SALES (CURRENT MONTH)
-         --------------------------------------------- */
-        return Sales::whereMonth('reservation_date', $now->month)
-            ->whereYear('reservation_date', $now->year)
-            ->sum('total_contract_price');
+        $query = Sales::whereMonth('reservation_date', $now->month)
+            ->whereYear('reservation_date', $now->year);
+
+        // 🔐 ROLE-BASED VISIBILITY
+        if ($user->hasRole(['agent'])) {
+            $query->where('user_id', $user->id);
+        }
+
+        return $query->sum('total_contract_price');
     }
 
     public function getAgentRanking(): \Illuminate\Database\Eloquent\Collection|array|\LaravelIdea\Helper\App\Models\_IH_Sales_C
