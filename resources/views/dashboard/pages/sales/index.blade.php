@@ -11,121 +11,46 @@
 
             <div class="d-flex justify-content-between align-items-center">
                 <h3 class="fw-bold mb-0">Sales Dashboard</h3>
-
-                {{-- QUICK KPI STRIP --}}
-                <div class="d-none d-md-flex gap-2">
-                <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">
-                    ₱12.4M MTD
-                </span>
-                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">
-                    12 Closed
-                </span>
-                    <span class="badge bg-warning bg-opacity-10 text-warning px-3 py-2">
-                    8 In Progress
-                </span>
-                </div>
             </div>
         </div>
 
         {{-- TOP SUMMARY --}}
         <div class="row g-4 mb-4">
 
-            {{-- SALES OVERVIEW --}}
-            <div class="col-lg-7">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-header bg-white border-0">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h6 class="fw-bold mb-0">Sales Overview</h6>
-                            <small class="text-muted">This Month</small>
-                        </div>
-                    </div>
-
-                    <div class="card-body d-flex flex-column flex-md-row align-items-center gap-4">
-
-                        {{-- DONUT PLACEHOLDER --}}
-                        <div class="text-center" style="min-width:220px">
-                            <div class="position-relative d-inline-block">
-                                <div class="rounded-circle border border-4 border-success opacity-75"
-                                     style="width:180px;height:180px;"></div>
-
-                                <div class="position-absolute top-50 start-50 translate-middle">
-                                    <small class="text-muted">Closed</small>
-                                    <h3 class="fw-bold mb-0 text-success">45%</h3>
-                                    <small class="text-muted">conversion</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- STATUS BREAKDOWN --}}
-                        <div class="w-100">
-                            <div class="row text-center gy-3">
-
-                                <div class="col-4">
-                                    <i class="fa-solid fa-clock text-warning mb-1"></i>
-                                    <small class="text-muted d-block">In Progress</small>
-                                    <h5 class="fw-bold">8</h5>
-                                </div>
-
-                                <div class="col-4 border-start border-end">
-                                    <i class="fa-solid fa-check-circle text-success mb-1"></i>
-                                    <small class="text-muted d-block">Closed</small>
-                                    <h5 class="fw-bold">12</h5>
-                                </div>
-
-                                <div class="col-4">
-                                    <i class="fa-solid fa-xmark-circle text-secondary mb-1"></i>
-                                    <small class="text-muted d-block">Cancelled</small>
-                                    <h5 class="fw-bold">3</h5>
-                                </div>
-
-                            </div>
-                        </div>
-
+            {{-- TOTAL SALES (CURRENT MONTH) --}}
+            <div class="col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <small class="text-muted">Sales This Month</small>
+                        <h3 class="fw-bold mt-2 text-success" id="current-month-sales">
+                        </h3>
+                        <span class="badge bg-success-subtle text-success">
+                    {{ now()->format('F Y') }}
+                </span>
                     </div>
                 </div>
             </div>
 
-            {{-- SALES ATTENTION & RISK --}}
-            <div class="col-lg-5">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-header bg-white border-0 d-flex justify-content-between">
-                        <h6 class="fw-bold mb-0">Sales Attention & Risk</h6>
-                        <i class="fa-solid fa-triangle-exclamation text-muted"></i>
-                    </div>
-
+            {{-- AGENT RANKING --}}
+            <div class="col-lg-8">
+                <div class="card shadow-sm h-100">
                     <div class="card-body">
+                        <h6 class="fw-bold mb-3">Top Performing Agents</h6>
 
-                        <div class="row g-3 mb-4">
-                            <div class="col-6">
-                                <div class="p-3 rounded bg-danger bg-opacity-10 h-100">
-                                    <i class="fa-solid fa-pause-circle text-danger"></i>
-                                    <small class="text-muted d-block mt-1">Stalled Deals</small>
-                                    <h4 class="fw-bold text-danger mb-0">4</h4>
-                                </div>
-                            </div>
+                        <div class="table-responsive">
+                            <table class="table table-sm align-middle">
+                                <thead class="text-muted small">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Agent</th>
+                                    <th>Units Sold</th>
+                                    <th>Total Amount</th>
+                                </tr>
+                                </thead>
+                                <tbody id="top-agents-by-sales">
 
-                            <div class="col-6">
-                                <div class="p-3 rounded bg-warning bg-opacity-10 h-100">
-                                    <i class="fa-solid fa-calendar-week text-warning"></i>
-                                    <small class="text-muted d-block mt-1">Due This Week</small>
-                                    <h4 class="fw-bold text-warning mb-0">2</h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-between small mb-2">
-                            <strong>High Value Deals</strong>
-                            <span class="fw-bold">₱6,500,000</span>
-                        </div>
-
-                        <div class="d-flex justify-content-between small mb-2">
-                            <strong>Pending Reservations</strong>
-                            <span class="fw-bold">3</span>
-                        </div>
-
-                        <div class="d-flex justify-content-between small">
-                            <strong>Conversion Rate</strong>
-                            <span class="fw-bold text-success">18%</span>
+                                </tbody>
+                            </table>
                         </div>
 
                     </div>
@@ -133,6 +58,7 @@
             </div>
 
         </div>
+
 
         {{-- SALES LIST --}}
         <div class="card border-0 shadow-sm">
@@ -219,45 +145,6 @@
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td>
-                                <strong>Juan Dela Cruz</strong><br>
-                                <small class="text-muted">0921 817 3000</small>
-                            </td>
-
-                            <td>Villa Corazon – Duplex</td>
-
-                            <td class="fw-bold">₱1,250,000</td>
-
-                            <td>
-                                <div class="d-flex align-items-center gap-2">
-                                    <span class="avatar bg-primary text-white fw-bold">JS</span>
-                                    <div>
-                                        <strong>John Santos</strong><br>
-                                        <small class="text-muted">Agent</small>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td>
-                                <span class="badge rounded-pill bg-success bg-opacity-10 text-success px-3">
-                                    Closed
-                                </span>
-                            </td>
-
-                            <td>Jan 29</td>
-
-                            <td class="text-end">
-                                <div class="btn-group">
-                                    <button class="btn btn-sm btn-outline-secondary">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-secondary">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
                         </tbody>
 
                     </table>

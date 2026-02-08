@@ -85,7 +85,7 @@ $(function(){
                 render: function (data) {
                     const map = {
                         completed: 'success',
-                        reserved: 'warning',
+                        reserved: 'primary',
                         cancelled: 'danger'
                     };
 
@@ -116,8 +116,6 @@ $(function(){
                 orderable: false,
                 className: 'text-end',
                 render: action => {
-
-                    console.log(action);
 
                     let buttons = '';
 
@@ -234,7 +232,8 @@ window.deleteSale = function (id, clientName, projectName, amount, assigned_agen
 
                         // 🔥 reload AFTER user clicks OK
                         salesTable.ajax.reload(null, false);
-
+                        displayCurrentMonthSales();
+                        displayAgentSalesRanking();
                     });
                 }
 
@@ -250,4 +249,32 @@ window.deleteSale = function (id, clientName, projectName, amount, assigned_agen
             });
     });
 };
+
+// current month sales display
+const currentMonthSales = document.getElementById('current-month-sales');
+
+const displayCurrentMonthSales = () => {
+    axios.get('/get-current-month-sales').then(response => {
+        const amount = Number(response.data) || 0;
+
+        currentMonthSales.innerHTML = new Intl.NumberFormat('en-PH', {
+            style: 'currency',
+            currency: 'PHP',
+            minimumFractionDigits: 2
+        }).format(amount);
+    })
+}
+
+const topAgentsBySales = document.getElementById('top-agents-by-sales');
+const displayAgentSalesRanking = () => {
+    axios.get('/get-agent-sales-rankings').then(response => {
+        console.log(response.data);
+        topAgentsBySales.innerHTML = `${response.data}`
+    })
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    displayCurrentMonthSales();
+    displayAgentSalesRanking();
+});
 

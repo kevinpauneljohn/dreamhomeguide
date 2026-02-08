@@ -17,7 +17,7 @@ class SalesService
             response()->json(['success' => false, 'message' => 'Something went wrong!'], 500);
     }
 
-    public function updateSales($sales, array $salesData)
+    public function updateSales($sales, array $salesData): \Illuminate\Http\JsonResponse
     {
         $sales = Sales::findOrFail($sales);
 
@@ -208,5 +208,17 @@ class SalesService
             })
 
             ->make(true);
+    }
+
+    public function getCurrentMonthSales()
+    {
+        $now = Carbon::now();
+
+        /* ---------------------------------------------
+         | TOTAL SALES (CURRENT MONTH)
+         --------------------------------------------- */
+        return Sales::whereMonth('created_at', $now->month)
+            ->whereYear('created_at', $now->year)
+            ->sum('total_contract_price');
     }
 }
