@@ -22,8 +22,8 @@
                 <div class="card shadow-sm h-100">
                     <div class="card-body">
                         <small class="text-muted">Sales This Month</small>
-                        <h3 class="fw-bold mt-2 text-success" id="current-month-sales">
-                        </h3>
+                        <h1 class="fw-bold mt-2 text-success" id="current-month-sales">
+                        </h1>
                         <span class="badge bg-success-subtle text-success">
                     {{ now()->format('F Y') }}
                 </span>

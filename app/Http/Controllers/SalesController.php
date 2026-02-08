@@ -38,34 +38,7 @@ class SalesController extends Controller
      */
     public function index()
     {
-//        $projects = Project::all();
-//        $agents = User::all();
-//        return view('dashboard.pages.sales.index')->with([
-//            'title' => 'Sales',
-//            'projects' => $projects,
-//            'agents' => $agents,
-//        ]);
-
         $now = Carbon::now();
-
-        /* ---------------------------------------------
-         | AGENT RANKING
-         --------------------------------------------- */
-        $agentRanking = Sales::select(
-            'user_id',
-            DB::raw('COUNT(id) as units_sold'),
-            DB::raw('SUM(total_contract_price) as total_amount')
-        )
-            ->with([
-                'agent' => function ($q) {
-                    $q->select('id', 'first_name', 'last_name', 'profile_photo')
-                        ->with('roles:id,name');
-                }
-            ])
-            ->groupBy('user_id')
-            ->orderByDesc('total_amount')
-            ->get();
-
 
         /* ---------------------------------------------
          | MONTHLY SALES (THIS YEAR vs LAST YEAR)
@@ -89,7 +62,6 @@ class SalesController extends Controller
 
 
         return view('dashboard.pages.sales.index', compact(
-            'agentRanking',
             'monthlySales',
             'projects','agents', 'title'
         ));
@@ -189,20 +161,7 @@ class SalesController extends Controller
         /* ---------------------------------------------
          | AGENT RANKING
          --------------------------------------------- */
-        $agentRanking = Sales::select(
-            'user_id',
-            DB::raw('COUNT(id) as units_sold'),
-            DB::raw('SUM(total_contract_price) as total_amount')
-        )
-            ->with([
-                'agent' => function ($q) {
-                    $q->select('id', 'first_name', 'last_name', 'profile_photo')
-                        ->with('roles:id,name');
-                }
-            ])
-            ->groupBy('user_id')
-            ->orderByDesc('total_amount')
-            ->get();
+        $agentRanking = $this->salesService->getAgentRanking();
 
         return view('dashboard.pages.sales.agents.ranking', compact(
             'agentRanking',

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Sales;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class SalesService
@@ -220,5 +221,23 @@ class SalesService
         return Sales::whereMonth('created_at', $now->month)
             ->whereYear('created_at', $now->year)
             ->sum('total_contract_price');
+    }
+
+    public function getAgentRanking(): \Illuminate\Database\Eloquent\Collection|array|\LaravelIdea\Helper\App\Models\_IH_Sales_C
+    {
+        return Sales::select(
+                'user_id',
+                DB::raw('COUNT(id) as units_sold'),
+                DB::raw('SUM(total_contract_price) as total_amount')
+            )
+                ->with([
+                    'agent' => function ($q) {
+                        $q->select('id', 'first_name', 'last_name', 'profile_photo')
+                            ->with('roles:id,name');
+                    }
+                ])
+                ->groupBy('user_id')
+                ->orderByDesc('total_amount')
+                ->get();
     }
 }
