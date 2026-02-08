@@ -201,22 +201,22 @@
             </li>
         @endcan
 
-        <li class="nav-item">
-            <a class="nav-link text-white d-flex justify-content-between align-items-center"
-               data-bs-toggle="collapse"
-               href="#reportsMenu">
-                <span>
-                    <i class="bi bi-bar-chart"></i> Reports
-                </span>
-                <i class="bi bi-caret-down-fill small"></i>
-            </a>
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link text-white d-flex justify-content-between align-items-center"--}}
+{{--               data-bs-toggle="collapse"--}}
+{{--               href="#reportsMenu">--}}
+{{--                <span>--}}
+{{--                    <i class="bi bi-bar-chart"></i> Reports--}}
+{{--                </span>--}}
+{{--                <i class="bi bi-caret-down-fill small"></i>--}}
+{{--            </a>--}}
 
-            <ul class="collapse" id="reportsMenu">
-                <li><a href="#" class="nav-link text-white-50">Sales Report</a></li>
-                <li><a href="#" class="nav-link text-white-50">Agent Performance</a></li>
-                <li><a href="#" class="nav-link text-white-50">Commission Summary</a></li>
-            </ul>
-        </li>
+{{--            <ul class="collapse" id="reportsMenu">--}}
+{{--                <li><a href="#" class="nav-link text-white-50">Sales Report</a></li>--}}
+{{--                <li><a href="#" class="nav-link text-white-50">Agent Performance</a></li>--}}
+{{--                <li><a href="#" class="nav-link text-white-50">Commission Summary</a></li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
 
     </ul>
 
