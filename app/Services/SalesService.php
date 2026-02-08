@@ -189,7 +189,7 @@ class SalesService
              | DATE
              ----------------------------------------- */
             ->addColumn('date', fn ($sale) =>
-                $sale->created_at
+                $sale->reservation_date
             )
 
             /* -----------------------------------------
