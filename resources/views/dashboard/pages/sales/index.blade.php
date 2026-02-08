@@ -18,21 +18,34 @@
         <div class="row g-4 mb-4">
 
             {{-- TOTAL SALES (CURRENT MONTH) --}}
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="card shadow-sm h-100">
                     <div class="card-body">
                         <small class="text-muted">Sales This Month</small>
                         <h1 class="fw-bold mt-2 text-success" id="current-month-sales">
                         </h1>
                         <span class="badge bg-success-subtle text-success">
-                    {{ now()->format('F Y') }}
-                </span>
+                            {{ now()->format('F Y') }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <small class="text-muted">Sales This Year</small>
+                        <h1 class="fw-bold text-primary mt-2" id="current-year-sales">
+                            ₱0.00
+                        </h1>
+                        <span class="badge bg-primary-subtle text-primary">
+                            {{ now()->year }}
+                        </span>
                     </div>
                 </div>
             </div>
 
             {{-- AGENT RANKING --}}
-            <div class="col-lg-8">
+            <div class="col-lg-6">
                 <div class="card shadow-sm h-100">
                     <div class="card-body">
                         <h6 class="fw-bold mb-3">Top Performing Agents</h6>

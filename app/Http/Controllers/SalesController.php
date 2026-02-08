@@ -156,6 +156,21 @@ class SalesController extends Controller
         return $this->salesService->getCurrentMonthSales();
     }
 
+    public function getCurrentYearSales()
+    {
+        $now  = Carbon::now();
+        $user = auth()->user();
+
+        $query = Sales::whereYear('reservation_date', $now->year);
+
+        // 🔐 ROLE-BASED VISIBILITY
+        if ($user->hasRole('agent')) {
+            $query->where('user_id', $user->id);
+        }
+
+        return $query->sum('total_contract_price');
+    }
+
     public function getAgentRankingTable()
     {
         /* ---------------------------------------------

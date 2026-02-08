@@ -273,8 +273,25 @@ const displayAgentSalesRanking = () => {
     })
 }
 
+// current year sales display
+const currentYearSales = document.getElementById('current-year-sales');
+
+const displayCurrentYearSales = () => {
+    axios.get('/get-current-year-sales').then(response => {
+        const amount = Number(response.data) || 0;
+
+        currentYearSales.innerHTML = new Intl.NumberFormat('en-PH', {
+            style: 'currency',
+            currency: 'PHP',
+            minimumFractionDigits: 2
+        }).format(amount);
+    });
+};
+
+
 document.addEventListener('DOMContentLoaded', () => {
     displayCurrentMonthSales();
     displayAgentSalesRanking();
+    displayCurrentYearSales();
 });
 
