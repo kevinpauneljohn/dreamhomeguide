@@ -64,6 +64,7 @@ class AppointmentController extends Controller
      */
     public function show(Appointment $appointment)
     {
+        abort_if($appointment->user_id != auth()->id() || !auth()->user()->hasRole(['super admin','manager']), 403);
         return view('dashboard.pages.appointments.show')->with([
             'appointment' => $appointment,
         ]);
