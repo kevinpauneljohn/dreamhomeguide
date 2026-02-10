@@ -173,9 +173,11 @@
                     <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
                         <span>No images uploaded yet.</span>
 
-                        <a href="/property/{{$property->id}}/edit?youtube_video=add" class="btn btn-sm btn-primary">
-                            <i class="bi bi-upload"></i> Add Youtube Video
-                        </a>
+                        @if(auth()->user()->can('add listing'))
+                            <a href="/property/{{$property->id}}/edit?youtube_video=add" class="btn btn-sm btn-primary">
+                                <i class="bi bi-upload"></i> Add Youtube Video
+                            </a>
+                        @endif
                     </div>
                 @endif
             </div>

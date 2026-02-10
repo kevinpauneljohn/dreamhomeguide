@@ -52,6 +52,7 @@
 
                                 {{-- CLIENT --}}
                                 <div class="col-md-6">
+                                    {{$sales->lead_id}}
                                     <label class="form-label">Client / Lead</label> <span class="text-danger">*</span>
                                     <select name="lead_id" id="lead_id" class="form-select" required>
                                         <option value="">Select Client</option>

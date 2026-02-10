@@ -102,7 +102,7 @@ class SalesController extends Controller
     public function show($sales)
     {
         $sale = Sales::findOrFail($sales);
-        abort_if($sale->user_id !== auth()->id(), 403);
+        abort_if($sale->user_id !== auth()->id() && !auth()->user()->hasAnyRole(['super admin', 'manager']), 403);
         return view('dashboard.pages.sales.show')->with([
             'title' => 'Sales',
             'sale' => $sale,

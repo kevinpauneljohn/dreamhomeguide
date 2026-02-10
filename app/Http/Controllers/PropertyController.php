@@ -48,6 +48,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
+        abort_if(!auth()->user()->can('add listing'), 403);
         return view('dashboard.pages.properties.create',[
             'title' => 'Create Property',
             'propertyCategories' => $this->propertyService->propertyCategories(),
@@ -93,6 +94,7 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
+        abort_if(!auth()->user()->can('edit listing'), 403);
         return view('dashboard.pages.properties.edit',[
             'title' => 'Edit Property',
             'property' => $property

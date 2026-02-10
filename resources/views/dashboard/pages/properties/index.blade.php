@@ -12,10 +12,12 @@
             <small class="text-muted">Manage all listings under Dream Home Guide Realty</small>
         </div>
 
-{{--        <a href="{{ route('properties.create') }}" class="btn btn-primary px-4">--}}
-        <a href="{{route('property.create')}}" class="btn btn-primary px-4">
-            + Add New Property
-        </a>
+    @if(auth()->user()->can('add listing'))
+            <a href="{{route('property.create')}}" class="btn btn-primary px-4">
+                + Add New Property
+            </a>
+    @endif
+
     </div>
     <div class="card mb-3">
         <div class="card-body">
