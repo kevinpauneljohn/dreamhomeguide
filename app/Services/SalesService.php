@@ -197,9 +197,9 @@ class SalesService
              ----------------------------------------- */
             ->addColumn('action', function ($sale) {
                 return [
-                    'view'   => auth()->user()->can('view sale'),
-                    'edit'   => auth()->user()->can('edit sale') && $sale->status !== 'completed',
-                    'delete' => auth()->user()->can('delete sale') && $sale->status !== 'completed',
+                    'view'   => auth()->user()->can('view sales'),
+                    'edit'   => auth()->user()->can('edit sales') && $sale->status !== 'completed',
+                    'delete' => auth()->user()->can('delete sales') && $sale->status !== 'completed',
                     'id'     => $sale->id,
                     'client' => $sale->lead->full_name,
                     'project' => $sale->project->name,
