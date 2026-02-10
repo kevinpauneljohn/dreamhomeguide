@@ -90,9 +90,11 @@
                         @endcan
 
                         @can('delete task')
-                            <button class="btn btn-outline-danger btn-sm" id="delete-task-button" data-id="{{ $task->id }}" data-title="{{ $task->title }}" data-ticket="{{sprintf('TSK-%05d', $task->id)}}">
-                                <i class="fa fa-trash"></i>
-                            </button>
+                            @if($task->user_id === auth()->id())
+                                    <button class="btn btn-outline-danger btn-sm" id="delete-task-button" data-id="{{ $task->id }}" data-title="{{ $task->title }}" data-ticket="{{sprintf('TSK-%05d', $task->id)}}">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                            @endif
                         @endcan
                     </div>
                 </div>
