@@ -137,7 +137,7 @@
                                 <select name="user_id" id="user_id" class="form-select">
                                     <option value="">Select Agent</option>
                                     @foreach($agents as $agent)
-                                        <option value="{{ $agent->id }}">{{ $agent->full_name }} - {{$agent->email}}</option>
+                                        <option value="{{ $agent->id }}" @if($agent->id === auth()->id())selected @endif>{{ $agent->full_name }} - {{$agent->email}}</option>
                                     @endforeach
                                 </select>
                             </div>
