@@ -34,7 +34,7 @@
 
                 <!-- Hide username on mobile -->
                 <span class="d-none d-md-inline">
-            {{ auth()->user()->full_name }}
+            {{ ucwords(strtolower(auth()->user()->full_name)) }}
         </span>
             </a>
 
