@@ -28,9 +28,19 @@ class UpdateLeadStatus extends Command
                     $targetStatus  = null;
 
                     /* -------------------------------------------------
-                     | PRIORITY 1: COLD (7+ days from created_at)
+                     | PRIORITY 0: FOLLOW-UP → COLD (7 days inactivity)
                      ------------------------------------------------- */
                     if (
+                        $currentStatus === 'follow-up' &&
+                        $lead->updated_at->lte($now->copy()->subDays(7))
+                    ) {
+                        $targetStatus = 'cold';
+                    }
+
+                    /* -------------------------------------------------
+                     | PRIORITY 1: COLD (7+ days from created_at)
+                     ------------------------------------------------- */
+                    elseif (
                         in_array($currentStatus, ['new', 'hot', 'warm'], true) &&
                         $lead->created_at->lte($now->copy()->subDays(7))
                     ) {
