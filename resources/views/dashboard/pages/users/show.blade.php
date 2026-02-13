@@ -128,6 +128,12 @@
                             </button>
                         </li>
 
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#files">
+                                Files
+                            </button>
+                        </li>
+
                     </ul>
 
                     <!-- TAB CONTENT -->
@@ -238,22 +244,98 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-{{--                                @foreach($commissions as $commission)--}}
-{{--                                    <tr>--}}
-{{--                                        <td>{{ $commission->date_assigned->format('M d, Y') }}</td>--}}
-{{--                                        <td>{{ $commission->rate }}%</td>--}}
-{{--                                        <td>{{ $commission->project->name }}</td>--}}
-{{--                                        <td>--}}
-{{--                                            <button class="btn btn-sm btn-danger"--}}
-{{--                                                    onclick="deleteCommission({{ $commission->id }})">--}}
-{{--                                                Delete--}}
-{{--                                            </button>--}}
-{{--                                        </td>--}}
-{{--                                    </tr>--}}
-{{--                                @endforeach--}}
+
                                 </tbody>
                             </table>
 
+                        </div>
+
+                        <div class="tab-pane fade" id="files">
+                            <div class="card card-default mb-3">
+                                <div class="card-body">
+                                    <div id="actions" class="row">
+                                        <div class="col-lg-6">
+                                            <div class="btn-group w-100">
+                                              <span class="btn btn-success col fileinput-button">
+                                                <i class="fas fa-plus"></i>
+                                                <span>Add files</span>
+                                              </span>
+                                                <button type="submit" class="btn btn-primary col start">
+                                                    <i class="fas fa-upload"></i>
+                                                    <span>Start upload</span>
+                                                </button>
+                                                <button type="reset" class="btn btn-warning col cancel">
+                                                    <i class="fas fa-times-circle"></i>
+                                                    <span>Cancel upload</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 d-flex align-items-center">
+                                            <div class="fileupload-process w-100">
+                                                <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                                    <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table table-striped files" id="previews">
+                                        <div id="template" class="row mt-2">
+                                            <div class="col-auto">
+                                                <span class="preview"><img src="data:," alt="" data-dz-thumbnail /></span>
+                                            </div>
+                                            <div class="col d-flex align-items-center">
+                                                <p class="mb-0">
+                                                    <span class="lead" data-dz-name></span>
+                                                    (<span data-dz-size></span>)
+                                                </p>
+                                                <strong class="error text-danger" data-dz-errormessage></strong>
+                                            </div>
+                                            <div class="col-4 d-flex align-items-center">
+                                                <div class="progress progress-striped active w-100" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                                    <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto d-flex align-items-center">
+                                                <div class="btn-group">
+                                                    <button class="btn btn-primary start">
+                                                        <i class="fas fa-upload"></i>
+                                                        <span>Start</span>
+                                                    </button>
+                                                    <button data-dz-remove class="btn btn-warning cancel">
+                                                        <i class="fas fa-times-circle"></i>
+                                                        <span>Cancel</span>
+                                                    </button>
+                                                    <button data-dz-remove class="btn btn-danger delete">
+                                                        <i class="fas fa-trash"></i>
+                                                        <span>Delete</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>image</th>
+                                        <th>File Name</th>
+                                        <th>Uploaded At</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($user->files as $file)
+                                        <tr>
+                                            <td><img src="{{asset('/storage/files/thumbs/' . $file->file_name)}}" class="img-thumbnail" width="55"></td>
+                                            <td>{{$file->file_name}}</td>
+                                            <td>{{$file->created_at}}</td>
+                                            <td></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
 
 
@@ -310,4 +392,5 @@
 @push('scripts')
     @vite(['resources/js/dashboard/commissions/create.js'])
     @vite(['resources/js/dashboard/commissions/commission-table.js'])
+    @vite(['resources/js/dashboard/users/files.js'])
 @endpush

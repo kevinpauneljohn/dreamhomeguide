@@ -65,7 +65,7 @@ class UserController implements HasMiddleware
         return view('dashboard.pages.users.show')->with([
             'title' => 'View User',
             'user' => $user,
-            'projects' => Project::all()
+            'projects' => Project::all(),
         ]);
     }
 

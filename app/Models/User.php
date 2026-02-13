@@ -151,5 +151,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Commission::class);
     }
+    public function files(): User|\Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(UserFile::class);
+    }
 
 }

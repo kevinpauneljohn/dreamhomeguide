@@ -35,6 +35,7 @@ export default defineConfig({
                 'resources/js/dashboard/users/create.js',
                 'resources/js/dashboard/users/edit.js',
                 'resources/js/dashboard/users/user-table.js',
+                'resources/js/dashboard/users/files.js',
 
                 // leads
                 'resources/js/dashboard/leads/create.js',
