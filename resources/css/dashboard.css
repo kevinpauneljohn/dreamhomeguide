@@ -164,6 +164,60 @@ body {
     overflow-x: hidden;
 }
 
+/* Remove bullets from sidebar submenus */
+.sidebar ul {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+/* Optional: indent submenu properly */
+.sidebar .collapse > li > a {
+    padding-left: 1.75rem;
+}
+
+/* Remove sidebar menu border radius */
+.sidebar .nav-pills .nav-link {
+    border-radius: 0 !important;
+}
+
+.sidebar .nav-link {
+    border-radius: 0 !important;
+    padding: 0.75rem 1rem;
+}
+
+.sidebar .nav-link.active {
+    background: linear-gradient(90deg, #1e6bff, #a821c6);
+}
+
+/*#sidebar {*/
+/*    background: linear-gradient(*/
+/*        180deg,*/
+/*        #111827 0%,*/
+/*        #1f2937 50%,*/
+/*        #0f172a 100%*/
+/*    );*/
+/*}*/
+
+#sidebar {
+    background: linear-gradient(
+        180deg,
+        #0f172a 0%,
+        #111827 40%,
+        #1e1b4b 100%
+    );
+}
+
+.sidebar .nav-link {
+    transition: all 0.2s ease;
+}
+
+
+
+
+
+
+
 
 
 

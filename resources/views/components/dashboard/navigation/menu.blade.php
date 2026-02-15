@@ -100,7 +100,7 @@
                     <i class="bi bi-caret-down-fill small"></i>
                 </a>
 
-                <ul class="collapse {{ request()->routeIs('sales.*') ? 'show' : '' }}"
+                <ul class="collapse {{ request()->routeIs('sales.*') ||  request()->routeIs('quota.*') ? 'show' : '' }}"
                     id="salesMenu">
                     <li>
                         <a href="{{ route('sales.index') }}"
@@ -114,6 +114,14 @@
                             Pipeline
                         </a>
                     </li>
+                    @can('view quota')
+                        <li>
+                            <a href="{{ route('quota.index') }}"
+                               class="nav-link text-white-50 {{ Route::is('quota.index') ? 'active' : '' }}">
+                                Quota
+                            </a>
+                        </li>
+                    @endcan
                     @can('add sales')
                         <li>
                             <a href="{{ route('sales.create') }}"
@@ -324,3 +332,5 @@
 
     </ul>
 </div>
+
+
