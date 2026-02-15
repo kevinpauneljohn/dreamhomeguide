@@ -2,6 +2,70 @@ import {Toast} from "@/toast.js";
 import Dropzone from "dropzone";
 
 const userId = document.getElementById('commission-form').dataset.userId;
+let userTable;
+$(function(){
+     userTable = $('#user-files-table').DataTable({
+        processing: true,
+        serverSide: true,
+        searching: false,
+        ajax: {
+            url: `/users/${userId}/files`,
+            type: 'GET',
+        },
+        columns: [
+            {
+                data: "file_name",
+                render: function (image) {
+                    return `<img src="/storage/files/thumbs/${image}" class="rounded" width="55" alt="${image}">`;
+                }
+            },
+            {
+                data: "file_name",
+            },
+            {
+                data: "updated_at",
+            },
+            {
+                data: "action",
+                orderable: false,
+                render: function (action) {
+                    return `
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-light border-0" data-bs-toggle="dropdown">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                ${action.view ? `<li><a href="/user/${action.id}" class="dropdown-item">View</a></li>` : ''}
+                                ${action.edit ? `<li><a href="/user/${action.id}/edit" class="dropdown-item">Edit</a></li>` : ''}
+                                ${action.delete ? `<li><a href="#" onclick="removeFile(${action.id})" class="dropdown-item text-danger">Delete</a></li>` : ''}
+                            </ul>
+                        </div>
+                    `;
+                }
+            },
+
+        ]
+    });
+
+    window.removeFile = (file) => {
+        axios.delete(`/users/files/${file}/delete`).then(response => {
+            console.log(response)
+            if(response.data.success === true)
+            {
+                Toast.fire({
+                    icon: "success",
+                    title: response.data.message
+                });
+                userTable.ajax.reload(null, false);
+            }else{
+                Toast.fire({
+                    icon: "error",
+                    title: response.data.message
+                });
+            }
+        })
+    };
+});
 
 // DropzoneJS Demo Code Start
 Dropzone.autoDiscover = false
@@ -33,7 +97,7 @@ const myDropzone = new Dropzone(document.body, { // Make the whole body a dropzo
                 icon: "success",
                 title: response.message
             });
-            // propertyImagesTable.ajax.reload(null, false);
+            userTable.ajax.reload(null, false);
             setTimeout(function(){
                 $('.dz-complete').fadeOut();
             },2500)
@@ -85,3 +149,5 @@ document.querySelector("#actions .cancel").onclick = function() {
     myDropzone.removeAllFiles(true)
 }
 // DropzoneJS Demo Code End
+
+

@@ -316,24 +316,17 @@
                                 </div>
                             </div>
 
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" id="user-files-table">
                                 <thead>
                                     <tr>
-                                        <th>image</th>
+                                        <th></th>
                                         <th>File Name</th>
                                         <th>Uploaded At</th>
-                                        <th>Action</th>
+                                        <th style="width: 6%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($user->files as $file)
-                                        <tr>
-                                            <td><img src="{{asset('/storage/files/thumbs/' . $file->file_name)}}" class="img-thumbnail" width="55"></td>
-                                            <td>{{$file->file_name}}</td>
-                                            <td>{{$file->created_at}}</td>
-                                            <td></td>
-                                        </tr>
-                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>

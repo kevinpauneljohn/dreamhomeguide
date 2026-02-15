@@ -10,4 +10,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/update-user-profile-photo/{user}',[UserController::class,'updateProfilePhoto'])->name('update-user-profile-photo');
     Route::post('/users/{user}/files/upload',[UserFileController::class,'store'])->name('users.files.store');
     Route::get('/users/{user}/files',[UserFileController::class,'getUserFiles'])->name('users.files');
+    Route::delete('/users/files/{userFile}/delete',[UserFileController::class,'destroy'])->name('users.files.destroy');
 });

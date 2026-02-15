@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserFile;
 use App\Http\Requests\StoreUserFileRequest;
 use App\Http\Requests\UpdateUserFileRequest;
+use App\Services\UserFileService;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
@@ -136,11 +137,15 @@ class UserFileController extends Controller
      */
     public function destroy(UserFile $userFile)
     {
-        //
+        unlink(public_path("storage/files/".$userFile->file_name));
+        unlink(public_path("storage/files/thumbs/".$userFile->file_name));
+        return $userFile->delete() ?
+            response()->json(['success' => true, 'message' => 'File deleted successfully.']) :
+            response()->json(['success' => false, 'message' => 'An error occurred while deleting the file.']);
     }
 
-    public function getUserFiles($user)
+    public function getUserFiles($user, UserFileService $userFileService)
     {
-        return UserFile::where('user_id', $user)->get();
+        return $userFileService->getFiles($user);
     }
 }
