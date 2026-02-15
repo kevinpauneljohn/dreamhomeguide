@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Sales;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use App\Models\Leads;
@@ -19,13 +20,31 @@ class UpdateLeadStatus extends Command
 
         $this->info('Running lead status automation...');
 
+        $reservedLeadIds = Sales::whereIn('status', ['reserved', 'completed'])
+            ->whereNotNull('lead_id')
+            ->pluck('lead_id')
+            ->unique()
+            ->toArray();
+
         Leads::whereNull('deleted_at')
-            ->chunkById(200, function ($leads) use ($now) {
+            ->chunkById(200, function ($leads) use ($now, $reservedLeadIds) {
 
                 foreach ($leads as $lead) {
 
                     $currentStatus = $lead->status;
                     $targetStatus  = null;
+
+                    if (in_array($lead->id, $reservedLeadIds)) {
+
+                        if ($currentStatus !== 'reserved') {
+                            $lead->update([
+                                'status' => 'reserved'
+                            ]);
+                        }
+
+                        // Skip further automation
+                        continue;
+                    }
 
                     /* -------------------------------------------------
                      | PRIORITY 0: FOLLOW-UP → COLD (7 days inactivity)
