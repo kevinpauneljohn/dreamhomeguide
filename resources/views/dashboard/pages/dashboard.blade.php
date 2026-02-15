@@ -38,18 +38,38 @@
                 <div class="card border-0 shadow-sm kpi-card">
                     <div class="card-body">
                         <small class="text-muted">Lead → Sale Conversion</small>
-                        <h3 class="fw-bold">18%</h3>
-                        <small class="text-warning">Needs improvement</small>
+                        <h3 class="fw-bold">{{ $monthlyConversionRate }}%</h3>
+
+                        @if($monthlyConversionRate >= 30)
+                            <small class="text-success">Excellent performance</small>
+
+                        @elseif($monthlyConversionRate >= 20)
+                            <small class="text-success">Strong performance</small>
+
+                        @elseif($monthlyConversionRate >= 10)
+                            <small class="text-warning">Needs improvement</small>
+
+                        @else
+                            <small class="text-danger">Critical – review follow-ups</small>
+                        @endif
+
                     </div>
                 </div>
             </div>
+
 
             <div class="col-6 col-lg-3">
                 <div class="card border-0 shadow-sm kpi-card">
                     <div class="card-body">
                         <small class="text-muted">Avg Days to Close</small>
-                        <h3 class="fw-bold">21</h3>
-                        <small class="text-muted">Industry avg: 30</small>
+                        <h3 class="fw-bold">{{$avgDaysToClose}}</h3>
+                        @if($avgDaysToClose <= 15)
+                            <small class="text-success">Excellent closing speed</small>
+                        @elseif($avgDaysToClose <= 30)
+                            <small class="text-warning">Industry average</small>
+                        @else
+                            <small class="text-danger">Slow conversion</small>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -71,7 +91,7 @@
                         <div class="row text-center mb-3">
                             <div class="col">
                                 <small class="text-muted">New Today</small>
-                                <h5 class="fw-bold">14</h5>
+                                <h5 class="fw-bold">{{$newLeadsToday}}</h5>
                             </div>
                             <div class="col">
                                 <small class="text-muted">Contacted &lt; 1hr</small>
@@ -88,15 +108,15 @@
                         <ul class="list-unstyled small mb-0">
                             <li class="d-flex justify-content-between mb-2">
                                 <span>Unassigned Leads</span>
-                                <span class="badge bg-danger">7</span>
+                                <span class="badge bg-danger">{{$unAssignedLeads}}</span>
                             </li>
                             <li class="d-flex justify-content-between mb-2">
-                                <span>No Follow-up (48h)</span>
-                                <span class="badge bg-warning text-dark">5</span>
+                                <span>For Follow-up</span>
+                                <span class="badge bg-warning text-dark">{{$leadsForFollowUp}}</span>
                             </li>
                             <li class="d-flex justify-content-between">
                                 <span>Hot Leads</span>
-                                <span class="badge bg-success">9</span>
+                                <span class="badge bg-success">{{$hotLeads}}</span>
                             </li>
                         </ul>
 

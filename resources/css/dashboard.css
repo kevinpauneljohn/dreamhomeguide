@@ -190,15 +190,6 @@ body {
     background: linear-gradient(90deg, #1e6bff, #a821c6);
 }
 
-/*#sidebar {*/
-/*    background: linear-gradient(*/
-/*        180deg,*/
-/*        #111827 0%,*/
-/*        #1f2937 50%,*/
-/*        #0f172a 100%*/
-/*    );*/
-/*}*/
-
 #sidebar {
     background: linear-gradient(
         180deg,
@@ -211,6 +202,8 @@ body {
 .sidebar .nav-link {
     transition: all 0.2s ease;
 }
+
+
 
 
 

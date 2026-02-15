@@ -99,7 +99,7 @@ class Leads extends Model
 
     public function sales(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Sales::class);
+        return $this->hasMany(Sales::class,'lead_id');
     }
 
 }
