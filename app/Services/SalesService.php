@@ -219,7 +219,7 @@ class SalesService
         $query = Sales::whereMonth('reservation_date', $now->month)
             ->whereYear('reservation_date', $now->year)
             ->where('status', 'completed')
-            ->where('status', 'reserved');
+            ->orWhere('status', 'reserved');
 
         // 🔐 ROLE-BASED VISIBILITY
         if ($user->hasRole(['agent'])) {
