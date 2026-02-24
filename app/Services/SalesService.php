@@ -229,7 +229,7 @@ class SalesService
         return $query->sum('total_contract_price');
     }
 
-    public function getAgentRanking(): \Illuminate\Database\Eloquent\Collection|array|\LaravelIdea\Helper\App\Models\_IH_Sales_C
+    public function getAgentRanking()
     {
         $now = Carbon::now();
         return Sales::select(
@@ -240,7 +240,7 @@ class SalesService
             ->whereMonth('reservation_date', $now->month)
                 ->whereYear('reservation_date', $now->year)
             ->where('status', 'completed')
-            ->where('status', 'reserved')
+            ->orWhere('status', 'reserved')
                 ->with([
                     'agent' => function ($q) {
                         $q->select('id', 'first_name', 'last_name', 'profile_photo')
