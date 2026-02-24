@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\DB;
 class SalesController extends Controller
 {
     public function __construct(
-        protected SalesService $salesService
+        protected SalesService $salesService,
+        protected CommissionService $commissionService
     )
     {
 
@@ -83,16 +84,16 @@ class SalesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSalesRequest $request, CommissionService $commissionService)
+    public function store(StoreSalesRequest $request)
     {
-        $rate = $commissionService->getCommissionRate($request->project_id, $request->user_id);
+        $rate = $this->commissionService->getCommissionRate($request->project_id, $request->user_id);
         if ($rate === null) {
             return response()->json([
                 'success' => false,
                 'message' => 'No commission rate found for this project and agent.'
             ]);
         }
-        $request->merge(['commission_rate' => $commissionService->getCommissionRate($request->project_id, $request->user_id)]);
+        $request->merge(['commission_rate' => $this->commissionService->getCommissionRate($request->project_id, $request->user_id)]);
         return $this->salesService->createSales($request->all());
     }
 
@@ -128,6 +129,14 @@ class SalesController extends Controller
      */
     public function update(UpdateSalesRequest $request,$sales)
     {
+        $rate = $this->commissionService->getCommissionRate($request->project_id, $request->user_id);
+        if ($rate === null) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No commission rate found for this project and agent.'
+            ]);
+        }
+        $request->merge(['commission_rate' => $this->commissionService->getCommissionRate($request->project_id, $request->user_id)]);
         return $this->salesService->updateSales($sales, $request->all());
     }
 
