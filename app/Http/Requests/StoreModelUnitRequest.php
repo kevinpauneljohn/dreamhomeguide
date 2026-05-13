@@ -25,7 +25,7 @@ class StoreModelUnitRequest extends FormRequest
         return [
             'project_id' => ['required'],
             'name' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', 'unique:model_units,slug','regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],
+            'slug' => ['required', 'string', 'max:255', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],
             'description' => ['nullable', 'string', 'max:2000'],
             'status' => ['required'],
             'type' => ['required'],

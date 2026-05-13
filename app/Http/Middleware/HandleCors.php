@@ -15,17 +15,27 @@ class HandleCors
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $response = $next($request);
+        $allowedOrigins = [
+            'http://localhost:5173',
+            'https://johnkevinpaunel.com',
+            'https://dreamhomeguide.test',
+        ];
 
-        $response->headers->set('Access-Control-Allow-Origin', 'https://johnkevinpaunel.com');
-        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
-        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-        $response->headers->set('Access-Control-Allow-Credentials', 'true');
+        $origin = $request->headers->get('Origin');
 
-        // Handle preflight requests
         if ($request->getMethod() === 'OPTIONS') {
-            return response('', 204)->withHeaders($response->headers->all());
+            $response = response('', 204);
+        } else {
+            $response = $next($request);
         }
+
+        if (in_array($origin, $allowedOrigins)) {
+            $response->headers->set('Access-Control-Allow-Origin', $origin);
+        }
+
+        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, X-XSRF-TOKEN, Accept');
+        $response->headers->set('Access-Control-Allow-Credentials', 'true');
 
         return $response;
     }

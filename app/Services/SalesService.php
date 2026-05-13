@@ -231,7 +231,7 @@ class SalesService
         return $query->sum('total_contract_price');
     }
 
-    public function getAgentRanking()
+    public function getAgentRanking(): \Illuminate\Database\Eloquent\Collection|array|\LaravelIdea\Helper\App\Models\_IH_Sales_C
     {
         $now = Carbon::now();
         return Sales::select(
