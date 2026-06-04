@@ -48,9 +48,10 @@ class ModelUnitController extends Controller
      */
     public function store(Request $request)
     {
-        return ModelUnit::create($request->all()) ?
-            response()->json(['success' => true, 'message' => 'Model Unit created successfully.'], 201) :
-            response()->json(['success' => false, 'message' => 'An error occurred while creating the model unit.'], 500);
+        return $request->all();
+//        return ModelUnit::create($request->all()) ?
+//            response()->json(['success' => true, 'message' => 'Model Unit created successfully.'], 201) :
+//            response()->json(['success' => false, 'message' => 'An error occurred while creating the model unit.'], 500);
 
     }
 
