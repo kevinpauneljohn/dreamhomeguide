@@ -6,7 +6,6 @@ use App\Models\ModelUnit;
 use App\Http\Requests\StoreModelUnitRequest;
 use App\Http\Requests\UpdateModelUnitRequest;
 use App\Services\ModelUnitService;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 
 class ModelUnitController extends Controller
@@ -46,12 +45,11 @@ class ModelUnitController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreModelUnitRequest $request)
     {
-        return $request->all();
-//        return ModelUnit::create($request->all()) ?
-//            response()->json(['success' => true, 'message' => 'Model Unit created successfully.'], 201) :
-//            response()->json(['success' => false, 'message' => 'An error occurred while creating the model unit.'], 500);
+        return ModelUnit::create($request->validated()) ?
+            response()->json(['success' => true, 'message' => 'Model Unit created successfully.'], 201) :
+            response()->json(['success' => false, 'message' => 'An error occurred while creating the model unit.'], 500);
 
     }
 
