@@ -62,6 +62,11 @@ const createModelUnit = (formData) => {
         })
         .catch(error => {
             console.log(error);
+            if (error.response) {
+                console.log('Status:', error.response.status);
+                console.log('Data:', error.response.data);
+            }
+
             if(error.response.data.status === false)
             {
                 Toast.fire({
