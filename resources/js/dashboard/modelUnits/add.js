@@ -47,34 +47,40 @@ const createModelUnit = (formData) => {
         .then(response => {
             console.log(response);
 
-            if(response.data.success === true)
-            {
-                resetModelUnitForm()
+            if (response.data.success === true) {
+                resetModelUnitForm();
+
                 Toast.fire({
                     icon: 'success',
                     title: response.data.message
-                })
-                document.dispatchEvent(
-                    new CustomEvent('reload:table')
-                );
-            }
+                });
 
+                document.dispatchEvent(new CustomEvent('reload:table'));
+            }
         })
         .catch(error => {
             console.log(error);
-            if (error.response) {
-                console.log('Status:', error.response.status);
-                console.log('Data:', error.response.data);
-            }
 
-            if(error.response.data.status === false)
-            {
+            const status = error.response?.status;
+            const data = error.response?.data;
+
+            console.log('Status:', status);
+            console.log('Data:', data);
+
+            if (data?.status === false) {
                 Toast.fire({
                     icon: 'warning',
-                    title: error.response.data.message
-                })
+                    title: data.message
+                });
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: data?.message || 'Something went wrong. Please try again.'
+                });
             }
-            const errors = error.response?.data?.errors;
+
+            const errors = data?.errors || {};
+
             Object.keys(errors).forEach(key => {
                 const field = modelUnitForm.querySelector(`[name="${key}"]`);
                 if (!field) return;
@@ -85,12 +91,12 @@ const createModelUnit = (formData) => {
                     `<p class="invalid-feedback">${errors[key][0]}</p>`
                 );
             });
-        }).finally(() => {
+        })
+        .finally(() => {
             resetLoading(saveModelBtn);
             enableForm(modelUnitForm);
-    })
-
-}
+        });
+};
 
 export {resetModelUnitForm, createModelUnit};
 
