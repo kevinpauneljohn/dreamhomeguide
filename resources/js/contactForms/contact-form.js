@@ -45,6 +45,10 @@ console.log(data);
         }
     }).fail(function (xhr) {
         console.log(xhr)
+        Toast.fire({
+            icon: "error",
+            title: xhr.responseJSON.message,
+        })
         $.each(xhr.responseJSON.errors, function (key, value) {
             contactForm.find('#'+key).addClass('is-invalid');
             contactForm.find('.'+key).append(`<p class="text-danger error">${value}</p>`);
