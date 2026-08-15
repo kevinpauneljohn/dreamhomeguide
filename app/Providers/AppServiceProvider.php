@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         RateLimiter::for('submit-inquiry', function (Request $request) {
-            return Limit::perMinutes(20, 1)
+            return Limit::perMinutes(20, 3)
                 ->by($request->ip())
                 ->response(function (Request $request, array $headers) {
                     return response()->json([
